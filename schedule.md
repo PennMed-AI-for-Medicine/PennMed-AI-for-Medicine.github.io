@@ -221,3 +221,4 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
   <!-- More rows can be added here -->
 </tbody>
 </table>
+
