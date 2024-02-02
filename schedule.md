@@ -28,7 +28,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
   </thead>
   <tbody>
     <tr>
-    <td style="text-align: center; vertical-align: middle;">01</td>
+    <td style="text-align: center; vertical-align: middle;"><b>01</b></td>
     <td style="text-align: center; vertical-align: middle;">01/15 - 01/19</td>
     <td>
         Foundations 1
@@ -40,7 +40,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
     </tr>    
     <tr>
-    <td style="text-align: center; vertical-align: middle;">02</td>
+    <td style="text-align: center; vertical-align: middle;"><b>02</b></td>
     <td style="text-align: center; vertical-align: middle;">01/22 - 01/26</td>
     <td>
         Foundations 2
@@ -56,7 +56,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
       <td></td>
     </tr>
     <tr>
-    <td style="text-align: center; vertical-align: middle;">03</td>
+    <td style="text-align: center; vertical-align: middle;"><b>03</b></td>
     <td style="text-align: center; vertical-align: middle;">01/29 - 02/02</td>
     <td>
         Foundations 3
@@ -65,10 +65,10 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
           <li>Data Science</li>
         </ul>
       </td>
-    <td> Homework 1 due <br><u>02/01/2024 at 11:59 pm</u> <br>submit .ipynb file via email or through <a href="https://canvas.upenn.edu/courses/1771611/assignments/12119273">Canvas</a></td>
+    <td> Homework 1 due <br><u>02/01/2024 at 11:59 pm</u> <br>Submit <tt>.ipynb</tt> file via email or <a href="https://canvas.upenn.edu/courses/1771611/assignments/12119273">Canvas</a></td>
     </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">04</td>
+    <td style="text-align: center; vertical-align: middle;"><b>04</b></td>
     <td td style="text-align: center; vertical-align: middle;">02/05 - 02/09</td>
     <td>
       Module 1
@@ -86,7 +86,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
 </tr> 
 <!-- Previous rows are assumed to be above -->
   <tr>
-    <td style="text-align: center; vertical-align: middle;">05</td>
+    <td style="text-align: center; vertical-align: middle;"><b>05</b></td>
     <td style="text-align: center; vertical-align: middle;">02/12 - 02/16</td>
     <td>
       Module 1
@@ -101,7 +101,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">06</td>
+    <td style="text-align: center; vertical-align: middle;"><b>06</b></td>
     <td style="text-align: center; vertical-align: middle;">02/19 - 02/23</td>
     <td>
       Module 2
@@ -109,9 +109,10 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
         <li>Introduction to machine learning</li>
       </ul>
     </td>
+    <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">07</td>
+    <td style="text-align: center; vertical-align: middle;"><b>07</b></td>
     <td style="text-align: center; vertical-align: middle;">02/26 - 03/01</td>
     <td>
       Module 2
@@ -122,12 +123,13 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">08</td>
+    <td style="text-align: center; vertical-align: middle;"><b>08</b></td>
     <td style="text-align: center; vertical-align: middle;">03/04 - 03/08</td>
     <td>Spring Break</td>
+    <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">09</td>
+    <td style="text-align: center; vertical-align: middle;"><b>09</b></td>
     <td style="text-align: center; vertical-align: middle;">03/11 - 03/15</td>
     <td>
       Midterm Project Due - Module 2
@@ -138,7 +140,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">10</td>
+    <td style="text-align: center; vertical-align: middle;"><b>10</b></td>
     <td style="text-align: center; vertical-align: middle;">03/18 - 03/22</td>
     <td>
       Module 3
@@ -149,7 +151,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">11</td>
+    <td style="text-align: center; vertical-align: middle;"><b>11</b></td>
     <td style="text-align: center; vertical-align: middle;">03/25 - 03/29</td>
     <td>
       Module 3
@@ -157,9 +159,10 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
         <li>Practical Deep Learning 1: PyTorch</li>
       </ul>
     </td>
+    <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">12</td>
+    <td style="text-align: center; vertical-align: middle;"><b>12</b></td>
     <td style="text-align: center; vertical-align: middle;">04/01 - 04/05</td>
     <td>
       Module 3
@@ -170,7 +173,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">13</td>
+    <td style="text-align: center; vertical-align: middle;"><b>13</b></td>
     <td style="text-align: center; vertical-align: middle;">04/08 - 04/12</td>
     <td>
       Module 3
@@ -181,7 +184,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">14</td>
+    <td style="text-align: center; vertical-align: middle;"><b>14</b></td>
     <td style="text-align: center; vertical-align: middle;">04/15 - 04/19</td>
     <td>
       Module 3
@@ -193,7 +196,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">15</td>
+    <td style="text-align: center; vertical-align: middle;"><b>15</b></td>
     <td style="text-align: center; vertical-align: middle;">04/22 - 04/26</td>
     <td>
       Module 3
@@ -205,7 +208,7 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
     <td></td>
   </tr>
   <tr>
-    <td style="text-align: center; vertical-align: middle;">16</td>
+    <td style="text-align: center; vertical-align: middle;"><b>16</b></td>
     <td style="text-align: center; vertical-align: middle;">04/29 - 05/03</td>
     <td>
       Final
