@@ -1,17 +1,18 @@
 -
-  module_number: 1
-  start_date: 2023-01-12
-  end_date: 2023-01-26
+  module_number: 0
+  start_date: 2024-01-15
+  end_date: 2024-01-19
   title: Course Introduction, Intro to data science and machine learning (AI). Computer setup and Python intro.
   description: In this module, we will introduce the course by going over some basic concepts of data science and artificial intelligence  
   intro_video: 
   #intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=97bacec2-6e77-4877-92ac-ad92011ca74c
-  slides: 01-Intro-to-Artificial-Intelligence.pdf
-  quiz:
-    - 
-      title: Quiz 1 "Course start, policies and basics"
-      url: https://www.gradescope.com/courses/484718/assignments/2546382/
-      due_date: 2023-01-12 23:59:00EDT
+  #slides: 01-Intro-to-Artificial-Intelligence.pdf
+  slides: AIMed_Syllabus_24_v0.2.pdf
+  #quiz:
+  #  - 
+  #    title: Quiz 1 "Course start, policies and basics"
+  #    url: https://www.gradescope.com/courses/484718/assignments/2546382/
+  #    due_date: 2023-01-12 23:59:00EDT
 #  lessons:
 #    - 
 #      title: Artificial Intelligence in Philosophy
