@@ -18,6 +18,20 @@ The schedule below shows the schedule section 401, which meets on Tuesday/Thursd
 -->
 <!-- Walk through the days in the semester -->
 <!-- Capture the current day -->
+
+<div class="alert alert-warning" markdown="1">
+The schedule below shows the schedule section 402, which meets on Monday/Wednesday.  [Click here for the 401 Tuesday/Thursday section.](schedule.html)
+</div>
+
+<table class="table table-striped" >
+  <thead>
+    <tr>
+      <th>Date</th> 
+      <th>Topic</th>
+    </tr>
+  </thead>
+  <tbody>
+
 {% capture start_date %}{{page.term_start  | date: '%s'}}{% endcapture %}
 {% capture end_date %}{{page.term_end  |  date: "%Y-%m-%d" }}{% endcapture %}
 {% for i in (1..365) %}
