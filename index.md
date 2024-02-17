@@ -1,5 +1,6 @@
 ---
-title: MPHY 6120 - Data Science and Artificial Intelligence for Medical Physics - University of Pennsylvania
+#title: MPHY 6120 - Data Science and Artificial Intelligence for Medical Physics - University of Pennsylvania
+title: MPHY 6120 - Artificial Intelligence for Medicine - University of Pennsylvania
 layout: default
 img: class_logo2.png 
 active_tab: main_page
@@ -37,10 +38,10 @@ Students that cannot attend a specific day can the instructor to discuss alterna
 Logistic details for the course are as follows:
 
 <ul>
-    <li> Course: MPHY 6120-01 Data Science & Artificial Intelligence for the Medical Physicist</li>
+    <li> Course: MPHY 6120-01 Artificial Intelligence for Medicine</li>
     <li> Offered:  Thursdays, 1:45 - 4:45 PM</li>
-    <li> Classroom: SCTR 10-146AB</li>
-    <li> Expected enrollment:  10</li>
+    <li> Classroom: SCTR 12-146AB</li>
+    <li> Expected enrollment:  14</li>
   </ul>
 </div>
 
@@ -154,7 +155,7 @@ Extra Credit Bounty Items:
 -->
 
 Course number
-: MPHY 6120 - Data Science and Artificial Intelligence for Medical Physics
+: MPHY 6120 - Artificial Intelligence for Medicine 
 
 Prerequeisites
 : Students should feel confident creating python programs and using git.
