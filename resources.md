@@ -1,5 +1,5 @@
 ---
-title: CIS 521 - Artificial Intelligence - University of Pennsylvania
+title: MPHY 6120 - Artificial Intelligence for Medicine - University of Pennsylvania
 layout: default
 img: HAL.png
 img_link: https://en.wikipedia.org/wiki/HAL_9000
@@ -9,4 +9,4 @@ active_tab: resources
 
 # Python IDE
 
-You can use whatever development environment you'd like.  We recommend [PyCharm](https://www.jetbrains.com/pycharm/).
+You can use whatever development environment you'd like.  We recommend [VSCode](https://code.visualstudio.com/).

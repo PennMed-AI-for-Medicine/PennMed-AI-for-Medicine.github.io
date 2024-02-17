@@ -4,7 +4,7 @@
   end_date: 2024-01-19
   title: Course Introduction, Intro to data science and machine learning (AI). Computer setup and Python intro.
   description: In this module, we will introduce the course by going over some basic concepts of data science and artificial intelligence  
-  intro_video: 
+  #intro_video: 
   #intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=97bacec2-6e77-4877-92ac-ad92011ca74c
   #slides: 01-Intro-to-Artificial-Intelligence.pdf
   slides: AIMed_Syllabus_24_v0.2.pdf
@@ -54,11 +54,11 @@
 #      optional: true
 #
 # -
-#   module_number: 2
-#   start_date: 2021-09-06
-#   end_date: 2021-09-13
-#   title: Intro to Python
-#   description: Python is an amazing language with a concise syntax that allows you to rapidly prototype algorithms, and we are going to use it for all the assignments in this course. This module will cover all of the fundamentals you need to get started with Python. And as we continue through the rest of the course, you’ll quickly become an expert!
+    module_number: 1
+    start_date: 2024-01-25
+    end_date: 2024-01-25
+    title: Intro to Python
+    description: Python is an amazing language with a concise syntax that allows you to rapidly prototype algorithms, and we are going to use it for all the assignments in this course. This module will cover all of the fundamentals you need to get started with Python. And as we continue through the rest of the course, you’ll quickly become an expert!
 #   intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d4389e5d-083e-40c7-b458-ad92011c9210
 #   slides: 02-Intro-to-Python.pdf
 #   quiz:
