@@ -41,17 +41,17 @@
     #     optional: true
     # Homework:
 
-   module_number: 3
-   start_date: 2024-03-18
-   end_date: 2024-03-29
-   title: Introduction to DL 
-   description: Introduction to deep learning and neural networks.
+- module_number: 3
+  start_date: 2024-03-18
+  end_date: 2024-03-29
+  title: Introduction to DL 
+  description: Introduction to deep learning and neural networks.
 
-  module_number: 4
-   start_date: 2024-03-19
-   end_date: 2024-03-26
-   title: Language models
-   description: Introduction to deep learning and neural networks.
+- module_number: 4
+  start_date: 2024-03-19
+  end_date: 2024-03-26
+  title: Language models
+  description: Introduction to deep learning and neural networks.
 
 
   # module_number: 2
