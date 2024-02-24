@@ -141,7 +141,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
         $("#{{ page.active_tab }}").addClass("active");
-        {% if page.js_onready %}
+        {{ page.js_onready }};
           {{ page.js_onready }};
         {% endif %}
       });
