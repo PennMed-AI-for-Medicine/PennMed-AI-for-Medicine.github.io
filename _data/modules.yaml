@@ -18,17 +18,17 @@
   slides: AIMed_Syllabus_24_v0.2.pdf
 
 
-- module_number: 1
-    start_date: 2024-01-25
-    end_date: 2024-02-16
-    title: DICOM
-    description: Introduction to DICOM and medical imaging. Eventually this should include other modalites like whole slide imaging and genetic data.
+- module_number:  1
+  start_date: 2024-01-25
+  end_date: 2024-02-16
+  title: DICOM
+  description: Introduction to DICOM and medical imaging. Eventually this should include other modalites like whole slide imaging and genetic data.
 
-  module_number: 2
-   start_date: 2024-02-19
-   end_date: 2024-03-15
-   title: Introduction to ML, statistics, EDA, linear algebra
-   description:
+- module_number: 2
+  start_date: 2024-02-19
+  end_date: 2024-03-15
+  title: Introduction to ML, statistics, EDA, linear algebra
+  description:
    # intro_video: 
    # quiz:
    # Lessons:
