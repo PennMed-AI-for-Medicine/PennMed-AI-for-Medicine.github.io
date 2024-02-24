@@ -51,7 +51,13 @@
   start_date: 2024-03-19
   end_date: 2024-03-26
   title: Language models
-  description: Introduction to deep learning and neural networks.
+  description: Introduction to language models and NLP.
+
+  lessons:
+  - 
+    title: (Optional Additional Resource) Great video my Andej Karpathy on Tokenization
+    video:  https://youtu.be/zduSFxRajkE?si=O8zjIOLFyErmC_Oe
+    length: 2 hours 14 minutes
 
 
   # module_number: 2
