@@ -1,5 +1,13 @@
--
-  module_number: 0
+# Module 0 = Python basics (numpy, pandas, ..)
+# Module 1 = DICOM 
+# Module 2 = Introduction to ML, statistics, EDA, linear algebra
+# Module 3 = Introduction to DL
+# Module 4 = Language models
+# Module 5 = PyTorch basics
+# Module 6 = .....
+
+
+- module_number: 0
   start_date: 2024-01-15
   end_date: 2024-01-19
   title: Course Introduction, Intro to data science and machine learning (AI). Computer setup and Python intro.
@@ -8,6 +16,63 @@
   #intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=97bacec2-6e77-4877-92ac-ad92011ca74c
   #slides: 01-Intro-to-Artificial-Intelligence.pdf
   slides: AIMed_Syllabus_24_v0.2.pdf
+
+
+- module_number: 1
+    start_date: 2024-01-25
+    end_date: 2024-02-16
+    title: DICOM
+    description: Introduction to DICOM and medical imaging. Eventually this should include other modalites like whole slide imaging and genetic data.
+
+  module_number: 2
+   start_date: 2024-02-19
+   end_date: 2024-03-15
+   title: Introduction to ML, statistics, EDA, linear algebra
+   description:
+   # intro_video: 
+   # quiz:
+   # Lessons:
+    #   - title: 
+    #     video:
+    #     length:
+    # Readings:
+    #   - title:
+    #     authors:
+    #     optional: true
+    # Homework:
+
+   module_number: 3
+   start_date: 2024-03-18
+   end_date: 2024-03-29
+   title: Introduction to DL 
+   description: Introduction to deep learning and neural networks.
+
+  module_number: 4
+   start_date: 2024-03-19
+   end_date: 2024-03-26
+   title: Language models
+   description: Introduction to deep learning and neural networks.
+
+
+  # module_number: 2
+  # start_date: 2024-01-29
+  # end_date: 2024-02-02
+  # title:  
+  # description:
+   # intro_video: 
+   # quiz:
+   # Lessons:
+    #   - title: 
+    #     video:
+    #     length:
+    # Readings:
+    #   - title:
+    #     authors:
+    #     optional: true
+    # Homework:
+
+  
+#   intro_video: 
   #quiz:
   #  - 
   #    title: Quiz 1 "Course start, policies and basics"
@@ -54,12 +119,12 @@
 #      optional: true
 #
 # -
-    module_number: 1
-    start_date: 2024-01-25
-    end_date: 2024-01-25
-    title: Intro to Python
-    description: Python is an amazing language with a concise syntax that allows you to rapidly prototype algorithms, and we are going to use it for all the assignments in this course. This module will cover all of the fundamentals you need to get started with Python. And as we continue through the rest of the course, you’ll quickly become an expert!
-#   intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d4389e5d-083e-40c7-b458-ad92011c9210
+#    module_number: 1
+#    start_date: 2024-01-25
+#    end_date: 2024-01-25
+#    title: DICOM
+#    description: Introduction to DICOM and medical imaging. Eventually this should include other modalites like whole slide imaging and genetic data.
+#    #   intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d4389e5d-083e-40c7-b458-ad92011c9210
 #   slides: 02-Intro-to-Python.pdf
 #   quiz:
 #     - 
@@ -95,12 +160,12 @@
 #   homework: Homework 1 "Python Skills"
 
 # -
-#   module_number: 3
-#   start_date: 2021-09-13
-#   end_date: 2021-09-20
-#   title: Search Problems
-#   description: In artificial intelligence, a surprising number of tasks that we want to solve can be cast as search problems. In this module, we will introduce the formal definition of search problems, and examine some classic algorithms for solving search problems called shortest path algorithms. These are sometimes referred to as “uninformed” search algorithms or “blind” search algorithms, because they are run without any additional knowledge of where our goal lies. We’ll also look at some variants of these algorithms that have computational complexity guarantees.
-#   intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=96480a11-edaa-4762-b5bb-ad92011c993e
+#   module_number: 2
+#   start_date: 2024-01-29
+#   end_date: 2024-02-02
+#   title:  
+#   description: 
+#   #   intro_video: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=96480a11-edaa-4762-b5bb-ad92011c993e
 #   slides: 03-Search-Problems.pdf
 #   quiz:
 #     - 
