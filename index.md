@@ -32,7 +32,7 @@ Updated course logistics:
 <ul>
     <li><strong>Course:</strong> MPHY 6120 - Artificial Intelligence for Medicine</li>
     <li><strong>Schedule:</strong> Tuesdays & Wednesdays, 1:45 - 3:15 PM</li>
-    <li><strong>Classroom:</strong> SCTR 12-146AB</li>
+    <li><strong>Classroom:</strong> SCTR 8-146AB</li>
     <li><strong>Semester:</strong> Spring 2025 (Jan 21 to early May)</li>
     <li><strong>Expected enrollment:</strong> ~14 students</li>
   </ul>
