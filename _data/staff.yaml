@@ -1,0 +1,15 @@
+- name: Rafe McBeth
+  pic: rafe.jpg
+  ai_pic: ai_rafe.jpg
+  url: https://www.med.upenn.edu/apps/faculty/index.php/g20002680/c1744/p9544774
+  extra_title: Director of Artificial Intelligence, Assistant Professor, Medical Physicist, Radiation Oncology
+  office_hours: 2 PM - 3 PM, Friday
+  location: Virtual 
+
+- name: Yifeng Zhu
+  pic: Yifeng.png
+  ai_pic: Yifeng.png
+  #url: https://yueyang1996.github.io
+  #office_hours: 9 AM - 11 AM, Thursday
+  #location: 
+  extra_title: TA

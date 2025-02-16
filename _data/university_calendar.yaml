@@ -1,0 +1,44 @@
+-
+  date: 2023-01-11
+  title: First day of classes
+  type: university_calendar
+-
+  date: 2023-01-16
+  title: MLK Day 
+  type: no_lecture
+- 
+  date: 2023-01-24
+  title: Course Selection Period Ends
+  type: university_calendar
+- 
+  date: 2023-02-20
+  title: Drop Period Ends
+  type: university_calendar
+-
+  date: 2023-03-09
+  title: Spring Term Break
+  type: no_lecture
+-
+  date: 2021-10-15
+  title: Fall Term Break
+  type: no_lecture
+-
+  date: 2021-10-29
+  title: Grade Type Change Deadline
+  type: university_calendar
+-
+  date: 2021-11-08
+  title: Last day to withdraw from a course
+  type: university_calendar
+-
+  date: 2021-11-25
+  title: Thanksgiving Break
+  type: no_lecture
+-
+  date: 2021-11-26
+  title: Thanksgiving Break
+  type: no_lecture
+-
+  date: 2023-05-09
+  title: Last day of classes
+  type: university_calendar

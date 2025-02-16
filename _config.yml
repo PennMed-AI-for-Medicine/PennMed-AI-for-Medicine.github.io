@@ -1,0 +1,7 @@
+exclude: ['README.md']
+include: ['term-projects/2018']
+timezone: America/New_York
+markdown: kramdown
+highlighter: rouge
+future: true
+theme: jekyll-theme-midnight
