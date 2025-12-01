@@ -92,7 +92,9 @@ We meet twice weekly for 90-minute sessions:
 ## Course Materials
 
 **Primary Text:**
-- *Little Book of Medical AI* (course companion, provided) — Your field guide to clinical AI
+- *Little Book of Medical AI* (course companion, provided)
+
+> **About the Little Book:** This is a living document being developed alongside the course. You'll receive draft chapters as we progress through modules. Your feedback and questions will shape the final version. Think of it as our collective field guide to the field—and a model for the field guides you'll write for your own projects.
 
 **Code & Resources:**
 - [Course GitHub Repository](https://github.com/PennMed-AI-for-Medicine)
@@ -138,29 +140,40 @@ Projects have **two parts**:
 - Code in GitHub repository
 
 ### Part B: Field Guide (3-5 pages)
-A document for non-experts covering:
-1. What this tool does (plain language)
-2. Where it fits in the workflow (who, when, which patients)
-3. Strengths (data-backed)
-4. Limitations and failure modes
-5. Safety rules (human review, prohibited uses)
-6. Local validation summary
-7. Monitoring plan (metrics, cadence, responsibility)
-8. Patient explanation (one paragraph, lay language)
 
-### Flexible Case Study Options
+A document for non-experts that could actually be handed to a busy clinician. This is graded separately from your technical work.
 
-**Imaging Track:**
-- Chest X-ray classification (pneumonia, COVID, cardiomegaly)
-- CT organ/lesion segmentation (liver, kidney, lung nodules)
-- Pathology/histology analysis
-- Retinal imaging, mammography, or other approved tasks
+| Section | What to Include | Points |
+|---------|-----------------|--------|
+| **1. Tool Summary** | Plain-language description a non-technical clinician could understand in 2 minutes | 10 |
+| **2. Intended Use** | Specific clinical context, patient population, workflow placement | 10 |
+| **3. Performance Summary** | Key metrics, what they mean clinically, comparison to alternatives | 15 |
+| **4. Limitations & Failure Modes** | When it breaks, edge cases, known biases | 15 |
+| **5. Human Oversight Rules** | When to review, when to override, red flags to watch for | 15 |
+| **6. Local Validation Plan** | How you would test this at a new site (cohort, metrics, thresholds) | 15 |
+| **7. Monitoring Plan** | What to track, how often, who reviews, escalation criteria | 10 |
+| **8. Patient Explanation** | One paragraph for informed consent / patient questions | 10 |
 
-**NLP Track:**
-- Clinical notes extraction/classification
-- Radiology report analysis
-- LLM for documentation assistance
-- Other approved clinical text tasks
+**Total: 100 points** (Field guide graded separately from technical artifact)
+
+### Project Tracks
+
+Students choose one of three tracks based on their background and interests. You select a track for your midterm project and can switch or continue for the final project.
+
+**Track A: Medical Imaging**
+- *Best for:* Students with image processing background, radiology/pathology interest
+- *Example projects:* Chest X-ray classification, CT organ segmentation, histopathology analysis, retinal imaging
+- *Key skills you'll develop:* DICOM/NIfTI handling, MONAI framework, CNNs, U-Net architectures
+
+**Track B: Clinical NLP**
+- *Best for:* Students with text/NLP background, documentation/EHR interest
+- *Example projects:* Clinical notes extraction, radiology report analysis, LLM for documentation assistance
+- *Key skills you'll develop:* Text preprocessing, embeddings, transformers, prompting strategies
+
+**Track C: Structured Clinical Data**
+- *Best for:* Students with statistics/epidemiology background, outcomes research interest
+- *Example projects:* Risk prediction from EHR data, treatment response modeling, survival analysis
+- *Key skills you'll develop:* Pandas, feature engineering, classical ML, tabular deep learning
 
 ---
 
