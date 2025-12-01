@@ -1,7 +1,6 @@
 ---
 title: MPHY 6120 - Artificial Intelligence for Medicine - University of Pennsylvania
 layout: default
-img: class_logo2.png 
 active_tab: main_page
 ---
 
