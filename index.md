@@ -9,18 +9,17 @@ active_tab: main_page
 **The Field Guide Mindset:** You will be asked to use AI tools that you did not design, do not fully understand, and do not have time to rigorously evaluate. This course teaches you to **build** those tools, **evaluate** them with discipline, and **write the field guide** someone else could use.
 </div>
 
-<div style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 15px; border: 1px solid transparent; border-radius: 4px;">
-  <strong>Welcome to MPHY 6120: Artificial Intelligence for Medicine!</strong> This course is designed for a broad audience including medical physicists, MD/PhDs, bioengineers, computer scientists, and translational researchers. Throughout the semester, you will learn to:
-  <ul>
-    <li>Work with diverse medical data (images, clinical text, structured EHR data)</li>
-    <li>Build and evaluate machine learning and deep learning models for clinical tasks</li>
-    <li>Understand large language models and their applications in healthcare</li>
-    <li>Design governance frameworks: acceptance tests, monitoring, and human-in-the-loop rules</li>
-    <li>Communicate AI capabilities and limitations to non-technical clinicians</li>
-    <li>Create "field guide" documentation for safe clinical AI deployment</li>
-  </ul>
+<div class="alert alert-success" markdown="1">
+**Welcome to MPHY 6120: Artificial Intelligence for Medicine!** This course is designed for a broad audience including medical physicists, MD/PhDs, bioengineers, computer scientists, and translational researchers. Throughout the semester, you will learn to:
 
-The goal is to produce graduates who can both <strong>build models</strong> and <strong>write the field guide</strong> that tells a real clinic how to use them safely.
+- Work with diverse medical data (images, clinical text, structured EHR data)
+- Build and evaluate machine learning and deep learning models for clinical tasks
+- Understand large language models and their applications in healthcare
+- Design governance frameworks: acceptance tests, monitoring, and human-in-the-loop rules
+- Communicate AI capabilities and limitations to non-technical clinicians
+- Create "field guide" documentation for safe clinical AI deployment
+
+The goal is to produce graduates who can both **build models** and **write the field guide** that tells a real clinic how to use them safely.
 </div>
 
 <div class="alert alert-info" markdown="1">
