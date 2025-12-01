@@ -1,52 +1,126 @@
--
-  date: 2024-01-18
-  title: Course Logistics
-  recording: 
--
-  date: 2024-01-18
-  title: Programming setup
-  recording: 
--
-  date: 2024-01-18
-  title: Basics of programming (Python)
-  recording: 
--
-#  date: 2023-01-12
-#  title: Introduction to data science and machine learning and its applications to medical physics
-#  recording:
-#  slides: test.pdf
-#-
-#  date: 2023-01-12
-#  title: Introduction / AI in Science Fiction and Philosophy 
-#  recording: https://test.com 
+# MPHY 6120 - AI for Medicine - Spring 2025 Lectures
+# Lecture schedule and recordings
 
-# recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=cf97c97d-568d-44c7-85e2-ad9501232319&start=313.990763026
+- date: 2025-01-21
+  title: Course Introduction & Field Guide Mindset
+  recording:
 
-#-
-#  date: 2021-09-01
-#  title: Introduction / AI in Science Fiction and Philosophy 
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=cf97c97d-568d-44c7-85e2-ad9501232319&start=313.990763026
-#-
-#  date: 2021-09-07
-#  title: Intro to Python part 1
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=67d2a2fb-f911-4164-8b51-ad9c0127fa0a
-#-
-#  date: 2021-09-08
-#  title: Intro to Python part 1.  Please also watch [the Module 2 recordings](http://artificial-intelligence-class.org/modules.html) or the [2nd Python lecture from the T/Th section](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=87f3e235-ea58-417e-9aed-ad9e018ad8c3).
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=9427a98d-4017-47dd-ba0d-ad9f00fed9ad
-#-
-#  date: 2021-09-09
-#  title: Intro to Python part 2
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=87f3e235-ea58-417e-9aed-ad9e018ad8c3
-#-
-#  date: 2021-09-13
-#  title: Search Problems
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=c195e366-5bb2-42da-8574-ada200eeb3d5
-#-
-#  date: 2021-09-14
-#  title: Search Problems
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=73363650-14c2-4435-943f-ada30127e425
-#-
-#  date: 2021-09-14
-#  title: Search Problems - part 2
-#  recording: https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ac4e1a70-be89-411c-abf5-ada50124534e
+- date: 2025-01-22
+  title: Development Environment Setup
+  recording:
+
+- date: 2025-01-28
+  title: Python & PyTorch Basics
+  recording:
+
+- date: 2025-01-29
+  title: Python Lab Session
+  recording:
+
+- date: 2025-02-04
+  title: Introduction to Medical Imaging Data
+  recording:
+
+- date: 2025-02-05
+  title: DICOM & NIfTI Formats
+  recording:
+
+- date: 2025-02-11
+  title: MONAI Framework Introduction
+  recording:
+
+- date: 2025-02-12
+  title: Medical Imaging Lab Session
+  recording:
+
+- date: 2025-02-18
+  title: Structured Clinical Data
+  recording:
+
+- date: 2025-02-19
+  title: EDA with Pandas
+  recording:
+
+- date: 2025-02-25
+  title: Feature Engineering for Clinical Data
+  recording:
+
+- date: 2025-02-26
+  title: Clinical Data Lab Session
+  recording:
+
+- date: 2025-03-04
+  title: Machine Learning Fundamentals
+  recording:
+
+- date: 2025-03-05
+  title: Classification & Regression
+  recording:
+
+- date: 2025-03-11
+  title: Spring Break - No Class
+  recording:
+
+- date: 2025-03-12
+  title: Spring Break - No Class
+  recording:
+
+- date: 2025-03-18
+  title: Evaluation Metrics & Cross-Validation
+  recording:
+
+- date: 2025-03-19
+  title: ML Lab Session
+  recording:
+
+- date: 2025-03-25
+  title: Deep Learning & CNNs
+  recording:
+
+- date: 2025-03-26
+  title: U-Net & Medical Image Segmentation
+  recording:
+
+- date: 2025-04-01
+  title: Midterm Project Work Session
+  recording:
+
+- date: 2025-04-02
+  title: Midterm Presentations
+  recording:
+
+- date: 2025-04-08
+  title: Clinical NLP Foundations
+  recording:
+
+- date: 2025-04-09
+  title: Text Processing Lab
+  recording:
+
+- date: 2025-04-15
+  title: Large Language Models
+  recording:
+
+- date: 2025-04-16
+  title: LLMs in Clinical Settings
+  recording:
+
+- date: 2025-04-22
+  title: Governance & Monitoring
+  recording:
+
+- date: 2025-04-23
+  title: Acceptance Testing & Monitoring Lab
+  recording:
+
+- date: 2025-04-29
+  title: From Model to MVP
+  recording:
+
+- date: 2025-04-30
+  title: Writing Field Guides
+  recording:
+
+- date: 2025-05-06
+  title: Final Presentations
+  recording:

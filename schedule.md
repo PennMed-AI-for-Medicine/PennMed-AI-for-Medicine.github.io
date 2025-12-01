@@ -2,9 +2,9 @@
 layout: default
 title: Schedule
 active_tab: items
-term_start: 2024-01-12
-term_end: 2024-05-03
-lecture_days: Thursdays
+term_start: 2025-01-21
+term_end: 2025-05-06
+lecture_days: Tuesday, Wednesday
 ---
 <!--
 <div class="alert alert-info">

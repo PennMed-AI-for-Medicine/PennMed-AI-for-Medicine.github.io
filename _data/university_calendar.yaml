@@ -1,44 +1,47 @@
+# University Calendar - Spring 2025
+# Update dates as official Penn calendar is released
+
 -
-  date: 2023-01-11
+  date: 2025-01-21
   title: First day of classes
   type: university_calendar
 -
-  date: 2023-01-16
-  title: MLK Day 
+  date: 2025-01-20
+  title: MLK Day - No Class
   type: no_lecture
 - 
-  date: 2023-01-24
+  date: 2025-02-04
   title: Course Selection Period Ends
   type: university_calendar
 - 
-  date: 2023-02-20
+  date: 2025-02-28
   title: Drop Period Ends
   type: university_calendar
 -
-  date: 2023-03-09
-  title: Spring Term Break
+  date: 2025-03-08
+  title: Spring Break Begins
+  type: university_calendar
+-
+  date: 2025-03-11
+  title: Spring Break - No Class
   type: no_lecture
 -
-  date: 2021-10-15
-  title: Fall Term Break
+  date: 2025-03-12
+  title: Spring Break - No Class
   type: no_lecture
 -
-  date: 2021-10-29
+  date: 2025-03-16
+  title: Spring Break Ends
+  type: university_calendar
+-
+  date: 2025-04-04
   title: Grade Type Change Deadline
   type: university_calendar
 -
-  date: 2021-11-08
+  date: 2025-04-14
   title: Last day to withdraw from a course
   type: university_calendar
 -
-  date: 2021-11-25
-  title: Thanksgiving Break
-  type: no_lecture
--
-  date: 2021-11-26
-  title: Thanksgiving Break
-  type: no_lecture
--
-  date: 2023-05-09
+  date: 2025-05-06
   title: Last day of classes
   type: university_calendar
