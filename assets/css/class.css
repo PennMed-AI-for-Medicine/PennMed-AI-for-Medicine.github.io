@@ -231,6 +231,58 @@ h3 + table {
 }
 
 /* ============================================
+   SCHEDULE TABLE (Override Bootstrap striping)
+   ============================================ */
+
+/* Force all table rows to dark background */
+.table-striped > tbody > tr,
+.table-striped > tbody > tr:nth-of-type(odd),
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: #161b22 !important;
+}
+
+/* Subtle alternating rows - just slightly different shades */
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #1c2128 !important;
+}
+
+/* All table cells get proper text color */
+.table > tbody > tr > td,
+.table > thead > tr > th,
+.table-striped > tbody > tr > td {
+  color: #c9d1d9 !important;
+  border-color: #30363d !important;
+}
+
+/* Module start rows - subtle teal accent */
+.table > tbody > tr.module-start > td,
+tr[class*="module"] td {
+  color: #f0f6fc !important;
+  font-weight: 500;
+}
+
+/* Secondary/muted text rows (like lab sessions) */
+.table > tbody > tr.text-muted > td,
+.table > tbody > tr > td.text-muted,
+tr.text-muted td,
+.text-muted {
+  color: #8b949e !important;
+}
+
+/* Hover state for schedule rows */
+.table-striped > tbody > tr:hover {
+  background-color: #21262d !important;
+}
+
+/* Table header styling */
+.table > thead > tr > th {
+  background-color: #21262d !important;
+  color: #f0f6fc !important;
+  border-bottom: 2px solid #2dd4bf !important;
+  font-weight: 600;
+}
+
+/* ============================================
    BLOCKQUOTES
    ============================================ */
 
