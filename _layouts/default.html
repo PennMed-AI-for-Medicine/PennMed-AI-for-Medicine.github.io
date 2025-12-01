@@ -45,6 +45,15 @@
     <link href="{{ site.baseurl }}/assets/css/syntax.css" rel="stylesheet">
     <link href="{{ site.baseurl }}/assets/css/class.css" rel="stylesheet">
 
+    <!-- Critical dark theme overrides for Bootstrap tables -->
+    <style>
+      .table-striped > tbody > tr:nth-of-type(odd) { background-color: #1c2128 !important; }
+      .table-striped > tbody > tr:nth-of-type(even) { background-color: #161b22 !important; }
+      .table-striped > tbody > tr > td { color: #c9d1d9 !important; background: transparent !important; }
+      .table > thead > tr > th { background-color: #21262d !important; color: #f0f6fc !important; }
+      td.alert, td.alert-info, td.alert-success, td.alert-danger { background: transparent !important; border: none !important; }
+    </style>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
