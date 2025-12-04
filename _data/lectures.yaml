@@ -1,126 +1,121 @@
-# MPHY 6120 - AI for Medicine - Spring 2025 Lectures
-# Lecture schedule and recordings
+# MPHY 6120 - AI for Medicine - Spring 2026 Lectures
+# Lecture schedule - Tues/Wed 1:45-3:15 PM
+# First day of classes: January 14, 2026 (Wednesday)
 
-- date: 2025-01-21
+- date: 2026-01-14
   title: Course Introduction & Field Guide Mindset
   recording:
 
-- date: 2025-01-22
+- date: 2026-01-20
   title: Development Environment Setup
   recording:
 
-- date: 2025-01-28
+- date: 2026-01-21
   title: Python & PyTorch Basics
   recording:
 
-- date: 2025-01-29
+- date: 2026-01-27
   title: Python Lab Session
   recording:
 
-- date: 2025-02-04
+- date: 2026-01-28
   title: Introduction to Medical Imaging Data
   recording:
 
-- date: 2025-02-05
+- date: 2026-02-03
   title: DICOM & NIfTI Formats
   recording:
 
-- date: 2025-02-11
+- date: 2026-02-04
   title: MONAI Framework Introduction
   recording:
 
-- date: 2025-02-12
+- date: 2026-02-10
   title: Medical Imaging Lab Session
   recording:
 
-- date: 2025-02-18
+- date: 2026-02-11
   title: Structured Clinical Data
   recording:
 
-- date: 2025-02-19
+- date: 2026-02-17
   title: EDA with Pandas
   recording:
 
-- date: 2025-02-25
+- date: 2026-02-18
   title: Feature Engineering for Clinical Data
   recording:
 
-- date: 2025-02-26
+- date: 2026-02-24
   title: Clinical Data Lab Session
   recording:
 
-- date: 2025-03-04
+- date: 2026-02-25
   title: Machine Learning Fundamentals
   recording:
 
-- date: 2025-03-05
+- date: 2026-03-03
   title: Classification & Regression
   recording:
 
-- date: 2025-03-11
-  title: Spring Break - No Class
-  recording:
-
-- date: 2025-03-12
-  title: Spring Break - No Class
-  recording:
-
-- date: 2025-03-18
-  title: Evaluation Metrics & Cross-Validation
-  recording:
-
-- date: 2025-03-19
+- date: 2026-03-04
   title: ML Lab Session
   recording:
 
-- date: 2025-03-25
+# Spring Break: March 7-15, 2026 - No classes March 10 & 11
+
+- date: 2026-03-17
+  title: Evaluation Metrics & Cross-Validation
+  recording:
+
+- date: 2026-03-18
   title: Deep Learning & CNNs
   recording:
 
-- date: 2025-03-26
+- date: 2026-03-24
   title: U-Net & Medical Image Segmentation
   recording:
 
-- date: 2025-04-01
+- date: 2026-03-25
+  title: Segmentation Lab Session
+  recording:
+
+- date: 2026-03-31
   title: Midterm Project Work Session
   recording:
 
-- date: 2025-04-02
+- date: 2026-04-01
   title: Midterm Presentations
   recording:
 
-- date: 2025-04-08
+- date: 2026-04-07
   title: Clinical NLP Foundations
   recording:
 
-- date: 2025-04-09
+- date: 2026-04-08
   title: Text Processing Lab
   recording:
 
-- date: 2025-04-15
+- date: 2026-04-14
   title: Large Language Models
   recording:
 
-- date: 2025-04-16
+- date: 2026-04-15
   title: LLMs in Clinical Settings
   recording:
 
-- date: 2025-04-22
+- date: 2026-04-21
   title: Governance & Monitoring
   recording:
 
-- date: 2025-04-23
+- date: 2026-04-22
   title: Acceptance Testing & Monitoring Lab
   recording:
 
-- date: 2025-04-29
+- date: 2026-04-28
   title: From Model to MVP
   recording:
 
-- date: 2025-04-30
-  title: Writing Field Guides
-  recording:
-
-- date: 2025-05-06
-  title: Final Presentations
+- date: 2026-04-29
+  title: Writing Field Guides & Course Wrap-up
   recording:

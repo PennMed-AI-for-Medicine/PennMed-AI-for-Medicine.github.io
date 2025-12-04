@@ -175,11 +175,8 @@ The quiz covers:
 {% capture recitation_date %}{{recitation.date | date: "%Y-%m-%d"}}{% endcapture %}
 
 {% if recitation_date == curr_date %}
-<tr><td>{{ recitation_date | date: '%a, %b %-d, %Y' }}</td><td><span markdown="1">{{recitation.title}} [[recording]]({{recitation.recording}}) 
-{% if recitation.slides %}
-[[slides]](slides/{{slides}})
-{% endif %}
-</span></td></tr>
+<tr><td>{{ recitation_date | date: '%a, %b %-d, %Y' }}</td><td><span markdown="1">{{recitation.title}}</span></td></tr>
+<!-- [[recording]]({{recitation.recording}}) {% if recitation.slides %}[[slides]](slides/{{slides}}){% endif %} -->
 {% endif %}
 {% endfor %}
 <!-- End display recitations / recorded group office hours -->

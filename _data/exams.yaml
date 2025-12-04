@@ -1,13 +1,18 @@
-# MPHY 6120 - AI for Medicine - Spring 2025
+# MPHY 6120 - AI for Medicine - Spring 2026
 # Key project dates
 
 - 
   title: Midterm Project Due - Medical Imaging Case Study
   topics: Modules 0-5
-  due_date: 2025-04-02 23:59:00EDT
+  due_date: 2026-04-01 23:59:00EDT
   type: project
+- 
+  title: Final Exam
+  topics: All Modules
+  due_date: 2026-05-06 13:45:00EDT
+  type: exam
 - 
   title: Final Project Due - Technical Artifact + Field Guide
   topics: All Modules
-  due_date: 2025-05-06 23:59:00EDT
+  due_date: 2026-05-06 23:59:00EDT
   type: project

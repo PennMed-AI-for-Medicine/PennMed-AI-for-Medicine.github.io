@@ -22,13 +22,13 @@ The goal is to produce graduates who can both **build models** and **write the f
 </div>
 
 <div class="alert alert-info" markdown="1">
-**Course Logistics - Spring 2025**
+**Course Logistics - Spring 2026**
 
 - **Course:** MPHY 6120 - Artificial Intelligence for Medicine
 - **Schedule:** Tuesdays & Wednesdays, 1:45 - 3:15 PM
 - **Classroom:** SCTR 8-146AB
-- **Semester:** Spring 2025 (January 21 - May 6)
-- **Expected enrollment:** ~14 students
+- **Semester:** Spring 2026 (January 14 - April 29)
+- **Expected enrollment:** ~25 students
 
 We encourage in-person attendance for lab sessions. Contact the instructor if you cannot attend a specific day.
 </div>
