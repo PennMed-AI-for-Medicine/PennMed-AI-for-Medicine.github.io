@@ -1,47 +1,59 @@
-# University Calendar - Spring 2025
-# Update dates as official Penn calendar is released
+# University Calendar - Spring 2026
+# Source: https://almanac.upenn.edu/penn-academic-calendar
 
 -
-  date: 2025-01-21
+  date: 2026-01-14
   title: First day of classes
   type: university_calendar
 -
-  date: 2025-01-20
+  date: 2026-01-19
   title: MLK Day - No Class
   type: no_lecture
 - 
-  date: 2025-02-04
+  date: 2026-01-27
   title: Course Selection Period Ends
   type: university_calendar
 - 
-  date: 2025-02-28
+  date: 2026-02-23
   title: Drop Period Ends
   type: university_calendar
 -
-  date: 2025-03-08
+  date: 2026-03-07
   title: Spring Break Begins
   type: university_calendar
 -
-  date: 2025-03-11
+  date: 2026-03-10
   title: Spring Break - No Class
   type: no_lecture
 -
-  date: 2025-03-12
+  date: 2026-03-11
   title: Spring Break - No Class
   type: no_lecture
 -
-  date: 2025-03-16
+  date: 2026-03-15
   title: Spring Break Ends
   type: university_calendar
 -
-  date: 2025-04-04
-  title: Grade Type Change Deadline
+  date: 2026-03-16
+  title: Classes Resume
   type: university_calendar
 -
-  date: 2025-04-14
+  date: 2026-03-23
+  title: Grade Mode Change Deadline
+  type: university_calendar
+-
+  date: 2026-03-30
   title: Last day to withdraw from a course
   type: university_calendar
 -
-  date: 2025-05-06
+  date: 2026-04-29
   title: Last day of classes
+  type: university_calendar
+-
+  date: 2026-05-04
+  title: Final Examinations Begin
+  type: university_calendar
+-
+  date: 2026-05-12
+  title: Spring Term Ends
   type: university_calendar

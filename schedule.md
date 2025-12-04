@@ -2,8 +2,8 @@
 layout: default
 title: Schedule
 active_tab: items
-term_start: 2025-01-21
-term_end: 2025-05-06
+term_start: 2026-01-14
+term_end: 2026-04-29
 lecture_days: Tuesday, Wednesday
 ---
 <!--
@@ -151,7 +151,8 @@ The quiz covers:
 {% capture lecture_date %}{{lecture.date | date: "%Y-%m-%d"}}{% endcapture %}
 
 {% if lecture_date == curr_date %}
-<tr><td>{{ lecture_date | date: '%a, %b %-d, %Y' }}</td><td><span markdown="1">{{lecture.title}} [[recording]]({{lecture.recording}}) [[slides]](slides/{{slides}})</span></td></tr>
+<tr><td>{{ lecture_date | date: '%a, %b %-d, %Y' }}</td><td><span markdown="1">{{lecture.title}}</span></td></tr>
+<!-- [[recording]]({{lecture.recording}}) [[slides]](slides/{{slides}}) -->
 {% assign displyed_lecture_info = true %}
 {% endif %}
 {% endfor %}
@@ -159,7 +160,8 @@ The quiz covers:
 
 <!-- Placeholder if no lecture exists in the YAML -->
 {% if displyed_lecture_info == false %}
-<tr><td>{{ curr_date | date: '%a, %b %-d, %Y' }} </td><td><span markdown="1">Lecture  [[slides]](slides/{{slides}})</span></td></tr>
+<tr><td>{{ curr_date | date: '%a, %b %-d, %Y' }} </td><td><span markdown="1">Lecture</span></td></tr>
+<!-- [[slides]](slides/{{slides}}) -->
 <!-- End no lecture placeholder -->
 {% endif %}
 
