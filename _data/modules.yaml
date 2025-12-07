@@ -263,15 +263,74 @@
   description: >
     Convolutional neural networks, U-Net architecture for segmentation, and image
     classification models. Hands-on with PyTorch and MONAI for medical imaging tasks.
+  lessons:
+    - title: "Neural Networks Fundamentals"
+      description: >
+        From biological inspiration to artificial neurons. Activation functions
+        (ReLU, sigmoid, softmax). Feedforward networks, backpropagation, and gradient
+        descent. Loss functions for classification vs. regression. Building intuition
+        before complexity.
+    - title: "Convolutional Neural Networks (CNNs)"
+      description: >
+        Why convolutions work for images. Filters, feature maps, pooling, and stride.
+        Classic architectures: LeNet, AlexNet, VGG, ResNet. What each layer learns.
+        From ImageNet to medical imaging.
+    - title: "Transfer Learning & Fine-Tuning"
+      description: >
+        Why training from scratch rarely makes sense in medical imaging. Using pretrained
+        models (ImageNet, RadImageNet). Freezing layers, learning rates for fine-tuning.
+        When transfer learning fails and what to do about it.
+    - title: "Image Segmentation with U-Net"
+      description: >
+        The encoder-decoder architecture that changed medical imaging. Skip connections
+        and why they matter. Loss functions for segmentation (Dice, cross-entropy).
+        Variants: Attention U-Net, nnU-Net. Hands-on with MONAI.
+    - title: "Training Deep Learning Models: Practical Considerations"
+      description: >
+        Data augmentation for medical images (rotation, elastic deformation, intensity).
+        Batch normalization, dropout, and regularization. Learning rate schedules.
+        Early stopping and checkpointing. Debugging when training goes wrong.
+  readings:
+    - title: "Deep Learning (Goodfellow, Bengio, Courville) - Chapter 9: CNNs"
+      url: https://www.deeplearningbook.org/contents/convnets.html
+      optional: false
+      note: "The foundational reference on CNNs"
+    - title: "U-Net: Convolutional Networks for Biomedical Image Segmentation"
+      authors: Ronneberger et al., MICCAI 2015
+      url: https://arxiv.org/abs/1505.04597
+      optional: false
+      note: "The paper that started it all for medical image segmentation"
+    - title: "MONAI Tutorials - 2D Classification"
+      url: https://github.com/Project-MONAI/tutorials/blob/main/2d_classification/mednist_tutorial.ipynb
+      optional: true
+      note: "Hands-on tutorial we'll work through in class"
 
 - module_number: 6
   start_date: 2026-03-25
   end_date: 2026-04-01
-  title: "Midterm: Medical Imaging Case Study"
+  title: "Midterm Project: Medical Imaging Case Study"
   description: >
     Students work on a self-selected medical imaging project from approved options:
     chest X-ray classification, CT organ segmentation, pathology analysis, retinal imaging,
     or other approved imaging tasks. Includes mini field guide deliverable.
+  lessons:
+    - title: "Midterm Project Kickoff"
+      description: >
+        Overview of project options, dataset access, and expectations. Forming teams
+        (if applicable). Timeline and milestones. What makes a good mini field guide.
+    - title: "Work Session: Data Exploration & Baseline"
+      description: >
+        In-class work time with instructor and TA support. Focus on loading data,
+        EDA, and establishing a simple baseline model. Troubleshooting environment
+        and data issues.
+    - title: "Work Session: Model Development"
+      description: >
+        In-class work time focused on model architecture, training, and iteration.
+        Peer feedback on approaches. Debugging common deep learning issues.
+    - title: "Midterm Presentations"
+      description: >
+        Brief presentations of results and mini field guides. Peer feedback and
+        discussion. What worked, what didn't, and lessons learned.
 
 - module_number: 7
   start_date: 2026-04-01
@@ -281,6 +340,42 @@
     Text processing, word embeddings, and the unique challenges of clinical natural
     language processing. Working with clinical notes, medical terminology, and
     de-identification considerations.
+  lessons:
+    - title: "Introduction to Clinical NLP"
+      description: >
+        Why clinical text is different: abbreviations, misspellings, implicit context,
+        copy-paste artifacts. Types of clinical documents (notes, reports, discharge
+        summaries). The de-identification challenge. HIPAA and safe harbor.
+    - title: "Text Preprocessing & Traditional NLP"
+      description: >
+        Tokenization, stemming, lemmatization. Bag of words and TF-IDF. N-grams.
+        Why these still matter even in the age of transformers. Building a simple
+        text classifier with scikit-learn.
+    - title: "Word Embeddings"
+      description: >
+        From one-hot to distributed representations. Word2Vec, GloVe, and FastText.
+        Domain-specific embeddings (BioWordVec, clinical embeddings). Visualizing
+        embeddings with t-SNE. What embeddings capture and what they miss.
+    - title: "Clinical NLP Tools & Resources"
+      description: >
+        Overview of clinical NLP tools: cTAKES, MetaMap, scispaCy, MedSpaCy.
+        UMLS and medical ontologies. Named entity recognition for medications,
+        diagnoses, and procedures. When to use off-the-shelf vs. custom solutions.
+  readings:
+    - title: "Speech and Language Processing (Jurafsky & Martin) - Chapters 2, 6"
+      url: https://web.stanford.edu/~jurafsky/slp3/
+      optional: false
+      note: "Text processing and vector semantics chapters"
+    - title: "Clinical Natural Language Processing in Languages Other Than English"
+      authors: Névéol et al., JAMIA 2018
+      url: https://academic.oup.com/jamia/article/25/8/1077/5001910
+      optional: true
+      note: "Good overview of clinical NLP challenges"
+    - title: "scispaCy: Fast and Robust Models for Biomedical NLP"
+      authors: Neumann et al., BioNLP 2019
+      url: https://arxiv.org/abs/1902.07669
+      optional: true
+      note: "Practical tool we'll use in class"
 
 - module_number: 8
   start_date: 2026-04-08
@@ -291,9 +386,46 @@
     clinical applications. Understanding capabilities and limitations of LLMs
     in healthcare settings.
   lessons:
+    - title: "The Transformer Revolution"
+      description: >
+        Attention is all you need. Self-attention and multi-head attention. Positional
+        encodings. Encoder-decoder vs. decoder-only architectures. Why transformers
+        replaced RNNs for most NLP tasks.
+    - title: "Large Language Models: GPT, BERT, and Beyond"
+      description: >
+        Pre-training and fine-tuning paradigm. BERT for understanding, GPT for generation.
+        Scaling laws and emergent capabilities. Medical LLMs: ClinicalBERT, PubMedBERT,
+        Med-PaLM. What's actually in these models.
+    - title: "Prompting & In-Context Learning"
+      description: >
+        Zero-shot, few-shot, and chain-of-thought prompting. Prompt engineering for
+        medical tasks. Retrieval-augmented generation (RAG). When prompting beats
+        fine-tuning and vice versa.
+    - title: "LLMs in Clinical Practice: Opportunities & Risks"
+      description: >
+        Current applications: clinical documentation, patient communication, decision
+        support. Hallucination and factual accuracy in medical contexts. Bias and
+        fairness concerns. Regulatory landscape. The responsible deployment question.
+  readings:
+    - title: "Attention Is All You Need"
+      authors: Vaswani et al., NeurIPS 2017
+      url: https://arxiv.org/abs/1706.03762
+      optional: true
+      note: "The transformer paper—technical but foundational"
+    - title: "The AI Revolution in Medicine (Chapters on GPT-4)"
+      authors: Lee, Goldberg, Kohane
+      optional: false
+      note: "Accessible overview of LLMs in medicine"
     - title: (Optional) Great video by Andrej Karpathy on Tokenization
       video: https://youtu.be/zduSFxRajkE?si=O8zjIOLFyErmC_Oe
       length: 2 hours 14 minutes
+      optional: true
+      note: "Deep dive into how LLMs process text"
+    - title: "Large Language Models in Medicine"
+      authors: Singhal et al., Nature 2023
+      url: https://www.nature.com/articles/s41586-023-06291-2
+      optional: true
+      note: "Med-PaLM paper—state of the art for medical QA"
 
 - module_number: 9
   start_date: 2026-04-15
@@ -304,16 +436,16 @@
     choosing monitoring metrics, setting review cadences, and defining human-in-the-loop
     rules. Practical exercises in building monitoring dashboards.
   lessons:
-    - title: "Lecture: What Governance Actually Means"
+    - title: "What Governance Actually Means"
       description: >
         Governance is not bureaucracy—it is constraints (what must always be true),
         experiments (acceptance tests and drift checks), and logs (traceability).
         We map familiar clinical concepts (commissioning, QA, chart rounds) to AI governance.
-    - title: "Lecture: Acceptance Testing Design"
+    - title: "Acceptance Testing Design"
       description: >
         How to design local validation: picking a representative cohort, choosing metrics
         that matter for your use case, setting thresholds, and documenting the process.
-    - title: "Lecture: Monitoring & Drift Detection"
+    - title: "Monitoring & Drift Detection"
       description: >
         Choosing 2-3 key monitoring stats, setting review cadence, defining who is responsible,
         and what to do when performance drifts. Real-world examples from clinical AI deployments.
@@ -321,6 +453,16 @@
       description: >
         Hands-on exercise implementing a monitoring script or dashboard for a model
         you've trained. Track predictions, flag anomalies, and generate alerts.
+  readings:
+    - title: "Hidden Technical Debt in Machine Learning Systems"
+      authors: Sculley et al., NeurIPS 2015
+      url: https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
+      optional: false
+      note: "Classic paper on ML systems in production"
+    - title: "FDA Guidance on AI/ML-Based Software as a Medical Device"
+      url: https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices
+      optional: true
+      note: "Understand the regulatory landscape"
 
 - module_number: 10
   start_date: 2026-04-22
@@ -331,11 +473,11 @@
     communicating with non-technical clinicians, and understanding the path
     from research to clinical implementation.
   lessons:
-    - title: "Lecture: The Gap Between Model and Product"
+    - title: "The Gap Between Model and Product"
       description: >
         Why most ML papers never become clinical tools. Understanding workflow integration,
         regulatory pathways, and the organizational factors that determine success.
-    - title: "Lecture: Writing Effective Field Guides"
+    - title: "Writing Effective Field Guides"
       description: >
         How to write documentation that busy clinicians will actually read and use.
         Plain language, clear rules, simple checklists, and the 8-section field guide template.
@@ -343,6 +485,12 @@
       description: >
         Students exchange draft field guides and provide structured feedback.
         Practice explaining technical work to non-technical audiences.
+  readings:
+    - title: "Reporting Guidelines for Clinical Trial Reports for Interventions Involving AI"
+      authors: CONSORT-AI, Nature Medicine 2020
+      url: https://www.nature.com/articles/s41591-020-1034-x
+      optional: true
+      note: "Standards for reporting AI in clinical research"
 
 - module_number: 11
   start_date: 2026-04-24
@@ -352,3 +500,16 @@
     Students present their final projects, which include both a technical artifact
     (model/pipeline) and a field guide document. Peer feedback and discussion
     of deployment readiness.
+  lessons:
+    - title: "Final Project Work Session"
+      description: >
+        Last in-class work time. Final debugging, polishing presentations, and
+        completing field guides. One-on-one check-ins with instructor.
+    - title: "Final Presentations: Day 1"
+      description: >
+        Student presentations (15-20 min each). Focus on the problem, approach,
+        results, and field guide highlights. Q&A and peer feedback.
+    - title: "Final Presentations: Day 2"
+      description: >
+        Remaining presentations. Course wrap-up: what we learned, where the field
+        is going, and how to continue learning after the course.
