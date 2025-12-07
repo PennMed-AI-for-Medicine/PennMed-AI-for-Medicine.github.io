@@ -1,19 +1,54 @@
-# MPHY 6120 - AI for Medicine - Spring 2025
+# MPHY 6120 - AI for Medicine - Spring 2026
 # Module structure for the course
+# Semester: January 14 - April 29, 2026
 
 - module_number: 0
-  start_date: 2025-01-21
-  end_date: 2025-01-28
+  start_date: 2026-01-14
+  end_date: 2026-01-21
   title: Course Introduction & The Field Guide Mindset
   description: >
     We introduce the course philosophy: you will learn to build AI tools for medicine,
     evaluate them with discipline, and write the field guide someone else could use.
     Key concepts include Models vs Systems, Metrics vs Readiness, and the governance mindset.
-  # slides: AIMed_Syllabus_25.pdf  # TODO: Add Spring 2025 syllabus
+  # slides: AIMed_Syllabus_26.pdf  # TODO: Add Spring 2026 syllabus
+  lessons:
+    - title: Course Overview & Expectations
+      description: >
+        Introduction to the course structure, grading, and what you'll build by semester end.
+        We discuss the three project tracks (imaging, NLP, structured data) and the field guide requirement.
+    - title: "The Field Guide Mindset: Models vs. Systems"
+      description: >
+        Why building a model is the easy part. Deployment, workflow integration, governance,
+        and monitoring are where most clinical AI projects fail. We reframe success as
+        "Could a busy community clinic use this safely?"
+    - title: "Five Pillars of Clinical AI"
+      description: >
+        Deep dive into the course philosophy: (1) Models vs Systems, (2) Metrics vs Readiness,
+        (3) Governance as Quantitative Discipline, (4) Maturity Levels, (5) Field Guide Mindset.
+    - title: "What Makes Medical AI Different?"
+      description: >
+        Unique challenges of healthcare: data privacy (HIPAA), class imbalance, distribution shift,
+        high-stakes decisions, regulatory requirements, and the need for explainability.
+  readings:
+    - title: "The AI Revolution in Medicine: GPT-4 and Beyond (Introduction & Chapter 1)"
+      authors: Peter Lee, Carey Goldberg, Isaac Kohane
+      optional: false
+    - title: "High-performance medicine: the convergence of human and artificial intelligence"
+      authors: Eric Topol
+      url: https://www.nature.com/articles/s41591-018-0300-7
+      optional: false
+    - title: "Dissecting racial bias in an algorithm used to manage the health of populations"
+      authors: Obermeyer et al.
+      url: https://www.science.org/doi/10.1126/science.aax2342
+      optional: true
+    - title: "How to Read Articles That Use Machine Learning"
+      authors: Liu et al., JAMA 2019
+      url: https://jamanetwork.com/journals/jama/fullarticle/2754798
+      optional: true
 
 - module_number: 1
-  start_date: 2025-01-28
-  end_date: 2025-02-04
+  start_date: 2026-01-21
+  end_date: 2026-01-28
   title: Python & Development Environment
   description: >
     Setting up your development environment with uv for package management, Jupyter notebooks,
@@ -24,16 +59,16 @@
       length: 2 hours
 
 - module_number: 2
-  start_date: 2025-02-04
-  end_date: 2025-02-18
+  start_date: 2026-01-28
+  end_date: 2026-02-11
   title: Medical Imaging Data
   description: >
     Introduction to medical imaging data formats and handling. Covers DICOM, NIfTI,
     various imaging modalities, and the MONAI framework for medical image analysis.
 
 - module_number: 3
-  start_date: 2025-02-18
-  end_date: 2025-03-04
+  start_date: 2026-02-11
+  end_date: 2026-02-25
   title: Structured Clinical Data & Exploratory Data Analysis
   description: >
     Working with electronic health record (EHR) data, feature engineering for clinical
@@ -41,8 +76,8 @@
     challenges of clinical tabular data.
 
 - module_number: 4
-  start_date: 2025-03-04
-  end_date: 2025-03-25
+  start_date: 2026-02-25
+  end_date: 2026-03-18
   title: Machine Learning Foundations
   description: >
     Core machine learning concepts: classification, regression, evaluation metrics,
@@ -50,16 +85,16 @@
     clinical deployment vs. publication.
 
 - module_number: 5
-  start_date: 2025-03-25
-  end_date: 2025-04-01
+  start_date: 2026-03-18
+  end_date: 2026-03-25
   title: Deep Learning for Medical Imaging
   description: >
     Convolutional neural networks, U-Net architecture for segmentation, and image
     classification models. Hands-on with PyTorch and MONAI for medical imaging tasks.
 
 - module_number: 6
-  start_date: 2025-04-01
-  end_date: 2025-04-08
+  start_date: 2026-03-25
+  end_date: 2026-04-01
   title: "Midterm: Medical Imaging Case Study"
   description: >
     Students work on a self-selected medical imaging project from approved options:
@@ -67,8 +102,8 @@
     or other approved imaging tasks. Includes mini field guide deliverable.
 
 - module_number: 7
-  start_date: 2025-04-08
-  end_date: 2025-04-15
+  start_date: 2026-04-01
+  end_date: 2026-04-08
   title: Clinical Text & NLP Foundations
   description: >
     Text processing, word embeddings, and the unique challenges of clinical natural
@@ -76,8 +111,8 @@
     de-identification considerations.
 
 - module_number: 8
-  start_date: 2025-04-15
-  end_date: 2025-04-22
+  start_date: 2026-04-08
+  end_date: 2026-04-15
   title: Large Language Models in Medicine
   description: >
     Transformer architectures, large language models, prompting strategies, and
@@ -89,8 +124,8 @@
       length: 2 hours 14 minutes
 
 - module_number: 9
-  start_date: 2025-04-22
-  end_date: 2025-04-29
+  start_date: 2026-04-15
+  end_date: 2026-04-22
   title: Governance & Monitoring for Clinical AI
   description: >
     What governance means in clinical settings. Designing acceptance tests,
@@ -116,8 +151,8 @@
         you've trained. Track predictions, flag anomalies, and generate alerts.
 
 - module_number: 10
-  start_date: 2025-04-29
-  end_date: 2025-05-01
+  start_date: 2026-04-22
+  end_date: 2026-04-24
   title: From Model to Minimum Viable Product
   description: >
     Deployment considerations for clinical AI, writing effective field guides,
@@ -138,8 +173,8 @@
         Practice explaining technical work to non-technical audiences.
 
 - module_number: 11
-  start_date: 2025-05-01
-  end_date: 2025-05-06
+  start_date: 2026-04-24
+  end_date: 2026-04-29
   title: Final Projects & Presentations
   description: >
     Students present their final projects, which include both a technical artifact
