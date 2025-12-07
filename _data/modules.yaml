@@ -53,10 +53,44 @@
   description: >
     Setting up your development environment with uv for package management, Jupyter notebooks,
     and PyTorch basics. We'll establish good coding practices for reproducible medical AI research.
+    This module pairs with Homework 1 to ensure everyone has a working environment.
   lessons:
+    - title: "Development Environment Setup"
+      description: >
+        Modern Python tooling: uv for fast package management, virtual environments for isolation,
+        and why reproducibility matters in medical AI research. We'll walk through the HW1 setup
+        and troubleshoot common issues.
+    - title: "Git & GitHub for Medical AI"
+      description: >
+        Version control isn't just for software engineers—it's essential for reproducible research
+        and increasingly important in the age of AI-assisted coding. Clone, commit, push, branch,
+        and pull request workflows. Your commit history tells the story of your work.
+    - title: "Jupyter Notebooks vs. Python Scripts"
+      description: >
+        When to use notebooks (exploration, visualization, teaching) vs. scripts (production,
+        testing, automation). Best practices for organizing medical AI projects. Introduction
+        to the notebooks you'll use throughout the course.
+    - title: "The Medical Data Landscape"
+      description: >
+        Preview of the data types we'll encounter: medical images (DICOM, NIfTI), structured
+        clinical data (EHR, tabular), and clinical text (notes, reports). Understanding what
+        makes medical data different from typical ML datasets.
+  readings:
+    - title: "The Good Research Code Handbook"
+      authors: Patrick Mineault
+      url: https://goodresearch.dev/
+      optional: false
+      note: "Skim chapters 1-3 on project setup and organization"
+    - title: "Git Handbook"
+      authors: GitHub Guides
+      url: https://guides.github.com/introduction/git-handbook/
+      optional: true
+      note: "Reference if you're new to Git"
     - title: (Optional) Great video by Andrej Karpathy on building neural networks from scratch
       video: https://www.youtube.com/watch?v=VMj-3S1tku0
       length: 2 hours
+      optional: true
+      note: "Excellent deep dive if you want to understand what's under the hood"
 
 - module_number: 2
   start_date: 2026-01-28
