@@ -5,7 +5,6 @@ active_tab: homework
 release_date: 2026-01-21
 due_date: 2026-01-28 23:59:00EST
 classroom_link: https://classroom.github.com/a/d7oSCce6
-submission_link: https://www.gradescope.com/
 ---
 
 <!-- Check whether the assignment is ready to release -->
@@ -25,9 +24,9 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 <div class="alert alert-success" markdown="1">
 **Get Started:**
 1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code
-2. Clone your repo and complete the exercises in `hw1_exercises.py`
-3. Push your completed work to GitHub
-4. [**Submit to Gradescope**]({{ page.submission_link }}) when complete
+2. Clone your repo to your local machine
+3. Complete the exercises in `hw1_exercises.py`
+4. Commit and push your work to GitHub before the deadline
 </div>
 
 ---
@@ -39,7 +38,7 @@ By completing this assignment, you will:
 - Set up your Python development environment using `uv`
 - Verify PyTorch installation and GPU access (if available)
 - Practice basic Python skills needed for the course
-- Submit your first assignment via Gradescope
+- Learn the Git workflow used throughout this course
 
 ---
 
@@ -218,20 +217,47 @@ print(f"Tensor device: {x.device}")
 
 ---
 
-## Submission
+## Submission via GitHub
 
-1. **Create a PDF report** containing:
-   - All screenshots from Part 1
-   - All code cells and outputs from Parts 2 and 3
-   - Brief comments explaining what each code block does
+All submissions for this course are done through GitHub. This mirrors real-world software development workflows and helps you build essential version control skills.
 
-2. **Submit to [Gradescope]({{ page.submission_link }})**:
-   - Your PDF report
-   - Your `.ipynb` notebook file(s)
+### How to Submit
 
-3. **Naming convention:**
-   - `hw1_lastname_firstname.pdf`
-   - `hw1_python_skills.ipynb` (or `hw1_starter.ipynb` if using provided notebook)
+1. **Complete your work** in `hw1_exercises.py` (replace `None` values with your code)
+2. **Commit your changes** with meaningful commit messages:
+   ```bash
+   git add hw1_exercises.py
+   git commit -m "Complete NumPy exercises 2.1.1-2.1.5"
+   ```
+3. **Push to GitHub** before the deadline:
+   ```bash
+   git push
+   ```
+
+### Commit Expectations
+
+Good commit habits are part of your grade. We expect:
+
+- **Multiple commits** showing your progress (not just one giant commit at the end)
+- **Meaningful commit messages** that describe what you did (e.g., "Add patient DataFrame with age groups" not "stuff")
+- **Working code** in your final commit (we grade the last commit before the deadline)
+
+### Example Good Commit History
+```
+a]b3f2d1 Complete Part 3: PyTorch CUDA check
+8c4e5f6 Add tensor operations and NumPy conversion
+2d1a9b7 Complete Part 2: matplotlib visualizations
+f7e8c3a Add pandas DataFrame exercises
+9a2b4c5 Complete NumPy array operations
+1e6d8f2 Verify environment setup - all packages installed
+```
+
+### Why Git Matters
+
+In the era of AI-assisted coding, your commit history tells the story of *your* work:
+- It shows your problem-solving process
+- It distinguishes your contributions from AI-generated code
+- It's a skill every employer expects
 
 ---
 
@@ -239,37 +265,40 @@ print(f"Tensor device: {x.device}")
 
 | Component | Points |
 |-----------|--------|
-| **Part 1: Environment Setup** | **30** |
-| 1.1 uv installation verified | 10 |
-| 1.2 Virtual environment created | 10 |
-| 1.3 Packages installed correctly | 10 |
+| **Part 1: Environment Setup** | **25** |
+| 1.1 uv installation verified | 8 |
+| 1.2 Virtual environment created | 8 |
+| 1.3 Packages installed correctly | 9 |
 | **Part 2: Python Skills** | **40** |
 | 2.1 NumPy exercises | 15 |
 | 2.2 Pandas exercises | 15 |
 | 2.3 Matplotlib visualizations | 10 |
-| **Part 3: PyTorch Basics** | **30** |
-| 3.1 Tensor creation | 10 |
-| 3.2 Tensor operations | 10 |
-| 3.3 GPU/CUDA check | 10 |
+| **Part 3: PyTorch Basics** | **25** |
+| 3.1 Tensor creation | 8 |
+| 3.2 Tensor operations | 9 |
+| 3.3 GPU/CUDA check | 8 |
+| **Git Workflow** | **10** |
+| Multiple meaningful commits | 5 |
+| Clear commit messages | 5 |
 | **Total** | **100** |
 
 ---
 
 ## Resources
 
+- [Git Handbook](https://guides.github.com/introduction/git-handbook/) — If you're new to Git
 - [uv Documentation](https://docs.astral.sh/uv/)
 - [NumPy Quickstart](https://numpy.org/doc/stable/user/quickstart.html)
 - [Pandas Getting Started](https://pandas.pydata.org/docs/getting_started/index.html)
 - [Matplotlib Tutorials](https://matplotlib.org/stable/tutorials/index.html)
 - [PyTorch Tutorials](https://pytorch.org/tutorials/)
-- [Penn's Python Course on Coursera](https://www.coursera.org/learn/python-programming-intro)
 
 ---
 
 ## Tips
 
 - **Start early!** Environment setup can sometimes have unexpected issues.
+- **Commit often** — Don't wait until you're done to make your first commit.
 - **Use the course GitHub Discussions** or office hours if you get stuck.
-- **Document any errors** you encounter and how you resolved them.
 - **If you don't have a GPU**, that's completely fine—all coursework can be done on CPU.
-- **Ask AI assistants** for help debugging, but make sure you understand the code.
+- **AI assistants are allowed** for debugging, but your commit history should show *your* problem-solving process.
