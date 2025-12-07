@@ -180,9 +180,16 @@ Students choose one of three tracks based on their background and interests. You
 
 ---
 
-## Office Hours
+## Submission & GitHub Workflow
 
-TBD — Schedule will be posted and announced via email.
+All code assignments are submitted via **GitHub Classroom**:
+
+1. Accept the assignment link (posted on Canvas and the homework page)
+2. Clone your private repository
+3. Complete the work, committing as you go
+4. Push before the deadline
+
+We use GitHub (not Gradescope) because version control is an essential skill for medical AI development. Your commit history shows your problem-solving process and distinguishes your work from AI-generated code. Grades are recorded in Canvas.
 
 ---
 
@@ -190,8 +197,19 @@ TBD — Schedule will be posted and announced via email.
 
 We encourage the use of AI coding assistants (GitHub Copilot, ChatGPT, Claude) to enhance your learning. However:
 - You are responsible for verifying correctness
-- Cite AI-assisted code where appropriate
+- Your commit history should reflect your problem-solving process
 - The goal is understanding, not just working code
+- AI assistants are tools to accelerate learning, not replace it
+
+---
+
+## Office Hours
+
+**Instructor:** TBD (will be announced first week of class)
+
+**TA:** TBD
+
+Office hours are drop-in; no appointment needed. For complex questions, email ahead so we can prepare.
 
 ---
 

@@ -44,8 +44,8 @@ Below, you'll find links to pre-recorded lectures. You can also <a href="https:/
 
 {% if module.intro_video %}  * **Intro:** Module {{ forloop.index }} [[Video]]({{module.intro_video}}) {% endif %}
 {% for lesson in module.lessons %}
-* **Lesson {{ forloop.index }}:** {{lesson.title}}
-{%if lesson.video %}[[Video]]({{lesson.video}}){% endif %}
+* **{{lesson.title}}**{% if lesson.video %} [[Video]]({{lesson.video}}){% endif %}{% if lesson.length %} ({{lesson.length}}){% endif %}
+{% if lesson.description %}<br><small class="text-muted">{{lesson.description}}</small>{% endif %}
 {% endfor %}
 
 
@@ -54,13 +54,15 @@ Slides: [[Slides]](slides/{{module.slides}})
 {% endif %}
 
 
-{% if module.readings %} 
-Readings:
+{% if module.readings %}
+**Readings:**
 {% for reading in module.readings %}
 {% if reading.url %}
-*  {% if reading.optional %}<b>Optional:</b> {% endif %} {{ reading.authors }}, <a href="{{ reading.url }}">{{ reading.title }}</a> 
+*  {% if reading.optional %}<span class="text-muted">(Optional)</span> {% endif %}{% if reading.authors %}{{ reading.authors }}, {% endif %}<a href="{{ reading.url }}">{{ reading.title }}</a>{% if reading.note %} — <small class="text-muted">{{ reading.note }}</small>{% endif %}
+{% elsif reading.video %}
+*  {% if reading.optional %}<span class="text-muted">(Optional)</span> {% endif %}{{ reading.title }}{% if reading.length %} ({{reading.length}}){% endif %} [[Video]]({{reading.video}}){% if reading.note %} — <small class="text-muted">{{ reading.note }}</small>{% endif %}
 {% else %}
-*  {% if reading.optional %}<b>Optional</b> {% endif %} {{ reading.authors }}, {{ reading.title }} 
+*  {% if reading.optional %}<span class="text-muted">(Optional)</span> {% endif %}{% if reading.authors %}{{ reading.authors }}, {% endif %}{{ reading.title }}{% if reading.note %} — <small class="text-muted">{{ reading.note }}</small>{% endif %}
 {% endif %}
 {% endfor %}
 {% endif %}
