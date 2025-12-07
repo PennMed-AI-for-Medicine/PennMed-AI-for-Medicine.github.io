@@ -4,13 +4,7 @@ title: Homework 1 - Python & Environment Setup
 active_tab: homework
 release_date: 2026-01-21
 due_date: 2026-01-28 23:59:00EST
-materials:
-    -
-        name: Starter Notebook (.ipynb)
-        url: hw1-starter.ipynb
-    -
-        name: Python Script Alternative (.py)
-        url: hw1_exercises.py
+classroom_link: https://classroom.github.com/a/XXXXXX
 submission_link: https://www.gradescope.com/
 ---
 
@@ -28,14 +22,13 @@ Warning: this assignment is not yet released. Check back on {{ page.release_date
 This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ page.due_date | date: "%I:%M%p" }}.
 </div>
 
-{% if page.materials %}
 <div class="alert alert-success" markdown="1">
-**Materials:**
-{% for material in page.materials %}
-- [{{ material.name }}]({{ material.url }})
-{% endfor %}
+**Get Started:**
+1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code
+2. Clone your repo and complete the exercises in `hw1_exercises.py`
+3. Push your completed work to GitHub
+4. [**Submit to Gradescope**]({{ page.submission_link }}) when complete
 </div>
-{% endif %}
 
 ---
 
