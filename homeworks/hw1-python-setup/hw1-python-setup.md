@@ -6,8 +6,11 @@ release_date: 2026-01-21
 due_date: 2026-01-28 23:59:00EST
 materials:
     -
-        name: Starter Notebook
+        name: Starter Notebook (.ipynb)
         url: hw1-starter.ipynb
+    -
+        name: Python Script Alternative (.py)
+        url: hw1_exercises.py
 submission_link: https://www.gradescope.com/
 ---
 
