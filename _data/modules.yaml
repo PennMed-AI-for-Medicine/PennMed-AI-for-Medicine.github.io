@@ -150,6 +150,51 @@
     Working with electronic health record (EHR) data, feature engineering for clinical
     variables, and exploratory data analysis with pandas. Understanding the unique
     challenges of clinical tabular data.
+  lessons:
+    - title: "Clinical Tabular Data: What Makes It Different"
+      description: >
+        EHR data vs. research datasets. Missing data that isn't random (MAR vs MCAR vs MNAR).
+        Class imbalance in medical outcomes. Time-series nature of clinical encounters.
+        Why standard ML assumptions often fail in healthcare.
+    - title: "Exploratory Data Analysis for Clinical Data"
+      description: >
+        Systematic EDA workflow: distributions, correlations, outliers. Visualization
+        techniques for clinical variables. Identifying data quality issues before they
+        break your model. Using pandas profiling and sweetviz for rapid exploration.
+    - title: "Data Cleaning & Preprocessing"
+      description: >
+        Handling missing values: imputation strategies and when deletion is appropriate.
+        Encoding categorical variables (one-hot, target encoding, ordinal). Feature scaling
+        and normalization. Dealing with outliers in clinical measurements.
+    - title: "Feature Engineering for Clinical Prediction"
+      description: >
+        Creating clinically meaningful features from raw data. Time-based features
+        (trends, rates of change). Composite scores and risk indices. Domain knowledge
+        as a feature engineering superpower.
+    - title: "Data Imbalance in Medical Outcomes"
+      description: >
+        Why most medical events are rare. Oversampling (SMOTE), undersampling, and
+        class weights. Evaluation metrics that matter when classes are imbalanced
+        (precision-recall, AUPRC). When accuracy is misleading.
+  readings:
+    - title: "Pandas Documentation - 10 Minutes to pandas"
+      url: https://pandas.pydata.org/docs/user_guide/10min.html
+      optional: true
+      note: "Quick refresher if needed"
+    - title: "Missing Data in Clinical Research"
+      authors: Sterne et al., BMJ 2009
+      url: https://www.bmj.com/content/338/bmj.b2393
+      optional: false
+      note: "Classic paper on handling missing data"
+    - title: "SMOTE: Synthetic Minority Over-sampling Technique"
+      authors: Chawla et al., JAIR 2002
+      url: https://arxiv.org/abs/1106.1813
+      optional: true
+      note: "Original SMOTE paper—skim for concepts"
+    - title: "A Visual Introduction to Machine Learning"
+      url: http://www.r2d3.us/visual-intro-to-machine-learning-part-1/
+      optional: true
+      note: "Beautiful interactive visualization of decision trees"
 
 - module_number: 4
   start_date: 2026-02-25
@@ -159,6 +204,57 @@
     Core machine learning concepts: classification, regression, evaluation metrics,
     cross-validation, and model selection. Emphasis on metrics that matter for
     clinical deployment vs. publication.
+  lessons:
+    - title: "Supervised Learning: Regression"
+      description: >
+        Linear regression as the foundation. Regularization (L1/Lasso, L2/Ridge) and why
+        it matters for high-dimensional clinical data. Interpreting coefficients in
+        medical contexts. When simple models beat complex ones.
+    - title: "Supervised Learning: Classification"
+      description: >
+        Logistic regression for binary outcomes. Decision trees and their interpretability.
+        Random forests and gradient boosting (XGBoost, LightGBM). SVMs briefly.
+        Choosing the right algorithm for your clinical question.
+    - title: "Model Evaluation: Beyond Accuracy"
+      description: >
+        Confusion matrices, sensitivity, specificity, PPV, NPV. ROC curves and AUC.
+        Precision-recall curves for imbalanced data. Calibration plots and why they
+        matter for clinical decision support. The metrics clinicians actually care about.
+    - title: "Cross-Validation & Model Selection"
+      description: >
+        Train/validation/test splits and why they matter. K-fold cross-validation.
+        Stratified sampling for imbalanced classes. Hyperparameter tuning with grid
+        search and random search. Avoiding data leakage.
+    - title: "Model Interpretability"
+      description: >
+        Why black boxes are problematic in medicine. Feature importance from tree models.
+        SHAP values for any model. LIME for local explanations. Building trust with
+        clinicians through interpretable predictions.
+    - title: "From Model to Clinical Utility"
+      description: >
+        Decision curve analysis: is your model actually useful? Net benefit and
+        clinical thresholds. Comparing models to existing clinical practice.
+        The gap between good AUC and clinical deployment.
+  readings:
+    - title: "An Introduction to Statistical Learning (ISLR)"
+      authors: James, Witten, Hastie, Tibshirani
+      url: https://www.statlearning.com/
+      optional: false
+      note: "Chapters 2-4 (statistical learning, regression, classification)"
+    - title: "Scikit-learn User Guide"
+      url: https://scikit-learn.org/stable/user_guide.html
+      optional: true
+      note: "Reference for implementation details"
+    - title: "A Unified Approach to Interpreting Model Predictions (SHAP)"
+      authors: Lundberg & Lee, NeurIPS 2017
+      url: https://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions
+      optional: true
+      note: "The SHAP paper—technical but foundational"
+    - title: "Decision Curve Analysis: A Novel Method for Evaluating Prediction Models"
+      authors: Vickers & Elkin, Medical Decision Making 2006
+      url: https://pubmed.ncbi.nlm.nih.gov/17099194/
+      optional: true
+      note: "How to evaluate if a model is clinically useful"
 
 - module_number: 5
   start_date: 2026-03-18
