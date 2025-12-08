@@ -4,7 +4,7 @@ title: Homework 2 - DICOM & Medical Imaging Fundamentals
 active_tab: homework
 release_date: 2026-02-04
 due_date: 2026-02-11 23:59:00EST
-classroom_link: https://classroom.github.com/a/XXXXXX
+classroom_link: https://classroom.github.com/a/FK8P0Hlx
 ---
 
 <!-- Check whether the assignment is ready to release -->
