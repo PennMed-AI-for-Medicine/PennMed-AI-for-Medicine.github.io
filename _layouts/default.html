@@ -89,14 +89,9 @@
             <li id="homework" class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Homework <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                {% for page in site.pages %}
-                {% if page.active_tab == "homework" %}
-                  {% capture today %}{{site.time | date: '%s'}}{% endcapture %}
-                  {% capture release %}{{page.release_date | date: '%s'}}{% endcapture %}
-                  {% if release <= today %}
+                {% assign homeworks = site.pages | where: "active_tab", "homework" | sort: "release_date" %}
+                {% for page in homeworks %}
                   <li><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a></li>
-                  {% endif %}
-                {% endif %}
                 {% endfor %}
               </ul>
             </li>
