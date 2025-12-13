@@ -33,8 +33,8 @@ Below, you'll find links to pre-recorded lectures. You can also <a href="https:/
 <a name="now"></a> 
 {% endif %}
 
-<a name="module-{{ forloop.index }}"></a> 
-# Module {{ forloop.index }}: {{module.title}}
+<a name="module-{{ module.module_number }}"></a>
+# Module {{ module.module_number }}: {{module.title}}
 
 
 
@@ -42,7 +42,7 @@ Below, you'll find links to pre-recorded lectures. You can also <a href="https:/
 {{module.description}}
 
 
-{% if module.intro_video %}  * **Intro:** Module {{ forloop.index }} [[Video]]({{module.intro_video}}) {% endif %}
+{% if module.intro_video %}  * **Intro:** Module {{ module.module_number }} [[Video]]({{module.intro_video}}) {% endif %}
 {% for lesson in module.lessons %}
 * **{{lesson.title}}**{% if lesson.video %} [[Video]]({{lesson.video}}){% endif %}{% if lesson.length %} ({{lesson.length}}){% endif %}
 {% if lesson.description %}<br><small class="text-muted">{{lesson.description}}</small>{% endif %}

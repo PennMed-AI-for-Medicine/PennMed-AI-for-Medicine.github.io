@@ -2,7 +2,7 @@
 layout: default
 title: Midterm Project - Medical Imaging Case Study
 active_tab: homework
-release_date: 2026-03-18
+release_date: 2026-03-19
 due_date: 2026-04-01 23:59:00EDT
 ---
 

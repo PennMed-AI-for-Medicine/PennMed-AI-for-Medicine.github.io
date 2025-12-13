@@ -2,7 +2,7 @@
 layout: default
 title: Final Project - Technical Artifact + Field Guide
 active_tab: homework
-release_date: 2026-04-01
+release_date: 2026-04-22
 due_date: 2026-05-06 23:59:00EDT
 ---
 

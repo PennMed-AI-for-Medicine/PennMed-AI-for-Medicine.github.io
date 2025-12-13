@@ -313,6 +313,7 @@
     Students work on a self-selected medical imaging project from approved options:
     chest X-ray classification, CT organ segmentation, pathology analysis, retinal imaging,
     or other approved imaging tasks. Includes mini field guide deliverable.
+  homework: Midterm
   lessons:
     - title: "Midterm Project Kickoff"
       description: >
