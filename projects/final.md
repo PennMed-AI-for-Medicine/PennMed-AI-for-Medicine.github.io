@@ -11,7 +11,7 @@ This project is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ pa
 </div>
 
 <div class="alert alert-warning" markdown="1">
-**Final Presentations:** April 28-29 during class time. Sign up for a slot (link TBD).
+**Final Presentations:** April 28-29 during class time. A **Review Board** of senior clinical and technical leaders will attend to provide feedback—simulating a real deployment review.
 </div>
 
 ---
@@ -186,6 +186,15 @@ final-project/
 
 15-20 minute presentation + 5 minutes Q&A.
 
+### The Review Board
+
+Your final presentation simulates a real clinical AI deployment review. A **Review Board** of senior leaders will attend, including:
+- Clinical informaticists
+- Department leadership
+- Technical experts from industry/Penn
+
+They will ask questions as if you were proposing to deploy this tool at their institution. This is intentional—bridging technical depth with clinical context and leadership communication is the whole point.
+
 **Structure:**
 1. **The Problem** (3 min) — What clinical problem? Why does it matter?
 2. **The Data** (2 min) — What data? Key characteristics and limitations?
@@ -193,7 +202,7 @@ final-project/
 4. **Results** (4 min) — How well does it work? Honest assessment.
 5. **Field Guide Highlights** (3 min) — Governance, monitoring, limitations
 6. **Lessons Learned** (2 min) — What would you do differently?
-7. **Q&A** (5 min)
+7. **Q&A with Review Board** (5 min)
 
 Presentations are **April 28-29** during class.
 
@@ -239,11 +248,23 @@ Presentations are **April 28-29** during class.
 |------|-----------|
 | Apr 1 | Project released, start planning |
 | Apr 8 | Custom project proposals due |
-| Apr 15 | Recommended: Data + baseline working |
+| Apr 15 | **CHECKPOINT: Field Guide Outline Due** (see below) |
 | Apr 22 | Recommended: Main experiments complete |
-| Apr 24 | Field guide draft recommended |
 | Apr 28-29 | **Final Presentations** |
 | May 6 | **Everything due by 11:59 PM** |
+
+### Required Checkpoint: Field Guide Outline (Apr 15)
+
+Submit a 1-page outline of your field guide via Canvas. This is **required** (pass/fail, no points) but ensures you're thinking about governance early, not at the last minute.
+
+Your outline should include:
+- **Project title and track**
+- **One-sentence problem statement**
+- **Intended clinical use** (who uses it, when, for what)
+- **Bullet points for each field guide section** (what you plan to cover)
+- **Known unknowns** (what you're still figuring out)
+
+This checkpoint exists because last year's best projects were the ones that started the field guide early. Don't treat documentation as an afterthought.
 
 ---
 

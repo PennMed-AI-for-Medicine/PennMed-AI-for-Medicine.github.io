@@ -30,7 +30,12 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 </div>
 
 <div class="alert alert-warning" markdown="1">
-**API Keys Required:** Part 3 of this assignment uses the OpenAI API. You'll need an API key with a small amount of credit (~$5 should be plenty). See Resources for details.
+**LLM Options:** Part 3 requires access to a large language model. You have several options:
+- **Ollama + Llama 3** (free, local) — Recommended for most students
+- **Course Azure credits** — Limited credits available; request access via Canvas
+- **OpenAI API** — If you prefer; ~$2-5 for this assignment
+
+See the Resources section for setup instructions.
 </div>
 
 ---
@@ -267,11 +272,49 @@ Your repository should contain:
 
 ## Resources
 
-### API Access
-- [OpenAI API](https://platform.openai.com/) — You'll need an account with API credits
-- Cost estimate: ~$2-5 for this assignment with careful usage
+### LLM Access Options
+
+**Option 1: Ollama + Llama 3 (Recommended — Free)**
+
+Run models locally on your laptop. Works great for this assignment.
+
+```bash
+# Install Ollama (macOS)
+brew install ollama
+
+# Or download from https://ollama.ai
+
+# Pull Llama 3 (8B model, ~4GB)
+ollama pull llama3
+
+# Run it
+ollama run llama3
+```
+
+In Python:
+```python
+import requests
+
+def query_ollama(prompt, model="llama3"):
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={"model": model, "prompt": prompt, "stream": False}
+    )
+    return response.json()["response"]
+```
+
+**Option 2: Course Azure Credits**
+
+Limited credits available for GPT-4 access. Request via Canvas assignment. Use sparingly — these are shared resources.
+
+**Option 3: OpenAI API**
+
+If you prefer commercial API: [platform.openai.com](https://platform.openai.com/)
+- Cost estimate: ~$2-5 for this assignment
+- GPT-3.5 is much cheaper than GPT-4; use 3.5 for development
 
 ### Documentation
+- [Ollama](https://ollama.ai/) — Local LLM runner
 - [scispaCy](https://allenai.github.io/scispacy/)
 - [OpenAI API Documentation](https://platform.openai.com/docs)
 - [UMLS Metathesaurus](https://www.nlm.nih.gov/research/umls/index.html)

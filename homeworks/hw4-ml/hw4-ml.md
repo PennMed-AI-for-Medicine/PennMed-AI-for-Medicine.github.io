@@ -184,13 +184,38 @@ For each:
 
 ---
 
+### Part 6: Fairness Analysis (10 points - REQUIRED)
+
+**6.1 Subgroup Performance (10 pts)**
+
+The Pima dataset includes Age. Analyze whether your model performs equitably:
+
+- Split the test set into age groups: Young (<30), Middle (30-50), Senior (>50)
+- Calculate AUC, sensitivity, and specificity for each subgroup
+- Create a table comparing performance across groups
+
+| Age Group | N | AUC | Sensitivity | Specificity |
+|-----------|---|-----|-------------|-------------|
+| Young (<30) | | | | |
+| Middle (30-50) | | | | |
+| Senior (>50) | | | | |
+
+Answer these questions:
+- Does your model perform equally well across age groups?
+- If there are disparities, what might explain them?
+- How would you address this before deployment?
+
+*Note: This dataset doesn't include race/ethnicity, but in real clinical AI, you must examine performance across demographic groups. The Obermeyer et al. paper (required reading) shows what happens when you don't.*
+
+---
+
 ## Reflection Questions
 
 Answer these in code comments or a markdown cell:
 
 1. **Clinical Utility**: If this model were deployed, what threshold would you use? What's the tradeoff between missing diabetics (false negatives) and unnecessary follow-ups (false positives)?
 
-2. **Fairness**: We didn't examine performance across subgroups. What additional analyses would you want before deploying this model?
+2. **Fairness Deep Dive**: Based on your subgroup analysis, would you deploy this model as-is? What additional data would you want to collect?
 
 3. **Limitations**: What are three reasons this model might not work well in a different hospital system?
 
@@ -233,7 +258,9 @@ Your repository should contain:
 | **Part 5: Interpretability** | **15** |
 | 5.1 SHAP values | 10 |
 | 5.2 Individual predictions | 5 |
-| **Subtotal** | **100** |
+| **Part 6: Fairness Analysis** | **10** |
+| 6.1 Subgroup performance | 10 |
+| **Subtotal** | **110** |
 | **Git Workflow** | |
 | Multiple meaningful commits | -5 if missing |
 | Clear commit messages | -5 if missing |

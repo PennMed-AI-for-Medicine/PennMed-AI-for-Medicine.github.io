@@ -235,6 +235,13 @@
         Decision curve analysis: is your model actually useful? Net benefit and
         clinical thresholds. Comparing models to existing clinical practice.
         The gap between good AUC and clinical deployment.
+    - title: "Fairness & Bias in Clinical AI"
+      description: >
+        Algorithmic bias in healthcare: how it arises, why it matters, and what to do.
+        The Obermeyer study on racial bias in risk prediction. Fairness metrics
+        (demographic parity, equalized odds, calibration across groups). Subgroup
+        analysis as standard practice. When "fair" models conflict with "accurate" ones.
+        FDA's emerging focus on bias evaluation.
   readings:
     - title: "An Introduction to Statistical Learning (ISLR)"
       authors: James, Witten, Hastie, Tibshirani
@@ -255,6 +262,16 @@
       url: https://pubmed.ncbi.nlm.nih.gov/17099194/
       optional: true
       note: "How to evaluate if a model is clinically useful"
+    - title: "Dissecting racial bias in an algorithm used to manage the health of populations"
+      authors: Obermeyer et al., Science 2019
+      url: https://www.science.org/doi/10.1126/science.aax2342
+      optional: false
+      note: "Essential case study—how a widely-used algorithm encoded racial bias"
+    - title: "Ensuring Fairness in Machine Learning to Advance Health Equity"
+      authors: Chen et al., Annals of Internal Medicine 2021
+      url: https://www.acpjournals.org/doi/10.7326/M20-7770
+      optional: true
+      note: "Practical framework for fairness in clinical ML"
 
 - module_number: 5
   start_date: 2026-03-18

@@ -112,7 +112,7 @@ We meet twice weekly for 90-minute sessions:
 |-----------|--------|-------------|
 | **Homework Assignments** | 50% | Coding tasks and short writing assignments |
 | **Midterm Project** | 20% | Medical imaging case study + mini field guide |
-| **Final Project** | 20% | Technical artifact + full field guide (3-5 pages) |
+| **Final Project** | 20% | Technical artifact + full field guide + presentation to Review Board |
 | **Participation** | 10% | In-class discussions, peer feedback |
 
 ### Grade Scale
@@ -158,6 +158,12 @@ A document for non-experts that could actually be handed to a busy clinician. Th
 | **8. Patient Explanation** | One paragraph for informed consent / patient questions | 10 |
 
 **Total: 100 points** (Field guide graded separately from technical artifact)
+
+### Final Presentation: The Review Board
+
+Final project presentations simulate a real clinical AI deployment review. A **Review Board** of senior clinical and technical leaders will attend—including clinical informaticists, department leadership, and industry experts. They will ask questions as if you were proposing to deploy your tool at their institution.
+
+This is intentional: bridging technical depth with clinical context and leadership communication is the whole point. You're not just building a model; you're learning to advocate for its responsible deployment.
 
 ### Project Tracks
 
