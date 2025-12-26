@@ -448,67 +448,103 @@
 - module_number: 9
   start_date: 2026-04-15
   end_date: 2026-04-22
-  title: Governance & Monitoring for Clinical AI
+  title: Model Evaluation & Explainability
   description: >
-    What governance means in clinical settings. Designing acceptance tests,
-    choosing monitoring metrics, setting review cadences, and defining human-in-the-loop
-    rules. Practical exercises in building monitoring dashboards.
+    Moving beyond AUROC to clinically meaningful evaluation. Calibration, decision curve
+    analysis, and metrics that answer clinical questions. Explainability methods including
+    SHAP, LIME, and saliency maps—and their limitations.
   lessons:
-    - title: "What Governance Actually Means"
+    - title: "Beyond AUROC: Clinically Meaningful Evaluation"
       description: >
-        Governance is not bureaucracy—it is constraints (what must always be true),
-        experiments (acceptance tests and drift checks), and logs (traceability).
-        We map familiar clinical concepts (commissioning, QA, chart rounds) to AI governance.
-    - title: "Acceptance Testing Design"
+        Why AUROC alone is insufficient for clinical deployment. AUPRC for imbalanced data,
+        operating point selection, and the metrics clinicians actually need to make decisions.
+    - title: "Calibration: Can You Trust the Probabilities?"
       description: >
-        How to design local validation: picking a representative cohort, choosing metrics
-        that matter for your use case, setting thresholds, and documenting the process.
-    - title: "Monitoring & Drift Detection"
+        Why calibration matters for clinical decision-making. Calibration curves, Brier score,
+        and recalibration techniques. When a model with good discrimination fails in practice.
+    - title: "Decision Curve Analysis: Clinical Utility"
       description: >
-        Choosing 2-3 key monitoring stats, setting review cadence, defining who is responsible,
-        and what to do when performance drifts. Real-world examples from clinical AI deployments.
-    - title: "Lab: Building a Simple Monitoring Dashboard"
+        Net benefit framework and decision curves. Comparing models to "treat all" and "treat none"
+        strategies. Determining the threshold range where your model actually helps.
+    - title: "Explainability Methods: SHAP, LIME, and Saliency"
       description: >
-        Hands-on exercise implementing a monitoring script or dashboard for a model
-        you've trained. Track predictions, flag anomalies, and generate alerts.
+        Feature attribution with SHAP values. Local explanations with LIME. Gradient-based
+        saliency and Grad-CAM for image models. Critical evaluation of explanation reliability.
+    - title: "When Explanations Mislead"
+      description: >
+        Sanity checks for saliency maps. The faithfulness vs plausibility tradeoff.
+        When to use interpretable models instead of explaining black boxes.
   readings:
+    - title: "Decision Curve Analysis: A Novel Method for Evaluating Prediction Models"
+      authors: Vickers & Elkin, Medical Decision Making 2006
+      url: https://pubmed.ncbi.nlm.nih.gov/17099194/
+      optional: false
+      note: "Foundation for understanding clinical utility"
+    - title: "Calibration: The Achilles Heel of Predictive Analytics"
+      authors: Van Calster et al., BMC Medicine 2019
+      url: https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-019-1466-7
+      optional: false
+      note: "Why calibration matters as much as discrimination"
+    - title: "A Unified Approach to Interpreting Model Predictions (SHAP)"
+      authors: Lundberg & Lee, NeurIPS 2017
+      url: https://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions
+      optional: true
+      note: "The SHAP paper—technical but foundational"
+    - title: "Stop Explaining Black Box Machine Learning Models for High Stakes Decisions"
+      authors: Rudin, Nature Machine Intelligence 2019
+      url: https://www.nature.com/articles/s42256-019-0048-x
+      optional: true
+      note: "Provocative argument for interpretable models"
+
+- module_number: 10
+  start_date: 2026-04-22
+  end_date: 2026-04-24
+  title: Governance, Regulatory & Deployment
+  description: >
+    The path from research to clinic: FDA regulatory pathways (510(k), De Novo, SaMD),
+    deployment architectures, EHR integration patterns, and governance structures for
+    sustainable AI operations. Writing effective field guides for clinical adoption.
+  lessons:
+    - title: "When Software Becomes a Medical Device"
+      description: >
+        FDA definitions, Software as a Medical Device (SaMD), and risk classification.
+        Understanding when your AI requires regulatory clearance and what that means.
+    - title: "FDA Pathways: 510(k), De Novo, and PCCP"
+      description: >
+        Navigating regulatory submission pathways. Finding predicates, demonstrating
+        substantial equivalence, and Predetermined Change Control Plans for AI updates.
+    - title: "Deployment Architecture & Clinical Integration"
+      description: >
+        Where models live: cloud, on-prem, edge. API design for clinical systems.
+        EHR integration patterns, CDS Hooks, and avoiding alert fatigue.
+    - title: "Governance & Monitoring in Production"
+      description: >
+        Drift detection, performance monitoring, and incident response. Governance
+        committees, model cards, and the organizational structures for sustainable AI.
+    - title: "Writing Effective Field Guides"
+      description: >
+        Documentation that busy clinicians will actually read. Plain language, clear rules,
+        honest limitations, and the field guide template that ties together everything you've learned.
+  readings:
+    - title: "FDA AI/ML-Based Software as a Medical Device Action Plan"
+      url: https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices
+      optional: false
+      note: "Essential reading on regulatory landscape"
     - title: "Hidden Technical Debt in Machine Learning Systems"
       authors: Sculley et al., NeurIPS 2015
       url: https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems
       optional: false
       note: "Classic paper on ML systems in production"
-    - title: "FDA Guidance on AI/ML-Based Software as a Medical Device"
-      url: https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices
+    - title: "Good Machine Learning Practice for Medical Device Development"
+      authors: FDA/Health Canada/MHRA, 2021
+      url: https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles
       optional: true
-      note: "Understand the regulatory landscape"
-
-- module_number: 10
-  start_date: 2026-04-22
-  end_date: 2026-04-24
-  title: From Model to Minimum Viable Product
-  description: >
-    Deployment considerations for clinical AI, writing effective field guides,
-    communicating with non-technical clinicians, and understanding the path
-    from research to clinical implementation.
-  lessons:
-    - title: "The Gap Between Model and Product"
-      description: >
-        Why most ML papers never become clinical tools. Understanding workflow integration,
-        regulatory pathways, and the organizational factors that determine success.
-    - title: "Writing Effective Field Guides"
-      description: >
-        How to write documentation that busy clinicians will actually read and use.
-        Plain language, clear rules, simple checklists, and the 8-section field guide template.
-    - title: "Workshop: Peer Review of Draft Field Guides"
-      description: >
-        Students exchange draft field guides and provide structured feedback.
-        Practice explaining technical work to non-technical audiences.
-  readings:
-    - title: "Reporting Guidelines for Clinical Trial Reports for Interventions Involving AI"
-      authors: CONSORT-AI, Nature Medicine 2020
-      url: https://www.nature.com/articles/s41591-020-1034-x
+      note: "10 guiding principles for clinical AI development"
+    - title: "Model Cards for Model Reporting"
+      authors: Mitchell et al., FAT* 2019
+      url: https://arxiv.org/abs/1810.03993
       optional: true
-      note: "Standards for reporting AI in clinical research"
+      note: "Framework for documenting ML models"
 
 - module_number: 11
   start_date: 2026-04-24
