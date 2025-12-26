@@ -3,8 +3,8 @@
 **Date:** 2025-12-26
 **Project:** PennMed AI for Medicine Course (clinicalai.guide)
 **Related repos:**
-- Website: `PennMed-AI-for-Medicine.github.io` (this repo)
-- Slides: `/Users/rafe/LocalGit/PennMed-AI-for-Medicine/slides`
+- Website: `PennMed-AI-for-Medicine.github.io` (this repo) — public
+- Slides: `PennMed-AI-for-Medicine/slides` — private
 - Textbook: `Little-Book-of-Medical-AI` (rafemcbeth.github.io/Little-Book-of-Medical-AI/)
 
 ---
@@ -96,7 +96,7 @@ Major alignment effort to synchronize three interconnected course resources:
    - Explainability details → Module 9
    - Deployment/Governance → Module 10
 
-3. **Set up slides remote** — Currently no git remote configured
+3. ~~**Set up slides remote**~~ ✅ **DONE** — github.com/PennMed-AI-for-Medicine/slides (private)
 
 4. ~~**Review homework alignment**~~ ✅ **DONE** — HW7 rewritten (see below)
 
