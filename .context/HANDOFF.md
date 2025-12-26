@@ -80,21 +80,19 @@ Major alignment effort to synchronize three interconnected course resources:
 | Module | Status | Notes |
 |--------|--------|-------|
 | 0, 1, 3, 5, 7, 9, 10, 11 | ✅ Complete | Full slide decks |
-| 2, 4, 6, 8 | 📝 Stub | Need content development |
+| 2 | ✅ Complete (slim) | 23 slides, practical focus, textbook for depth |
+| 4 | ✅ Complete | 41 slides, fairness woven throughout |
+| 6 | 📝 Stub (minimal) | Work session, minimal slides needed |
+| 8 | ✅ Complete | 39 slides, timeless concepts |
 | supplemental/ | 📦 Extra | Content to integrate later |
 
 ---
 
 ## Pending / Next Steps
 
-1. **Develop stub slide content** for modules 2, 4, 6, 8
-   - Module 2: DICOM deep dive
-   - Module 4: ML foundations + integrate fairness content
-   - Module 6: Minimal (project work session)
-   - Module 8: LLM-focused slides
+1. ~~**Develop stub slide content**~~ ✅ **DONE** — Modules 2, 4, 8 complete (see below)
 
-2. **Integrate supplemental content**
-   - Fairness slides → Module 4
+2. **Integrate supplemental content** (optional, for deeper lectures)
    - Explainability details → Module 9
    - Deployment/Governance → Module 10
 
@@ -105,6 +103,31 @@ Major alignment effort to synchronize three interconnected course resources:
 ---
 
 ## Recent Changes (2025-12-26)
+
+### Slides Modules 2, 4, 8 Developed
+
+**Module 2 — Medical Imaging Data (23 slides)**
+- Slim, practical: "enough to do HW and not be confused"
+- DICOM basics, pydicom, window/level, MONAI
+- Two-track pointer (core vs advanced/med phys)
+- Deep dive → textbook appendix
+- Philosophy: not a 90-min DICOM lecture for non-physics students
+
+**Module 4 — ML Foundations (41 slides)**
+- Opens with Obermeyer case (fairness hook)
+- Fairness woven throughout, not bolted on
+- Evaluation metrics that matter clinically (ROC, PR, calibration)
+- Cross-validation, data leakage, temporal validation
+- SHAP, fairness audit, calibration by group
+- "Clinical utility > technical performance"
+
+**Module 8 — LLMs in Medicine (39 slides)**
+- Timeless concepts, not trends
+- Transformers conceptually (attention intuition, not math)
+- Prompting as transferable skill (zero/few-shot, chain-of-thought, RAG)
+- Heavy emphasis on risks (8 slides on limitations)
+- "When NOT to use LLMs" explicitly addressed
+- Avoids: specific model versions, API tutorials, benchmarks
 
 ### HW7 Rewritten: Governance → Evaluation & Explainability
 
