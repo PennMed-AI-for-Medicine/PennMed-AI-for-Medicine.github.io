@@ -30,6 +30,10 @@
         Unique challenges of healthcare: data privacy (HIPAA), class imbalance, distribution shift,
         high-stakes decisions, regulatory requirements, and the need for explainability.
   readings:
+    - title: "📖 Textbook: Chapter 1 — History of AI in Medicine"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/01-history.html
+      optional: false
+      note: "Course textbook—foundational context for the field"
     - title: "The AI Revolution in Medicine: GPT-4 and Beyond (Introduction & Chapter 1)"
       authors: Peter Lee, Carey Goldberg, Isaac Kohane
       optional: false
@@ -76,6 +80,10 @@
         clinical data (EHR, tabular), and clinical text (notes, reports). Understanding what
         makes medical data different from typical ML datasets.
   readings:
+    - title: "📖 Textbook: Chapter 2 — Programming Fundamentals"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/02-programming.html
+      optional: false
+      note: "Course textbook—Python, environments, and tooling"
     - title: "The Good Research Code Handbook"
       authors: Patrick Mineault
       url: https://goodresearch.dev/
@@ -126,6 +134,10 @@
         RT Plan (beam parameters). Calculating DVH from dose and structure data.
         Real-world challenges in RT data handling.
   readings:
+    - title: "📖 Textbook: Chapter 6 — Convolutional Architectures for Medical Imaging"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/06-cnns-medical-imaging.html
+      optional: false
+      note: "Course textbook—imaging fundamentals and CNN architectures"
     - title: "DICOM Standard Browser"
       url: https://dicom.innolitics.com/
       optional: false
@@ -177,6 +189,14 @@
         class weights. Evaluation metrics that matter when classes are imbalanced
         (precision-recall, AUPRC). When accuracy is misleading.
   readings:
+    - title: "📖 Textbook: Chapter 3 — Statistics for Medical AI"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/03-statistics.html
+      optional: false
+      note: "Course textbook—statistical foundations for clinical data"
+    - title: "📖 Textbook: Chapter 12 — Text & EHR NLP Applications"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/12-text-ehr-nlp.html
+      optional: true
+      note: "Course textbook—EHR-specific content (preview)"
     - title: "Pandas Documentation - 10 Minutes to pandas"
       url: https://pandas.pydata.org/docs/user_guide/10min.html
       optional: true
@@ -243,6 +263,14 @@
         analysis as standard practice. When "fair" models conflict with "accurate" ones.
         FDA's emerging focus on bias evaluation.
   readings:
+    - title: "📖 Textbook: Chapter 4 — Classical Machine Learning"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/04-classical-ml.html
+      optional: false
+      note: "Course textbook—ML fundamentals"
+    - title: "📖 Textbook: Chapter 18 — Fairness, Bias & Health Equity"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/18-fairness-bias-equity.html
+      optional: false
+      note: "Course textbook—fairness and bias in clinical AI"
     - title: "An Introduction to Statistical Learning (ISLR)"
       authors: James, Witten, Hastie, Tibshirani
       url: https://www.statlearning.com/
@@ -308,9 +336,17 @@
         Batch normalization, dropout, and regularization. Learning rate schedules.
         Early stopping and checkpointing. Debugging when training goes wrong.
   readings:
+    - title: "📖 Textbook: Chapter 5 — Deep Neural Networks & Backprop"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/05-deep-neural-networks.html
+      optional: false
+      note: "Course textbook—neural network foundations"
+    - title: "📖 Textbook: Chapter 6 — Convolutional Architectures for Medical Imaging"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/06-cnns-medical-imaging.html
+      optional: false
+      note: "Course textbook—CNNs for medical imaging"
     - title: "Deep Learning (Goodfellow, Bengio, Courville) - Chapter 9: CNNs"
       url: https://www.deeplearningbook.org/contents/convnets.html
-      optional: false
+      optional: true
       note: "The foundational reference on CNNs"
     - title: "U-Net: Convolutional Networks for Biomedical Image Segmentation"
       authors: Ronneberger et al., MICCAI 2015
@@ -349,6 +385,11 @@
       description: >
         Brief presentations of results and mini field guides. Peer feedback and
         discussion. What worked, what didn't, and lessons learned.
+  readings:
+    - title: "📖 Textbook: Chapter 11 — Imaging Case Studies"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/11-imaging-case-studies.html
+      optional: false
+      note: "Course textbook—real-world imaging AI examples"
 
 - module_number: 7
   start_date: 2026-04-01
@@ -380,9 +421,17 @@
         UMLS and medical ontologies. Named entity recognition for medications,
         diagnoses, and procedures. When to use off-the-shelf vs. custom solutions.
   readings:
+    - title: "📖 Textbook: Chapter 8 — Sequence Models & Transformers"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/08-sequence-transformers.html
+      optional: false
+      note: "Course textbook—NLP foundations and sequence modeling"
+    - title: "📖 Textbook: Chapter 12 — Text & EHR NLP Applications"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/12-text-ehr-nlp.html
+      optional: false
+      note: "Course textbook—clinical NLP applications"
     - title: "Speech and Language Processing (Jurafsky & Martin) - Chapters 2, 6"
       url: https://web.stanford.edu/~jurafsky/slp3/
-      optional: false
+      optional: true
       note: "Text processing and vector semantics chapters"
     - title: "Clinical Natural Language Processing in Languages Other Than English"
       authors: Névéol et al., JAMIA 2018
@@ -425,6 +474,14 @@
         support. Hallucination and factual accuracy in medical contexts. Bias and
         fairness concerns. Regulatory landscape. The responsible deployment question.
   readings:
+    - title: "📖 Textbook: Chapter 9 — Large Language Models in Medicine"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/09-llms-medicine.html
+      optional: false
+      note: "Course textbook—LLMs for healthcare"
+    - title: "📖 Textbook: Chapter 10 — Prompt Engineering"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/10-prompt-engineering.html
+      optional: false
+      note: "Course textbook—effective prompting strategies"
     - title: "Attention Is All You Need"
       authors: Vaswani et al., NeurIPS 2017
       url: https://arxiv.org/abs/1706.03762
@@ -475,6 +532,10 @@
         Sanity checks for saliency maps. The faithfulness vs plausibility tradeoff.
         When to use interpretable models instead of explaining black boxes.
   readings:
+    - title: "📖 Textbook: Chapter 16 — Interpretability & Uncertainty"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/16-interpretability-uncertainty.html
+      optional: false
+      note: "Course textbook—explainability and uncertainty quantification"
     - title: "Decision Curve Analysis: A Novel Method for Evaluating Prediction Models"
       authors: Vickers & Elkin, Medical Decision Making 2006
       url: https://pubmed.ncbi.nlm.nih.gov/17099194/
@@ -526,6 +587,14 @@
         Documentation that busy clinicians will actually read. Plain language, clear rules,
         honest limitations, and the field guide template that ties together everything you've learned.
   readings:
+    - title: "📖 Textbook: Chapter 14 — AI Ops & Deployment"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/14-ai-ops-deployment.html
+      optional: false
+      note: "Course textbook—deployment and MLOps for healthcare"
+    - title: "📖 Textbook: Chapter 19 — Regulation & Ethics"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/19-regulation-ethics.html
+      optional: false
+      note: "Course textbook—FDA pathways and ethical considerations"
     - title: "FDA AI/ML-Based Software as a Medical Device Action Plan"
       url: https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices
       optional: false
