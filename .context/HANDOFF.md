@@ -100,7 +100,32 @@ Major alignment effort to synchronize three interconnected course resources:
 
 3. **Set up slides remote** — Currently no git remote configured
 
-4. **Review homework alignment** — Currently 7 HWs, verify they map to modules
+4. ~~**Review homework alignment**~~ ✅ **DONE** — HW7 rewritten (see below)
+
+---
+
+## Recent Changes (2025-12-26)
+
+### HW7 Rewritten: Governance → Evaluation & Explainability
+
+**Rationale:** Governance content is already embedded in midterm/final projects (field guide deliverables). Homework is better suited for technical, code-able skills.
+
+**Old HW7:** "Governance & Monitoring for Clinical AI"
+- Acceptance testing design
+- Drift detection implementation
+- Model cards, escalation protocols
+
+**New HW7:** "Model Evaluation & Explainability"
+- Part 1: Calibration analysis (plots, Platt scaling, Brier score)
+- Part 2: Decision curve analysis (net benefit, clinical thresholds)
+- Part 3: SHAP explanations (global + local, critical evaluation)
+- Part 4: Grad-CAM for images (with sanity checks)
+
+**Files changed:**
+- `homeworks/hw7-governance/` → `homeworks/hw7-evaluation/`
+- `hw7-governance.md` → `hw7-evaluation.md`
+
+**Design principle:** Homework = technical skills, Projects = synthesis + governance thinking
 
 ---
 
