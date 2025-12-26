@@ -90,13 +90,14 @@ We meet twice weekly for 90-minute sessions:
 ## Course Materials
 
 **Primary Text:**
-- *Little Book of Medical AI* (course companion, provided)
+- [**Little Book of Medical AI**](https://rafemcbeth.github.io/Little-Book-of-Medical-AI/) (course textbook, free online)
 
-> **About the Little Book:** This is a living document being developed alongside the course. You'll receive draft chapters as we progress through modules. Your feedback and questions will shape the final version. Think of it as our collective field guide to the field—and a model for the field guides you'll write for your own projects.
+> **About the Little Book:** This is a living document being developed alongside the course. Your feedback and questions will shape the final version. Think of it as our collective field guide to the field—and a model for the field guides you'll write for your own projects.
 
 **Code & Resources:**
-- [Course GitHub Repository](https://github.com/PennMed-AI-for-Medicine)
-- [Course Website](https://pennmed-ai-for-medicine.github.io/)
+- [Course Textbook](https://rafemcbeth.github.io/Little-Book-of-Medical-AI/)
+- [Course GitHub Organization](https://github.com/PennMed-AI-for-Medicine)
+- [Course Website](https://clinicalai.guide)
 
 **Optional References:**
 - *Machine and Deep Learning in Oncology, Medical Physics and Radiology* (2nd ed.) by Issam El Naqa et al., 2022
