@@ -81,9 +81,9 @@ Major alignment effort to synchronize three interconnected course resources:
 |--------|--------|-------|
 | 0, 1, 3, 5, 7, 9, 10, 11 | ✅ Complete | Full slide decks |
 | 2 | ✅ Complete (slim) | 23 slides, practical focus, textbook for depth |
-| 4 | ✅ Complete | 41 slides, fairness woven throughout |
+| 4 | ✅ Complete | ~48 slides, fairness woven throughout, practical additions |
 | 6 | 📝 Stub (minimal) | Work session, minimal slides needed |
-| 8 | ✅ Complete | 39 slides, timeless concepts |
+| 8 | ✅ Complete | 42 slides, timeless concepts, practical additions |
 | supplemental/ | 📦 Extra | Content to integrate later |
 
 ---
@@ -113,21 +113,29 @@ Major alignment effort to synchronize three interconnected course resources:
 - Deep dive → textbook appendix
 - Philosophy: not a 90-min DICOM lecture for non-physics students
 
-**Module 4 — ML Foundations (41 slides)**
+**Module 4 — ML Foundations (~48 slides)**
 - Opens with Obermeyer case (fairness hook)
 - Fairness woven throughout, not bolted on
 - Evaluation metrics that matter clinically (ROC, PR, calibration)
 - Cross-validation, data leakage, temporal validation
 - SHAP, fairness audit, calibration by group
 - "Clinical utility > technical performance"
+- **Added:** Missing data handling, class imbalance strategies
+- **Added:** Internal vs external validation (5-15% performance drop)
+- **Added:** Decision curve code example (dcurves package)
+- **Added:** "What to Report" checklist (dataset, splitting, metrics, CIs)
 
-**Module 8 — LLMs in Medicine (39 slides)**
+**Module 8 — LLMs in Medicine (42 slides)**
 - Timeless concepts, not trends
 - Transformers conceptually (attention intuition, not math)
 - Prompting as transferable skill (zero/few-shot, chain-of-thought, RAG)
 - Heavy emphasis on risks (8 slides on limitations)
 - "When NOT to use LLMs" explicitly addressed
 - Avoids: specific model versions, API tutorials, benchmarks
+- **Added:** Practical LLM Evaluation (rubric development, consistency testing)
+- **Added:** Local vs Cloud LLMs (privacy, latency, control tradeoffs)
+- **Added:** Cost Considerations (prompt optimization, caching, token math)
+- **TODO:** Self-Attention visual diagram, RAG architecture diagram
 
 ### HW7 Rewritten: Governance → Evaluation & Explainability
 
@@ -180,7 +188,8 @@ Major alignment effort to synchronize three interconnected course resources:
 
 ## Notes for Next Session
 
-- Slides repo has no remote — changes are local only
+- **Slides remote set up:** github.com/PennMed-AI-for-Medicine/slides (private)
 - Website builds via GitHub Actions (no local Jekyll needed)
 - Textbook at: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/
 - User prefers discussion before implementation on significant changes
+- **License:** CC BY-NC-SA 4.0 added to website repo (see LICENSE file + footer)
