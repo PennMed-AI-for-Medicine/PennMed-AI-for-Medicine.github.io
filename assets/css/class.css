@@ -516,11 +516,16 @@ footer a {
     background-color: #161b22;
     border-top: 1px solid #30363d;
   }
-  
+
+  /* Fix navbar title flush against left edge on mobile */
+  .navbar-brand {
+    padding-left: 15px !important;
+  }
+
   table {
     font-size: 0.9rem;
   }
-  
+
   h3 + table {
     max-width: 100%;
   }
