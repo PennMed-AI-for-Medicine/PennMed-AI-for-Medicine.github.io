@@ -518,7 +518,8 @@ footer a {
   }
 
   /* Fix navbar title flush against left edge on mobile */
-  .navbar-brand {
+  .navbar-header {
+    margin-left: 0 !important;
     padding-left: 15px !important;
   }
 
