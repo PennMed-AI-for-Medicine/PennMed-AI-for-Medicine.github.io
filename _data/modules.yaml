@@ -103,65 +103,11 @@
 - module_number: 2
   start_date: 2026-01-28
   end_date: 2026-02-11
-  title: Medical Imaging Data
-  description: >
-    Introduction to medical imaging data formats and handling. Covers DICOM, NIfTI,
-    various imaging modalities, and the MONAI framework for medical image analysis.
-    Includes advanced track for radiation therapy data (RT structures, dose, DVH).
-  lessons:
-    - title: "DICOM Fundamentals"
-      description: >
-        The universal language of medical imaging. Understanding DICOM structure: headers,
-        pixel data, and metadata. Reading CT, MR, and X-ray images with pydicom. Why DICOM
-        matters for AI: the metadata is often more valuable than the pixels.
-    - title: "DICOM Coordinate Systems & Geometry"
-      description: >
-        Patient coordinate systems, image orientation, and spatial relationships.
-        Converting between pixel coordinates and physical space. Window/level for
-        visualization. Common pitfalls that break AI models.
-    - title: "Beyond DICOM: NIfTI, PNG, and Research Formats"
-      description: >
-        When to use NIfTI (neuroimaging, volumetric analysis), when DICOM is overkill,
-        and how to convert between formats. Working with public datasets (TCIA, PhysioNet,
-        Grand Challenges) that may use different formats.
-    - title: "Introduction to MONAI"
-      description: >
-        PyTorch-based framework for medical imaging AI. Data loading, transforms,
-        and preprocessing pipelines. Why MONAI exists and when to use it vs. raw PyTorch.
-    - title: "Advanced Track: Radiation Therapy DICOM"
-      description: >
-        For medical physics students: RT Structure Sets (contours), RT Dose (3D dose grids),
-        RT Plan (beam parameters). Calculating DVH from dose and structure data.
-        Real-world challenges in RT data handling.
-  readings:
-    - title: "📖 Textbook: Chapter 6 — Convolutional Architectures for Medical Imaging"
-      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/06-cnns-medical-imaging.html
-      optional: false
-      note: "Course textbook—imaging fundamentals and CNN architectures"
-    - title: "DICOM Standard Browser"
-      url: https://dicom.innolitics.com/
-      optional: false
-      note: "Bookmark this—you'll reference it constantly"
-    - title: "pydicom Documentation"
-      url: https://pydicom.github.io/pydicom/stable/
-      optional: false
-    - title: "MONAI Getting Started"
-      url: https://docs.monai.io/en/stable/
-      optional: true
-      note: "Skim the tutorials section"
-    - title: "The Cancer Imaging Archive (TCIA)"
-      url: https://www.cancerimagingarchive.net/
-      optional: true
-      note: "Source for many public medical imaging datasets"
-
-- module_number: 3
-  start_date: 2026-02-11
-  end_date: 2026-02-25
   title: Structured Clinical Data & Exploratory Data Analysis
   description: >
     Working with electronic health record (EHR) data, feature engineering for clinical
     variables, and exploratory data analysis with pandas. Understanding the unique
-    challenges of clinical tabular data.
+    challenges of clinical tabular data. Garbage in = garbage out—understand your data first.
   lessons:
     - title: "Clinical Tabular Data: What Makes It Different"
       description: >
@@ -215,6 +161,60 @@
       url: http://www.r2d3.us/visual-intro-to-machine-learning-part-1/
       optional: true
       note: "Beautiful interactive visualization of decision trees"
+
+- module_number: 3
+  start_date: 2026-02-11
+  end_date: 2026-02-25
+  title: Medical Imaging Data
+  description: >
+    Introduction to medical imaging data formats and handling. Covers DICOM, NIfTI,
+    various imaging modalities, and the MONAI framework for medical image analysis.
+    Includes advanced track for radiation therapy data (RT structures, dose, DVH).
+  lessons:
+    - title: "DICOM Fundamentals"
+      description: >
+        The universal language of medical imaging. Understanding DICOM structure: headers,
+        pixel data, and metadata. Reading CT, MR, and X-ray images with pydicom. Why DICOM
+        matters for AI: the metadata is often more valuable than the pixels.
+    - title: "DICOM Coordinate Systems & Geometry"
+      description: >
+        Patient coordinate systems, image orientation, and spatial relationships.
+        Converting between pixel coordinates and physical space. Window/level for
+        visualization. Common pitfalls that break AI models.
+    - title: "Beyond DICOM: NIfTI, PNG, and Research Formats"
+      description: >
+        When to use NIfTI (neuroimaging, volumetric analysis), when DICOM is overkill,
+        and how to convert between formats. Working with public datasets (TCIA, PhysioNet,
+        Grand Challenges) that may use different formats.
+    - title: "Introduction to MONAI"
+      description: >
+        PyTorch-based framework for medical imaging AI. Data loading, transforms,
+        and preprocessing pipelines. Why MONAI exists and when to use it vs. raw PyTorch.
+    - title: "Advanced Track: Radiation Therapy DICOM"
+      description: >
+        For medical physics students: RT Structure Sets (contours), RT Dose (3D dose grids),
+        RT Plan (beam parameters). Calculating DVH from dose and structure data.
+        Real-world challenges in RT data handling.
+  readings:
+    - title: "📖 Textbook: Chapter 6 — Convolutional Architectures for Medical Imaging"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/06-cnns-medical-imaging.html
+      optional: false
+      note: "Course textbook—imaging fundamentals and CNN architectures"
+    - title: "DICOM Standard Browser"
+      url: https://dicom.innolitics.com/
+      optional: false
+      note: "Bookmark this—you'll reference it constantly"
+    - title: "pydicom Documentation"
+      url: https://pydicom.github.io/pydicom/stable/
+      optional: false
+    - title: "MONAI Getting Started"
+      url: https://docs.monai.io/en/stable/
+      optional: true
+      note: "Skim the tutorials section"
+    - title: "The Cancer Imaging Archive (TCIA)"
+      url: https://www.cancerimagingarchive.net/
+      optional: true
+      note: "Source for many public medical imaging datasets"
 
 - module_number: 4
   start_date: 2026-02-25

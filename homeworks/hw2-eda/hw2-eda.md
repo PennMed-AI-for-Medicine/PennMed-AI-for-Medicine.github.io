@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Homework 3 - Exploratory Data Analysis & Clinical Data
+title: Homework 2 - Exploratory Data Analysis & Clinical Data
 active_tab: homework
-release_date: 2026-02-11
-due_date: 2026-02-25 23:59:00EST
+release_date: 2026-02-04
+due_date: 2026-02-11 23:59:00EST
 classroom_link: https://classroom.github.com/a/XXXXXX
 ---
 
@@ -24,7 +24,7 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 <div class="alert alert-success" markdown="1">
 **Get Started:**
 1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code and data
-2. Clone your repo and complete the exercises in `hw3_eda.py`
+2. Clone your repo and complete the exercises in `hw2_eda.py`
 3. Commit regularly as you work (this is part of your grade!)
 4. Push your completed work to GitHub before the deadline
 </div>
@@ -172,7 +172,7 @@ Answer these questions in code comments:
 
 ## Submission via GitHub
 
-1. **Complete your work** in `hw3_eda.py`
+1. **Complete your work** in `hw2_eda.py`
 2. **Save your figures** to the `outputs/` directory
 3. **Commit your changes** with meaningful messages
 4. **Push to GitHub** before the deadline
@@ -180,7 +180,7 @@ Answer these questions in code comments:
 ### Deliverables
 
 Your repository should contain:
-- `hw3_eda.py` — Completed code with comments
+- `hw2_eda.py` — Completed code with comments
 - `outputs/` — Generated figures (PNG files)
 - Clear commit history showing your progress
 

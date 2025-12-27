@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Homework 2 - DICOM & Medical Imaging Fundamentals
+title: Homework 3 - DICOM & Medical Imaging Fundamentals
 active_tab: homework
-release_date: 2026-02-04
-due_date: 2026-02-11 23:59:00EST
+release_date: 2026-02-11
+due_date: 2026-02-25 23:59:00EST
 classroom_link: https://classroom.github.com/a/FK8P0Hlx
 ---
 
@@ -24,7 +24,7 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 <div class="alert alert-success" markdown="1">
 **Get Started:**
 1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code and sample DICOM data
-2. Clone your repo and complete the exercises in `hw2_dicom.py`
+2. Clone your repo and complete the exercises in `hw3_dicom.py`
 3. Commit regularly as you work (this is part of your grade!)
 4. Push your completed work to GitHub before the deadline
 </div>
@@ -174,10 +174,10 @@ A Dose-Volume Histogram (DVH) is a fundamental tool in radiation oncology, showi
 
 ## Submission via GitHub
 
-1. **Complete your work** in `hw2_dicom.py`
+1. **Complete your work** in `hw3_dicom.py`
 2. **Commit your changes** with meaningful messages:
    ```bash
-   git add hw2_dicom.py
+   git add hw3_dicom.py
    git commit -m "Complete Part 2: window/level visualization"
    ```
 3. **Push to GitHub** before the deadline:
