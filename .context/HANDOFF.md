@@ -1,195 +1,102 @@
-# Session Handoff: Course Content Alignment
+# Course Handoff: Current State
 
-**Date:** 2025-12-26
-**Project:** PennMed AI for Medicine Course (clinicalai.guide)
+**Project:** MPHY 6120 - AI for Medicine (clinicalai.guide)
+**Last updated:** 2025-12-27
+
 **Related repos:**
-- Website: `PennMed-AI-for-Medicine.github.io` (this repo) — public
+- Website: `PennMed-AI-for-Medicine.github.io` — public
 - Slides: `PennMed-AI-for-Medicine/slides` — private
 - Textbook: `Little-Book-of-Medical-AI` (rafemcbeth.github.io/Little-Book-of-Medical-AI/)
 
----
-
-## Session Summary
-
-Major alignment effort to synchronize three interconnected course resources:
-1. **Website** (scaffold) — The course structure students see
-2. **Slides** (delivery) — In-class teaching materials
-3. **Textbook** (depth) — Comprehensive reference, 19 chapters
-
-### Philosophy Established
-- **Field Guide mindset** is central — "Could a busy community clinic use this safely?"
-- Textbook is broadest, course is scaffold, slides live in between
-- 12 modules (0-11), 7 homeworks, midterm + final project
-- NLP and LLMs kept as separate modules (historical context matters)
+See `CHANGELOG.md` for session-by-session history.
 
 ---
 
-## What Was Done
+## Course Philosophy
 
-### Website Changes (pushed to GitHub)
-1. **Module 9** renamed: "Governance & Monitoring" → **"Model Evaluation & Explainability"**
-   - Added lessons on calibration, decision curves, SHAP/LIME, saliency
-
-2. **Module 10** renamed: "From Model to MVP" → **"Governance, Regulatory & Deployment"**
-   - Added lessons on FDA pathways, SaMD, deployment, governance
-
-3. **CLAUDE.md** created with course philosophy and content hierarchy
-
-4. **Textbook cross-references** added to ALL modules (0-10)
-   - Each module now links to relevant textbook chapters
-   - Prefixed with 📖 for visibility
-
-### Slides Changes (committed locally, no remote)
-1. **Renumbered** all slides to match website (0-11)
-2. **Moved to `supplemental/`:**
-   - PyTorch Foundations (was Module 2)
-   - Fairness & Bias (was Module 4)
-   - Explainability details (was Module 8)
-   - Deployment & MLOps (was Module 10)
-   - Governance & Monitoring (was Module 11)
-
-3. **Created stub slides** for:
-   - Module 2: Medical Imaging Data (DICOM)
-   - Module 4: Machine Learning Foundations
-   - Module 6: Midterm Project
-   - Module 8: Large Language Models
-
-4. **Updated README.md** with new structure and supplemental guide
+- **Field Guide Mindset** — "Could a busy community clinic use this safely?"
+- **Models vs Systems** — Building is easy, deployment is hard
+- **Garbage In = Garbage Out** — Understand your data before modeling
+- **Governance as Quantitative Discipline** — Constraints, experiments, logs
 
 ---
 
-## Current State
+## Module Structure (12 modules, 0-indexed)
 
-### Website Modules (aligned)
-| # | Title | Textbook Chapters |
-|---|-------|------------------|
-| 0 | Course Intro & Field Guide Mindset | Ch 1 |
-| 1 | Python & Development Environment | Ch 2 |
-| 2 | Medical Imaging Data | Ch 6 |
-| 3 | Structured Clinical Data & EDA | Ch 3, 12 |
-| 4 | Machine Learning Foundations | Ch 4, 18 |
-| 5 | Deep Learning for Medical Imaging | Ch 5, 6 |
-| 6 | Midterm Project | Ch 11 |
-| 7 | Clinical Text & NLP | Ch 8, 12 |
-| 8 | Large Language Models | Ch 9, 10 |
-| 9 | Model Evaluation & Explainability | Ch 16 |
-| 10 | Governance, Regulatory & Deployment | Ch 14, 19 |
-| 11 | Final Projects | — |
+| # | Title | Homework | Textbook |
+|---|-------|----------|----------|
+| 0 | Course Intro & Field Guide Mindset | — | Ch 1 |
+| 1 | Python & Development Environment | HW1 | Ch 2 |
+| 2 | **Structured Clinical Data & EDA** | HW2 | Ch 3, 12 |
+| 3 | **Medical Imaging Data** | HW3 | Ch 6 |
+| 4 | Machine Learning Foundations | HW4 | Ch 4, 18 |
+| 5 | Deep Learning for Medical Imaging | HW5 | Ch 5, 6 |
+| 6 | Midterm Project | Midterm | Ch 11 |
+| 7 | Clinical Text & NLP | HW6 | Ch 8, 12 |
+| 8 | Large Language Models | (HW6 spans) | Ch 9, 10 |
+| 9 | Model Evaluation & Explainability | HW7 | Ch 16 |
+| 10 | Governance, Regulatory & Deployment | — | Ch 14, 19 |
+| 11 | Final Projects | Final | — |
 
-### Slides Status
+---
+
+## Homework Schedule
+
+| HW | Topic | Release | Due |
+|----|-------|---------|-----|
+| HW1 | Python Setup | Jan 21 | Jan 28 |
+| HW2 | EDA & Clinical Data | Feb 4 | Feb 11 |
+| HW3 | DICOM & Imaging | Feb 11 | Feb 25 |
+| HW4 | ML for Clinical Prediction | Feb 25 | Mar 11 |
+| HW5 | Deep Learning | Mar 18 | Mar 25 |
+| HW6 | Clinical NLP & LLMs | Apr 1 | Apr 15 |
+| HW7 | Evaluation & Explainability | Apr 15 | Apr 22 |
+
+---
+
+## Slides Status
+
 | Module | Status | Notes |
 |--------|--------|-------|
-| 0, 1, 3, 5, 7, 9, 10, 11 | ✅ Complete | Full slide decks |
-| 2 | ✅ Complete (slim) | 23 slides, practical focus, textbook for depth |
-| 4 | ✅ Complete | ~48 slides, fairness woven throughout, practical additions |
-| 6 | 📝 Stub (minimal) | Work session, minimal slides needed |
-| 8 | ✅ Complete | 42 slides, timeless concepts, practical additions |
+| 0, 1, 5, 7, 9, 10, 11 | ✅ Complete | Full slide decks |
+| 2 | ✅ Complete | ~40 slides, EDA focus |
+| 3 | ✅ Complete (slim) | ~23 slides, practical DICOM |
+| 4 | ✅ Complete | ~48 slides, fairness woven in |
+| 6 | 📝 Stub | Work session, minimal needed |
+| 8 | ✅ Complete | ~42 slides, timeless LLM concepts |
 | supplemental/ | 📦 Extra | Content to integrate later |
 
 ---
 
-## Pending / Next Steps
+## Key Files
 
-1. ~~**Develop stub slide content**~~ ✅ **DONE** — Modules 2, 4, 8 complete (see below)
+**Website:**
+- `_data/modules.yaml` — Course structure (modules, lessons, readings)
+- `_data/lectures.yaml` — Lecture schedule
+- `homeworks/hw*-*/` — Homework specifications
+- `CLAUDE.md` — AI assistant instructions
+- `LICENSE` — CC BY-NC-SA 4.0
 
-2. **Integrate supplemental content** (optional, for deeper lectures)
-   - Explainability details → Module 9
-   - Deployment/Governance → Module 10
-
-3. ~~**Set up slides remote**~~ ✅ **DONE** — github.com/PennMed-AI-for-Medicine/slides (private)
-
-4. ~~**Review homework alignment**~~ ✅ **DONE** — HW7 rewritten (see below)
-
----
-
-## Recent Changes (2025-12-26)
-
-### Slides Modules 2, 4, 8 Developed
-
-**Module 2 — Medical Imaging Data (23 slides)**
-- Slim, practical: "enough to do HW and not be confused"
-- DICOM basics, pydicom, window/level, MONAI
-- Two-track pointer (core vs advanced/med phys)
-- Deep dive → textbook appendix
-- Philosophy: not a 90-min DICOM lecture for non-physics students
-
-**Module 4 — ML Foundations (~48 slides)**
-- Opens with Obermeyer case (fairness hook)
-- Fairness woven throughout, not bolted on
-- Evaluation metrics that matter clinically (ROC, PR, calibration)
-- Cross-validation, data leakage, temporal validation
-- SHAP, fairness audit, calibration by group
-- "Clinical utility > technical performance"
-- **Added:** Missing data handling, class imbalance strategies
-- **Added:** Internal vs external validation (5-15% performance drop)
-- **Added:** Decision curve code example (dcurves package)
-- **Added:** "What to Report" checklist (dataset, splitting, metrics, CIs)
-
-**Module 8 — LLMs in Medicine (42 slides)**
-- Timeless concepts, not trends
-- Transformers conceptually (attention intuition, not math)
-- Prompting as transferable skill (zero/few-shot, chain-of-thought, RAG)
-- Heavy emphasis on risks (8 slides on limitations)
-- "When NOT to use LLMs" explicitly addressed
-- Avoids: specific model versions, API tutorials, benchmarks
-- **Added:** Practical LLM Evaluation (rubric development, consistency testing)
-- **Added:** Local vs Cloud LLMs (privacy, latency, control tradeoffs)
-- **Added:** Cost Considerations (prompt optimization, caching, token math)
-- **TODO:** Self-Attention visual diagram, RAG architecture diagram
-
-### HW7 Rewritten: Governance → Evaluation & Explainability
-
-**Rationale:** Governance content is already embedded in midterm/final projects (field guide deliverables). Homework is better suited for technical, code-able skills.
-
-**Old HW7:** "Governance & Monitoring for Clinical AI"
-- Acceptance testing design
-- Drift detection implementation
-- Model cards, escalation protocols
-
-**New HW7:** "Model Evaluation & Explainability"
-- Part 1: Calibration analysis (plots, Platt scaling, Brier score)
-- Part 2: Decision curve analysis (net benefit, clinical thresholds)
-- Part 3: SHAP explanations (global + local, critical evaluation)
-- Part 4: Grad-CAM for images (with sanity checks)
-
-**Files changed:**
-- `homeworks/hw7-governance/` → `homeworks/hw7-evaluation/`
-- `hw7-governance.md` → `hw7-evaluation.md`
-
-**Design principle:** Homework = technical skills, Projects = synthesis + governance thinking
+**Slides:**
+- `module_*_slides.py` — Slide generators (python-pptx)
+- `template.py` — Shared slide templates
+- `supplemental/` — Extra content for deeper lectures
 
 ---
 
-## Key Decisions Made
+## Textbook Alignment Check
 
-| Decision | Rationale |
-|----------|-----------|
-| Keep Module 0 | Zero-indexing philosophy, "about to start an adventure" |
-| NLP + LLMs separate | Historical context matters, NLP existed before LLMs |
-| 7 homeworks | 12-week course with significant projects needs focus |
-| Textbook broader than course | Students can go deeper; course is curated scaffold |
-| Slides in supplemental/ | Don't delete good content; integrate later |
+When updating course content, verify textbook covers:
+- [ ] EDA workflow and data quality (Module 2 now earlier)
+- [ ] Missing data patterns (MAR/MCAR/MNAR)
+- [ ] Calibration and decision curves (Module 9)
+- [ ] External validation reality (5-15% drop)
 
 ---
 
-## Files Modified This Session
+## Notes
 
-### Website (this repo)
-- `_data/modules.yaml` — Module 9, 10 content; textbook references
-- `CLAUDE.md` — Created (course philosophy)
-
-### Slides repo
-- `module_*_slides.py` — Renumbered and updated docstrings
-- `supplemental/` — New directory with extra content
-- `README.md` — Updated structure documentation
-- `plans/` — Renumbered plan files
-
----
-
-## Notes for Next Session
-
-- **Slides remote set up:** github.com/PennMed-AI-for-Medicine/slides (private)
-- Website builds via GitHub Actions (no local Jekyll needed)
-- Textbook at: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/
-- User prefers discussion before implementation on significant changes
-- **License:** CC BY-NC-SA 4.0 added to website repo (see LICENSE file + footer)
+- Website builds via GitHub Actions
+- Slides repo is private (contains solutions context)
+- User prefers discussion before significant changes
+- License requires attribution for forks
