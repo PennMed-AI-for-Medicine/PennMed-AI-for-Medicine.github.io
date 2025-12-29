@@ -23,10 +23,24 @@ Running log of significant changes made during AI-assisted development sessions.
 - `slides/module_2_slides.py` — Now EDA content
 - `slides/module_3_slides.py` — Now DICOM content
 
+### Textbook Reference Fixes
+
+Verified all textbook URLs (16 links, all return 200). Fixed chapter-to-module mapping:
+
+- **Module 2 (EDA):** Added Ch 3b (EDA for Clinical Data) as primary reading; Ch 3 (Stats) now optional
+- **Module 3 (DICOM):** Added Appendix DICOM as primary reading; Ch 6 (CNNs) now optional preview
+
+### Documentation Restructure
+
+Split handoff documentation into two files:
+- `HANDOFF.md` — Always-current state (modules, homework, slides status)
+- `CHANGELOG.md` — Session-by-session history (this file)
+
 ### Other Changes
 - Fixed mobile navbar padding (title flush against left edge)
 - Added practical slides to Module 4 (missing data, class imbalance, external validation, decision curves, what-to-report checklist)
 - Added practical slides to Module 8 (LLM evaluation, local vs cloud, cost considerations)
+- Reviewed textbook EDA chapter (Ch 3b) — confirmed strong coverage of missing data, feature engineering, class imbalance; visualization is lighter but adequate
 
 ---
 
