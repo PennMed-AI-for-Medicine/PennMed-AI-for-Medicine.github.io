@@ -94,6 +94,13 @@ When updating course content, verify textbook covers:
 
 ---
 
+## Pre-Launch TODOs
+
+- [ ] **Hide unreleased homeworks** — Modify `_layouts/default.html` dropdown to filter by `release_date`. Currently shows all HWs for review purposes.
+- [ ] Update GitHub Classroom links (currently placeholder `XXXXXX` for HW3-7)
+- [ ] Finalize office hours in `index.md`
+- [ ] Add guest lecture info
+
 ## Notes
 
 - Website builds via GitHub Actions
