@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Midterm Project - Medical Imaging Case Study
+title: Midterm Project
 active_tab: homework
 release_date: 2026-03-19
 due_date: 2026-04-01 23:59:00EDT
@@ -14,7 +14,7 @@ This project is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ pa
 
 ## Overview
 
-The midterm project is your first opportunity to apply deep learning to a medical imaging problem end-to-end. You'll work on a self-selected project from the approved options below, building on skills from Modules 1-5.
+The midterm project is your opportunity to apply what you've learned to a clinical AI problem end-to-end. Choose one of three tracks based on your interests and background. Each track produces the same deliverables: working code and a mini field guide.
 
 **Deliverables:**
 1. Working code (Jupyter notebook or Python script)
@@ -23,65 +23,67 @@ The midterm project is your first opportunity to apply deep learning to a medica
 
 ---
 
-## Project Options
+## Project Tracks
 
 Choose ONE of the following tracks:
 
-### Option A: Chest X-Ray Classification
+### Track A: Medical Imaging
 
-**Task:** Build a classifier to detect one or more conditions from chest X-rays.
-
-**Suggested Datasets:**
-- [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) — 112k images, 14 disease labels
-- [CheXpert](https://stanfordmlgroup.github.io/competitions/chexpert/) — 224k images from Stanford
-- [RSNA Pneumonia Detection](https://www.kaggle.com/c/rsna-pneumonia-detection-challenge) — Kaggle challenge data
-
-**Minimum Requirements:**
-- Binary or multi-label classification
-- Train/val/test split with proper evaluation
-- At least one baseline and one CNN model
-- ROC curve and confusion matrix
-
----
-
-### Option B: Medical Image Segmentation
-
-**Task:** Segment anatomical structures or lesions from medical images.
+**Task:** Build a classification or segmentation model for medical images.
 
 **Suggested Datasets:**
+- [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) — 112k chest X-rays, 14 disease labels
 - [ISIC Skin Lesion](https://challenge.isic-archive.com/) — Dermoscopy images with lesion masks
-- [LiTS Liver Tumor](https://competitions.codalab.org/competitions/17094) — CT liver/tumor segmentation
-- [DRIVE Retinal Vessels](https://drive.grand-challenge.org/) — Fundus images with vessel masks
+- [APTOS Diabetic Retinopathy](https://www.kaggle.com/c/aptos2019-blindness-detection) — Retinal images, DR grading
 - Any MONAI dataset from the [Model Zoo](https://monai.io/model-zoo.html)
 
 **Minimum Requirements:**
-- U-Net or similar architecture
-- Dice score evaluation
-- Visualization of predictions vs ground truth
-- At least 3 example cases in your report
+- Train/val/test split with proper evaluation
+- At least one baseline and one deep learning model
+- Appropriate metrics (ROC/AUC for classification, Dice for segmentation)
+- Visualization of predictions
 
 ---
 
-### Option C: Retinal Image Analysis
+### Track B: Clinical NLP
 
-**Task:** Classify diabetic retinopathy severity or detect other retinal conditions.
+**Task:** Build a text classification or entity extraction model for clinical text.
 
 **Suggested Datasets:**
-- [APTOS 2019 Blindness Detection](https://www.kaggle.com/c/aptos2019-blindness-detection) — Kaggle DR classification
-- [Messidor-2](https://www.adcis.net/en/third-party/messidor2/) — DR grading dataset
-- [ODIR-5K](https://odir2019.grand-challenge.org/) — Multi-label ocular disease
+- [MIMIC-III Clinical Notes](https://physionet.org/content/mimiciii/) — ICU notes (requires credentialing)
+- [n2c2 Challenges](https://n2c2.dbmi.hms.harvard.edu/) — De-identified clinical text datasets
+- [MedMentions](https://github.com/chanzuckerberg/MedMentions) — PubMed abstracts with entity annotations
+- [PubMedQA](https://pubmedqa.github.io/) — Biomedical question answering
 
 **Minimum Requirements:**
-- Handle class imbalance (DR severity is very imbalanced)
-- Transfer learning from pretrained model
-- Quadratic weighted kappa evaluation (standard for DR)
-- Error analysis on misclassified cases
+- Appropriate text preprocessing
+- At least one baseline (e.g., TF-IDF + logistic regression) and one neural model
+- Appropriate metrics (F1, precision/recall by class)
+- Error analysis on misclassified examples
 
 ---
 
-### Option D: Your Own Project (Requires Approval)
+### Track C: Structured Clinical Data
 
-Have a different medical imaging project in mind? Propose it!
+**Task:** Build a risk prediction or outcome model using tabular clinical data.
+
+**Suggested Datasets:**
+- [MIMIC-III](https://physionet.org/content/mimiciii/) — ICU data (requires credentialing)
+- [eICU](https://physionet.org/content/eicu-crd/) — Multi-center ICU data
+- [Heart Disease UCI](https://archive.ics.uci.edu/ml/datasets/heart+disease) — Classic prediction task
+- [Diabetes 130-US Hospitals](https://archive.ics.uci.edu/ml/datasets/diabetes+130-us+hospitals+for+years+1999-2008) — Readmission prediction
+
+**Minimum Requirements:**
+- Proper EDA and handling of missing data
+- At least one baseline and one ML model (e.g., XGBoost, Random Forest)
+- Appropriate metrics (AUC, calibration plot)
+- Feature importance analysis (SHAP or similar)
+
+---
+
+### Custom Project (Requires Approval)
+
+Have a different clinical AI project in mind? Propose it!
 
 **To get approval:**
 1. Email the instructor by **March 20** with:
@@ -157,7 +159,7 @@ Submit via GitHub (link TBD):
 - **Get a baseline working first** — A simple model that runs beats a complex model that doesn't
 - **Document as you go** — Don't leave the field guide until the last minute
 - **It's okay to fail** — If your model doesn't work well, analyze why. That's valuable!
-- **Use what you learned** — HW2 (DICOM), HW5 (deep learning) are directly relevant
+- **Use what you learned** — HW2 (EDA), HW3 (DICOM), HW4 (ML), HW5 (deep learning) are all relevant
 
 ---
 

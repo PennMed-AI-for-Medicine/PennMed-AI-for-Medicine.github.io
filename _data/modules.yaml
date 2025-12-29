@@ -365,17 +365,19 @@
 - module_number: 6
   start_date: 2026-03-25
   end_date: 2026-04-01
-  title: "Midterm Project: Medical Imaging Case Study"
+  title: "Midterm Project"
   description: >
-    Students work on a self-selected medical imaging project from approved options:
-    chest X-ray classification, CT organ segmentation, pathology analysis, retinal imaging,
-    or other approved imaging tasks. Includes mini field guide deliverable.
+    Students select one of three tracks for their midterm project. Each track requires
+    a working model and a mini field guide. Track A: Medical Imaging (classification,
+    segmentation, detection). Track B: Clinical NLP (text classification, entity extraction).
+    Track C: Structured Data (risk prediction, outcome modeling).
   homework: Midterm
   lessons:
     - title: "Midterm Project Kickoff"
       description: >
-        Overview of project options, dataset access, and expectations. Forming teams
-        (if applicable). Timeline and milestones. What makes a good mini field guide.
+        Overview of the three project tracks, dataset options, and expectations.
+        Forming teams (if applicable). Timeline and milestones. What makes a good
+        mini field guide: intended use, performance summary, limitations, decision rules.
     - title: "Work Session: Data Exploration & Baseline"
       description: >
         In-class work time with instructor and TA support. Focus on loading data,
@@ -384,10 +386,10 @@
     - title: "Work Session: Model Development"
       description: >
         In-class work time focused on model architecture, training, and iteration.
-        Peer feedback on approaches. Debugging common deep learning issues.
+        Peer feedback on approaches. Debugging common issues across all tracks.
     - title: "Midterm Presentations"
       description: >
-        Brief presentations of results and mini field guides. Peer feedback and
+        10-minute presentations of results and mini field guides. Peer feedback and
         discussion. What worked, what didn't, and lessons learned.
   readings:
     - title: "📖 Textbook: Chapter 11 — Imaging Case Studies"
