@@ -196,10 +196,14 @@
         RT Plan (beam parameters). Calculating DVH from dose and structure data.
         Real-world challenges in RT data handling.
   readings:
-    - title: "📖 Textbook: Chapter 6 — Convolutional Architectures for Medical Imaging"
-      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/06-cnns-medical-imaging.html
+    - title: "📖 Textbook: Appendix — DICOM Reference"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/appendix-dicom.html
       optional: false
-      note: "Course textbook—imaging fundamentals and CNN architectures"
+      note: "Course textbook—DICOM format, pydicom, coordinate systems"
+    - title: "📖 Textbook: Chapter 6 — CNNs for Medical Imaging"
+      url: https://rafemcbeth.github.io/Little-Book-of-Medical-AI/chapters/06-cnns-medical-imaging.html
+      optional: true
+      note: "Course textbook—preview of imaging AI (covered in Module 5)"
     - title: "DICOM Standard Browser"
       url: https://dicom.innolitics.com/
       optional: false
