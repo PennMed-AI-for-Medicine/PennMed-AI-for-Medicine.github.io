@@ -6,19 +6,19 @@ Running log of significant changes made during AI-assisted development sessions.
 
 ## 2025-12-28
 
-### Module 6: Three Project Tracks
+### Module 6: Two Project Tracks
 
-**Rationale:** Midterm project should accommodate students with different interests and backgrounds. Three tracks allow imaging, NLP, and structured data paths while maintaining consistent deliverables.
+**Rationale:** Midterm project should accommodate students with different interests. Initially planned 3 tracks, but NLP track removed because Module 7 (NLP) comes *after* midterm — students wouldn't have the prerequisite knowledge. NLP becomes a final project option instead.
 
 **Changes:**
 - Module 6 title: "Midterm Project" (was "Midterm Project: Medical Imaging Case Study")
-- Module 6 description: Updated to describe 3 tracks with mini field guide requirement
-- `projects/midterm.md`: Restructured with Track A (Imaging), Track B (NLP), Track C (Structured Data)
+- Module 6 description: Updated to describe 2 tracks with mini field guide requirement
+- `projects/midterm.md`: Restructured with Track A (Imaging), Track B (Structured Data)
 - `_data/exams.yaml`: Updated midterm title
 
 **Files changed:**
 - `_data/modules.yaml` — Module 6 title and description
-- `projects/midterm.md` — Complete restructure for 3 tracks
+- `projects/midterm.md` — Complete restructure for 2 tracks
 - `_data/exams.yaml` — Midterm title update
 
 ---

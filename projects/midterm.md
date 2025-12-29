@@ -14,7 +14,7 @@ This project is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ pa
 
 ## Overview
 
-The midterm project is your opportunity to apply what you've learned to a clinical AI problem end-to-end. Choose one of three tracks based on your interests and background. Each track produces the same deliverables: working code and a mini field guide.
+The midterm project is your opportunity to apply what you've learned to a clinical AI problem end-to-end. Choose one of two tracks based on your interests and background. Each track produces the same deliverables: working code and a mini field guide.
 
 **Deliverables:**
 1. Working code (Jupyter notebook or Python script)
@@ -45,25 +45,7 @@ Choose ONE of the following tracks:
 
 ---
 
-### Track B: Clinical NLP
-
-**Task:** Build a text classification or entity extraction model for clinical text.
-
-**Suggested Datasets:**
-- [MIMIC-III Clinical Notes](https://physionet.org/content/mimiciii/) — ICU notes (requires credentialing)
-- [n2c2 Challenges](https://n2c2.dbmi.hms.harvard.edu/) — De-identified clinical text datasets
-- [MedMentions](https://github.com/chanzuckerberg/MedMentions) — PubMed abstracts with entity annotations
-- [PubMedQA](https://pubmedqa.github.io/) — Biomedical question answering
-
-**Minimum Requirements:**
-- Appropriate text preprocessing
-- At least one baseline (e.g., TF-IDF + logistic regression) and one neural model
-- Appropriate metrics (F1, precision/recall by class)
-- Error analysis on misclassified examples
-
----
-
-### Track C: Structured Clinical Data
+### Track B: Structured Clinical Data
 
 **Task:** Build a risk prediction or outcome model using tabular clinical data.
 

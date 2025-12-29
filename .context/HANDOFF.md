@@ -31,7 +31,7 @@ See `CHANGELOG.md` for session-by-session history.
 | 3 | **Medical Imaging Data** | HW3 | Ch 6 |
 | 4 | Machine Learning Foundations | HW4 | Ch 4, 18 |
 | 5 | Deep Learning for Medical Imaging | HW5 | Ch 5, 6 |
-| 6 | Midterm Project (3 tracks: Imaging/NLP/Structured) | Midterm | Ch 11 |
+| 6 | Midterm Project (2 tracks: Imaging/Structured) | Midterm | Ch 11 |
 | 7 | Clinical Text & NLP | HW6 | Ch 8, 12 |
 | 8 | Large Language Models | (HW6 spans) | Ch 9, 10 |
 | 9 | Model Evaluation & Explainability | HW7 | Ch 16 |
@@ -74,7 +74,7 @@ See `CHANGELOG.md` for session-by-session history.
 - `_data/modules.yaml` — Course structure (modules, lessons, readings)
 - `_data/lectures.yaml` — Lecture schedule
 - `homeworks/hw*-*/` — Homework specifications
-- `projects/midterm.md` — Midterm project spec (3 tracks)
+- `projects/midterm.md` — Midterm project spec (2 tracks)
 - `projects/final.md` — Final project spec
 - `CLAUDE.md` — AI assistant instructions
 - `LICENSE` — CC BY-NC-SA 4.0
