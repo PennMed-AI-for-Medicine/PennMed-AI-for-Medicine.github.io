@@ -19,35 +19,35 @@
   recording:
 
 - date: 2026-01-28
-  title: Introduction to Medical Imaging Data
+  title: Introduction to Clinical Tabular Data
   recording:
 
 - date: 2026-02-03
-  title: DICOM & NIfTI Formats
+  title: EDA for Clinical Data
   recording:
 
 - date: 2026-02-04
-  title: MONAI Framework Introduction
+  title: Missing Data & Feature Engineering
   recording:
 
 - date: 2026-02-10
-  title: Medical Imaging Lab Session
+  title: Clinical Data Lab Session
   recording:
 
 - date: 2026-02-11
-  title: Structured Clinical Data
+  title: Introduction to Medical Imaging Data
   recording:
 
 - date: 2026-02-17
-  title: EDA with Pandas
+  title: DICOM & NIfTI Formats
   recording:
 
 - date: 2026-02-18
-  title: Feature Engineering for Clinical Data
+  title: MONAI Framework Introduction
   recording:
 
 - date: 2026-02-24
-  title: Clinical Data Lab Session
+  title: Medical Imaging Lab Session
   recording:
 
 - date: 2026-02-25
@@ -105,15 +105,15 @@
   recording:
 
 - date: 2026-04-21
-  title: Governance & Monitoring
+  title: Model Evaluation & Explainability
   recording:
 
 - date: 2026-04-22
-  title: Acceptance Testing & Monitoring Lab
+  title: Calibration, Decision Curves & SHAP Lab
   recording:
 
 - date: 2026-04-28
-  title: From Model to MVP
+  title: Governance, Regulatory & Deployment
   recording:
 
 - date: 2026-04-29
