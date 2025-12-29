@@ -23,6 +23,14 @@ Running log of significant changes made during AI-assisted development sessions.
 - `slides/module_2_slides.py` — Now EDA content
 - `slides/module_3_slides.py` — Now DICOM content
 
+### Lecture Schedule Fix
+
+`lectures.yaml` still had old module order. Fixed:
+- Jan 28 - Feb 10: Now EDA/Clinical Data (was DICOM)
+- Feb 11 - Feb 24: Now DICOM/Imaging (was EDA)
+- Apr 21-22: Now "Model Evaluation & Explainability" (was "Governance & Monitoring")
+- Apr 28: Now "Governance, Regulatory & Deployment" (was "From Model to MVP")
+
 ### Textbook Reference Fixes
 
 Verified all textbook URLs (16 links, all return 200). Fixed chapter-to-module mapping:
