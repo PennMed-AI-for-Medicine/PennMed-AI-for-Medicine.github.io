@@ -3,8 +3,8 @@
 
 -
   date: 2026-01-14
-  title: First day of classes
-  type: university_calendar
+  title: First day of classes (Monday classes begin - no MPHY 6120)
+  type: no_lecture
 -
   date: 2026-01-19
   title: MLK Day - No Class
