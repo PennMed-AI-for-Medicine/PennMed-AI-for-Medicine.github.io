@@ -1,9 +1,9 @@
 # MPHY 6120 - AI for Medicine - Spring 2026
 # Module structure for the course
-# Semester: January 14 - April 29, 2026
+# Semester: January 20 - April 29, 2026 (University starts Jan 14, but this course begins Jan 20)
 
 - module_number: 0
-  start_date: 2026-01-14
+  start_date: 2026-01-20
   end_date: 2026-01-21
   title: Course Introduction & The Field Guide Mindset
   description: >
@@ -511,7 +511,7 @@
 
 - module_number: 9
   start_date: 2026-04-15
-  end_date: 2026-04-22
+  end_date: 2026-04-21
   title: Model Evaluation & Explainability
   description: >
     Moving beyond AUROC to clinically meaningful evaluation. Calibration, decision curve
@@ -565,8 +565,8 @@
       note: "Provocative argument for interpretable models"
 
 - module_number: 10
-  start_date: 2026-04-22
-  end_date: 2026-04-24
+  start_date: 2026-04-21
+  end_date: 2026-04-22
   title: Governance, Regulatory & Deployment
   description: >
     The path from research to clinic: FDA regulatory pathways (510(k), De Novo, SaMD),
@@ -623,7 +623,7 @@
       note: "Framework for documenting ML models"
 
 - module_number: 11
-  start_date: 2026-04-24
+  start_date: 2026-04-22
   end_date: 2026-04-29
   title: Final Projects & Presentations
   description: >

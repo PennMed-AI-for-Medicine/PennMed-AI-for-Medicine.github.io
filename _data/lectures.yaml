@@ -1,17 +1,14 @@
 # MPHY 6120 - AI for Medicine - Spring 2026 Lectures
 # Lecture schedule - Tues/Wed 1:45-3:15 PM
-# First day of classes: January 14, 2026 (Wednesday)
+# First day of classes: January 20, 2026 (Tuesday)
+# Note: University classes start Jan 14, but this course begins Jan 20
 
-- date: 2026-01-14
+- date: 2026-01-20
   title: Course Introduction & Field Guide Mindset
   recording:
 
-- date: 2026-01-20
-  title: Development Environment Setup
-  recording:
-
 - date: 2026-01-21
-  title: Python & PyTorch Basics
+  title: Development Environment & Python Basics
   recording:
 
 - date: 2026-01-27
@@ -105,17 +102,17 @@
   recording:
 
 - date: 2026-04-21
-  title: Model Evaluation & Explainability
+  title: Model Evaluation, Calibration & Explainability
   recording:
 
 - date: 2026-04-22
-  title: Calibration, Decision Curves & SHAP Lab
-  recording:
-
-- date: 2026-04-28
   title: Governance, Regulatory & Deployment
   recording:
 
+- date: 2026-04-28
+  title: Final Presentations Day 1
+  recording:
+
 - date: 2026-04-29
-  title: Writing Field Guides & Course Wrap-up
+  title: Final Presentations Day 2
   recording:

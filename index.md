@@ -27,7 +27,7 @@ The goal is to produce graduates who can both **build models** and **write the f
 - **Course:** MPHY 6120 - Artificial Intelligence for Medicine
 - **Schedule:** Tuesdays & Wednesdays, 1:45 - 3:15 PM
 - **Classroom:** SCTR 8-146AB
-- **Semester:** Spring 2026 (January 14 - April 29)
+- **Semester:** Spring 2026 (January 20 - April 29)
 - **Expected enrollment:** ~25 students
 
 We encourage in-person attendance for lab sessions. Contact the instructor if you cannot attend a specific day.
