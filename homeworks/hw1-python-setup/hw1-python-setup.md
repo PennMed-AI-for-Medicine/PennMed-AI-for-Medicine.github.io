@@ -35,7 +35,8 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 
 By completing this assignment, you will:
 
-- Set up your Python development environment using `uv`
+- Set up VS Code with GitHub Copilot as your AI pair programming environment
+- Configure your Python development environment using `uv`
 - Verify PyTorch installation and GPU access (if available)
 - Practice basic Python skills needed for the course
 - Learn the Git workflow used throughout this course
@@ -44,11 +45,47 @@ By completing this assignment, you will:
 
 ## Instructions
 
-### Part 1: Environment Setup (30 points)
+### Part 1: Environment Setup (25 points)
 
-#### 1.1 Install uv Package Manager (10 points)
+#### 1.1 Install VS Code and GitHub Copilot (9 points)
 
-[uv](https://github.com/astral-sh/uv) is a fast Python package manager that we'll use throughout the course. Install it by following the instructions for your operating system:
+We'll use Visual Studio Code as our IDE with GitHub Copilot as your AI pair programmer. This mirrors how many professional developers work today.
+
+**Step 1: Install VS Code**
+
+Download and install [Visual Studio Code](https://code.visualstudio.com/) for your operating system.
+
+**Step 2: Get GitHub Education Benefits**
+
+As a student, you get free access to GitHub Copilot and other developer tools:
+
+1. Go to [GitHub Education](https://education.github.com/pack)
+2. Click "Get your pack" and verify your student status with your Penn email
+3. Once approved, Copilot will be free on your GitHub account
+
+**Step 3: Install VS Code Extensions**
+
+Open VS Code and install these extensions (Ctrl/Cmd + Shift + X):
+
+1. **Python** (by Microsoft) — Python language support
+2. **GitHub Copilot** — AI pair programming assistant
+3. **Jupyter** — Notebook support
+
+**Step 4: Sign into GitHub Copilot**
+
+1. Click the Copilot icon in the VS Code sidebar
+2. Sign in with your GitHub account (the one with Education benefits)
+3. Verify Copilot is working by typing a comment like `# function to calculate BMI` and see if it suggests code
+
+**Deliverable:** Screenshot showing VS Code with the Python and GitHub Copilot extensions installed and Copilot active.
+
+> **A note on AI pair programming:** Copilot is a tool to accelerate your work, not replace your learning. Use it to get unstuck, explore syntax, and see alternative approaches—but make sure you understand every line of code you submit. Your commit history should reflect *your* problem-solving process.
+
+#### 1.2 Install uv Package Manager (8 points)
+
+[uv](https://github.com/astral-sh/uv) is a fast Python package and environment manager that we'll use throughout the course. It's written in Rust and is significantly faster than pip—it handles both virtual environment creation and package installation in one tool.
+
+Install it by following the instructions for your operating system:
 
 **macOS/Linux:**
 ```bash
@@ -67,7 +104,7 @@ uv --version
 
 **Deliverable:** Screenshot showing `uv --version` output.
 
-#### 1.2 Create a Virtual Environment (10 points)
+#### 1.3 Create a Virtual Environment (4 points)
 
 Create a dedicated virtual environment for this course:
 
@@ -97,7 +134,7 @@ source .venv/bin/activate
 
 **Deliverable:** Screenshot showing your activated virtual environment (your prompt should show `(.venv)` or similar).
 
-#### 1.3 Install Required Packages (10 points)
+#### 1.4 Install Required Packages (4 points)
 
 Install the core packages we'll use throughout the course:
 
@@ -127,7 +164,7 @@ print("All packages imported successfully!")
 
 ### Part 2: Python Skills Review (40 points)
 
-Complete the following exercises in the starter notebook (or create your own notebook named `hw1_python_skills.ipynb`).
+Complete the following exercises in `hw1_exercises.py` from your cloned repository. The file contains function stubs—replace the `None` values with your implementations.
 
 #### 2.1 NumPy Array Operations (15 points)
 
@@ -167,9 +204,9 @@ Create the following visualizations with proper labels, titles, and legends:
 
 ---
 
-### Part 3: PyTorch Basics (30 points)
+### Part 3: PyTorch Basics (25 points)
 
-Complete these exercises in the same notebook or a new one named `hw1_pytorch_basics.ipynb`.
+Continue working in `hw1_exercises.py` for these exercises.
 
 #### 3.1 Tensor Creation (10 points)
 
@@ -266,9 +303,10 @@ In the era of AI-assisted coding, your commit history tells the story of *your* 
 | Component | Points |
 |-----------|--------|
 | **Part 1: Environment Setup** | **25** |
-| 1.1 uv installation verified | 8 |
-| 1.2 Virtual environment created | 8 |
-| 1.3 Packages installed correctly | 9 |
+| 1.1 VS Code + GitHub Copilot configured | 9 |
+| 1.2 uv installation verified | 8 |
+| 1.3 Virtual environment created | 4 |
+| 1.4 Packages installed correctly | 4 |
 | **Part 2: Python Skills** | **40** |
 | 2.1 NumPy exercises | 15 |
 | 2.2 Pandas exercises | 15 |
@@ -297,8 +335,8 @@ In the era of AI-assisted coding, your commit history tells the story of *your* 
 
 ## Tips
 
-- **Start early!** Environment setup can sometimes have unexpected issues.
+- **Start early!** Environment setup can sometimes have unexpected issues. GitHub Education verification can take 1-2 days.
 - **Commit often** — Don't wait until you're done to make your first commit.
 - **Use the course GitHub Discussions** or office hours if you get stuck.
 - **If you don't have a GPU**, that's completely fine—all coursework can be done on CPU.
-- **AI assistants are allowed** for debugging, but your commit history should show *your* problem-solving process.
+- **Use Copilot wisely** — Let it help you learn syntax and explore approaches, but understand every line you submit.
