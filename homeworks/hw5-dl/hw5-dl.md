@@ -3,7 +3,7 @@ layout: default
 title: Homework 5 - Deep Learning for Medical Image Classification
 active_tab: homework
 release_date: 2026-03-18
-due_date: 2026-03-25 23:59:00EST
+due_date: 2026-04-08 23:59:00EST
 classroom_link: https://classroom.github.com/a/XXXXXX
 ---
 

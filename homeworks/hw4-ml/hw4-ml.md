@@ -3,7 +3,7 @@ layout: default
 title: Homework 4 - Machine Learning for Clinical Prediction
 active_tab: homework
 release_date: 2026-02-25
-due_date: 2026-03-11 23:59:00EST
+due_date: 2026-03-04 23:59:00EST
 classroom_link: https://classroom.github.com/a/XXXXXX
 ---
 

@@ -1,118 +1,104 @@
 # MPHY 6120 - AI for Medicine - Spring 2026 Lectures
 # Lecture schedule - Tues/Wed 1:45-3:15 PM
-# First day of classes: January 20, 2026 (Tuesday)
-# Note: University classes start Jan 14, but this course begins Jan 20
+# Each class is ~half lecture, ~half hands-on lab
+# Content guided by module lessons in modules.yaml
 
+# Week 1
 - date: 2026-01-20
-  title: Course Introduction & Field Guide Mindset
-  recording:
+  title: "Module 0: Course Introduction & Field Guide Mindset"
 
 - date: 2026-01-21
-  title: Development Environment & Python Basics
-  recording:
+  title: "Module 1: Python Environment & Development Setup"
 
+# Week 2
 - date: 2026-01-27
-  title: Python Lab Session
-  recording:
+  title: "Module 1: Git, Notebooks & Medical Data Landscape"
 
 - date: 2026-01-28
-  title: Introduction to Clinical Tabular Data
-  recording:
+  title: "Module 2: Clinical Tabular Data & EDA"
 
+# Week 3
 - date: 2026-02-03
-  title: EDA for Clinical Data
-  recording:
+  title: "Module 2: Data Cleaning & Preprocessing"
 
 - date: 2026-02-04
-  title: Missing Data & Feature Engineering
-  recording:
+  title: "Module 2: Feature Engineering & Class Imbalance"
 
+# Week 4 - Guest lectures (Dr. McBeth away)
 - date: 2026-02-10
-  title: "DICOM Fundamentals (Guest Lecture)"
-  recording:
+  title: "Module 3: DICOM Fundamentals (Guest Lecture)"
 
 - date: 2026-02-11
-  title: "Medical Imaging Data & Coordinate Systems (Guest Lecture)"
-  recording:
+  title: "Module 3: Imaging Coordinate Systems (Guest Lecture)"
 
+# Week 5
 - date: 2026-02-17
-  title: NIfTI & Research Formats
-  recording:
+  title: "Module 3: NIfTI & Research Formats"
 
 - date: 2026-02-18
-  title: MONAI Framework Introduction
-  recording:
+  title: "Module 3: MONAI Framework"
 
+# Week 6
 - date: 2026-02-24
-  title: Medical Imaging Lab Session
-  recording:
+  title: "Module 3: Medical Imaging Applications"
 
 - date: 2026-02-25
-  title: Machine Learning Fundamentals
-  recording:
+  title: "Module 4: ML Fundamentals — Regression & Classification"
 
+# Week 7
 - date: 2026-03-03
-  title: Classification & Regression
-  recording:
+  title: "Module 4: Evaluation Metrics & Cross-Validation"
 
 - date: 2026-03-04
-  title: ML Lab Session
-  recording:
+  title: "Module 4: Model Selection & Interpretability; Midterm Kickoff"
 
-# Spring Break: March 7-15, 2026 - No classes March 10 & 11
+# Spring Break: March 7-15, 2026
 
+# Week 8
 - date: 2026-03-17
-  title: Midterm Presentations
-  recording:
+  title: "Module 6: Midterm Presentations"
 
 - date: 2026-03-18
-  title: Deep Learning & CNNs
-  recording:
+  title: "Module 5: Neural Networks & Backpropagation"
 
+# Week 9
 - date: 2026-03-24
-  title: U-Net & Medical Image Segmentation
-  recording:
+  title: "Module 5: CNNs & Transfer Learning"
 
 - date: 2026-03-25
-  title: Segmentation Lab Session
-  recording:
+  title: "Module 5: U-Net & Medical Image Segmentation"
 
+# Week 10
 - date: 2026-03-31
-  title: Evaluation Metrics & Cross-Validation
-  recording:
+  title: "Module 5: Training Deep Learning Models"
 
 - date: 2026-04-01
-  title: Transfer Learning & Fine-Tuning
-  recording:
+  title: "Module 7: Clinical NLP Foundations"
 
+# Week 11
 - date: 2026-04-07
-  title: Clinical NLP Foundations
-  recording:
+  title: "Module 7: Text Processing & Word Embeddings"
 
 - date: 2026-04-08
-  title: Text Processing Lab
-  recording:
+  title: "Module 8: Transformers & Large Language Models"
 
+# Week 12
 - date: 2026-04-14
-  title: Large Language Models
-  recording:
+  title: "Module 8: LLMs in Clinical Settings"
 
 - date: 2026-04-15
-  title: LLMs in Clinical Settings
-  recording:
+  title: "Module 8: Prompting & Retrieval-Augmented Generation"
 
+# Week 13
 - date: 2026-04-21
-  title: Model Evaluation, Calibration & Explainability
-  recording:
+  title: "Module 9: Model Evaluation, Calibration & Explainability"
 
 - date: 2026-04-22
-  title: Governance, Regulatory & Deployment
-  recording:
+  title: "Module 10: Governance, Regulatory & Deployment"
 
+# Week 14
 - date: 2026-04-28
-  title: Final Presentations Day 1
-  recording:
+  title: "Module 11: Final Presentations Day 1"
 
 - date: 2026-04-29
-  title: Final Presentations Day 2
-  recording:
+  title: "Module 11: Final Presentations Day 2"
