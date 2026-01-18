@@ -28,15 +28,15 @@
   recording:
 
 - date: 2026-02-10
-  title: Clinical Data Lab Session
+  title: "DICOM Fundamentals (Guest Lecture)"
   recording:
 
 - date: 2026-02-11
-  title: Introduction to Medical Imaging Data
+  title: "Medical Imaging Data & Coordinate Systems (Guest Lecture)"
   recording:
 
 - date: 2026-02-17
-  title: DICOM & NIfTI Formats
+  title: NIfTI & Research Formats
   recording:
 
 - date: 2026-02-18
@@ -62,7 +62,7 @@
 # Spring Break: March 7-15, 2026 - No classes March 10 & 11
 
 - date: 2026-03-17
-  title: Evaluation Metrics & Cross-Validation
+  title: Midterm Presentations
   recording:
 
 - date: 2026-03-18
@@ -78,11 +78,11 @@
   recording:
 
 - date: 2026-03-31
-  title: Midterm Project Work Session
+  title: Evaluation Metrics & Cross-Validation
   recording:
 
 - date: 2026-04-01
-  title: Midterm Presentations
+  title: Transfer Learning & Fine-Tuning
   recording:
 
 - date: 2026-04-07

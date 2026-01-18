@@ -222,7 +222,7 @@
 
 - module_number: 4
   start_date: 2026-02-25
-  end_date: 2026-03-18
+  end_date: 2026-03-04
   title: Machine Learning Foundations
   description: >
     Core machine learning concepts: classification, regression, evaluation metrics,
@@ -307,7 +307,7 @@
 
 - module_number: 5
   start_date: 2026-03-18
-  end_date: 2026-03-25
+  end_date: 2026-04-01
   title: Deep Learning for Medical Imaging
   description: >
     Convolutional neural networks, U-Net architecture for segmentation, and image
@@ -363,8 +363,8 @@
       note: "Hands-on tutorial we'll work through in class"
 
 - module_number: 6
-  start_date: 2026-03-25
-  end_date: 2026-04-01
+  start_date: 2026-03-03
+  end_date: 2026-03-17
   title: "Midterm Project"
   description: >
     Students select one of two tracks for their midterm project. Each track requires
