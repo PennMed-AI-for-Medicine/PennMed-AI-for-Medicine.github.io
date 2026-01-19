@@ -4,7 +4,7 @@ title: Homework 0 - Git & GitHub Practice
 active_tab: homework
 release_date: 2026-01-20
 due_date: 2026-01-20 23:59:00EST
-classroom_link: TBD
+classroom_link: https://classroom.github.com/a/re50haE3
 ---
 
 <!-- Check whether the assignment is ready to release -->

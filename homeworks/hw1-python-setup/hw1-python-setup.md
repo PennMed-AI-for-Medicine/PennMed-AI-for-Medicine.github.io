@@ -4,7 +4,7 @@ title: Homework 1 - Python & Environment Setup
 active_tab: homework
 release_date: 2026-01-21
 due_date: 2026-01-28 23:59:00EST
-classroom_link: https://classroom.github.com/a/d7oSCce6
+classroom_link: https://classroom.github.com/a/wYc9Dgh8
 ---
 
 <!-- Check whether the assignment is ready to release -->
