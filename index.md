@@ -90,12 +90,12 @@ We meet twice weekly for 90-minute sessions:
 ## Course Materials
 
 **Primary Text:**
-- [**Little Book of Medical AI**](https://rafemcbeth.github.io/Little-Book-of-Medical-AI/) (course textbook, free online)
+- [**The Clinical AI Field Guide**](https://book.clinicalai.guide) (course textbook, free online)
 
-> **About the Little Book:** This is a living document being developed alongside the course. Your feedback and questions will shape the final version. Think of it as our collective field guide to the field—and a model for the field guides you'll write for your own projects.
+> **About the Field Guide:** This is a living document being developed alongside the course. Your feedback and questions will shape the final version. Think of it as our collective field guide to the field—and a model for the field guides you'll write for your own projects.
 
 **Code & Resources:**
-- [Course Textbook](https://rafemcbeth.github.io/Little-Book-of-Medical-AI/)
+- [Course Textbook](https://book.clinicalai.guide)
 - [Course GitHub Organization](https://github.com/PennMed-AI-for-Medicine)
 - [Course Website](https://clinicalai.guide)
 
