@@ -3,7 +3,7 @@ layout: default
 title: Homework 0 - Git & GitHub Practice
 active_tab: homework
 release_date: 2026-01-20
-due_date: 2026-01-24 23:59:00EST
+due_date: 2026-01-20 23:59:00EST
 classroom_link: TBD
 ---
 
@@ -22,7 +22,7 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 </div>
 
 <div class="alert alert-warning" markdown="1">
-**This is an ungraded practice assignment.** The goal is to get comfortable with the Git workflow you'll use all semester—before the real homework begins.
+**This is an ungraded in-class exercise.** We'll do this together on Day 1. If you can't complete this workflow in one class session, come to office hours immediately—you'll need this skill for every assignment.
 </div>
 
 <div class="alert alert-success" markdown="1">
