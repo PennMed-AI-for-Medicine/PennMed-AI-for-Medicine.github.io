@@ -118,43 +118,25 @@ uv --version
 
 **Deliverable:** Screenshot showing `uv --version` output.
 
-#### 1.3 Create a Virtual Environment (4 points)
+#### 1.3 Initialize Project and Install Packages (8 points)
 
-Create a dedicated virtual environment for this course:
+Set up your project with proper dependency management:
 
 ```bash
-# Create a new directory for the course
-mkdir mphy6120
-cd mphy6120
+# Navigate to your cloned homework repo
+cd hw1-python-setup-<your-username>
 
-# Initialize a new project with uv
+# Initialize uv project (creates pyproject.toml)
 uv init
 
-# Create virtual environment with Python 3.11
-uv venv --python 3.11
+# Add required packages (creates uv.lock for reproducibility)
+uv add torch numpy pandas matplotlib jupyter ipykernel
 ```
 
-Activate the virtual environment:
-
-**macOS/Linux:**
-```bash
-source .venv/bin/activate
-```
-
-**Windows:**
-```powershell
-.venv\Scripts\activate
-```
-
-**Deliverable:** Screenshot showing your activated virtual environment (your prompt should show `(.venv)` or similar).
-
-#### 1.4 Install Required Packages (4 points)
-
-Install the core packages we'll use throughout the course:
-
-```bash
-uv pip install torch numpy pandas matplotlib jupyter ipykernel
-```
+This creates:
+- `pyproject.toml` — declares your dependencies
+- `uv.lock` — locks exact versions (reproducibility!)
+- `.venv/` — virtual environment
 
 **Note:** If you have an NVIDIA GPU and want CUDA support, follow the [PyTorch installation guide](https://pytorch.org/get-started/locally/) for your specific setup.
 
@@ -182,16 +164,35 @@ Complete the following exercises in `hw1_exercises.py` from your cloned reposito
 
 **How to run your code:**
 
+**Option 1: Using uv run (recommended)**
 ```bash
-# Option 1: With venv activated
-python hw1_exercises.py
-
-# Option 2: Using uv directly
 uv run python hw1_exercises.py
+```
+This is the simplest approach—`uv run` automatically uses the virtual environment.
 
-# Option 3: In VS Code
-# Open hw1_exercises.py → Cmd+Shift+P → "Python: Select Interpreter" → choose .venv
-# Click ▶️ Run (top right) or press F5
+**Option 2: In VS Code**
+
+To run Python files directly in VS Code, you need to select the correct Python interpreter:
+
+1. Open `hw1_exercises.py` in VS Code
+2. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows) to open the Command Palette
+3. Type "Python: Select Interpreter" and press Enter
+4. Look for the `.venv` option—it should show something like:
+   - `Python 3.x.x ('.venv': venv)` or
+   - `Python 3.x.x ./venv/bin/python`
+5. If you don't see `.venv` in the list:
+   - The `.venv` folder may be hidden. In VS Code's file explorer, you can still select it via the Command Palette
+   - Make sure you ran `uv init` and `uv add` first (this creates the `.venv` folder)
+   - Try clicking "Enter interpreter path..." and navigate to `.venv/bin/python` (Mac/Linux) or `.venv\Scripts\python.exe` (Windows)
+6. Once selected, click the ▶️ Run button (top right) or press `F5`
+
+> **Tip:** The `.venv` folder is hidden by default because it starts with a dot. In Finder (Mac), press `Cmd+Shift+.` to show hidden files. In Windows Explorer, enable "Hidden items" in the View menu.
+
+**Option 3: With venv activated manually**
+```bash
+source .venv/bin/activate  # Mac/Linux
+# or: .venv\Scripts\activate  # Windows
+python hw1_exercises.py
 ```
 
 #### 2.1 NumPy Array Operations (15 points)
