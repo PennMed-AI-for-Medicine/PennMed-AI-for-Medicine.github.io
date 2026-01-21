@@ -180,6 +180,20 @@ print("All packages imported successfully!")
 
 Complete the following exercises in `hw1_exercises.py` from your cloned repository. The file contains function stubs—replace the `None` values with your implementations.
 
+**How to run your code:**
+
+```bash
+# Option 1: With venv activated
+python hw1_exercises.py
+
+# Option 2: Using uv directly
+uv run python hw1_exercises.py
+
+# Option 3: In VS Code
+# Open hw1_exercises.py → Cmd+Shift+P → "Python: Select Interpreter" → choose .venv
+# Click ▶️ Run (top right) or press F5
+```
+
 #### 2.1 NumPy Array Operations (15 points)
 
 1. **Array Creation (3 pts):** Create a 1D NumPy array containing the integers 1 through 10.
