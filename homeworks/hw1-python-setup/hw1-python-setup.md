@@ -25,8 +25,9 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 **Get Started:**
 1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code
 2. Clone your repo to your local machine
-3. Complete the exercises in `hw1_exercises.py`
-4. Commit and push your work to GitHub before the deadline
+3. Complete `reflection.md` (tell us about yourself)
+4. Complete the exercises in `hw1_exercises.py`
+5. Commit and push your work to GitHub before the deadline
 </div>
 
 ---
@@ -45,7 +46,20 @@ By completing this assignment, you will:
 
 ## Instructions
 
-### Part 1: Environment Setup (25 points)
+### Part 0: Tell Us About Yourself (10 points)
+
+Open `reflection.md` and answer the questions about your background and goals. This helps us understand where you're coming from and tailor the course.
+
+**Questions:**
+1. What is your program and year?
+2. What programming experience do you have?
+3. Have you used Git/GitHub before? If so, in what context?
+4. What do you hope to learn in this course?
+5. Is there a specific clinical AI application you're interested in?
+
+---
+
+### Part 1: Environment Setup (15 points)
 
 #### 1.1 Install VS Code and GitHub Copilot (9 points)
 
@@ -302,19 +316,20 @@ In the era of AI-assisted coding, your commit history tells the story of *your* 
 
 | Component | Points |
 |-----------|--------|
-| **Part 1: Environment Setup** | **25** |
-| 1.1 VS Code + GitHub Copilot configured | 9 |
-| 1.2 uv installation verified | 8 |
-| 1.3 Virtual environment created | 4 |
-| 1.4 Packages installed correctly | 4 |
+| **Part 0: Reflection** | **10** |
+| Completed `reflection.md` with thoughtful answers | 10 |
+| **Part 1: Environment Setup** | **15** |
+| VS Code + GitHub Copilot configured | 5 |
+| uv and virtual environment set up | 5 |
+| Packages installed correctly | 5 |
 | **Part 2: Python Skills** | **40** |
-| 2.1 NumPy exercises | 15 |
-| 2.2 Pandas exercises | 15 |
-| 2.3 Matplotlib visualizations | 10 |
+| NumPy exercises | 15 |
+| Pandas exercises | 15 |
+| Matplotlib visualizations | 10 |
 | **Part 3: PyTorch Basics** | **25** |
-| 3.1 Tensor creation | 8 |
-| 3.2 Tensor operations | 9 |
-| 3.3 GPU/CUDA check | 8 |
+| Tensor creation | 8 |
+| Tensor operations | 9 |
+| GPU/CUDA check | 8 |
 | **Git Workflow** | **10** |
 | Multiple meaningful commits | 5 |
 | Clear commit messages | 5 |
@@ -337,6 +352,6 @@ In the era of AI-assisted coding, your commit history tells the story of *your* 
 
 - **Start early!** Environment setup can sometimes have unexpected issues. GitHub Education verification can take 1-2 days.
 - **Commit often** — Don't wait until you're done to make your first commit.
-- **Use the course GitHub Discussions** or office hours if you get stuck.
+- **Post on Canvas** or come to office hours if you get stuck.
 - **If you don't have a GPU**, that's completely fine—all coursework can be done on CPU.
 - **Use Copilot wisely** — Let it help you learn syntax and explore approaches, but understand every line you submit.
