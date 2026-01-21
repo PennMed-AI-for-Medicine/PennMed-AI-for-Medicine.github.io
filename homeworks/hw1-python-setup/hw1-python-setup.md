@@ -95,7 +95,7 @@ Open VS Code and install these extensions (Ctrl/Cmd + Shift + X):
 
 > **A note on AI pair programming:** Copilot is a tool to accelerate your work, not replace your learning. Use it to get unstuck, explore syntax, and see alternative approaches—but make sure you understand every line of code you submit. Your commit history should reflect *your* problem-solving process.
 
-#### 1.2 Install uv Package Manager (8 points)
+#### 1.2 Install uv Package Manager (6 points)
 
 [uv](https://github.com/astral-sh/uv) is a fast Python package and environment manager that we'll use throughout the course. It's written in Rust and is significantly faster than pip—it handles both virtual environment creation and package installation in one tool.
 
@@ -118,43 +118,62 @@ uv --version
 
 **Deliverable:** Screenshot showing `uv --version` output.
 
-#### 1.3 Initialize Project and Install Packages (8 points)
+#### 1.3 Set Up Course Environment (10 points)
 
-Set up your project with proper dependency management:
+You'll create **one shared Python environment** for the entire course. This saves disk space (PyTorch is large!) and keeps things simple.
 
+**Step 1: Create your course folder and initialize the environment**
+
+**macOS/Linux:**
 ```bash
-# Navigate to your cloned homework repo
-cd hw1-python-setup-<your-username>
-
-# Initialize uv project (creates pyproject.toml)
+mkdir ~/MPHY6120
+cd ~/MPHY6120
 uv init
+uv add torch numpy pandas matplotlib jupyter ipykernel
+```
 
-# Add required packages (creates uv.lock for reproducibility)
+**Windows (PowerShell):**
+```powershell
+mkdir ~\MPHY6120
+cd ~\MPHY6120
+uv init
 uv add torch numpy pandas matplotlib jupyter ipykernel
 ```
 
 This creates:
 - `pyproject.toml` — declares your dependencies
 - `uv.lock` — locks exact versions (reproducibility!)
-- `.venv/` — virtual environment
+- `.venv/` — virtual environment (shared by all homeworks)
+
+**Step 2: Clone your homework INTO this folder**
+
+```bash
+cd ~/MPHY6120
+git clone <your-hw1-repo-url>
+cd hw1-python-setup-<your-username>
+```
+
+Your folder structure should look like:
+```
+~/MPHY6120/
+├── .venv/                          ← shared environment
+├── pyproject.toml
+├── uv.lock
+└── hw1-python-setup-<username>/    ← your homework repo
+    ├── hw1_exercises.py
+    └── reflection.md
+```
 
 **Note:** If you have an NVIDIA GPU and want CUDA support, follow the [PyTorch installation guide](https://pytorch.org/get-started/locally/) for your specific setup.
 
-Verify your installation by starting Python and running:
+**Step 3: Verify your installation**
 
-```python
-import torch
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-print(f"PyTorch version: {torch.__version__}")
-print(f"NumPy version: {np.__version__}")
-print(f"Pandas version: {pd.__version__}")
-print("All packages imported successfully!")
+```bash
+cd ~/MPHY6120
+uv run python -c "import torch; import numpy; import pandas; print('All packages working!')"
 ```
 
-**Deliverable:** Screenshot showing successful package imports with version numbers.
+**Deliverable:** Screenshot showing successful package imports.
 
 ---
 
@@ -165,33 +184,41 @@ Complete the following exercises in `hw1_exercises.py` from your cloned reposito
 **How to run your code:**
 
 **Option 1: Using uv run (recommended)**
+
+From your **course folder** (`~/MPHY6120`), run:
 ```bash
+cd ~/MPHY6120
+uv run python hw1-python-setup-<your-username>/hw1_exercises.py
+```
+
+Or from inside your homework folder:
+```bash
+cd ~/MPHY6120/hw1-python-setup-<your-username>
 uv run python hw1_exercises.py
 ```
-This is the simplest approach—`uv run` automatically uses the virtual environment.
+
+`uv run` automatically finds the `.venv` in the parent folder.
 
 **Option 2: In VS Code**
 
-To run Python files directly in VS Code, you need to select the correct Python interpreter:
+Since the `.venv` is in your course folder (not inside the homework), you need to point VS Code to it:
 
-1. Open `hw1_exercises.py` in VS Code
+1. Open your homework folder in VS Code
 2. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows) to open the Command Palette
 3. Type "Python: Select Interpreter" and press Enter
-4. Look for the `.venv` option—it should show something like:
-   - `Python 3.x.x ('.venv': venv)` or
-   - `Python 3.x.x ./venv/bin/python`
-5. If you don't see `.venv` in the list:
-   - The `.venv` folder may be hidden. In VS Code's file explorer, you can still select it via the Command Palette
-   - Make sure you ran `uv init` and `uv add` first (this creates the `.venv` folder)
-   - Try clicking "Enter interpreter path..." and navigate to `.venv/bin/python` (Mac/Linux) or `.venv\Scripts\python.exe` (Windows)
+4. Click **"Enter interpreter path..."**
+5. Navigate to your course folder's `.venv`:
+   - **Mac/Linux:** `~/MPHY6120/.venv/bin/python`
+   - **Windows:** `~\MPHY6120\.venv\Scripts\python.exe`
 6. Once selected, click the ▶️ Run button (top right) or press `F5`
 
-> **Tip:** The `.venv` folder is hidden by default because it starts with a dot. In Finder (Mac), press `Cmd+Shift+.` to show hidden files. In Windows Explorer, enable "Hidden items" in the View menu.
+> **Tip:** The `.venv` folder is hidden because it starts with a dot. In Finder (Mac), press `Cmd+Shift+.` to show hidden files. In Windows Explorer, enable "Hidden items" in the View menu.
 
 **Option 3: With venv activated manually**
 ```bash
-source .venv/bin/activate  # Mac/Linux
-# or: .venv\Scripts\activate  # Windows
+source ~/MPHY6120/.venv/bin/activate  # Mac/Linux
+# or: ~\MPHY6120\.venv\Scripts\activate  # Windows
+cd ~/MPHY6120/hw1-python-setup-<your-username>
 python hw1_exercises.py
 ```
 
