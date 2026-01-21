@@ -212,9 +212,10 @@ We encourage the use of AI coding assistants (GitHub Copilot, ChatGPT, Claude) t
 
 ## Office Hours
 
-**Instructor:** TBD (will be announced first week of class)
+**Instructor (Rafe McBeth):** Thursday 1-2 PM
+**Location:** RadOnc.AI Lab (PCAM CN C234W) / Virtual
 
-**TA:** TBD
+**TA (Priyash Singh):** TBD
 
 Office hours are drop-in; no appointment needed. For complex questions, email ahead so we can prepare.
 
