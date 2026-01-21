@@ -207,12 +207,13 @@ Since the `.venv` is in your course folder (not inside the homework), you need t
 2. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows) to open the Command Palette
 3. Type "Python: Select Interpreter" and press Enter
 4. Click **"Enter interpreter path..."**
-5. Navigate to your course folder's `.venv`:
-   - **Mac/Linux:** `~/MPHY6120/.venv/bin/python`
-   - **Windows:** `~\MPHY6120\.venv\Scripts\python.exe`
-6. Once selected, click the ▶️ Run button (top right) or press `F5`
+5. Enter the path to your **`.venv` folder** (not the python binary inside it):
+   ```
+   ~/MPHY6120/.venv
+   ```
+6. Press Enter, then click the ▶️ Run button (top right) or press `F5`
 
-> **Tip:** The `.venv` folder is hidden because it starts with a dot. In Finder (Mac), press `Cmd+Shift+.` to show hidden files. In Windows Explorer, enable "Hidden items" in the View menu.
+> **Important:** Enter the path to the `.venv` **folder**, not `.venv/bin/python`. VS Code needs the folder path to properly detect the environment.
 
 **Option 3: With venv activated manually**
 ```bash
@@ -387,6 +388,53 @@ In the era of AI-assisted coding, your commit history tells the story of *your* 
 - [Pandas Getting Started](https://pandas.pydata.org/docs/getting_started/index.html)
 - [Matplotlib Tutorials](https://matplotlib.org/stable/tutorials/index.html)
 - [PyTorch Tutorials](https://pytorch.org/tutorials/)
+
+---
+
+## Troubleshooting
+
+### VS Code can't find the Python interpreter / "No module named numpy"
+
+**Problem:** You selected the interpreter but VS Code still uses the wrong Python.
+
+**Solution:** When entering the interpreter path, enter the path to the **`.venv` folder**, not the `python` binary inside it:
+
+1. `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows)
+2. Type "Python: Select Interpreter" → Enter
+3. Click **"Enter interpreter path..."**
+4. Enter the path to your `.venv` folder (not `.venv/bin/python`):
+   ```
+   ~/MPHY6120/.venv
+   ```
+5. Press Enter
+
+### VS Code terminal shows `(base)` and ignores your interpreter
+
+**Problem:** Conda's base environment activates automatically and overrides your selection.
+
+**Solution:** Disable conda auto-activation:
+```bash
+conda config --set auto_activate_base false
+```
+Then restart VS Code.
+
+### Can't see the `.venv` folder
+
+**Problem:** The folder is hidden because it starts with a dot.
+
+**Solution:**
+- **Mac Finder:** Press `Cmd+Shift+.` to show hidden files
+- **Windows Explorer:** View menu → check "Hidden items"
+- **VS Code:** The file explorer shows hidden files by default, but you may need to scroll up
+
+### `uv run` command not found
+
+**Problem:** uv isn't in your PATH after installation.
+
+**Solution:** Close and reopen your terminal, or run:
+```bash
+source ~/.bashrc   # or ~/.zshrc on Mac
+```
 
 ---
 
