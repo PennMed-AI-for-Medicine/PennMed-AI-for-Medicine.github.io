@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Homework 0 - Git & GitHub Practice
-active_tab: homework
+active_tab: cancelled
 release_date: 2026-01-20
 due_date: 2026-01-21 23:59:00EST
 ---
