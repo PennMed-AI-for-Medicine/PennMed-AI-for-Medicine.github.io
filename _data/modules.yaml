@@ -135,11 +135,11 @@
         class weights. Evaluation metrics that matter when classes are imbalanced
         (precision-recall, AUPRC). When accuracy is misleading.
   readings:
-    - title: "📖 Textbook: Chapter 3b — EDA for Clinical Data"
+    - title: "📖 Textbook: Chapter 5 — EDA for Clinical Data"
       url: https://book.clinicalai.guide/chapters/03b-eda-clinical-data.html
       optional: false
       note: "Course textbook—the core EDA chapter, covers missing data, feature engineering, class imbalance"
-    - title: "📖 Textbook: Chapter 3 — Statistics for Medical AI"
+    - title: "📖 Textbook: Chapter 4 — Statistics for Medical AI"
       url: https://book.clinicalai.guide/chapters/03-statistics.html
       optional: true
       note: "Course textbook—statistical foundations (reference)"
@@ -158,7 +158,7 @@
       optional: true
       note: "Original SMOTE paper—skim for concepts"
     - title: "A Visual Introduction to Machine Learning"
-      url: http://www.r2d3.us/visual-intro-to-machine-learning-part-1/
+      url: https://narrative-flow.github.io/exploratory-study-2/
       optional: true
       note: "Beautiful interactive visualization of decision trees"
 
