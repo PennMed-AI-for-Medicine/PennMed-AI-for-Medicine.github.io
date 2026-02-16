@@ -48,6 +48,7 @@ source .venv/bin/activate
 - [pydicom Documentation](https://pydicom.github.io/pydicom/stable/)
 - [The Cancer Imaging Archive (TCIA)](https://www.cancerimagingarchive.net/) — Public medical imaging datasets
 - [PhysioNet](https://physionet.org/) — Clinical databases and physiological signals
+- [Newhauser et al. (2014) — Anonymization of DICOM Electronic Medical Records for Radiation Therapy](https://pubmed.ncbi.nlm.nih.gov/25147130/) — DICOM connections and de-identification for RT
 
 ---
 
