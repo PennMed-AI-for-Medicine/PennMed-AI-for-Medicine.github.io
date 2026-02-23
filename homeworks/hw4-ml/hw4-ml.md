@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Homework 4 - Machine Learning for Clinical Prediction
+title: Homework 4 - Clinical ML Consultant
 active_tab: homework
 release_date: 2026-02-25
 due_date: 2026-03-04 23:59:00EST
@@ -24,9 +24,14 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 <div class="alert alert-success" markdown="1">
 **Get Started:**
 1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code and data
-2. Clone your repo and complete the exercises in `hw4_ml.py`
-3. Commit regularly as you work (this is part of your grade!)
-4. Push your completed work to GitHub before the deadline
+2. Clone your repo and work in `hw4_consultant.py` (code) and `memos/` (written deliverables)
+3. This assignment is **~60% written analysis, ~40% code** — plan your time accordingly
+4. Commit regularly as you work (this is part of your grade!)
+5. Push your completed work to GitHub before the deadline
+</div>
+
+<div class="alert alert-warning" markdown="1">
+**This assignment is different.** You are not following a recipe. You are playing the role of a consultant — you decide what to explore, which metrics matter, and what to recommend. There are traps in the data that you need to catch. Read carefully, think critically, and write clearly.
 </div>
 
 ---
@@ -35,252 +40,249 @@ This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{
 
 By completing this assignment, you will:
 
-- Train and evaluate classification models for clinical prediction
-- Understand evaluation metrics beyond accuracy (ROC, PR curves, calibration)
-- Apply cross-validation and avoid data leakage
-- Interpret models using feature importance and SHAP values
-- Recognize when a model is (and isn't) clinically useful
+- Audit a clinical dataset for data quality issues **before** modeling
+- Identify data leakage and explain why it invalidates a model
+- Build and evaluate classifiers using metrics appropriate to the clinical context
+- Translate a clinical constraint into a quantitative threshold decision
+- Critically evaluate a colleague's model for calibration and subgroup failures
+- Write a deployment recommendation that synthesizes technical and clinical considerations
 
 ---
 
-## Background
+## Scenario
 
-Building a machine learning model is straightforward. Building one that's actually useful in clinical practice is hard. This assignment bridges that gap by focusing on the **evaluation** and **interpretation** aspects that determine whether a model could actually help patients.
+**You are an AI consultant** hired by Mercy Community Hospital, a mid-sized hospital serving a diverse patient population. Their Chief Medical Officer (CMO) wants to know: *can we use machine learning to screen for diabetes in our primary care clinics?*
 
-You'll work with the Pima Indians Diabetes Dataset from HW3, but now your goal is to build and rigorously evaluate predictive models. The key insight: a model with 0.85 AUC might be useless, while one with 0.75 AUC might save lives. It depends on calibration, clinical context, and what decisions the model informs.
+The hospital has given you:
+
+1. **A patient dataset** (`data/mercy_hospital_patients.csv`) — ~1,200 de-identified patients from their primary care clinics
+2. **A colleague's model predictions** (`data/colleague_predictions.csv`) — Another consultant already built a model. The CMO wants your opinion on whether it's ready to deploy.
+3. **The colleague's feature importance** (`data/colleague_feature_importance.csv`) — What their model relies on
+
+Your job is to audit the data, build your own model, evaluate the colleague's work, and make a deployment recommendation. The CMO is not technical — your written memos need to be clear and honest about what ML can and cannot do here.
 
 ---
 
 ## The Dataset
 
-Same dataset as HW3 — you should use your imputed data or start fresh:
+`data/mercy_hospital_patients.csv` contains ~1,200 patients with the following features:
 
 | Feature | Description |
 |---------|-------------|
-| Pregnancies | Number of pregnancies |
-| Glucose | Plasma glucose concentration (2hr OGTT) |
-| BloodPressure | Diastolic blood pressure |
-| SkinThickness | Triceps skin fold thickness |
-| Insulin | 2-hour serum insulin |
-| BMI | Body mass index |
-| DiabetesPedigreeFunction | Genetic risk score |
-| Age | Age in years |
-| **Outcome** | Diabetes diagnosis (1=yes, 0=no) — **target variable** |
+| `patient_id` | Unique identifier |
+| `age` | Age in years |
+| `sex` | Patient sex (M/F) |
+| `bmi` | Body mass index |
+| `systolic_bp` | Systolic blood pressure (mmHg) |
+| `diastolic_bp` | Diastolic blood pressure (mmHg) |
+| `fasting_glucose` | Fasting plasma glucose (mg/dL) |
+| `total_cholesterol` | Total cholesterol (mg/dL) |
+| `hdl_cholesterol` | HDL cholesterol (mg/dL) |
+| `smoking_status` | Current / Former / Never |
+| `physical_activity` | Low / Moderate / High |
+| `num_office_visits` | Office visits in last 12 months |
+| `family_history_diabetes` | Yes / No |
+| `insurance_type` | Private / Medicare / Medicaid / Uninsured |
+| `hba1c` | Hemoglobin A1c (%) |
+| `metformin_prescribed` | Whether metformin is currently prescribed (Yes/No) |
+| `diabetes_diagnosis` | **Target variable** (1 = diabetes, 0 = no diabetes) |
+
+<div class="alert alert-danger" markdown="1">
+**Not all of these features should be used as predictors.** Part of your job is to figure out which ones are appropriate. If you train a model on all columns blindly, you will get a very wrong answer.
+</div>
 
 ---
 
-## Instructions
+## Deliverables
 
-### Part 1: Data Preparation & Train/Test Split (15 points)
+Your repository should contain:
 
-**1.1 Load and Prepare Data (5 pts)**
-- Load the diabetes dataset
-- Handle missing values (zeros in Glucose, BMI, etc.) — you can use your approach from HW3
-- Split into features (X) and target (y)
-
-**1.2 Train/Test Split (10 pts)**
-- Create a train/test split (80/20)
-- Use stratification to maintain class balance
-- **Important**: Document the class distribution in both sets
-- Why is stratification important for imbalanced data?
+| File | Contents |
+|------|----------|
+| `hw4_consultant.py` | All code (EDA, modeling, evaluation, peer review) |
+| `outputs/` | Generated figures (PNG files) |
+| `memos/phase1_data_audit.md` | Phase 1 written memo |
+| `memos/phase3_threshold.md` | Phase 3 written memo |
+| `memos/phase4_peer_review.md` | Phase 4 written memo |
+| `memos/phase5_deployment.md` | Phase 5 deployment recommendation |
 
 ---
 
-### Part 2: Baseline Models (25 points)
+## Phase 1: Data Audit (20 points)
 
-**2.1 Logistic Regression (10 pts)**
+Before you touch a model, you need to understand the data. A responsible consultant doesn't start training until they've audited what they're working with.
 
-Train a logistic regression model:
-- Use default parameters first
-- Report accuracy, precision, recall, F1 on the test set
-- Print the confusion matrix
-- Which features have the largest coefficients? What does this mean clinically?
+### Code (8 pts)
 
-**2.2 Random Forest (10 pts)**
+Explore the dataset. At minimum:
 
-Train a random forest classifier:
-- Use default parameters first
-- Report the same metrics as 2.1
-- Extract and visualize feature importances
-- Compare to logistic regression — which features matter most?
+- Examine feature distributions and class balance
+- Compute a correlation matrix (pay attention to features that are suspiciously correlated with the target)
+- Characterize missingness patterns — which features have missing values, and is the missingness random?
+- Look at the relationship between key features and the target variable
 
-**2.3 Model Comparison (5 pts)**
-- Create a table comparing the two models
-- Which model would you choose and why?
-- Is accuracy the right metric to compare them?
+You decide what to plot and what to compute. There is no checklist.
 
----
+### Written: Data Audit Memo (12 pts)
 
-### Part 3: Evaluation Beyond Accuracy (25 points)
+Write a memo in `memos/phase1_data_audit.md` (minimum **300 words**) documenting your data quality findings **before any modeling**. Address at least three concerns you found in the data.
 
-**3.1 ROC Curve Analysis (8 pts)**
+Your memo will be graded on what you catch:
 
-For both models:
-- Plot ROC curves on the same figure
-- Calculate and display AUC for each
-- Mark the point on each curve corresponding to the default threshold (0.5)
-- What does the ROC curve tell you that accuracy doesn't?
+| Finding | Points |
+|---------|--------|
+| Identify the HbA1c leakage problem and explain why it's leakage | 4 |
+| Identify the metformin leakage problem and explain why it's leakage | 3 |
+| Identify informative missingness or another valid data quality concern | 3 |
+| Clear explanation of *why* each issue matters for modeling | 2 |
 
-**3.2 Precision-Recall Curves (8 pts)**
-
-For both models:
-- Plot Precision-Recall curves
-- Calculate Average Precision (AP) for each
-- Why are PR curves often more informative than ROC for medical prediction?
-
-**3.3 Calibration Analysis (9 pts)**
-
-For one model (your choice):
-- Create a calibration plot (reliability diagram)
-- Is your model well-calibrated?
-- Why does calibration matter for clinical decision support?
-- If poorly calibrated, what could you do to fix it?
+*Hint: Think about the causal relationship between each feature and the diagnosis. Which features could you actually measure **before** you know the outcome?*
 
 ---
 
-### Part 4: Cross-Validation & Hyperparameter Tuning (20 points)
+## Phase 2: Model Development (25 points)
 
-**4.1 K-Fold Cross-Validation (10 pts)**
+Now build your own model(s) using a **cleaned** version of the data — with leakage features removed and missingness handled appropriately.
 
-Using the training data only:
-- Implement 5-fold stratified cross-validation
-- Report mean and std of AUC across folds
-- Why do we use cross-validation instead of a single validation split?
+### Code (20 pts)
 
-**4.2 Hyperparameter Tuning (10 pts)**
+- Build **at least two** different classifiers (your choice — logistic regression, random forest, gradient boosting, etc.)
+- Use proper train/test splits with stratification
+- Generate evaluation metrics and visualizations that you think are relevant for a diabetes screening task
 
-For Random Forest:
-- Use GridSearchCV or RandomizedSearchCV to tune:
-  - `n_estimators`: [50, 100, 200]
-  - `max_depth`: [3, 5, 10, None]
-  - `min_samples_split`: [2, 5, 10]
-- Report the best parameters
-- Does tuning improve test set performance significantly?
-- Warning: What's the risk of tuning on cross-validation and then expecting the same performance on truly new data?
+This is open-ended. You choose which metrics to compute and which plots to generate. We're looking for evidence that you:
 
----
+1. Actually removed the leakage features
+2. Handled missing data thoughtfully (not just dropped all rows with NaNs)
+3. Evaluated your models using metrics that make sense for screening
+4. Compared your models meaningfully
 
-### Part 5: Model Interpretability (15 points)
+### Written: Metric Justification (5 pts)
 
-**5.1 SHAP Values (10 pts)**
-
-Using your best model:
-- Calculate SHAP values for the test set
-- Create a SHAP summary plot (beeswarm)
-- Create a SHAP bar plot (mean absolute SHAP values)
-- Interpret: Which features drive predictions? In what direction?
-
-**5.2 Individual Predictions (5 pts)**
-
-Select two test patients:
-- One correctly classified diabetic
-- One false negative (missed diabetes)
-
-For each:
-- Show their feature values
-- Create a SHAP waterfall plot
-- Explain why the model made its prediction
-- For the false negative: what went wrong?
+In a comment block or markdown cell in your code file, briefly explain (3-5 sentences): **Why did you choose these specific evaluation metrics?** What makes them appropriate for a diabetes screening task at a community hospital?
 
 ---
 
-### Part 6: Fairness Analysis (10 points - REQUIRED)
+## Phase 3: Clinical Constraints (20 points)
 
-**6.1 Subgroup Performance (10 pts)**
+The CMO tells you:
 
-The Pima dataset includes Age. Analyze whether your model performs equitably:
+> *"We can't have more than 1 in 10 patients flagged as high-risk turning out to be healthy — our follow-up clinic is already overwhelmed."*
 
-- Split the test set into age groups: Young (<30), Middle (30-50), Senior (>50)
-- Calculate AUC, sensitivity, and specificity for each subgroup
-- Create a table comparing performance across groups
+### Code (8 pts)
 
-| Age Group | N | AUC | Sensitivity | Specificity |
-|-----------|---|-----|-------------|-------------|
-| Young (<30) | | | | |
-| Middle (30-50) | | | | |
-| Senior (>50) | | | | |
+- Generate precision and sensitivity (recall) across a range of classification thresholds for your best model
+- Identify the threshold that satisfies the CMO's constraint
+- Produce a clear visualization of the tradeoff
 
-Answer these questions:
-- Does your model perform equally well across age groups?
-- If there are disparities, what might explain them?
-- How would you address this before deployment?
+### Written: Threshold Memo (12 pts)
 
-*Note: This dataset doesn't include race/ethnicity, but in real clinical AI, you must examine performance across demographic groups. The Obermeyer et al. paper (required reading) shows what happens when you don't.*
+Write a memo in `memos/phase3_threshold.md` addressing:
+
+1. **Translation** (3 pts): What does the CMO's constraint mean in ML terms? Which metric does "1 in 10 flagged patients turning out to be healthy" correspond to? State the constraint precisely.
+
+2. **Recommendation** (4 pts): What threshold do you recommend? What sensitivity (recall) do you achieve at that threshold? Show your work.
+
+3. **Clinical Tradeoff** (5 pts): At your recommended threshold, how many diabetic patients will your model miss? Is this tradeoff clinically acceptable? What happens to the patients your model misses — are they harmed, or will they be caught through other means? Write as if you're explaining this to the CMO.
 
 ---
 
-## Reflection Questions
+## Phase 4: Peer Review (20 points)
 
-Answer these in code comments or a markdown cell:
+Your colleague already built a diabetes prediction model. The CMO is excited because it has an AUC of 0.93. Your job is to determine whether it's actually ready for deployment.
 
-1. **Clinical Utility**: If this model were deployed, what threshold would you use? What's the tradeoff between missing diabetics (false negatives) and unnecessary follow-ups (false positives)?
+You have:
+- `data/colleague_predictions.csv` — Contains `patient_id`, `true_label`, `predicted_probability`, `age`, `sex`
+- `data/colleague_feature_importance.csv` — The features their model relies on most
 
-2. **Fairness Deep Dive**: Based on your subgroup analysis, would you deploy this model as-is? What additional data would you want to collect?
+### Code (5 pts)
 
-3. **Limitations**: What are three reasons this model might not work well in a different hospital system?
+- Load the colleague's predictions and reproduce their reported AUC
+- Generate a calibration plot (reliability diagram) for their model
+- Compute performance metrics stratified by age group (e.g., under 30 vs. 30+)
+
+### Written: Peer Review Memo (15 pts)
+
+Write a memo in `memos/phase4_peer_review.md` (minimum **400 words**). This is a professional peer review — be specific, cite numbers, and explain clinical implications.
+
+| Finding | Points |
+|---------|--------|
+| Identify the calibration problem and explain what it means for patients | 5 |
+| Identify the subgroup performance failure and explain who it harms | 5 |
+| Final recommendation (deploy / fix / reject) with clear reasoning | 5 |
+
+*Hint: A model can have a great AUC and still be dangerous. Check whether predicted probabilities match observed rates, and whether the model works equally well for all patient groups.*
+
+---
+
+## Phase 5: Deployment Recommendation (15 points)
+
+### Written: Deployment Memo (15 pts)
+
+Write a one-page memo in `memos/phase5_deployment.md` to the CMO recommending whether Mercy Community Hospital should deploy **your model** (not the colleague's) for diabetes screening.
+
+This memo should synthesize everything you've learned across the assignment. Address:
+
+| Component | Points |
+|-----------|--------|
+| Expected performance and honest limitations of your model | 5 |
+| Fairness considerations — which patient groups need monitoring? What disparities did you observe or suspect? | 5 |
+| What would need to be true before going live? (validation plan, monitoring strategy, failure modes) | 5 |
+
+This is not a summary of Phase 2 results. We're looking for evidence that you've thought about what it means to put a model into clinical practice — the gap between "works on test data" and "safe to use on patients."
 
 ---
 
 ## Submission via GitHub
 
-1. **Complete your work** in `hw4_ml.py`
-2. **Save your figures** to the `outputs/` directory
-3. **Commit your changes** with meaningful messages
-4. **Push to GitHub** before the deadline
-
-### Deliverables
-
-Your repository should contain:
-- `hw4_ml.py` — Completed code with comments
-- `outputs/` — Generated figures (PNG files)
-- Clear commit history showing your progress
+1. **Complete your code** in `hw4_consultant.py`
+2. **Write your memos** in the `memos/` directory (Markdown format)
+3. **Save your figures** to the `outputs/` directory
+4. **Commit regularly** with meaningful messages — your commit history should show your thought process
+5. **Push to GitHub** before the deadline
 
 ---
 
 ## Grading Rubric
 
-| Component | Points |
-|-----------|--------|
-| **Part 1: Data Preparation** | **15** |
-| 1.1 Load and prepare data | 5 |
-| 1.2 Train/test split with stratification | 10 |
-| **Part 2: Baseline Models** | **25** |
-| 2.1 Logistic regression | 10 |
-| 2.2 Random forest | 10 |
-| 2.3 Model comparison | 5 |
-| **Part 3: Evaluation Beyond Accuracy** | **25** |
-| 3.1 ROC curve analysis | 8 |
-| 3.2 Precision-recall curves | 8 |
-| 3.3 Calibration analysis | 9 |
-| **Part 4: Cross-Validation & Tuning** | **20** |
-| 4.1 K-fold cross-validation | 10 |
-| 4.2 Hyperparameter tuning | 10 |
-| **Part 5: Interpretability** | **15** |
-| 5.1 SHAP values | 10 |
-| 5.2 Individual predictions | 5 |
-| **Part 6: Fairness Analysis** | **10** |
-| 6.1 Subgroup performance | 10 |
-| **Subtotal** | **110** |
-| **Git Workflow** | |
-| Multiple meaningful commits | -5 if missing |
-| Clear commit messages | -5 if missing |
+| Component | Code | Written | Total |
+|-----------|------|---------|-------|
+| **Phase 1: Data Audit** | 8 | 12 | **20** |
+| EDA and exploration | 8 | | |
+| Audit memo (leakage, missingness, quality) | | 12 | |
+| **Phase 2: Model Development** | 20 | 5 | **25** |
+| Two classifiers on cleaned data | 20 | | |
+| Metric justification | | 5 | |
+| **Phase 3: Clinical Constraints** | 8 | 12 | **20** |
+| Threshold analysis code and visualization | 8 | | |
+| Threshold memo (translation, recommendation, tradeoff) | | 12 | |
+| **Phase 4: Peer Review** | 5 | 15 | **20** |
+| Reproduce AUC, calibration plot, subgroup analysis | 5 | | |
+| Peer review memo | | 15 | |
+| **Phase 5: Deployment Recommendation** | — | 15 | **15** |
+| Deployment memo | | 15 | |
+| **Subtotal** | **41** | **59** | **100** |
+| **Git Workflow** | | | |
+| Multiple meaningful commits | | | -5 if missing |
+| Clear commit messages | | | -5 if missing |
 
 ---
 
 ## Resources
 
 - [Scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html)
-- [SHAP Documentation](https://shap.readthedocs.io/en/latest/)
-- [An Introduction to Statistical Learning (ISLR)](https://www.statlearning.com/) — Chapters 2-4
 - [Calibration Plots Explained](https://scikit-learn.org/stable/modules/calibration.html)
-- [Decision Curve Analysis](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)
+- [An Introduction to Statistical Learning (ISLR)](https://www.statlearning.com/) — Chapters 2-4
+- Obermeyer et al., ["Dissecting racial bias in an algorithm"](https://www.science.org/doi/10.1126/science.aax2342) — Science, 2019
+- [Data Leakage in Machine Learning](https://machinelearningmastery.com/data-leakage-machine-learning/) — overview of common leakage patterns
 
 ---
 
 ## Tips
 
-- **Don't chase AUC** — A well-calibrated model with 0.75 AUC is often more useful than a poorly-calibrated one with 0.85
-- **Interpret with domain knowledge** — If Glucose isn't a top feature, something might be wrong
-- **Watch for data leakage** — Tune hyperparameters on training data only
-- **SHAP is slow** — Use a subset of data if needed
-- **Commit after each part** — Don't wait until the end
+- **Read the data dictionary carefully** — Not every feature belongs in your model
+- **Correlation with the target is not always a good thing** — Suspiciously high correlation should make you nervous, not excited
+- **Write your memos for a non-technical reader** — The CMO is a physician, not a data scientist. Clear writing matters.
+- **Don't chase AUC** — A well-calibrated model with honest limitations is worth more than a leaky model with 0.99 AUC
+- **Commit after each phase** — Don't wait until the end
+- **Budget time for writing** — The memos are worth more than the code
