@@ -203,7 +203,7 @@
     - title: "📖 Textbook: Chapter 6 — CNNs for Medical Imaging"
       url: https://book.clinicalai.guide/chapters/06-cnns-medical-imaging.html
       optional: true
-      note: "Course textbook—preview of imaging AI (covered in Module 5)"
+      note: "Course textbook—preview of imaging AI (covered in Module 6)"
     - title: "DICOM Standard Browser"
       url: https://dicom.innolitics.com/
       optional: false
@@ -309,7 +309,7 @@
       optional: true
       note: "Practical framework for fairness in clinical ML"
 
-- module_number: 5
+- module_number: 6
   start_date: 2026-03-18
   end_date: 2026-04-01
   title: Deep Learning for Medical Imaging
@@ -366,7 +366,7 @@
       optional: true
       note: "Hands-on tutorial we'll work through in class"
 
-- module_number: 6
+- module_number: 5
   start_date: 2026-03-03
   end_date: 2026-03-17
   title: "Midterm Project"

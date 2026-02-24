@@ -20,8 +20,9 @@ Three interconnected resources exist:
 
 ### Module Structure (12 modules)
 - **0**: Course Introduction & Field Guide Mindset
-- **1-5**: Skills building (Python, Imaging, EDA, ML, Deep Learning)
-- **6**: Midterm Project
+- **1-4**: Skills building (Python, EDA, Imaging, ML)
+- **5**: Midterm Project
+- **6**: Deep Learning for Medical Imaging
 - **7-8**: NLP & LLMs (kept separate for historical context)
 - **9**: Model Evaluation & Explainability
 - **10**: Governance, Regulatory & Deployment

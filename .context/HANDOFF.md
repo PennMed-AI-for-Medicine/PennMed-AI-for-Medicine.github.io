@@ -30,8 +30,8 @@ See `CHANGELOG.md` for session-by-session history.
 | 2 | **Structured Clinical Data & EDA** | HW2 | Ch 3, 12 |
 | 3 | **Medical Imaging Data** | HW3 | Ch 6 |
 | 4 | Machine Learning Foundations | HW4 | Ch 4, 18 |
-| 5 | Deep Learning for Medical Imaging | HW5 | Ch 5, 6 |
-| 6 | Midterm Project (2 tracks: Imaging/Structured) | Midterm | Ch 11 |
+| 5 | Midterm Project (2 tracks: Imaging/Structured) | Midterm | Ch 11 |
+| 6 | Deep Learning for Medical Imaging | HW5 | Ch 5, 6 |
 | 7 | Clinical Text & NLP | HW6 | Ch 8, 12 |
 | 8 | Large Language Models | (HW6 spans) | Ch 9, 10 |
 | 9 | Model Evaluation & Explainability | HW7 | Ch 16 |
@@ -58,11 +58,11 @@ See `CHANGELOG.md` for session-by-session history.
 
 | Module | Status | Notes |
 |--------|--------|-------|
-| 0, 1, 5, 7, 9, 10, 11 | ✅ Complete | Full slide decks |
+| 0, 1, 6, 7, 9, 10, 11 | ✅ Complete | Full slide decks |
 | 2 | ✅ Complete | ~40 slides, EDA focus |
 | 3 | ✅ Complete (slim) | ~23 slides, practical DICOM |
 | 4 | ✅ Complete | ~48 slides, fairness woven in |
-| 6 | 📝 Stub | Work session, minimal needed |
+| 5 | 📝 Stub | Work session, minimal needed |
 | 8 | ✅ Complete | ~42 slides, timeless LLM concepts |
 | supplemental/ | 📦 Extra | Content to integrate later |
 
