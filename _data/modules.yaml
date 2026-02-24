@@ -164,7 +164,7 @@
 
 - module_number: 3
   start_date: 2026-02-10
-  end_date: 2026-02-23
+  end_date: 2026-02-18
   title: Medical Imaging Data
   description: >
     Introduction to medical imaging data formats and handling. Covers DICOM, NIfTI,
@@ -226,7 +226,7 @@
 
 - module_number: 4
   start_date: 2026-02-24
-  end_date: 2026-03-04
+  end_date: 2026-02-25
   title: Machine Learning Foundations
   description: >
     Core machine learning concepts: classification, regression, evaluation metrics,

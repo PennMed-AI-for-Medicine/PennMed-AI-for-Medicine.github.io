@@ -40,17 +40,17 @@
 
 # Week 6
 - date: 2026-02-24
-  title: "Module 3: Medical Imaging Applications"
+  title: "Module 4: ML Foundations — Data Audit & Algorithms"
 
 - date: 2026-02-25
-  title: "Module 4: ML Fundamentals — Regression & Classification"
+  title: "Module 4: ML Foundations — Evaluation, Fairness & Peer Review"
 
 # Week 7
 - date: 2026-03-03
-  title: "Module 4: Evaluation Metrics & Cross-Validation"
+  title: "Module 6: Midterm Project Kickoff & Data Exploration"
 
 - date: 2026-03-04
-  title: "Module 4: Model Selection & Interpretability; Midterm Kickoff"
+  title: "Module 6: Midterm Work Session — Baseline Models"
 
 # Spring Break: March 7-15, 2026
 
