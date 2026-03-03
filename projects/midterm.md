@@ -2,8 +2,8 @@
 layout: default
 title: Midterm Project
 active_tab: homework
-release_date: 2026-03-19
-due_date: 2026-04-01 23:59:00EDT
+release_date: 2026-03-03
+due_date: 2026-03-17 23:59:00EDT
 ---
 
 <div class="alert alert-info">
@@ -14,7 +14,7 @@ This project is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ pa
 
 ## Overview
 
-The midterm project is your opportunity to apply what you've learned to a clinical AI problem end-to-end. Choose one of two tracks based on your interests and background. Each track produces the same deliverables: working code and a mini field guide.
+The midterm project is your opportunity to apply what you've learned in Modules 1-4 to a clinical AI problem end-to-end. You will build a risk prediction or outcome model using structured clinical data, and write a mini field guide documenting your work.
 
 **Deliverables:**
 1. Working code (Jupyter notebook or Python script)
@@ -23,29 +23,7 @@ The midterm project is your opportunity to apply what you've learned to a clinic
 
 ---
 
-## Project Tracks
-
-Choose ONE of the following tracks:
-
-### Track A: Medical Imaging
-
-**Task:** Build a classification or segmentation model for medical images.
-
-**Suggested Datasets:**
-- [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) — 112k chest X-rays, 14 disease labels
-- [ISIC Skin Lesion](https://challenge.isic-archive.com/) — Dermoscopy images with lesion masks
-- [APTOS Diabetic Retinopathy](https://www.kaggle.com/c/aptos2019-blindness-detection) — Retinal images, DR grading
-- Any MONAI dataset from the [Model Zoo](https://monai.io/model-zoo.html)
-
-**Minimum Requirements:**
-- Train/val/test split with proper evaluation
-- At least one baseline and one deep learning model
-- Appropriate metrics (ROC/AUC for classification, Dice for segmentation)
-- Visualization of predictions
-
----
-
-### Track B: Structured Clinical Data
+## Project: Structured Clinical Data
 
 **Task:** Build a risk prediction or outcome model using tabular clinical data.
 
@@ -63,12 +41,12 @@ Choose ONE of the following tracks:
 
 ---
 
-### Custom Project (Requires Approval)
+### Custom Dataset (Requires Approval)
 
-Have a different clinical AI project in mind? Propose it!
+Have a different structured clinical dataset in mind? Propose it!
 
 **To get approval:**
-1. Email the instructor by **March 20** with:
+1. Email the instructor by **March 6** with:
    - Dataset description and access plan
    - Clinical problem and why it matters
    - Proposed approach
@@ -108,7 +86,7 @@ Write a 2-3 page document covering:
 - Key results
 - One thing you learned
 
-Presentations will be during class on **April 1**.
+Presentations will be during class on **March 17**.
 
 ---
 
@@ -126,12 +104,12 @@ Submit via GitHub (link TBD):
 
 | Date | Milestone |
 |------|-----------|
-| Mar 18 | Project released, choose your track |
-| Mar 20 | Deadline for custom project proposals |
-| Mar 25 | Recommended: Data loaded, baseline running |
-| Mar 31 | In-class work session |
-| Apr 1 | **Presentations in class** |
-| Apr 1 | **Code + Field Guide due by 11:59 PM** |
+| Mar 3 | Project released, teams assigned |
+| Mar 6 | Deadline for custom dataset proposals |
+| Mar 10 | Recommended: Data loaded, baseline running |
+| Mar 11 | In-class work session |
+| Mar 17 | **Presentations in class** |
+| Mar 17 | **Code + Field Guide due by 11:59 PM** |
 
 ---
 
@@ -141,7 +119,7 @@ Submit via GitHub (link TBD):
 - **Get a baseline working first** — A simple model that runs beats a complex model that doesn't
 - **Document as you go** — Don't leave the field guide until the last minute
 - **It's okay to fail** — If your model doesn't work well, analyze why. That's valuable!
-- **Use what you learned** — HW2 (EDA), HW3 (DICOM), HW4 (ML), HW5 (deep learning) are all relevant
+- **Use what you learned** — HW2 (EDA), HW3 (DICOM), and HW4 (ML) are all relevant
 
 ---
 

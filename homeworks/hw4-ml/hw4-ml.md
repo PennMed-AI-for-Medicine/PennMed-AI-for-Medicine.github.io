@@ -3,8 +3,8 @@ layout: default
 title: Homework 4 - Clinical ML Consultant
 active_tab: homework
 release_date: 2026-02-25
-due_date: 2026-03-04 23:59:00EST
-classroom_link: https://classroom.github.com/a/XXXXXX
+due_date: 2026-03-17 23:59:00EDT
+classroom_link: https://classroom.github.com/a/1tIQ37h4
 ---
 
 <!-- Check whether the assignment is ready to release -->
