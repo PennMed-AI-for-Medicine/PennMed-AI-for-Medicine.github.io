@@ -22,7 +22,7 @@ Three interconnected resources exist:
 - **0**: Course Introduction & Field Guide Mindset
 - **1-4**: Skills building (Python, EDA, Imaging, ML)
 - **5**: Midterm Project
-- **6**: Deep Learning for Medical Imaging
+- **6**: Deep Learning: From Neurons to U-Net
 - **7-8**: NLP & LLMs (kept separate for historical context)
 - **9**: Model Evaluation & Explainability
 - **10**: Governance, Regulatory & Deployment

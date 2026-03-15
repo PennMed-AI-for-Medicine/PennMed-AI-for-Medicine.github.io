@@ -310,9 +310,9 @@
       note: "Practical framework for fairness in clinical ML"
 
 - module_number: 6
-  start_date: 2026-03-18
+  start_date: 2026-03-17
   end_date: 2026-04-01
-  title: Deep Learning for Medical Imaging
+  title: "Deep Learning: From Neurons to U-Net"
   description: >
     Convolutional neural networks, U-Net architecture for segmentation, and image
     classification models. Hands-on with PyTorch and MONAI for medical imaging tasks.
@@ -368,7 +368,7 @@
 
 - module_number: 5
   start_date: 2026-03-03
-  end_date: 2026-03-17
+  end_date: 2026-03-18
   title: "Midterm Project"
   description: >
     Students select one of two tracks for their midterm project. Each track requires

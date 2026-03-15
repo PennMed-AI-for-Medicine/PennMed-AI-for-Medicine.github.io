@@ -3,7 +3,7 @@ layout: default
 title: Midterm Project
 active_tab: homework
 release_date: 2026-03-03
-due_date: 2026-03-17 23:59:00EDT
+due_date: 2026-03-18 23:59:00EDT
 ---
 
 <div class="alert alert-info">
@@ -86,7 +86,7 @@ Write a 2-3 page document covering:
 - Key results
 - One thing you learned
 
-Presentations will be during class on **March 17**.
+Presentations will be during class on **Wednesday, March 18**.
 
 ---
 
@@ -108,8 +108,8 @@ Submit via GitHub (link TBD):
 | Mar 6 | Deadline for custom dataset proposals |
 | Mar 10 | Recommended: Data loaded, baseline running |
 | Mar 11 | In-class work session |
-| Mar 17 | **Presentations in class** |
-| Mar 17 | **Code + Field Guide due by 11:59 PM** |
+| Mar 18 | **Presentations in class (Wednesday)** |
+| Mar 18 | **Code + Field Guide due by 11:59 PM** |
 
 ---
 
