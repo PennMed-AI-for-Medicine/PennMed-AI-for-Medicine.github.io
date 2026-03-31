@@ -343,6 +343,14 @@
         Data augmentation for medical images (rotation, elastic deformation, intensity).
         Batch normalization, dropout, and regularization. Learning rate schedules.
         Early stopping and checkpointing. Debugging when training goes wrong.
+    - title: "In-Class Challenge: Beat the Baseline (DermaMNIST)"
+      description: >
+        1-hour hands-on challenge. The baseline CNN gets ~68% accuracy on 7-class skin
+        lesion classification by predicting the most common class. Your job: beat it.
+        Modify the model, optimizer, augmentation — whatever it takes.
+  lab:
+    title: "Beat the Baseline — DermaMNIST Challenge"
+    url: https://classroom.github.com/a/n7UvOQ59
   readings:
     - title: "📖 Textbook: Chapter 5 — Deep Neural Networks & Backprop"
       url: https://book.clinicalai.guide/chapters/05-deep-neural-networks.html

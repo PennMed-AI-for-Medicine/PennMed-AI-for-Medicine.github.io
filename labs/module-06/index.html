@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6: From ML to Deep Learning — Interactive</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a; color: #ccc; font-family: -apple-system, 'Segoe UI', sans-serif;
+    line-height: 1.6; padding: 20px;
+  }
+  h1 { color: #fff; font-size: 28px; text-align: center; margin: 20px 0; }
+  h2 { color: #e8713a; font-size: 22px; margin: 30px 0 15px; border-bottom: 2px solid #e8713a; padding-bottom: 5px; }
+  h3 { color: #fff; font-size: 16px; margin: 15px 0 8px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section {
+    background: #111; border: 1px solid #333; border-radius: 8px;
+    padding: 25px; margin: 20px 0;
+  }
+  .row { display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 280px; }
+  label { display: block; color: #aaa; font-size: 13px; margin: 8px 0 3px; }
+  input[type="range"] { width: 100%; accent-color: #e8713a; }
+  .value-display {
+    font-family: 'Courier New', monospace; font-size: 14px; color: #e8713a;
+    background: #1a1a1a; padding: 2px 8px; border-radius: 3px; display: inline-block;
+  }
+  .big-number {
+    font-size: 48px; font-weight: bold; font-family: 'Courier New', monospace;
+    text-align: center; padding: 15px;
+  }
+  .red { color: #e84040; }
+  .green { color: #2bb86c; }
+  .orange { color: #e8713a; }
+  .blue { color: #4a9eff; }
+  .purple { color: #b06aff; }
+  canvas { border: 1px solid #333; border-radius: 4px; display: block; }
+  .equation {
+    font-family: 'Courier New', monospace; font-size: 16px; color: #ccc;
+    background: #1a1a1a; padding: 12px 16px; border-radius: 6px; margin: 10px 0;
+    border-left: 3px solid #e8713a;
+  }
+  .punchline {
+    text-align: center; font-size: 20px; color: #ffd700; margin: 15px 0;
+    font-style: italic;
+  }
+  .note { font-size: 13px; color: #666; margin-top: 8px; }
+  button {
+    background: #e8713a; color: #fff; border: none; padding: 8px 16px;
+    border-radius: 4px; cursor: pointer; font-size: 14px; margin: 5px;
+  }
+  button:hover { background: #f58a4b; }
+  button.active { background: #2bb86c; }
+  .kernel-grid {
+    display: inline-grid; grid-template-columns: repeat(3, 50px);
+    gap: 2px; margin: 10px;
+  }
+  .kernel-cell {
+    width: 50px; height: 50px; background: #1a1a1a; border: 1px solid #444;
+    display: flex; align-items: center; justify-content: center;
+    font-family: monospace; font-size: 14px; color: #e8713a;
+  }
+  .step-indicator {
+    display: flex; gap: 10px; justify-content: center; margin: 20px 0;
+  }
+  .step {
+    width: 40px; height: 40px; border-radius: 50%; background: #222;
+    border: 2px solid #444; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: #666; font-size: 16px; transition: all 0.3s; cursor: pointer;
+  }
+  .step.active { border-color: #e8713a; color: #e8713a; background: #2a1a0a; }
+  .step.done { border-color: #2bb86c; color: #2bb86c; background: #0a2a1a; }
+  nav {
+    display: flex; gap: 5px; justify-content: center; margin: 15px 0;
+    flex-wrap: wrap;
+  }
+  nav button { font-size: 13px; padding: 6px 14px; }
+
+  /* Section 5 styles */
+  .shuffle-compare { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; align-items: center; }
+  .shuffle-compare canvas { border: 1px solid #333; border-radius: 4px; }
+  .neighbor-grid { display: inline-grid; grid-template-columns: repeat(7,32px); gap: 1px; margin: 10px auto; }
+  .neighbor-cell { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-family: monospace; border-radius: 2px; }
+  .fc-problem-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 15px; margin: 8px 0; }
+  .fc-problem-card h4 { color: #e84040; margin-bottom: 5px; font-size: 14px; }
+  .fc-problem-card p { font-size: 13px; color: #aaa; }
+
+  /* Section 8 styles */
+  .pool-grid { display: inline-grid; gap: 2px; margin: 10px; }
+  .pool-cell {
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    font-family: monospace; font-size: 16px; font-weight: bold; border-radius: 3px; transition: all 0.3s;
+  }
+  .pool-selected { background: #0a2a1a; border: 2px solid #2bb86c; color: #2bb86c; }
+  .pool-dimmed { background: #1a1a1a; border: 1px solid #333; color: #555; }
+  .size-progression { display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 15px 0; }
+  .size-box { background: #1a1a1a; border: 1px solid #4a9eff; border-radius: 4px; padding: 4px 10px; font-family: monospace; font-size: 13px; color: #4a9eff; }
+  .size-arrow { color: #555; font-size: 16px; }
+
+  /* Section 9 styles */
+  .pipeline-container { overflow-x: auto; padding: 10px 0; }
+  .pipeline-row { display: flex; align-items: center; gap: 4px; min-width: 900px; justify-content: center; }
+  .pipeline-stage {
+    padding: 10px 8px; border-radius: 6px; text-align: center; cursor: pointer;
+    border: 2px solid transparent; transition: all 0.3s; min-width: 62px; position: relative;
+  }
+  .pipeline-stage:hover, .pipeline-stage.selected { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+  .pipeline-stage .stage-label { font-size: 11px; font-weight: bold; }
+  .pipeline-stage .stage-shape { font-size: 9px; font-family: monospace; margin-top: 3px; opacity: 0.7; }
+  .pipeline-arrow { color: #555; font-size: 18px; flex-shrink: 0; }
+  .pipeline-detail { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 15px; margin-top: 15px; min-height: 80px; }
+  .shape-tracker { display: flex; align-items: center; gap: 3px; justify-content: center; flex-wrap: wrap; margin: 12px 0; font-family: monospace; font-size: 11px; }
+  .shape-chip { padding: 3px 6px; border-radius: 3px; }
+  .pipeline-flow-bar { height: 6px; border-radius: 3px; margin: 10px 0; background: #222; position: relative; overflow: hidden; }
+  .pipeline-flow-fill { height: 100%; border-radius: 3px; width: 0%; transition: width 1.5s ease-in-out; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>From ML to Deep Learning</h1>
+<p style="text-align:center; color:#888; margin-bottom:20px;">MPHY 6120 — Module 6 Interactive Exercises</p>
+
+<div class="step-indicator">
+  <div class="step active" id="step1">1</div>
+  <div class="step" id="step2">2</div>
+  <div class="step" id="step3">3</div>
+  <div class="step" id="step4">4</div>
+  <div class="step" id="step5">5</div>
+  <div class="step" id="step6">6</div>
+  <div class="step" id="step7">7</div>
+  <div class="step" id="step8">8</div>
+  <div class="step" id="step9">9</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 1: A Neuron IS Logistic Regression      -->
+<!-- =============================================== -->
+<div class="section" id="sec1">
+<h2>Step 1: A Neuron IS Logistic Regression</h2>
+<p>You already know logistic regression: multiply inputs by weights, add bias, apply sigmoid. <strong>That's a neuron.</strong></p>
+
+<div class="row">
+  <div class="col">
+    <h3>Adjust the weights:</h3>
+
+    <label>x1 (pixel intensity): <span class="value-display" id="x1v">0.8</span></label>
+    <input type="range" id="x1" min="0" max="1" step="0.1" value="0.8">
+
+    <label>w1 (weight): <span class="value-display" id="w1v">0.7</span></label>
+    <input type="range" id="w1" min="-2" max="2" step="0.1" value="0.7">
+
+    <label>x2 (pixel intensity): <span class="value-display" id="x2v">0.3</span></label>
+    <input type="range" id="x2" min="0" max="1" step="0.1" value="0.3">
+
+    <label>w2 (weight): <span class="value-display" id="w2v">-0.5</span></label>
+    <input type="range" id="w2" min="-2" max="2" step="0.1" value="-0.5">
+
+    <label>b (bias): <span class="value-display" id="bv">0.1</span></label>
+    <input type="range" id="bias" min="-2" max="2" step="0.1" value="0.1">
+
+    <div class="equation" id="neuron-eq">
+      z = (0.7 x 0.8) + (-0.5 x 0.3) + 0.1 = <strong>0.51</strong><br>
+      y = sigma(z) = <strong style="color:#2bb86c">0.625</strong>
+    </div>
+  </div>
+  <div class="col">
+    <h3>The neuron:</h3>
+    <canvas id="neuronCanvas" width="400" height="300"></canvas>
+    <p class="note">This diagram IS the equation on the left. Same math, different picture.</p>
+  </div>
+</div>
+<div class="punchline">A neuron is just logistic regression with a different name.</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 2: What One Neuron Can't Do             -->
+<!-- =============================================== -->
+<div class="section" id="sec2">
+<h2>Step 2: What One Neuron Can't Do</h2>
+<p>A single neuron draws <strong>one straight line</strong> through the data. If the boundary between classes isn't straight, it fails. Add more neurons and the boundary bends.</p>
+
+<div class="row">
+  <div class="col">
+    <h3>Choose a problem:</h3>
+    <nav>
+      <button onclick="setDataset('linear')" id="btn-ds-linear">Simple (linear)</button>
+      <button onclick="setDataset('circle')" id="btn-ds-circle" class="active">Circle</button>
+      <button onclick="setDataset('moons')" id="btn-ds-moons">Two Moons</button>
+      <button onclick="setDataset('spiral')" id="btn-ds-spiral">Spiral</button>
+    </nav>
+
+    <label>Neurons in hidden layer: <span class="value-display" id="bneuronsv">1</span></label>
+    <input type="range" id="bneurons" min="1" max="16" step="1" value="1">
+
+    <label>Hidden layers: <span class="value-display" id="blayersv">1</span></label>
+    <input type="range" id="blayers" min="0" max="3" step="1" value="1">
+
+    <div class="equation" id="boundary-explain">
+      <strong>1 neuron, 1 layer:</strong> Can only draw a single straight line.<br>
+      <span style="color:#888;">This IS logistic regression. Same thing.</span>
+    </div>
+
+    <div style="margin-top:10px;">
+      <button onclick="trainBoundaryNet()" style="background:#2bb86c;">Train Network (click to iterate)</button>
+      <button onclick="resetBoundaryNet()">Reset Weights</button>
+    </div>
+    <p style="font-size:13px; color:#888; margin-top:5px;">
+      Accuracy: <span class="value-display" id="boundary-acc" style="font-size:16px;">--</span>
+    </p>
+  </div>
+  <div class="col">
+    <canvas id="boundaryCanvas" width="420" height="380"></canvas>
+    <p class="note">
+      <span class="blue">Blue = Class A (Normal)</span> &nbsp;
+      <span class="orange">Orange = Class B (Pneumonia)</span><br>
+      Background color = what the network predicts at each point.
+    </p>
+  </div>
+</div>
+<div class="punchline" id="boundary-punchline">One neuron = one line. Not enough for real problems.</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 3: Why Activation Functions             -->
+<!-- =============================================== -->
+<div class="section" id="sec3">
+<h2>Step 3: Why Activation Functions?</h2>
+<p>Without an activation function, a neuron is just a straight line. Stack 100 straight lines and you still get... a straight line. Activations add the <strong>curves</strong>.</p>
+
+<!-- Pipeline diagram -->
+<div style="display:flex; align-items:center; justify-content:center; gap:8px; margin:20px 0; flex-wrap:wrap;">
+  <div style="background:#1a3a5c; border:2px solid #4a9eff; border-radius:8px; padding:10px 14px; text-align:center;">
+    <div style="color:#4a9eff; font-size:12px;">INPUTS</div>
+    <div style="color:#fff; font-size:14px; font-family:monospace;">x1, x2, ...</div>
+  </div>
+  <div style="color:#555; font-size:20px;">-></div>
+  <div style="background:#2a1a0a; border:2px solid #e8713a; border-radius:8px; padding:10px 14px; text-align:center;">
+    <div style="color:#e8713a; font-size:12px;">WEIGHTS x INPUTS + BIAS</div>
+    <div style="color:#fff; font-size:14px; font-family:monospace;">z = Sum(wi*xi) + b</div>
+  </div>
+  <div style="color:#555; font-size:20px;">-></div>
+  <div id="activation-box" style="background:#0a2a1a; border:3px solid #2bb86c; border-radius:8px; padding:10px 14px; text-align:center; box-shadow:0 0 15px rgba(43,184,108,0.3);">
+    <div style="color:#2bb86c; font-size:12px; font-weight:bold;">ACTIVATION</div>
+    <div style="color:#fff; font-size:14px; font-family:monospace;" id="pipeline-act-name">sigma(z)</div>
+  </div>
+  <div style="color:#555; font-size:20px;">-></div>
+  <div style="background:#0a2a1a; border:2px solid #2bb86c; border-radius:8px; padding:10px 14px; text-align:center;">
+    <div style="color:#2bb86c; font-size:12px;">OUTPUT</div>
+    <div style="color:#fff; font-size:14px; font-family:monospace;">y-hat</div>
+  </div>
+</div>
+<p style="text-align:center; color:#2bb86c; font-size:14px; margin-bottom:15px;">The activation function sits <strong>right here</strong> -- between the weighted sum and the output</p>
+
+<div class="row">
+  <div class="col">
+    <h3>Choose an activation:</h3>
+    <nav>
+      <button onclick="setActivation('none')" id="btn-act-none">None (Linear)</button>
+      <button onclick="setActivation('sigmoid')" id="btn-act-sigmoid" class="active">Sigmoid</button>
+      <button onclick="setActivation('relu')" id="btn-act-relu">ReLU</button>
+      <button onclick="setActivation('tanh')" id="btn-act-tanh">Tanh</button>
+    </nav>
+
+    <canvas id="activationCanvas" width="400" height="250"></canvas>
+
+    <div class="equation" id="activation-eq">
+      <strong>Sigmoid:</strong> sigma(z) = 1 / (1 + e^-z)<br>
+      <span style="color:#888;">Squishes any number into (0, 1) -- like a probability</span>
+    </div>
+
+    <div class="equation" id="activation-props" style="border-left-color:#2bb86c;">
+      <strong>Output range:</strong> <span id="act-range">(0, 1)</span><br>
+      <strong>When to use:</strong> <span id="act-when">Output layer for binary classification</span>
+    </div>
+  </div>
+  <div class="col">
+    <h3>Why it matters -- stacking layers:</h3>
+    <p style="color:#aaa; font-size:13px; margin-bottom:10px;">Each curve below is a different neuron's output. Watch what happens when you turn activation off:</p>
+    <canvas id="stackCanvas" width="400" height="250"></canvas>
+
+    <div class="equation" id="stack-explain">
+      <span class="green">With activation:</span> each layer can bend the function into new shapes.<br>
+      <span style="color:#888;">2 layers can approximate any curve. That's the <strong>universal approximation theorem</strong>.</span>
+    </div>
+
+    <label>Input value (z): <span class="value-display" id="zInputV">0.0</span></label>
+    <input type="range" id="zInput" min="-5" max="5" step="0.1" value="0">
+    <p style="font-size:14px; margin-top:5px;">
+      f(z) = <span class="value-display" id="activationOutput">0.500</span>
+    </p>
+  </div>
+</div>
+
+<div class="punchline">Linear + Linear = Linear. Linear + Activation + Linear + Activation = Can learn anything.</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 4: Stack Layers -> Deep                 -->
+<!-- =============================================== -->
+<div class="section" id="sec4">
+<h2>Step 4: Stack Layers -> "Deep" Learning</h2>
+<p>Each layer detects patterns in the previous layer's output. Simple to Complex.</p>
+
+<div class="row">
+  <div class="col">
+    <label>Number of layers: <span class="value-display" id="nlayersv">1</span></label>
+    <input type="range" id="nlayers" min="1" max="5" step="1" value="1">
+
+    <label>Neurons per layer: <span class="value-display" id="nperlayerv">4</span></label>
+    <input type="range" id="nperlayer" min="2" max="8" step="1" value="4">
+
+    <canvas id="networkCanvas" width="500" height="280"></canvas>
+  </div>
+  <div class="col">
+    <div id="layer-descriptions">
+      <div class="equation">
+        <strong>Layer 1:</strong> Detects edges, gradients, simple textures<br>
+        <span style="color:#666;">-> "Is this pixel brighter than its neighbor?"</span>
+      </div>
+    </div>
+    <div class="equation" style="border-left-color:#2bb86c; margin-top:15px;">
+      <strong>Total parameters:</strong> <span id="total-params">--</span><br>
+      <strong>"Deep"</strong> = more layers = more abstract features
+    </div>
+    <p class="punchline" style="font-size:16px;">In medical imaging:<br>pixels -> edges -> textures -> anatomy -> pathology</p>
+  </div>
+</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 5: Images Are Special (NEW)             -->
+<!-- =============================================== -->
+<div class="section" id="sec5">
+<h2>Step 5: Images Are Special</h2>
+<p>A fully-connected layer treats every pixel independently. But images have <strong>spatial structure</strong> -- nearby pixels matter more than distant ones. Let's see why that's a problem.</p>
+
+<h3>Demo 1: Shuffle the pixels</h3>
+<p style="color:#aaa; font-size:13px; margin-bottom:10px;">A fully-connected network can't tell the difference between these two images. It just sees a list of numbers.</p>
+<div class="shuffle-compare">
+  <div style="text-align:center;">
+    <canvas id="xrayOriginal" width="150" height="150"></canvas>
+    <div style="color:#2bb86c; font-size:12px; margin-top:4px;">Original</div>
+  </div>
+  <div style="text-align:center;">
+    <canvas id="xrayShuffled" width="150" height="150"></canvas>
+    <div style="color:#e84040; font-size:12px; margin-top:4px;">Pixels shuffled</div>
+  </div>
+  <div style="max-width:200px;">
+    <button onclick="shuffleXrayPixels()" style="background:#e84040;">Shuffle Pixels</button>
+    <button onclick="resetXrayPixels()">Reset</button>
+    <p style="color:#888; font-size:12px; margin-top:8px;">An FC layer treats both the same -- it doesn't know about spatial arrangement.</p>
+  </div>
+</div>
+
+<h3 style="margin-top:25px;">Demo 2: Neighbors matter</h3>
+<p style="color:#aaa; font-size:13px; margin-bottom:10px;">Highlight a pixel and see its 3x3 neighborhood. Edges, textures, anatomy -- all defined by LOCAL patterns.</p>
+<div style="text-align:center;">
+  <canvas id="neighborCanvas" width="200" height="200" style="cursor:crosshair;"></canvas>
+  <div id="neighborInfo" style="margin-top:8px; font-size:13px; color:#888;">Hover over the image to see a pixel's neighborhood.</div>
+  <div id="neighborGridContainer" style="display:flex; justify-content:center; margin-top:10px;"></div>
+</div>
+
+<h3 style="margin-top:25px;">Why fully-connected fails for images:</h3>
+<div class="row">
+  <div class="col">
+    <div class="fc-problem-card">
+      <h4>(a) Too many parameters</h4>
+      <canvas id="paramProblemCanvas" width="280" height="100"></canvas>
+      <p>A 224x224 image with 128 neurons = <strong style="color:#e84040;">6.4 million</strong> weights in ONE layer. Most are wasted.</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fc-problem-card">
+      <h4>(b) Ignores spatial structure</h4>
+      <canvas id="spatialProblemCanvas" width="280" height="100"></canvas>
+      <p>Pixel [0,0] connects to the same neuron as pixel [223,223]. The network can't know they're far apart.</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fc-problem-card">
+      <h4>(c) No translation invariance</h4>
+      <canvas id="translationProblemCanvas" width="280" height="100"></canvas>
+      <p>A tumor in the top-left activates totally different weights than the same tumor in the bottom-right.</p>
+    </div>
+  </div>
+</div>
+<div class="punchline">Images have structure. Fully-connected layers throw it away.</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 6: The Fix: Convolution                 -->
+<!-- =============================================== -->
+<div class="section" id="sec6">
+<h2>Step 6: The Fix -- Convolution</h2>
+<p>Convolution solves all three problems from Step 5. Instead of connecting every pixel to every neuron, use a small sliding window.</p>
+
+<div class="row" style="margin-bottom:20px;">
+  <div class="col">
+    <div class="equation" style="border-left-color:#2bb86c;">
+      <strong style="color:#2bb86c;">Local connections</strong> -> Respects spatial structure<br>
+      <span style="color:#888;">Each neuron only sees a 3x3 neighborhood. Nearby pixels, not distant ones.</span>
+    </div>
+    <div class="equation" style="border-left-color:#4a9eff;">
+      <strong style="color:#4a9eff;">Weight sharing</strong> -> Translation invariance<br>
+      <span style="color:#888;">Same kernel everywhere. A tumor looks the same wherever it appears.</span>
+    </div>
+    <div class="equation" style="border-left-color:#b06aff;">
+      <strong style="color:#b06aff;">Fewer parameters</strong> -> Efficient learning<br>
+      <span style="color:#888;">9 weights per kernel instead of millions. Less data needed to train.</span>
+    </div>
+  </div>
+  <div class="col">
+    <h3>See the difference:</h3>
+    <label>Image size: <span class="value-display" id="imgsizev">28x28</span></label>
+    <input type="range" id="imgsize" min="0" max="4" step="1" value="0">
+
+    <label>Number of neurons/filters in first layer: <span class="value-display" id="neuronsv">32</span></label>
+    <input type="range" id="neurons" min="8" max="128" step="8" value="32">
+
+    <div style="margin-top:20px;">
+      <div class="big-number red" id="fc-params">25,088</div>
+      <p style="text-align:center; color:#e84040;">Fully Connected: every pixel -> every neuron</p>
+    </div>
+    <div>
+      <div class="big-number green" id="conv-params">288</div>
+      <p style="text-align:center; color:#2bb86c;">Conv 3x3: 9 weights x neurons (shared!)</p>
+    </div>
+  </div>
+</div>
+
+<canvas id="paramCanvas" width="500" height="280" style="margin:0 auto;"></canvas>
+<p class="note" style="text-align:center;">Drag the image size slider to see the fully-connected count explode while convolution stays flat.</p>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 7: Kernel Explorer                      -->
+<!-- =============================================== -->
+<div class="section" id="sec7">
+<h2>Step 7: Kernel Explorer</h2>
+<p>A convolution kernel is a small grid of weights that slides across the image. Different weights detect different patterns.</p>
+
+<div class="row">
+  <div class="col">
+    <h3>Choose a kernel:</h3>
+    <nav>
+      <button onclick="setKernel('identity')" id="btn-identity">Identity</button>
+      <button onclick="setKernel('edge_h')" id="btn-edge_h">Edge (H)</button>
+      <button onclick="setKernel('edge_v')" id="btn-edge_v">Edge (V)</button>
+      <button onclick="setKernel('sharpen')" id="btn-sharpen">Sharpen</button>
+      <button onclick="setKernel('blur')" id="btn-blur">Blur</button>
+      <button onclick="setKernel('emboss')" id="btn-emboss">Emboss</button>
+    </nav>
+
+    <h3>Kernel values:</h3>
+    <div class="kernel-grid" id="kernelGrid"></div>
+    <p class="note">These 9 numbers ARE the "weights" the CNN learns. Different weights = different features detected.</p>
+
+    <h3 style="margin-top:15px;">Or build your own:</h3>
+    <div class="kernel-grid" id="customGrid"></div>
+    <button onclick="applyCustomKernel()">Apply Custom Kernel</button>
+  </div>
+  <div class="col">
+    <h3>Original -> Filtered:</h3>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <canvas id="origCanvas" width="200" height="200"></canvas>
+      <canvas id="filtCanvas" width="200" height="200"></canvas>
+    </div>
+    <p class="punchline" style="font-size:16px; margin-top:10px;">A CNN learns these kernels automatically from data!</p>
+  </div>
+</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 8: Pooling (NEW)                        -->
+<!-- =============================================== -->
+<div class="section" id="sec8">
+<h2>Step 8: Pooling -- Shrink but Remember</h2>
+<p>After convolution, we <strong>downsample</strong> with pooling. Keep the strongest activations, discard the rest. The image shrinks but the features get richer.</p>
+
+<div class="row">
+  <div class="col">
+    <h3>Input grid (random values):</h3>
+    <div id="poolInputGrid" style="text-align:center;"></div>
+
+    <label>Pool size: <span class="value-display" id="poolSizeV">2x2</span></label>
+    <input type="range" id="poolSize" min="2" max="3" step="1" value="2">
+
+    <button onclick="regeneratePoolGrid()" style="margin-top:10px;">New Random Values</button>
+  </div>
+  <div class="col">
+    <h3>After max pooling:</h3>
+    <div id="poolOutputGrid" style="text-align:center;"></div>
+
+    <div class="equation" style="margin-top:15px; border-left-color:#4a9eff;">
+      <strong>Max pooling:</strong> In each region, keep only the <span class="green">maximum value</span>.<br>
+      <span style="color:#888;">The <span style="color:#555;">dimmed values</span> are discarded. The <span style="color:#2bb86c;">green values</span> survive.</span>
+    </div>
+  </div>
+</div>
+
+<h3 style="margin-top:20px;">Size progression in a real CNN:</h3>
+<div class="size-progression" id="sizeProgression"></div>
+<p style="text-align:center; color:#888; font-size:13px;">Each pooling layer halves the spatial dimensions. Features get compressed but more meaningful.</p>
+
+<div class="punchline">Keeps the strongest activations. Each layer, the image shrinks but the features get richer.</div>
+</div>
+
+<!-- =============================================== -->
+<!-- SECTION 9: The Full CNN Pipeline (NEW)          -->
+<!-- =============================================== -->
+<div class="section" id="sec9">
+<h2>Step 9: The Full CNN Pipeline</h2>
+<p>Now put it all together. Click each stage to see what it does and how the data shape changes.</p>
+
+<div class="pipeline-container">
+  <div class="pipeline-row" id="pipelineRow"></div>
+</div>
+
+<div class="pipeline-flow-bar">
+  <div class="pipeline-flow-fill" id="pipelineFlowFill" style="background: linear-gradient(90deg, #e8713a, #2bb86c, #4a9eff, #b06aff);"></div>
+</div>
+
+<div class="shape-tracker" id="shapeTracker"></div>
+
+<div class="pipeline-detail" id="pipelineDetail">
+  <p style="color:#888; text-align:center;">Click any stage above to learn what it does.</p>
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+  <button onclick="runPipelineAnimation()" style="background:#2bb86c; font-size:16px; padding:10px 24px;">Run Pipeline</button>
+</div>
+
+<div class="punchline">pixels -> edges -> textures -> shapes -> anatomy -> diagnosis.<br>The network builds this hierarchy automatically.</div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ================================================
+// SHARED: Synthetic X-ray generator
+// ================================================
+function generateXray(size) {
+  const data = new Float32Array(size * size);
+  const cx = size/2, cy = size/2;
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const dx = (x-cx)/cx, dy = (y-cy)/cy;
+      const r = Math.sqrt(dx*dx + dy*dy);
+      let v = 0.3 + 0.5 * Math.exp(-r*r*3);
+      v += 0.1 * Math.sin(y * 0.3) * Math.exp(-dx*dx*4);
+      const hx = (x - cx*0.85)/cx, hy = (y - cy*1.05)/cy;
+      v -= 0.15 * Math.exp(-(hx*hx + hy*hy) * 8);
+      v += 0.08 * Math.exp(-dx*dx*40);
+      data[y*size+x] = Math.max(0, Math.min(1, v));
+    }
+  }
+  return data;
+}
+
+function drawImage(canvas, data, size, normalize) {
+  const ctx = canvas.getContext('2d');
+  const imageData = ctx.createImageData(size, size);
+  let min=Infinity, max=-Infinity;
+  if (normalize) {
+    for (let i = 0; i < data.length; i++) { min=Math.min(min,data[i]); max=Math.max(max,data[i]); }
+  } else { min=0; max=1; }
+  const range = max-min || 1;
+  for (let i = 0; i < data.length; i++) {
+    const v = Math.floor(((data[i]-min)/range)*255);
+    const idx = i*4;
+    imageData.data[idx] = Math.floor(v*0.7);
+    imageData.data[idx+1] = Math.floor(v*0.8);
+    imageData.data[idx+2] = v;
+    imageData.data[idx+3] = 255;
+  }
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = size; tempCanvas.height = size;
+  tempCanvas.getContext('2d').putImageData(imageData, 0, 0);
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+}
+
+// ================================================
+// SECTION 1: Neuron
+// ================================================
+const sigmoid = z => 1 / (1 + Math.exp(-z));
+
+function updateNeuron() {
+  const x1 = parseFloat(document.getElementById('x1').value);
+  const w1 = parseFloat(document.getElementById('w1').value);
+  const x2 = parseFloat(document.getElementById('x2').value);
+  const w2 = parseFloat(document.getElementById('w2').value);
+  const b = parseFloat(document.getElementById('bias').value);
+
+  document.getElementById('x1v').textContent = x1.toFixed(1);
+  document.getElementById('w1v').textContent = w1.toFixed(1);
+  document.getElementById('x2v').textContent = x2.toFixed(1);
+  document.getElementById('w2v').textContent = w2.toFixed(1);
+  document.getElementById('bv').textContent = b.toFixed(1);
+
+  const z = w1*x1 + w2*x2 + b;
+  const y = sigmoid(z);
+
+  document.getElementById('neuron-eq').innerHTML =
+    'z = (<span class="orange">'+w1+'</span> x <span class="blue">'+x1+'</span>) + ' +
+    '(<span class="orange">'+w2+'</span> x <span class="blue">'+x2+'</span>) + ' +
+    '<span class="purple">'+b+'</span> = <strong>'+z.toFixed(2)+'</strong><br>' +
+    'y = sigma(z) = <strong style="color:'+(y > 0.5 ? '#2bb86c' : '#e84040')+'">'+y.toFixed(3)+'</strong>' +
+    ' -> '+(y > 0.5 ? '<span class="green">Positive (pneumonia?)</span>' : '<span class="red">Negative (normal?)</span>');
+
+  drawNeuron(x1, w1, x2, w2, b, z, y);
+}
+
+function drawNeuron(x1, w1, x2, w2, b, z, y) {
+  const c = document.getElementById('neuronCanvas');
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, 400, 300);
+
+  const inputs = [{x:40, y:75, label:'x1='+x1, w:'w1='+w1},
+                  {x:40, y:225, label:'x2='+x2, w:'w2='+w2}];
+  const sx=175, sy=150;
+  const ax=265, ay=150;
+  const ox=355, oy=150;
+
+  inputs.forEach(function(inp) {
+    var wVal = inp === inputs[0] ? w1 : w2;
+    var thickness = Math.abs(wVal) * 3 + 1;
+    var color = wVal >= 0 ? '#e8713a' : '#e84040';
+    ctx.strokeStyle = color;
+    ctx.lineWidth = thickness;
+    ctx.beginPath(); ctx.moveTo(inp.x+25, inp.y); ctx.lineTo(sx-25, sy); ctx.stroke();
+    ctx.fillStyle = '#e8713a'; ctx.font = '12px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(inp.w, (inp.x+25+sx-25)/2, (inp.y+sy)/2-8);
+  });
+
+  ctx.strokeStyle = '#b06aff'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(sx, 280); ctx.lineTo(sx, sy+24); ctx.stroke();
+  ctx.fillStyle = '#b06aff'; ctx.font = '12px monospace'; ctx.textAlign = 'center';
+  ctx.fillText('b='+b, sx, 290);
+
+  ctx.strokeStyle = '#888'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(sx+25, sy); ctx.lineTo(ax-25, ay); ctx.stroke();
+  ctx.fillStyle = '#aaa'; ctx.font = '11px monospace';
+  ctx.fillText('z='+z.toFixed(2), (sx+ax)/2, sy-12);
+
+  ctx.strokeStyle = '#2bb86c'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(ax+25, ay); ctx.lineTo(ox-25, oy); ctx.stroke();
+
+  inputs.forEach(function(inp) {
+    ctx.beginPath(); ctx.arc(inp.x, inp.y, 25, 0, Math.PI*2);
+    ctx.fillStyle = '#1a3a5c'; ctx.fill();
+    ctx.strokeStyle = '#4a9eff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#4a9eff'; ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText(inp.label, inp.x, inp.y+5);
+  });
+
+  ctx.beginPath(); ctx.arc(sx, sy, 24, 0, Math.PI*2);
+  ctx.fillStyle = '#2a1a0a'; ctx.fill();
+  ctx.strokeStyle = '#e8713a'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.fillStyle = '#e8713a'; ctx.font = 'bold 18px sans-serif';
+  ctx.textAlign = 'center'; ctx.fillText('\u03A3', sx, sy+7);
+
+  ctx.shadowColor = '#2bb86c'; ctx.shadowBlur = 12;
+  ctx.beginPath(); ctx.arc(ax, ay, 24, 0, Math.PI*2);
+  ctx.fillStyle = '#0a2a1a'; ctx.fill();
+  ctx.strokeStyle = '#2bb86c'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = '#2bb86c'; ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('\u03C3', ax, ay+7);
+
+  ctx.font = '10px sans-serif';
+  ctx.fillStyle = '#e8713a'; ctx.fillText('sum', sx, sy+38);
+  ctx.fillStyle = '#2bb86c'; ctx.fillText('activation', ax, ay+38);
+
+  ctx.beginPath(); ctx.arc(ox, oy, 25, 0, Math.PI*2);
+  ctx.fillStyle = y > 0.5 ? '#0a2a1a' : '#2a0a0a'; ctx.fill();
+  ctx.strokeStyle = y > 0.5 ? '#2bb86c' : '#e84040'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.fillStyle = y > 0.5 ? '#2bb86c' : '#e84040'; ctx.font = 'bold 14px sans-serif';
+  ctx.fillText(y.toFixed(3), ox, oy+5);
+  ctx.textAlign = 'left';
+}
+
+['x1','w1','x2','w2','bias'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', updateNeuron);
+});
+updateNeuron();
+
+// ================================================
+// SECTION 2: Decision Boundary (TinyNet)
+// ================================================
+class TinyNet {
+  constructor(nInputs, layerSizes) {
+    this.layers = [];
+    let prevSize = nInputs;
+    for (const size of layerSizes) {
+      this.layers.push({
+        W: Array.from({length: size}, () => Array.from({length: prevSize}, () => (Math.random()-0.5)*2)),
+        b: Array.from({length: size}, () => (Math.random()-0.5)*0.5),
+      });
+      prevSize = size;
+    }
+    this.layers.push({
+      W: [Array.from({length: prevSize}, () => (Math.random()-0.5)*2)],
+      b: [(Math.random()-0.5)*0.5],
+    });
+  }
+
+  forward(x) {
+    let a = x;
+    this.activations = [a.slice()];
+    for (let l = 0; l < this.layers.length - 1; l++) {
+      const layer = this.layers[l];
+      a = layer.W.map((w, i) => {
+        const z = w.reduce((s, wj, j) => s + wj * a[j], 0) + layer.b[i];
+        return Math.max(0, z);
+      });
+      this.activations.push(a.slice());
+    }
+    const outLayer = this.layers[this.layers.length-1];
+    const z = outLayer.W[0].reduce((s, w, j) => s + w * a[j], 0) + outLayer.b[0];
+    const out = 1 / (1 + Math.exp(-z));
+    this.activations.push([out]);
+    return out;
+  }
+
+  train(data, lr) {
+    const eps = 1e-4;
+    let totalLoss = 0;
+    for (const d of data) {
+      const pred = this.forward(d.x);
+      const loss = -(d.y * Math.log(pred + 1e-8) + (1-d.y) * Math.log(1 - pred + 1e-8));
+      totalLoss += loss;
+      for (let l = 0; l < this.layers.length; l++) {
+        const layer = this.layers[l];
+        for (let i = 0; i < layer.W.length; i++) {
+          for (let j = 0; j < layer.W[i].length; j++) {
+            layer.W[i][j] += eps;
+            const lossPlus = this._loss(d.x, d.y);
+            layer.W[i][j] -= 2*eps;
+            const lossMinus = this._loss(d.x, d.y);
+            layer.W[i][j] += eps;
+            layer.W[i][j] -= lr * (lossPlus - lossMinus) / (2*eps);
+          }
+          layer.b[i] += eps;
+          const lossPlus = this._loss(d.x, d.y);
+          layer.b[i] -= 2*eps;
+          const lossMinus = this._loss(d.x, d.y);
+          layer.b[i] += eps;
+          layer.b[i] -= lr * (lossPlus - lossMinus) / (2*eps);
+        }
+      }
+    }
+    return totalLoss / data.length;
+  }
+
+  _loss(x, y) {
+    const pred = this.forward(x);
+    return -(y * Math.log(pred + 1e-8) + (1-y) * Math.log(1 - pred + 1e-8));
+  }
+}
+
+function makeLinear(n) {
+  const data = [];
+  for (let i = 0; i < n; i++) {
+    const x1 = Math.random()*2-1, x2 = Math.random()*2-1;
+    const y = (x1 + x2 > 0.2) ? 1 : 0;
+    data.push({x:[x1+(.1*(Math.random()-.5)), x2+(.1*(Math.random()-.5))], y:y});
+  }
+  return data;
+}
+function makeCircle(n) {
+  const data = [];
+  for (let i = 0; i < n; i++) {
+    const x1 = Math.random()*2-1, x2 = Math.random()*2-1;
+    const y = (x1*x1 + x2*x2 < 0.5) ? 1 : 0;
+    data.push({x:[x1, x2], y:y});
+  }
+  return data;
+}
+function makeMoons(n) {
+  const data = [];
+  for (let i = 0; i < n; i++) {
+    if (Math.random() > 0.5) {
+      const angle = Math.random() * Math.PI;
+      data.push({x:[Math.cos(angle)+.1*(Math.random()-.5), Math.sin(angle)+.1*(Math.random()-.5)], y:0});
+    } else {
+      const angle = Math.random() * Math.PI;
+      data.push({x:[1-Math.cos(angle)+.1*(Math.random()-.5), 0.5-Math.sin(angle)+.1*(Math.random()-.5)], y:1});
+    }
+  }
+  return data;
+}
+function makeSpiral(n) {
+  const data = [];
+  for (let i = 0; i < n/2; i++) {
+    const t = i/n*4*Math.PI;
+    const r = t/12;
+    data.push({x:[r*Math.cos(t)+.08*(Math.random()-.5), r*Math.sin(t)+.08*(Math.random()-.5)], y:0});
+    data.push({x:[-r*Math.cos(t)+.08*(Math.random()-.5), -r*Math.sin(t)+.08*(Math.random()-.5)], y:1});
+  }
+  return data;
+}
+
+let boundaryData = makeCircle(120);
+let boundaryNet = null;
+let boundaryDatasetName = 'circle';
+let trainInterval = null;
+
+function setDataset(name) {
+  boundaryDatasetName = name;
+  document.querySelectorAll('[id^="btn-ds-"]').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('btn-ds-'+name).classList.add('active');
+  var generators = {linear: makeLinear, circle: makeCircle, moons: makeMoons, spiral: makeSpiral};
+  boundaryData = generators[name](120);
+  resetBoundaryNet();
+}
+
+function resetBoundaryNet() {
+  if (trainInterval) { clearInterval(trainInterval); trainInterval = null; }
+  var nNeurons = parseInt(document.getElementById('bneurons').value);
+  var nLayers = parseInt(document.getElementById('blayers').value);
+  var layerSizes = nLayers === 0 ? [] : Array(nLayers).fill(nNeurons);
+  boundaryNet = new TinyNet(2, layerSizes);
+  document.getElementById('boundary-acc').textContent = '--';
+  drawBoundary();
+  updateBoundaryExplain();
+}
+
+function updateBoundaryExplain() {
+  var nNeurons = parseInt(document.getElementById('bneurons').value);
+  var nLayers = parseInt(document.getElementById('blayers').value);
+  document.getElementById('bneuronsv').textContent = nNeurons;
+  document.getElementById('blayersv').textContent = nLayers;
+
+  var msg, punch;
+  if (nLayers === 0) {
+    msg = '<strong>0 hidden layers:</strong> This is literally logistic regression.<br><span style="color:#888;">One straight line. That\'s all you get.</span>';
+    punch = 'This IS logistic regression. No hidden layers = no deep learning.';
+  } else if (nNeurons === 1 && nLayers === 1) {
+    msg = '<strong>1 neuron, 1 layer:</strong> Can draw one bent line (one ReLU kink).<br><span style="color:#888;">Barely better than logistic regression.</span>';
+    punch = 'One neuron = one line. Not enough for real problems.';
+  } else if (nNeurons <= 4 && nLayers === 1) {
+    msg = '<strong>'+nNeurons+' neurons, 1 layer:</strong> Can combine '+nNeurons+' line segments into a boundary.<br><span style="color:#888;">Getting there, but still limited shapes.</span>';
+    punch = 'More neurons = more line segments to combine. The boundary gets flexible.';
+  } else if (nLayers === 1) {
+    msg = '<strong>'+nNeurons+' neurons, 1 layer:</strong> Enough to approximate most 2D boundaries.<br><span style="color:#888;">This is the universal approximation theorem in action.</span>';
+    punch = 'Enough neurons in one layer can fit any shape -- but deeper is more efficient.';
+  } else {
+    msg = '<strong>'+nNeurons+' neurons x '+nLayers+' layers:</strong> Deep network -- can learn hierarchical features.<br><span style="color:#888;">Each layer builds on the previous. This is deep learning.</span>';
+    punch = nLayers+' layers deep. Each layer learns more abstract patterns. This is why "deep" works.';
+  }
+  document.getElementById('boundary-explain').innerHTML = msg;
+  document.getElementById('boundary-punchline').textContent = punch;
+}
+
+function trainBoundaryNet() {
+  if (trainInterval) { clearInterval(trainInterval); trainInterval = null; }
+  var epoch = 0;
+  trainInterval = setInterval(function() {
+    for (var i = 0; i < 5; i++) {
+      var shuffled = boundaryData.slice().sort(function() { return Math.random()-0.5; });
+      boundaryNet.train(shuffled, 0.05);
+      epoch++;
+    }
+    var correct = 0;
+    for (var j = 0; j < boundaryData.length; j++) {
+      var pred = boundaryNet.forward(boundaryData[j].x) > 0.5 ? 1 : 0;
+      if (pred === boundaryData[j].y) correct++;
+    }
+    var acc = (correct/boundaryData.length*100).toFixed(1);
+    document.getElementById('boundary-acc').textContent = acc+'% (epoch '+epoch+')';
+    drawBoundary();
+    if (epoch > 200) { clearInterval(trainInterval); trainInterval = null; }
+  }, 50);
+}
+
+function drawBoundary() {
+  var c = document.getElementById('boundaryCanvas');
+  var ctx = c.getContext('2d');
+  var W = 420, H = 380;
+  ctx.clearRect(0, 0, W, H);
+  var pad = 30;
+  var pw = W-2*pad, ph = H-2*pad;
+  var minX=-1.5, maxX=1.5, minY=-1.5, maxY=1.5;
+  boundaryData.forEach(function(d) {
+    minX = Math.min(minX, d.x[0]-0.2); maxX = Math.max(maxX, d.x[0]+0.2);
+    minY = Math.min(minY, d.x[1]-0.2); maxY = Math.max(maxY, d.x[1]+0.2);
+  });
+  if (boundaryNet) {
+    var res = 40;
+    var cellW = pw/res, cellH = ph/res;
+    for (var gy = 0; gy < res; gy++) {
+      for (var gx = 0; gx < res; gx++) {
+        var x1 = minX + (gx/res)*(maxX-minX);
+        var x2 = maxY - (gy/res)*(maxY-minY);
+        var pred = boundaryNet.forward([x1, x2]);
+        var r = Math.floor(50 + pred * 150);
+        var g = Math.floor(50 + (1-pred) * 80);
+        var b = Math.floor(80 + (1-pred) * 150);
+        ctx.fillStyle = 'rgb('+r+','+g+','+b+')';
+        ctx.fillRect(pad + gx*cellW, pad + gy*cellH, cellW+1, cellH+1);
+      }
+    }
+  }
+  boundaryData.forEach(function(d) {
+    var px = pad + ((d.x[0]-minX)/(maxX-minX))*pw;
+    var py = pad + ((maxY-d.x[1])/(maxY-minY))*ph;
+    ctx.beginPath(); ctx.arc(px, py, 4, 0, Math.PI*2);
+    ctx.fillStyle = d.y === 0 ? '#4a9eff' : '#e8713a';
+    ctx.fill();
+    ctx.strokeStyle = '#000'; ctx.lineWidth = 1; ctx.stroke();
+  });
+}
+
+['bneurons','blayers'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', function() { resetBoundaryNet(); });
+});
+setDataset('circle');
+
+// ================================================
+// SECTION 3: Activation Functions
+// ================================================
+var activations = {
+  none:    { fn: function(z){return z;}, name: 'Linear (no activation)', eq: 'f(z) = z', range: '(-inf, +inf)', when: 'Never for hidden layers -- defeats the purpose of depth', color: '#e84040' },
+  sigmoid: { fn: function(z){return 1/(1+Math.exp(-z));}, name: 'Sigmoid', eq: 'sigma(z) = 1 / (1 + e^-z)', range: '(0, 1)', when: 'Output layer for binary classification (probability)', color: '#2bb86c' },
+  relu:    { fn: function(z){return Math.max(0, z);}, name: 'ReLU', eq: 'f(z) = max(0, z)', range: '[0, +inf)', when: 'Hidden layers -- default choice in modern networks', color: '#4a9eff' },
+  tanh:    { fn: function(z){return Math.tanh(z);}, name: 'Tanh', eq: 'f(z) = tanh(z)', range: '(-1, 1)', when: 'Hidden layers when you need negative outputs', color: '#b06aff' },
+};
+
+var currentActivation = 'sigmoid';
+
+function setActivation(name) {
+  currentActivation = name;
+  document.querySelectorAll('[id^="btn-act-"]').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('btn-act-'+name).classList.add('active');
+
+  var act = activations[name];
+  var desc = name === 'none' ? 'No transformation -- output equals input' : name === 'relu' ? 'Kills negative values, passes positive unchanged -- simple and fast' : name === 'tanh' ? 'Like sigmoid but centered at 0, outputs (-1, 1)' : 'Squishes any number into (0, 1) -- like a probability';
+  document.getElementById('activation-eq').innerHTML =
+    '<strong>'+act.name+':</strong> '+act.eq+'<br><span style="color:#888;">'+desc+'</span>';
+  document.getElementById('act-range').textContent = act.range;
+  document.getElementById('act-when').textContent = act.when;
+
+  var pipeBox = document.getElementById('activation-box');
+  var pipeName = document.getElementById('pipeline-act-name');
+  if (name === 'none') {
+    pipeBox.style.borderColor = '#e84040';
+    pipeBox.style.boxShadow = '0 0 15px rgba(232,64,64,0.3)';
+    pipeBox.querySelector('div').style.color = '#e84040';
+    pipeBox.querySelector('div').textContent = 'NO ACTIVATION';
+    pipeName.textContent = 'f(z) = z';
+    pipeName.style.color = '#e84040';
+  } else {
+    pipeBox.style.borderColor = act.color;
+    pipeBox.style.boxShadow = '0 0 15px '+act.color+'40';
+    pipeBox.querySelector('div').style.color = act.color;
+    pipeBox.querySelector('div').textContent = 'ACTIVATION';
+    pipeName.textContent = act.eq.split('=')[0].trim();
+    pipeName.style.color = '#fff';
+  }
+
+  drawActivationPlot();
+  drawStackDemo();
+  updateZInput();
+}
+
+function drawActivationPlot() {
+  var c = document.getElementById('activationCanvas');
+  var ctx = c.getContext('2d');
+  var W = 400, H = 250;
+  ctx.clearRect(0, 0, W, H);
+  var pad = {l:40, r:20, t:20, b:30};
+  var pw = W-pad.l-pad.r, ph = H-pad.t-pad.b;
+
+  ctx.strokeStyle = '#222'; ctx.lineWidth = 1;
+  for (var i = -4; i <= 4; i++) {
+    var x = pad.l + ((i+5)/10)*pw;
+    ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, H-pad.b); ctx.stroke();
+  }
+  [-1, 0, 1].forEach(function(v) {
+    var y = pad.t + ((1-v)/2)*ph;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W-pad.r, y); ctx.stroke();
+  });
+
+  ctx.strokeStyle = '#555'; ctx.lineWidth = 1.5;
+  var zeroX = pad.l + (5/10)*pw;
+  var zeroY = pad.t + ph/2;
+  ctx.beginPath(); ctx.moveTo(pad.l, zeroY); ctx.lineTo(W-pad.r, zeroY); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(zeroX, pad.t); ctx.lineTo(zeroX, H-pad.b); ctx.stroke();
+
+  ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  [-4,-2,0,2,4].forEach(function(v) {
+    var x = pad.l + ((v+5)/10)*pw;
+    ctx.fillText(v, x, H-pad.b+14);
+  });
+  ctx.textAlign = 'right';
+  [-1,0,1].forEach(function(v) {
+    var y = pad.t + ((1-v)/2)*ph;
+    ctx.fillText(v, pad.l-5, y+4);
+  });
+
+  Object.keys(activations).forEach(function(name) {
+    var act = activations[name];
+    if (name === currentActivation) return;
+    ctx.strokeStyle = act.color + '30'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var px = 0; px <= pw; px++) {
+      var z = (px/pw)*10 - 5;
+      var val = act.fn(z);
+      val = Math.max(-1.5, Math.min(1.5, val));
+      var y = pad.t + ((1-val)/2)*ph;
+      px === 0 ? ctx.moveTo(pad.l+px, y) : ctx.lineTo(pad.l+px, y);
+    }
+    ctx.stroke();
+  });
+
+  var act = activations[currentActivation];
+  ctx.strokeStyle = act.color; ctx.lineWidth = 3;
+  ctx.beginPath();
+  for (var px = 0; px <= pw; px++) {
+    var z = (px/pw)*10 - 5;
+    var val = act.fn(z);
+    val = Math.max(-1.5, Math.min(1.5, val));
+    var y = pad.t + ((1-val)/2)*ph;
+    px === 0 ? ctx.moveTo(pad.l+px, y) : ctx.lineTo(pad.l+px, y);
+  }
+  ctx.stroke();
+
+  var zVal = parseFloat(document.getElementById('zInput').value);
+  var markerX = pad.l + ((zVal+5)/10)*pw;
+  var markerVal = act.fn(zVal);
+  markerVal = Math.max(-1.5, Math.min(1.5, markerVal));
+  var markerY = pad.t + ((1-markerVal)/2)*ph;
+  ctx.beginPath(); ctx.arc(markerX, markerY, 6, 0, Math.PI*2);
+  ctx.fillStyle = act.color; ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+
+  ctx.fillStyle = act.color; ctx.font = 'bold 13px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText(act.name, pad.l+5, pad.t+15);
+}
+
+function drawStackDemo() {
+  var c = document.getElementById('stackCanvas');
+  var ctx = c.getContext('2d');
+  var W = 400, H = 250;
+  ctx.clearRect(0, 0, W, H);
+  var pad = {l:40, r:20, t:25, b:30};
+  var pw = W-pad.l-pad.r, ph = H-pad.t-pad.b;
+
+  ctx.strokeStyle = '#444'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.l, H-pad.b); ctx.lineTo(W-pad.r, H-pad.b); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, H-pad.b); ctx.stroke();
+  ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('input', pad.l+pw/2, H-5);
+
+  var act = activations[currentActivation];
+  var neurons = [{w: 1.5, b: -2},{w: -1.0, b: 1},{w: 0.8, b: 0.5},{w: -1.2, b: -0.5}];
+  var neuronColors = ['#e8713a', '#4a9eff', '#2bb86c', '#b06aff'];
+
+  ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  var minCombined = Infinity, maxCombined = -Infinity;
+  var combinedVals = [];
+  for (var px = 0; px <= pw; px++) {
+    var x = (px/pw)*6 - 3;
+    var combined = 0;
+    neurons.forEach(function(n) { combined += act.fn(n.w * x + n.b); });
+    combinedVals.push(combined);
+    minCombined = Math.min(minCombined, combined);
+    maxCombined = Math.max(maxCombined, combined);
+  }
+  var range = maxCombined - minCombined || 1;
+  combinedVals.forEach(function(val, px) {
+    var y = pad.t + ph - ((val - minCombined)/range)*ph;
+    px === 0 ? ctx.moveTo(pad.l+px, y) : ctx.lineTo(pad.l+px, y);
+  });
+  ctx.stroke();
+
+  neurons.forEach(function(n, ni) {
+    ctx.strokeStyle = neuronColors[ni] + '60'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var px = 0; px <= pw; px++) {
+      var x = (px/pw)*6 - 3;
+      var val = act.fn(n.w * x + n.b);
+      var y = pad.t + ph - ((val - minCombined)/range)*ph;
+      px === 0 ? ctx.moveTo(pad.l+px, y) : ctx.lineTo(pad.l+px, y);
+    }
+    ctx.stroke();
+  });
+
+  ctx.fillStyle = '#ffd700'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('Combined output (4 neurons)', pad.l+5, pad.t+12);
+
+  var isLinear = currentActivation === 'none';
+  ctx.fillStyle = isLinear ? '#e84040' : '#2bb86c';
+  ctx.font = '12px sans-serif';
+  ctx.fillText(isLinear ? 'Still a straight line! Stacking was pointless.' : 'Non-linear! Can approximate complex patterns.', pad.l+5, H-pad.b-8);
+
+  document.getElementById('stack-explain').innerHTML = isLinear
+    ? '<span class="red">Without activation:</span> layer1 x layer2 = still just a linear function.<br><span style="color:#888;">Adding more layers adds zero expressive power. Waste of computation.</span>'
+    : '<span class="green">With '+act.name+':</span> each layer can bend the function into new shapes.<br><span style="color:#888;">2 layers with activation can approximate <strong>any</strong> continuous function. That\'s the universal approximation theorem.</span>';
+}
+
+function updateZInput() {
+  var z = parseFloat(document.getElementById('zInput').value);
+  document.getElementById('zInputV').textContent = z.toFixed(1);
+  var act = activations[currentActivation];
+  var val = act.fn(z);
+  document.getElementById('activationOutput').textContent = val.toFixed(3);
+  document.getElementById('activationOutput').style.color = act.color;
+  drawActivationPlot();
+}
+
+document.getElementById('zInput').addEventListener('input', updateZInput);
+setActivation('sigmoid');
+
+// ================================================
+// SECTION 4: Network Diagram (Stack Layers)
+// ================================================
+var layerDescriptions = [
+  'Detects edges, gradients, simple textures',
+  'Combines edges into shapes and local patterns',
+  'Recognizes parts: lung boundaries, rib segments',
+  'Understands anatomy: heart silhouette, diaphragm',
+  'High-level: "pneumonia opacity in right lower lobe"',
+];
+
+function updateNetwork() {
+  var nLayers = parseInt(document.getElementById('nlayers').value);
+  var nPerLayer = parseInt(document.getElementById('nperlayer').value);
+  document.getElementById('nlayersv').textContent = nLayers;
+  document.getElementById('nperlayerv').textContent = nPerLayer;
+
+  var descDiv = document.getElementById('layer-descriptions');
+  descDiv.innerHTML = '';
+  for (var i = 0; i < nLayers; i++) {
+    var eq = document.createElement('div');
+    eq.className = 'equation';
+    eq.innerHTML = '<strong>Layer '+(i+1)+':</strong> '+layerDescriptions[i]+'<br>' +
+      '<span style="color:#666;">-> '+nPerLayer+' neurons, '+(i===0 ? '9 weights each (3x3 kernel)' : nPerLayer + ' inputs each')+'</span>';
+    descDiv.appendChild(eq);
+  }
+
+  var total = 9 * nPerLayer;
+  for (var i = 1; i < nLayers; i++) total += 9 * nPerLayer;
+  document.getElementById('total-params').innerHTML =
+    '<span class="green">'+total.toLocaleString()+'</span> (with convolution) vs ' +
+    '<span class="red">'+(50176 * nPerLayer).toLocaleString()+'</span> (fully connected)';
+
+  drawNetwork(nLayers, nPerLayer);
+}
+
+function drawNetwork(nLayers, nPerLayer) {
+  var c = document.getElementById('networkCanvas');
+  var ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, 500, 280);
+
+  var totalLayers = nLayers + 2;
+  function layerX(i) { return 40 + (i / (totalLayers-1)) * 420; }
+
+  var layers = [3];
+  for (var i = 0; i < nLayers; i++) layers.push(nPerLayer);
+  layers.push(2);
+
+  var colors = ['#4a9eff'];
+  for (var i = 0; i < nLayers; i++) colors.push('#e8713a');
+  colors.push('#2bb86c');
+
+  for (var l = 0; l < layers.length-1; l++) {
+    for (var i = 0; i < layers[l]; i++) {
+      for (var j = 0; j < layers[l+1]; j++) {
+        var x1 = layerX(l), y1 = 140 - (layers[l]-1)*15 + i*30;
+        var x2 = layerX(l+1), y2 = 140 - (layers[l+1]-1)*15 + j*30;
+        ctx.strokeStyle = '#333'; ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(x1+12, y1); ctx.lineTo(x2-12, y2); ctx.stroke();
+      }
+    }
+  }
+
+  for (var l = 0; l < layers.length; l++) {
+    for (var i = 0; i < layers[l]; i++) {
+      var x = layerX(l), y = 140 - (layers[l]-1)*15 + i*30;
+      ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI*2);
+      ctx.fillStyle = colors[l] + '40'; ctx.fill();
+      ctx.strokeStyle = colors[l]; ctx.lineWidth = 2; ctx.stroke();
+    }
+    ctx.fillStyle = colors[l]; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    var label = l === 0 ? 'Input' : l === layers.length-1 ? 'Output' : 'Layer '+l;
+    ctx.fillText(label, layerX(l), 260);
+  }
+}
+
+['nlayers','nperlayer'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', updateNetwork);
+});
+updateNetwork();
+
+// ================================================
+// SECTION 5: Images Are Special (NEW)
+// ================================================
+var XRAY_SIZE = 100;
+var sharedXrayData = generateXray(XRAY_SIZE);
+
+// Draw original xray for section 5
+drawImage(document.getElementById('xrayOriginal'), sharedXrayData, XRAY_SIZE, false);
+drawImage(document.getElementById('xrayShuffled'), sharedXrayData, XRAY_SIZE, false);
+
+function shuffleXrayPixels() {
+  var shuffled = new Float32Array(sharedXrayData.length);
+  var indices = Array.from({length: sharedXrayData.length}, function(_, i) { return i; });
+  for (var i = indices.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
+  }
+  for (var i = 0; i < sharedXrayData.length; i++) {
+    shuffled[i] = sharedXrayData[indices[i]];
+  }
+  drawImage(document.getElementById('xrayShuffled'), shuffled, XRAY_SIZE, false);
+}
+
+function resetXrayPixels() {
+  drawImage(document.getElementById('xrayShuffled'), sharedXrayData, XRAY_SIZE, false);
+}
+
+// Neighbor demo
+var neighborCanvas = document.getElementById('neighborCanvas');
+drawImage(neighborCanvas, sharedXrayData, XRAY_SIZE, false);
+
+neighborCanvas.addEventListener('mousemove', function(e) {
+  var rect = neighborCanvas.getBoundingClientRect();
+  var mx = (e.clientX - rect.left) / rect.width;
+  var my = (e.clientY - rect.top) / rect.height;
+  var px = Math.floor(mx * XRAY_SIZE);
+  var py = Math.floor(my * XRAY_SIZE);
+  px = Math.max(1, Math.min(XRAY_SIZE-2, px));
+  py = Math.max(1, Math.min(XRAY_SIZE-2, py));
+
+  // Redraw image
+  drawImage(neighborCanvas, sharedXrayData, XRAY_SIZE, false);
+  var ctx = neighborCanvas.getContext('2d');
+  var scale = 200 / XRAY_SIZE;
+
+  // Highlight 3x3 neighborhood
+  ctx.strokeStyle = '#2bb86c'; ctx.lineWidth = 2;
+  ctx.strokeRect((px-1)*scale, (py-1)*scale, 3*scale, 3*scale);
+
+  // Center pixel
+  ctx.fillStyle = 'rgba(232,113,58,0.5)';
+  ctx.fillRect(px*scale, py*scale, scale, scale);
+
+  // Show neighbor grid
+  var container = document.getElementById('neighborGridContainer');
+  container.innerHTML = '';
+  var grid = document.createElement('div');
+  grid.style.cssText = 'display:inline-grid; grid-template-columns:repeat(3,40px); gap:2px;';
+  for (var dy = -1; dy <= 1; dy++) {
+    for (var dx = -1; dx <= 1; dx++) {
+      var cell = document.createElement('div');
+      var val = sharedXrayData[(py+dy)*XRAY_SIZE+(px+dx)];
+      var brightness = Math.floor(val * 255);
+      cell.style.cssText = 'width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:monospace;border-radius:3px;';
+      if (dx === 0 && dy === 0) {
+        cell.style.background = '#e8713a';
+        cell.style.color = '#fff';
+        cell.style.fontWeight = 'bold';
+      } else {
+        cell.style.background = '#0a2a1a';
+        cell.style.border = '1px solid #2bb86c';
+        cell.style.color = '#2bb86c';
+      }
+      cell.textContent = val.toFixed(2);
+      grid.appendChild(cell);
+    }
+  }
+  container.appendChild(grid);
+  document.getElementById('neighborInfo').innerHTML = 'Pixel ['+px+','+py+'] = <span style="color:#e8713a;">'+sharedXrayData[py*XRAY_SIZE+px].toFixed(3)+'</span>. Its 3x3 neighborhood defines local features.';
+});
+
+// FC problem visuals
+(function() {
+  // (a) Parameter count visual
+  var c = document.getElementById('paramProblemCanvas');
+  var ctx = c.getContext('2d');
+  ctx.fillStyle = '#1a1a1a'; ctx.fillRect(0,0,280,100);
+  // Draw tiny grid representing pixels
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
+      ctx.fillStyle = 'hsl('+((i*8+j)*5)+',40%,30%)';
+      ctx.fillRect(10+i*10, 10+j*10, 9, 9);
+    }
+  }
+  // Lines to neurons
+  ctx.strokeStyle = '#e8404030'; ctx.lineWidth = 0.5;
+  for (var n = 0; n < 4; n++) {
+    var ny = 20 + n*20;
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        ctx.beginPath(); ctx.moveTo(90, 10+j*10+5); ctx.lineTo(200, ny); ctx.stroke();
+      }
+    }
+    ctx.beginPath(); ctx.arc(200, ny, 8, 0, Math.PI*2);
+    ctx.fillStyle = '#e8404060'; ctx.fill();
+    ctx.strokeStyle = '#e84040'; ctx.lineWidth = 1; ctx.stroke();
+  }
+  ctx.fillStyle = '#e84040'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('64 pixels x 4 neurons', 210, 50);
+  ctx.fillText('= 256 weights', 210, 65);
+  ctx.fillStyle = '#888'; ctx.font = '10px sans-serif';
+  ctx.fillText('(224x224 = 50,176 per neuron!)', 210, 82);
+})();
+
+(function() {
+  // (b) Spatial structure visual
+  var c = document.getElementById('spatialProblemCanvas');
+  var ctx = c.getContext('2d');
+  ctx.fillStyle = '#1a1a1a'; ctx.fillRect(0,0,280,100);
+  // Draw 6x6 grid
+  for (var i = 0; i < 6; i++) {
+    for (var j = 0; j < 6; j++) {
+      ctx.fillStyle = '#333';
+      ctx.fillRect(15+i*13, 15+j*13, 12, 12);
+    }
+  }
+  // Highlight corner and center
+  ctx.fillStyle = '#4a9eff'; ctx.fillRect(15, 15, 12, 12);
+  ctx.fillStyle = '#e8713a'; ctx.fillRect(15+5*13, 15+5*13, 12, 12);
+  // Arrow to same neuron
+  ctx.strokeStyle = '#4a9eff'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(33, 21); ctx.lineTo(180, 40); ctx.stroke();
+  ctx.strokeStyle = '#e8713a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(90, 80); ctx.lineTo(180, 40); ctx.stroke();
+  ctx.beginPath(); ctx.arc(180, 40, 10, 0, Math.PI*2);
+  ctx.fillStyle = '#22222280'; ctx.fill();
+  ctx.strokeStyle = '#888'; ctx.lineWidth = 1; ctx.stroke();
+  ctx.fillStyle = '#fff'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('Same neuron!', 195, 44);
+  ctx.fillStyle = '#888'; ctx.font = '10px sans-serif';
+  ctx.fillText('No concept of "near"', 195, 60);
+  ctx.fillText('or "far" apart', 195, 73);
+})();
+
+(function() {
+  // (c) Translation invariance visual
+  var c = document.getElementById('translationProblemCanvas');
+  var ctx = c.getContext('2d');
+  ctx.fillStyle = '#1a1a1a'; ctx.fillRect(0,0,280,100);
+  // Two small images with a blob in different positions
+  ctx.strokeStyle = '#444'; ctx.lineWidth = 1;
+  ctx.strokeRect(10, 15, 60, 60);
+  ctx.strokeRect(90, 15, 60, 60);
+  // Blob top-left
+  ctx.beginPath(); ctx.arc(25, 30, 8, 0, Math.PI*2);
+  ctx.fillStyle = '#e8713a80'; ctx.fill();
+  ctx.strokeStyle = '#e8713a'; ctx.lineWidth = 1; ctx.stroke();
+  // Blob bottom-right
+  ctx.beginPath(); ctx.arc(135, 60, 8, 0, Math.PI*2);
+  ctx.fillStyle = '#e8713a80'; ctx.fill();
+  ctx.strokeStyle = '#e8713a'; ctx.lineWidth = 1; ctx.stroke();
+  // Arrows to different neurons
+  ctx.strokeStyle = '#4a9eff'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(70, 35); ctx.lineTo(175, 25); ctx.stroke();
+  ctx.strokeStyle = '#b06aff'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(150, 60); ctx.lineTo(175, 55); ctx.stroke();
+  ctx.beginPath(); ctx.arc(180, 25, 6, 0, Math.PI*2);
+  ctx.fillStyle = '#4a9eff50'; ctx.fill(); ctx.strokeStyle = '#4a9eff'; ctx.stroke();
+  ctx.beginPath(); ctx.arc(180, 55, 6, 0, Math.PI*2);
+  ctx.fillStyle = '#b06aff50'; ctx.fill(); ctx.strokeStyle = '#b06aff'; ctx.stroke();
+  ctx.fillStyle = '#fff'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('Different weights', 195, 28);
+  ctx.fillText('for same feature!', 195, 42);
+  ctx.fillStyle = '#888'; ctx.font = '10px sans-serif';
+  ctx.fillText('Must re-learn the', 195, 62);
+  ctx.fillText('pattern at each location', 195, 75);
+  ctx.fillStyle = '#e8713a'; ctx.font = '10px sans-serif';
+  ctx.fillText('same tumor', 55, 88);
+  ctx.fillText('same tumor', 90, 88);
+})();
+
+// ================================================
+// SECTION 6: The Fix: Convolution (Parameter chart)
+// ================================================
+var imgSizes = [28, 64, 128, 224, 512];
+
+function updateParams() {
+  var sizeIdx = parseInt(document.getElementById('imgsize').value);
+  var neurons = parseInt(document.getElementById('neurons').value);
+  var size = imgSizes[sizeIdx];
+  var pixels = size * size;
+  var fcParams = pixels * neurons;
+  var convParams = 9 * neurons;
+
+  document.getElementById('imgsizev').textContent = size+'x'+size;
+  document.getElementById('neuronsv').textContent = neurons;
+  document.getElementById('fc-params').textContent = fcParams.toLocaleString();
+  document.getElementById('conv-params').textContent = convParams.toLocaleString();
+
+  drawParamChart(sizeIdx, neurons);
+}
+
+function drawParamChart(sizeIdx, neurons) {
+  var c = document.getElementById('paramCanvas');
+  var ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, 500, 280);
+
+  var padding = {top:30, bottom:40, left:60, right:20};
+  var w = 500-padding.left-padding.right;
+  var h = 280-padding.top-padding.bottom;
+
+  var fcAll = imgSizes.map(function(s) { return s*s*neurons; });
+  var convAll = imgSizes.map(function(s) { return 9*neurons; });
+  var maxVal = Math.max.apply(null, fcAll);
+
+  ctx.strokeStyle = '#444'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padding.left, padding.top);
+  ctx.lineTo(padding.left, 280-padding.bottom);
+  ctx.lineTo(500-padding.right, 280-padding.bottom);
+  ctx.stroke();
+
+  ctx.fillStyle = '#888'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  imgSizes.forEach(function(s, i) {
+    var x = padding.left + (i/(imgSizes.length-1)) * w;
+    ctx.fillText(s+'', x, 280-padding.bottom+15);
+  });
+  ctx.fillText('Image Size', padding.left + w/2, 280-5);
+
+  ctx.save(); ctx.translate(15, padding.top+h/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('Parameters', 0, 0); ctx.restore();
+
+  ctx.strokeStyle = '#e84040'; ctx.lineWidth = 3;
+  ctx.beginPath();
+  fcAll.forEach(function(v, i) {
+    var x = padding.left + (i/(imgSizes.length-1)) * w;
+    var y = padding.top + h - (v/maxVal) * h;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  ctx.strokeStyle = '#2bb86c'; ctx.lineWidth = 3;
+  ctx.beginPath();
+  convAll.forEach(function(v, i) {
+    var x = padding.left + (i/(imgSizes.length-1)) * w;
+    var y = padding.top + h - (v/maxVal) * h;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  var cx = padding.left + (sizeIdx/(imgSizes.length-1)) * w;
+  var fcY = padding.top + h - (fcAll[sizeIdx]/maxVal) * h;
+  ctx.beginPath(); ctx.arc(cx, fcY, 6, 0, Math.PI*2);
+  ctx.fillStyle = '#e84040'; ctx.fill();
+
+  var convY = padding.top + h - (convAll[sizeIdx]/maxVal) * h;
+  ctx.beginPath(); ctx.arc(cx, convY, 6, 0, Math.PI*2);
+  ctx.fillStyle = '#2bb86c'; ctx.fill();
+
+  ctx.fillStyle = '#e84040'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('Fully Connected', padding.left+10, padding.top+15);
+  ctx.fillStyle = '#2bb86c';
+  ctx.fillText('Convolution 3x3', padding.left+10, padding.top+32);
+
+  var ratio = fcAll[sizeIdx] / convAll[sizeIdx];
+  ctx.fillStyle = '#ffd700'; ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'right';
+  ctx.fillText(ratio.toFixed(0)+'x more params!', 500-padding.right-5, padding.top+20);
+}
+
+['imgsize','neurons'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', updateParams);
+});
+updateParams();
+
+// ================================================
+// SECTION 7: Kernel Explorer
+// ================================================
+var KERNELS = {
+  identity:  [[0,0,0],[0,1,0],[0,0,0]],
+  edge_h:    [[-1,-1,-1],[0,0,0],[1,1,1]],
+  edge_v:    [[-1,0,1],[-1,0,1],[-1,0,1]],
+  sharpen:   [[0,-1,0],[-1,5,-1],[0,-1,0]],
+  blur:      [[1/9,1/9,1/9],[1/9,1/9,1/9],[1/9,1/9,1/9]],
+  emboss:    [[-2,-1,0],[-1,1,1],[0,1,2]],
+};
+
+var currentKernel = KERNELS.identity;
+var imgData = sharedXrayData; // shared with section 5
+
+function applyKernel(img, kernel, size) {
+  var out = new Float32Array(size * size);
+  for (var y = 1; y < size-1; y++) {
+    for (var x = 1; x < size-1; x++) {
+      var sum = 0;
+      for (var ky = -1; ky <= 1; ky++) {
+        for (var kx = -1; kx <= 1; kx++) {
+          sum += img[(y+ky)*size+(x+kx)] * kernel[ky+1][kx+1];
+        }
+      }
+      out[y*size+x] = sum;
+    }
+  }
+  return out;
+}
+
+function renderKernelGrid(kernel) {
+  var grid = document.getElementById('kernelGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      var cell = document.createElement('div');
+      cell.className = 'kernel-cell';
+      var v = kernel[i][j];
+      cell.textContent = v === Math.floor(v) ? v.toString() : v.toFixed(2);
+      cell.style.color = v > 0 ? '#2bb86c' : v < 0 ? '#e84040' : '#666';
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function renderCustomGrid() {
+  var grid = document.getElementById('customGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      var input = document.createElement('input');
+      input.type = 'number';
+      input.value = currentKernel[i][j];
+      input.step = '1';
+      input.style.cssText = 'width:50px;height:50px;background:#1a1a1a;border:1px solid #444;color:#e8713a;font-family:monospace;font-size:14px;text-align:center;';
+      input.dataset.row = i;
+      input.dataset.col = j;
+      grid.appendChild(input);
+    }
+  }
+}
+
+function applyCustomKernel() {
+  var inputs = document.getElementById('customGrid').querySelectorAll('input');
+  var kernel = [[0,0,0],[0,0,0],[0,0,0]];
+  inputs.forEach(function(inp) {
+    kernel[inp.dataset.row][inp.dataset.col] = parseFloat(inp.value) || 0;
+  });
+  currentKernel = kernel;
+  renderKernelGrid(kernel);
+  updateKernelView();
+  document.querySelectorAll('#sec7 nav button').forEach(function(b) { b.classList.remove('active'); });
+}
+
+function setKernel(name) {
+  currentKernel = KERNELS[name];
+  renderKernelGrid(currentKernel);
+  renderCustomGrid();
+  updateKernelView();
+  document.querySelectorAll('#sec7 nav button').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('btn-'+name).classList.add('active');
+}
+
+function updateKernelView() {
+  var size = XRAY_SIZE;
+  var filtered = applyKernel(imgData, currentKernel, size);
+  drawImage(document.getElementById('filtCanvas'), filtered, size, true);
+}
+
+drawImage(document.getElementById('origCanvas'), imgData, XRAY_SIZE, false);
+setKernel('identity');
+
+// ================================================
+// SECTION 8: Pooling (NEW)
+// ================================================
+var poolGridData = [];
+var poolGridSize = 6;
+
+function generatePoolGridData() {
+  poolGridData = [];
+  for (var i = 0; i < poolGridSize; i++) {
+    var row = [];
+    for (var j = 0; j < poolGridSize; j++) {
+      row.push(Math.floor(Math.random() * 10));
+    }
+    poolGridData.push(row);
+  }
+}
+
+function renderPooling() {
+  var poolSize = parseInt(document.getElementById('poolSize').value);
+  document.getElementById('poolSizeV').textContent = poolSize+'x'+poolSize;
+
+  var outputRows = Math.floor(poolGridSize / poolSize);
+  var outputCols = Math.floor(poolGridSize / poolSize);
+
+  // Determine max positions
+  var maxPositions = {};
+  var outputData = [];
+  for (var oi = 0; oi < outputRows; oi++) {
+    var outRow = [];
+    for (var oj = 0; oj < outputCols; oj++) {
+      var maxVal = -Infinity;
+      var maxR = -1, maxC = -1;
+      for (var di = 0; di < poolSize; di++) {
+        for (var dj = 0; dj < poolSize; dj++) {
+          var r = oi * poolSize + di;
+          var c = oj * poolSize + dj;
+          if (r < poolGridSize && c < poolGridSize) {
+            if (poolGridData[r][c] > maxVal) {
+              maxVal = poolGridData[r][c];
+              maxR = r; maxC = c;
+            }
+          }
+        }
+      }
+      maxPositions[maxR+','+maxC] = true;
+      outRow.push(maxVal);
+    }
+    outputData.push(outRow);
+  }
+
+  // Render input grid
+  var inputDiv = document.getElementById('poolInputGrid');
+  inputDiv.innerHTML = '';
+  var inputGrid = document.createElement('div');
+  inputGrid.className = 'pool-grid';
+  inputGrid.style.gridTemplateColumns = 'repeat('+poolGridSize+', 44px)';
+  for (var i = 0; i < poolGridSize; i++) {
+    for (var j = 0; j < poolGridSize; j++) {
+      var cell = document.createElement('div');
+      cell.className = 'pool-cell';
+      cell.textContent = poolGridData[i][j];
+      if (maxPositions[i+','+j]) {
+        cell.classList.add('pool-selected');
+      } else {
+        cell.classList.add('pool-dimmed');
+      }
+      // Add pool-region border coloring
+      var regionR = Math.floor(i / poolSize);
+      var regionC = Math.floor(j / poolSize);
+      var hue = ((regionR * outputCols + regionC) * 60 + 200) % 360;
+      cell.style.borderColor = maxPositions[i+','+j] ? '#2bb86c' : 'hsl('+hue+',30%,25%)';
+      inputGrid.appendChild(cell);
+    }
+  }
+  inputDiv.appendChild(inputGrid);
+
+  // Render output grid
+  var outputDiv = document.getElementById('poolOutputGrid');
+  outputDiv.innerHTML = '';
+  var outputGrid = document.createElement('div');
+  outputGrid.className = 'pool-grid';
+  outputGrid.style.gridTemplateColumns = 'repeat('+outputCols+', 44px)';
+  for (var i = 0; i < outputRows; i++) {
+    for (var j = 0; j < outputCols; j++) {
+      var cell = document.createElement('div');
+      cell.className = 'pool-cell pool-selected';
+      cell.textContent = outputData[i][j];
+      cell.style.fontSize = '20px';
+      outputGrid.appendChild(cell);
+    }
+  }
+  outputDiv.appendChild(outputGrid);
+
+  // Size info
+  inputDiv.innerHTML += '<p style="color:#888;font-size:12px;margin-top:5px;">'+poolGridSize+'x'+poolGridSize+' input</p>';
+  outputDiv.innerHTML += '<p style="color:#888;font-size:12px;margin-top:5px;">'+outputRows+'x'+outputCols+' output</p>';
+}
+
+function regeneratePoolGrid() {
+  generatePoolGridData();
+  renderPooling();
+}
+
+function renderSizeProgression() {
+  var sizes = [224, 112, 56, 28, 14, 7];
+  var labels = ['Input', 'Pool 1', 'Pool 2', 'Pool 3', 'Pool 4', 'Pool 5'];
+  var container = document.getElementById('sizeProgression');
+  container.innerHTML = '';
+  sizes.forEach(function(s, i) {
+    if (i > 0) {
+      var arrow = document.createElement('span');
+      arrow.className = 'size-arrow';
+      arrow.textContent = '\u00F7 2 \u2192';
+      container.appendChild(arrow);
+    }
+    var box = document.createElement('div');
+    box.className = 'size-box';
+    var scale = s / 224;
+    box.style.padding = Math.max(3, 8*scale)+'px '+Math.max(6, 14*scale)+'px';
+    box.innerHTML = '<div style="font-weight:bold;">'+s+'x'+s+'</div><div style="font-size:10px;color:#666;">'+labels[i]+'</div>';
+    container.appendChild(box);
+  });
+}
+
+generatePoolGridData();
+renderPooling();
+renderSizeProgression();
+document.getElementById('poolSize').addEventListener('input', renderPooling);
+
+// ================================================
+// SECTION 9: Full CNN Pipeline (NEW)
+// ================================================
+var pipelineStages = [
+  { label: 'Image', type: 'input', color: '#888', shape: '224x224x1', desc: 'Raw grayscale medical image. Each pixel is a number 0-255.', visual: 'A single-channel image with 50,176 pixel values.' },
+  { label: 'Conv1', type: 'conv', color: '#e8713a', shape: '224x224x32', desc: 'Apply 32 different 3x3 kernels. Each kernel detects a different low-level feature: horizontal edges, vertical edges, gradients.', visual: '32 feature maps, each 224x224. The image has been "seen" 32 different ways.' },
+  { label: 'ReLU', type: 'relu', color: '#2bb86c', shape: '224x224x32', desc: 'Kill all negative values. If a feature is not present (negative activation), set to zero. Keeps only positive evidence.', visual: 'Same size, but all negative values zeroed out. Sparse and clean.' },
+  { label: 'Pool1', type: 'pool', color: '#4a9eff', shape: '112x112x32', desc: 'Max pool 2x2: take the strongest activation in each 2x2 block. Halves the spatial dimensions.', visual: 'Half the width, half the height. 32 feature maps now 112x112.' },
+  { label: 'Conv2', type: 'conv', color: '#e8713a', shape: '112x112x64', desc: 'Apply 64 kernels to the 32 feature maps. Now detecting combinations of edges: corners, textures, curves.', visual: '64 feature maps. Each one combines patterns from the previous 32.' },
+  { label: 'ReLU', type: 'relu', color: '#2bb86c', shape: '112x112x64', desc: 'Again, zero out negatives. Only keep features that are positively detected.', visual: 'Same size, negatives removed.' },
+  { label: 'Pool2', type: 'pool', color: '#4a9eff', shape: '56x56x64', desc: 'Another 2x2 max pool. Spatial dimensions halved again.', visual: '64 feature maps, each 56x56. Getting smaller but richer.' },
+  { label: 'Conv3', type: 'conv', color: '#e8713a', shape: '56x56x128', desc: 'Apply 128 kernels. Now detecting complex structures: organ boundaries, anatomical landmarks, tissue patterns.', visual: '128 feature maps. High-level spatial features.' },
+  { label: 'ReLU', type: 'relu', color: '#2bb86c', shape: '56x56x128', desc: 'Zero out negatives one more time.', visual: 'Same size, cleaned up.' },
+  { label: 'Pool3', type: 'pool', color: '#4a9eff', shape: '28x28x128', desc: 'Final 2x2 max pool. The image is now 28x28 but has 128 channels of rich feature information.', visual: '128 feature maps at 28x28. Each "pixel" represents a high-level feature over a large receptive field.' },
+  { label: 'Flatten', type: 'flatten', color: '#ffd700', shape: '100,352', desc: 'Reshape the 3D tensor (28x28x128) into a 1D vector. 28 x 28 x 128 = 100,352 numbers in a row.', visual: 'One long vector. Spatial layout is gone; we now have a feature fingerprint of the whole image.' },
+  { label: 'Linear', type: 'linear', color: '#b06aff', shape: '256', desc: 'A fully-connected layer maps 100,352 features down to 256. Learns which combinations of spatial features matter for the diagnosis.', visual: '256 high-level abstract features. No longer spatial -- just "what matters".' },
+  { label: 'Output', type: 'output', color: '#fff', shape: '2', desc: 'Final layer: 2 neurons, one per class (e.g., Normal vs Pneumonia). Softmax converts to probabilities.', visual: 'Two numbers that sum to 1.0. The network\'s diagnosis.' },
+];
+
+function buildPipeline() {
+  var row = document.getElementById('pipelineRow');
+  row.innerHTML = '';
+  pipelineStages.forEach(function(stage, i) {
+    if (i > 0) {
+      var arrow = document.createElement('span');
+      arrow.className = 'pipeline-arrow';
+      arrow.textContent = '\u2192';
+      row.appendChild(arrow);
+    }
+    var box = document.createElement('div');
+    box.className = 'pipeline-stage';
+    box.style.borderColor = stage.color + '60';
+    box.style.background = stage.color + '15';
+    box.dataset.index = i;
+    box.innerHTML = '<div class="stage-label" style="color:'+stage.color+';">'+stage.label+'</div>' +
+      '<div class="stage-shape" style="color:'+stage.color+'80;">'+stage.shape+'</div>';
+    box.addEventListener('click', function() { selectPipelineStage(parseInt(this.dataset.index)); });
+    row.appendChild(box);
+  });
+
+  // Build shape tracker
+  var tracker = document.getElementById('shapeTracker');
+  tracker.innerHTML = '';
+  pipelineStages.forEach(function(stage, i) {
+    if (i > 0) {
+      var arrow = document.createElement('span');
+      arrow.style.color = '#555';
+      arrow.textContent = ' \u2192 ';
+      tracker.appendChild(arrow);
+    }
+    var chip = document.createElement('span');
+    chip.className = 'shape-chip';
+    chip.id = 'shape-chip-'+i;
+    chip.style.color = stage.color;
+    chip.style.background = stage.color + '15';
+    chip.textContent = stage.shape;
+    tracker.appendChild(chip);
+  });
+}
+
+function selectPipelineStage(idx) {
+  var stage = pipelineStages[idx];
+  // Update selection
+  document.querySelectorAll('.pipeline-stage').forEach(function(el) { el.classList.remove('selected'); el.style.borderColor = pipelineStages[el.dataset.index].color + '60'; });
+  var boxes = document.querySelectorAll('.pipeline-stage');
+  boxes[idx].classList.add('selected');
+  boxes[idx].style.borderColor = stage.color;
+
+  // Highlight shape chip
+  document.querySelectorAll('.shape-chip').forEach(function(el) { el.style.fontWeight = 'normal'; el.style.fontSize = '11px'; });
+  var chip = document.getElementById('shape-chip-'+idx);
+  if (chip) { chip.style.fontWeight = 'bold'; chip.style.fontSize = '13px'; }
+
+  // Show detail
+  var detail = document.getElementById('pipelineDetail');
+  var typeLabels = { input:'INPUT', conv:'CONVOLUTION', relu:'ACTIVATION', pool:'POOLING', flatten:'RESHAPE', linear:'FULLY CONNECTED', output:'OUTPUT' };
+  detail.innerHTML =
+    '<div style="display:flex;gap:15px;align-items:flex-start;flex-wrap:wrap;">' +
+      '<div style="flex:1;min-width:250px;">' +
+        '<div style="color:'+stage.color+';font-size:12px;font-weight:bold;text-transform:uppercase;">'+typeLabels[stage.type]+'</div>' +
+        '<h3 style="color:#fff;margin:5px 0;">'+stage.label+'</h3>' +
+        '<p style="color:#ccc;font-size:14px;">'+stage.desc+'</p>' +
+        '<div class="equation" style="border-left-color:'+stage.color+';margin-top:10px;">' +
+          '<strong>Output shape:</strong> <span style="color:'+stage.color+';">'+stage.shape+'</span>' +
+        '</div>' +
+      '</div>' +
+      '<div style="flex:1;min-width:250px;">' +
+        '<div style="background:#0a0a0a;border:1px solid #333;border-radius:6px;padding:12px;">' +
+          '<div style="color:#888;font-size:11px;margin-bottom:5px;">VISUALIZATION</div>' +
+          '<canvas id="pipelineVisCanvas" width="260" height="80"></canvas>' +
+          '<p style="color:#888;font-size:12px;margin-top:6px;">'+stage.visual+'</p>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  // Draw mini visual
+  drawPipelineVisual(idx);
+}
+
+function drawPipelineVisual(idx) {
+  var canvas = document.getElementById('pipelineVisCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 260, 80);
+  var stage = pipelineStages[idx];
+
+  if (stage.type === 'input') {
+    // Draw small image
+    ctx.fillStyle = '#333';
+    for (var i = 0; i < 8; i++) for (var j = 0; j < 8; j++) {
+      var v = Math.floor(sharedXrayData[Math.floor(i/8*XRAY_SIZE)*XRAY_SIZE + Math.floor(j/8*XRAY_SIZE)] * 200 + 55);
+      ctx.fillStyle = 'rgb('+Math.floor(v*0.7)+','+Math.floor(v*0.8)+','+v+')';
+      ctx.fillRect(5+j*9, 5+i*9, 8, 8);
+    }
+    ctx.fillStyle = '#888'; ctx.font = '10px sans-serif'; ctx.fillText('224x224x1', 85, 45);
+  } else if (stage.type === 'conv') {
+    // Draw multiple feature maps
+    var n = idx <= 2 ? 4 : idx <= 6 ? 6 : 8;
+    for (var k = 0; k < n; k++) {
+      var x0 = 5 + k * 32;
+      for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) {
+        var v = Math.random();
+        ctx.fillStyle = 'rgba(232,113,58,'+(v*0.8+0.2)+')';
+        ctx.fillRect(x0+j*6, 10+i*6, 5, 5);
+      }
+      ctx.strokeStyle = '#e8713a40'; ctx.strokeRect(x0, 10, 24, 24);
+    }
+    ctx.fillStyle = '#e8713a'; ctx.font = '10px sans-serif'; ctx.fillText('Multiple feature maps', 5, 55);
+  } else if (stage.type === 'relu') {
+    // Show before/after
+    for (var i = 0; i < 16; i++) {
+      var v = Math.random() * 2 - 1;
+      var xp = 5 + i * 8;
+      ctx.fillStyle = v >= 0 ? '#2bb86c' : '#e84040';
+      ctx.fillRect(xp, 10, 6, 25);
+      ctx.fillStyle = '#2bb86c';
+      ctx.fillRect(xp + 140, 10, 6, v >= 0 ? 25 : 0);
+      if (v < 0) { ctx.fillStyle = '#33333380'; ctx.fillRect(xp + 140, 10, 6, 25); }
+    }
+    ctx.fillStyle = '#888'; ctx.font = '10px sans-serif';
+    ctx.fillText('Before', 40, 50); ctx.fillText('After (negatives zeroed)', 145, 50);
+  } else if (stage.type === 'pool') {
+    // Show 4x4 -> 2x2
+    var vals = [[7,2,5,3],[1,8,4,6],[3,1,9,2],[5,7,3,8]];
+    for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) {
+      ctx.fillStyle = '#1a1a1a'; ctx.fillRect(5+j*16, 5+i*16, 15, 15);
+      ctx.fillStyle = '#888'; ctx.font = '11px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(vals[i][j], 12+j*16, 17+i*16);
+    }
+    ctx.fillStyle = '#555'; ctx.font = '16px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('\u2192', 82, 40);
+    var maxes = [[8,6],[7,9]];
+    for (var i = 0; i < 2; i++) for (var j = 0; j < 2; j++) {
+      ctx.fillStyle = '#0a2a1a'; ctx.fillRect(95+j*22, 15+i*22, 20, 20);
+      ctx.strokeStyle = '#2bb86c'; ctx.strokeRect(95+j*22, 15+i*22, 20, 20);
+      ctx.fillStyle = '#2bb86c'; ctx.font = 'bold 13px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(maxes[i][j], 105+j*22, 30+i*22);
+    }
+    ctx.fillStyle = '#4a9eff'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('Keep max in each 2x2', 145, 35);
+    ctx.textAlign = 'left';
+  } else if (stage.type === 'flatten') {
+    // Draw 3D to 1D
+    ctx.fillStyle = '#ffd70040';
+    ctx.fillRect(5, 10, 60, 60);
+    ctx.strokeStyle = '#ffd700'; ctx.strokeRect(5, 10, 60, 60);
+    ctx.fillStyle = '#ffd700'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('28x28x128', 35, 45);
+    ctx.fillStyle = '#555'; ctx.font = '16px sans-serif';
+    ctx.fillText('\u2192', 80, 42);
+    ctx.fillStyle = '#ffd70040';
+    ctx.fillRect(100, 25, 150, 20);
+    ctx.strokeStyle = '#ffd700'; ctx.strokeRect(100, 25, 150, 20);
+    ctx.fillStyle = '#ffd700'; ctx.font = '9px monospace';
+    ctx.fillText('100,352', 175, 39);
+    ctx.textAlign = 'left';
+  } else if (stage.type === 'linear') {
+    // Draw connections
+    for (var i = 0; i < 6; i++) {
+      for (var j = 0; j < 3; j++) {
+        ctx.strokeStyle = '#b06aff30'; ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(30, 10+i*12); ctx.lineTo(180, 20+j*20); ctx.stroke();
+      }
+      ctx.beginPath(); ctx.arc(30, 10+i*12, 4, 0, Math.PI*2);
+      ctx.fillStyle = '#b06aff60'; ctx.fill();
+    }
+    for (var j = 0; j < 3; j++) {
+      ctx.beginPath(); ctx.arc(180, 20+j*20, 6, 0, Math.PI*2);
+      ctx.fillStyle = '#b06aff'; ctx.fill();
+    }
+    ctx.fillStyle = '#b06aff'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('100K -> 256 features', 200, 40);
+  } else if (stage.type === 'output') {
+    // Two output neurons
+    ctx.beginPath(); ctx.arc(60, 30, 18, 0, Math.PI*2);
+    ctx.fillStyle = '#2bb86c40'; ctx.fill(); ctx.strokeStyle = '#2bb86c'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#2bb86c'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('0.92', 60, 35);
+    ctx.fillText('Normal', 60, 60);
+
+    ctx.beginPath(); ctx.arc(160, 30, 18, 0, Math.PI*2);
+    ctx.fillStyle = '#e8404040'; ctx.fill(); ctx.strokeStyle = '#e84040'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#e84040'; ctx.font = 'bold 12px sans-serif';
+    ctx.fillText('0.08', 160, 35);
+    ctx.fillText('Pneumonia', 160, 60);
+    ctx.textAlign = 'left';
+  }
+}
+
+var pipelineAnimRunning = false;
+
+function runPipelineAnimation() {
+  if (pipelineAnimRunning) return;
+  pipelineAnimRunning = true;
+  var fill = document.getElementById('pipelineFlowFill');
+  fill.style.width = '0%';
+
+  var i = 0;
+  function step() {
+    if (i >= pipelineStages.length) {
+      pipelineAnimRunning = false;
+      return;
+    }
+    selectPipelineStage(i);
+    fill.style.width = ((i+1)/pipelineStages.length*100)+'%';
+    i++;
+    setTimeout(step, 600);
+  }
+  step();
+}
+
+buildPipeline();
+
+// ================================================
+// Step indicator navigation
+// ================================================
+document.querySelectorAll('.step').forEach(function(el, i) {
+  el.addEventListener('click', function() {
+    var target = document.getElementById('sec'+(i+1));
+    if (target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// Update step indicators on scroll
+function updateStepIndicators() {
+  for (var i = 1; i <= 9; i++) {
+    var sec = document.getElementById('sec'+i);
+    var step = document.getElementById('step'+i);
+    if (sec && step) {
+      var rect = sec.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.5 && rect.bottom > 0) {
+        step.className = 'step active';
+      } else if (rect.bottom < window.innerHeight * 0.5) {
+        step.className = 'step done';
+      } else {
+        step.className = 'step';
+      }
+    }
+  }
+}
+
+window.addEventListener('scroll', updateStepIndicators);
+updateStepIndicators();
+</script>
+</body>
+</html>

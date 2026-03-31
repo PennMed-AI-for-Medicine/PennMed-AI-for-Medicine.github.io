@@ -67,7 +67,11 @@ Slides: [[Slides]](slides/{{module.slides}})
 {% endfor %}
 {% endif %}
 
-{% if module.homework %} 
+{% if module.lab %}
+**Lab:** <a href="{{ module.lab.url }}">{{ module.lab.title }}</a>
+{% endif %}
+
+{% if module.homework %}
 Homework:
 
 <ul>
