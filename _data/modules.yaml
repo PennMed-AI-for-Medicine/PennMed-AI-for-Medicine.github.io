@@ -309,6 +309,42 @@
       optional: true
       note: "Practical framework for fairness in clinical ML"
 
+- module_number: 5
+  start_date: 2026-03-03
+  end_date: 2026-03-18
+  title: "Midterm Project"
+  description: >
+    Students select one of two tracks for their midterm project. Each track requires
+    a working model and a mini field guide. Track A: Medical Imaging (classification,
+    segmentation, detection). Track B: Structured Data (risk prediction, outcome modeling).
+    NLP track available for final project after Module 7-8 coverage.
+  homework: Midterm
+  lessons:
+    - title: "Midterm Project Kickoff"
+      description: >
+        Overview of the two project tracks (imaging and structured data), dataset
+        options, and expectations. Forming teams (if applicable). Timeline and
+        milestones. What makes a good mini field guide: intended use, performance
+        summary, limitations, decision rules.
+    - title: "Work Session: Data Exploration & Baseline"
+      description: >
+        In-class work time with instructor and TA support. Focus on loading data,
+        EDA, and establishing a simple baseline model. Troubleshooting environment
+        and data issues.
+    - title: "Work Session: Model Development"
+      description: >
+        In-class work time focused on model architecture, training, and iteration.
+        Peer feedback on approaches. Debugging common issues across both tracks.
+    - title: "Midterm Presentations"
+      description: >
+        10-minute presentations of results and mini field guides. Peer feedback and
+        discussion. What worked, what didn't, and lessons learned.
+  readings:
+    - title: "📖 Textbook: Chapter 11 — Imaging Case Studies"
+      url: https://book.clinicalai.guide/chapters/11-imaging-case-studies.html
+      optional: false
+      note: "Course textbook—real-world imaging AI examples"
+
 - module_number: 6
   start_date: 2026-03-24
   end_date: 2026-04-01
@@ -373,42 +409,6 @@
       url: https://github.com/Project-MONAI/tutorials/blob/main/2d_classification/mednist_tutorial.ipynb
       optional: true
       note: "Hands-on tutorial we'll work through in class"
-
-- module_number: 5
-  start_date: 2026-03-03
-  end_date: 2026-03-18
-  title: "Midterm Project"
-  description: >
-    Students select one of two tracks for their midterm project. Each track requires
-    a working model and a mini field guide. Track A: Medical Imaging (classification,
-    segmentation, detection). Track B: Structured Data (risk prediction, outcome modeling).
-    NLP track available for final project after Module 7-8 coverage.
-  homework: Midterm
-  lessons:
-    - title: "Midterm Project Kickoff"
-      description: >
-        Overview of the two project tracks (imaging and structured data), dataset
-        options, and expectations. Forming teams (if applicable). Timeline and
-        milestones. What makes a good mini field guide: intended use, performance
-        summary, limitations, decision rules.
-    - title: "Work Session: Data Exploration & Baseline"
-      description: >
-        In-class work time with instructor and TA support. Focus on loading data,
-        EDA, and establishing a simple baseline model. Troubleshooting environment
-        and data issues.
-    - title: "Work Session: Model Development"
-      description: >
-        In-class work time focused on model architecture, training, and iteration.
-        Peer feedback on approaches. Debugging common issues across both tracks.
-    - title: "Midterm Presentations"
-      description: >
-        10-minute presentations of results and mini field guides. Peer feedback and
-        discussion. What worked, what didn't, and lessons learned.
-  readings:
-    - title: "📖 Textbook: Chapter 11 — Imaging Case Studies"
-      url: https://book.clinicalai.guide/chapters/11-imaging-case-studies.html
-      optional: false
-      note: "Course textbook—real-world imaging AI examples"
 
 - module_number: 7
   start_date: 2026-04-01
