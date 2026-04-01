@@ -68,7 +68,7 @@ Slides: [[Slides]](slides/{{module.slides}})
 {% endif %}
 
 {% if module.lab %}
-**Lab:** <a href="{{ module.lab.url }}">{{ module.lab.title }}</a>
+**Lab:** <a href="{{ module.lab.url }}">{{ module.lab.title }}</a>{% if module.lab.colab_url %} · <a href="{{ module.lab.colab_url }}">Open in Google Colab</a>{% endif %}
 {% endif %}
 
 {% if module.homework %}

@@ -387,6 +387,7 @@
   lab:
     title: "Beat the Baseline — DermaMNIST Challenge"
     url: https://classroom.github.com/a/n7UvOQ59
+    colab_url: https://colab.research.google.com/drive/14aD96M2Lx8bn5RbRz7GyKRiIJp0M23zG?usp=sharing
   readings:
     - title: "📖 Textbook: Chapter 5 — Deep Neural Networks & Backprop"
       url: https://book.clinicalai.guide/chapters/05-deep-neural-networks.html
