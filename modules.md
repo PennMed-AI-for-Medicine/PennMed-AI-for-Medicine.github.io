@@ -70,6 +70,7 @@ Slides: [[Slides]](slides/{{module.slides}})
 {% if module.lab %}
 **Lab:** {{ module.lab.title }}
 
+{% if module.lab.interactive_url %}* <a href="{{ module.lab.interactive_url }}">Interactive Deep Learning Walkthrough</a> — neurons, convolutions, and architecture explorer{% endif %}
 * <a href="{{ module.lab.url }}">Accept the Challenge (GitHub Classroom)</a>
 {% if module.lab.colab_url %}* <a href="{{ module.lab.colab_url }}">Open in Google Colab</a> — no local setup needed{% endif %}
 {% if module.lab.strategy_guide_url %}* <a href="{{ module.lab.strategy_guide_url }}">Strategy Guide</a> — progressive hints to improve your score{% endif %}
