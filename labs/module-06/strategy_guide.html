@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DermaMNIST Strategy Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
+  :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --muted: #8b949e;
+          --accent: #4a90d9; --border: #30363d; --hint1: #fef3c7; --hint2: #fde68a;
+          --hint3: #fbbf24; --code-bg: #161b22; --success: #3fb950; --danger: #f85149;
+          --blue: #4a90d9; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; max-width: 800px;
+         margin: 0 auto; padding: 2rem 1.5rem; }
+  h1, h2 { font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; }
+  h1 { font-size: 2rem; margin-bottom: 0.2rem; color: #f0f6fc; }
+  .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 0.5rem; }
+  .intro { color: var(--muted); margin-bottom: 2rem; border-bottom: 2px solid var(--border);
+           padding-bottom: 1.5rem; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .level-badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 12px;
+                 font-size: 0.75rem; font-weight: 700; color: white; }
+  .level-1 { background: #22c55e; }
+  .level-2 { background: #3b82f6; }
+  .level-3 { background: #a855f7; }
+  .level-4 { background: #f59e0b; }
+  .level-5 { background: #ef4444; }
+  .concept { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+             padding: 1.2rem; margin: 0.8rem 0; }
+  .concept p { margin: 0.4rem 0; }
+  .try-this { background: linear-gradient(135deg, #0a2a1a, #161b22); border-left: 4px solid #22c55e;
+              border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; }
+  .try-this::before { content: 'Try this: '; font-weight: 700; color: #4ade80; }
+  .warning { background: linear-gradient(135deg, #2a0a0a, #161b22); border-left: 4px solid var(--danger);
+             border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; }
+  .warning::before { content: 'Watch out: '; font-weight: 700; color: #f87171; }
+  .question { background: linear-gradient(135deg, #0a1a2a, #161b22); border-left: 4px solid var(--blue);
+              border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; font-style: italic; }
+
+  /* Hint system */
+  .hint-stack { margin: 0.8rem 0; }
+  details.hint { border: 1px solid var(--border); border-radius: 8px; margin: 0.4rem 0;
+                 background: var(--card); overflow: hidden; }
+  details.hint summary { padding: 0.7rem 1rem; cursor: pointer; font-weight: 600;
+                         user-select: none; list-style: none; display: flex;
+                         align-items: center; gap: 0.5rem; }
+  details.hint summary::-webkit-details-marker { display: none; }
+  details.hint summary::before { content: '\1F4A1'; font-size: 0.9rem; }
+  details.hint[open] summary { border-bottom: 1px solid var(--border); }
+  .hint-body { padding: 0.8rem 1rem; color: var(--muted); }
+  details.hint.h1-style { border-color: #166534; }
+  details.hint.h1-style summary { background: #14532d22; }
+  details.hint.h2-style { border-color: #854d0e; }
+  details.hint.h2-style summary { background: #78350f22; }
+  details.hint.h3-style { border-color: #9a3412; }
+  details.hint.h3-style summary { background: #7c2d1222; }
+
+  code { background: var(--code-bg); padding: 0.15rem 0.4rem; border-radius: 4px;
+         font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85em; color: #93c5fd; }
+  .section-ref { display: inline-block; background: #1e3a5f; color: #93c5fd;
+                 padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.8rem;
+                 font-weight: 600; margin: 0.2rem 0; }
+
+  .progress-map { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+                  padding: 1.2rem; margin: 1rem 0; }
+  .progress-map h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .milestone { display: flex; align-items: center; gap: 0.8rem; padding: 0.4rem 0;
+               border-bottom: 1px solid var(--border); }
+  .milestone:last-child { border-bottom: none; }
+  .milestone-auc { font-weight: 700; font-family: monospace; width: 4rem; text-align: center;
+                   padding: 0.2rem; border-radius: 4px; font-size: 0.85rem; }
+  .milestone-desc { flex: 1; font-size: 0.9rem; }
+  .m-bronze { background: #78350f; color: #fde68a; }
+  .m-silver { background: #334155; color: #e2e8f0; }
+  .m-gold { background: #854d0e; color: #fef08a; }
+  .m-plat { background: #4c1d95; color: #c4b5fd; }
+  .m-clinical { background: #831843; color: #fbcfe8; }
+
+  .scoreboard { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .score-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+                padding: 1rem; text-align: center; }
+  .score-card .big { font-size: 1.5rem; font-weight: 700; }
+  .score-card .label { color: var(--muted); font-size: 0.85rem; }
+
+  footer { color: var(--muted); font-size: 0.8rem; margin-top: 3rem; padding-top: 1rem;
+           border-top: 1px solid var(--border); text-align: center; }
+
+  @media (max-width: 600px) {
+    body { padding: 1rem; }
+    .scoreboard { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div style="margin-bottom:1.5rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border);">
+  <a href="/modules.html#module-6" style="color:#4a90d9;font-size:0.85rem;text-decoration:none;">&larr; Back to Module 6</a>
+  <span style="color:#8b949e;font-size:0.85rem;"> &middot; MPHY 6120 &middot; clinicalai.guide</span>
+</div>
+
+<h1>DermaMNIST Strategy Guide</h1>
+<p class="subtitle">MPHY 6120 &middot; Module 6 &middot; Beat the Baseline Challenge</p>
+<div class="intro">
+  <p>This guide won't give you the answers. It will point you in productive directions
+  and help you understand <em>why</em> each change matters. Open only the hints you need &mdash;
+  you'll learn more by struggling a bit first.</p>
+  <p style="margin-top:0.5rem;">
+    <strong>Remember:</strong> modify only the sections marked
+    <span class="section-ref">MODIFY THIS</span> and re-run with
+    <code>uv run python challenge_beat_the_baseline.py</code>
+  </p>
+</div>
+
+<!-- ── PROGRESS MAP ── -->
+<div class="progress-map">
+  <h3>Progress Milestones</h3>
+  <p style="color:var(--muted); font-size:0.85rem; margin-bottom:0.5rem;">Where does your AUC put you?</p>
+  <div class="milestone">
+    <div class="milestone-auc m-bronze">~0.82</div>
+    <div class="milestone-desc">Baseline territory. The model is basically guessing "benign" for everything.</div>
+  </div>
+  <div class="milestone">
+    <div class="milestone-auc m-bronze">0.85</div>
+    <div class="milestone-desc">You fixed the optimizer. Good first step &mdash; now the model is actually learning.</div>
+  </div>
+  <div class="milestone">
+    <div class="milestone-auc m-silver">0.88</div>
+    <div class="milestone-desc">Better architecture or augmentation is working. You're above average.</div>
+  </div>
+  <div class="milestone">
+    <div class="milestone-auc m-gold">0.90</div>
+    <div class="milestone-desc">Target beaten. You've combined multiple improvements effectively.</div>
+  </div>
+  <div class="milestone">
+    <div class="milestone-auc m-plat">0.92+</div>
+    <div class="milestone-desc">Expert territory. You're using scheduling, strong augmentation, or transfer learning.</div>
+  </div>
+  <div class="milestone">
+    <div class="milestone-auc m-clinical">???</div>
+    <div class="milestone-desc">Bonus: check your <em>melanoma recall</em>. High AUC doesn't mean you catch cancer.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2><span class="level-badge level-1">Level 1</span> Quick Wins (5 minutes)</h2>
+<p style="color:var(--muted);">These are one-line changes in <span class="section-ref">Section 5</span> that should immediately improve your score.</p>
+
+<div class="concept">
+  <p><strong>The optimizer matters more than you think.</strong></p>
+  <p>The baseline uses SGD with a learning rate of 0.1. That's... aggressive.
+  Think about what happens when you take giant steps through a loss landscape with lots of valleys.</p>
+</div>
+
+<div class="try-this">
+  Look up <code>torch.optim.Adam</code>. What default learning rate do most tutorials recommend?
+  Try swapping the optimizer in Section 5 &mdash; just one line.
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint 1: Which optimizer?</summary>
+    <div class="hint-body">
+      Adam (Adaptive Moment Estimation) maintains per-parameter learning rates.
+      It's the go-to optimizer for almost any deep learning project.
+      It's in <code>torch.optim</code>.
+    </div>
+  </details>
+  <details class="hint h2-style">
+    <summary>Hint 2: What learning rate?</summary>
+    <div class="hint-body">
+      The most common default for Adam is <code>1e-3</code> (0.001).
+      That's 100x smaller than the baseline's SGD learning rate.
+      Too high = overshooting. Too low = underfitting in few epochs.
+    </div>
+  </details>
+</div>
+
+<div class="concept">
+  <p><strong>5 epochs might not be enough.</strong></p>
+  <p>The model sees each image only 5 times. Would you learn to distinguish 7 types of
+  skin lesions from 5 passes through a textbook?</p>
+</div>
+
+<div class="try-this">
+  Try 10 or 15 epochs in Section 5. Watch both train and val loss &mdash;
+  if they start diverging, you're overfitting.
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2><span class="level-badge level-2">Level 2</span> Build a Better Model (15 minutes)</h2>
+<p style="color:var(--muted);">These changes go in <span class="section-ref">Section 4</span>. The baseline model is intentionally weak.</p>
+
+<div class="concept">
+  <p><strong>The baseline has 6,887 parameters.</strong> That's fewer parameters than pixels
+  in a single training batch. The model literally cannot represent the features it needs.
+  Think of it like trying to describe 7 types of skin lesions using only 10 words.</p>
+</div>
+
+<div class="try-this">
+  The baseline conv layers use 8 and 16 channels. What happens if you use 32 and 64?
+  You're giving the model more "feature detectors."
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint 1: What to change in the model</summary>
+    <div class="hint-body">
+      <p>In the <code>BaselineModel.__init__</code>, look at the <code>nn.Conv2d</code> layers.
+      The second argument is the number of output channels (feature maps). More channels = more
+      features the model can detect.</p>
+      <p>If you change channel counts, you also need to update the <code>nn.Linear</code>
+      layer's input size to match. Think about what size the feature maps are after two rounds
+      of MaxPool2d(2) on a 28&times;28 image.</p>
+    </div>
+  </details>
+  <details class="hint h2-style">
+    <summary>Hint 2: The magic ingredient most architectures use</summary>
+    <div class="hint-body">
+      <p>Look up <code>nn.BatchNorm2d</code>. It goes after each Conv2d layer (before or after ReLU,
+      both work). It normalizes activations, stabilizes training, and often provides
+      the single biggest accuracy jump.</p>
+      <p>Usage: <code>nn.BatchNorm2d(num_channels)</code> where num_channels matches
+      the Conv2d output channels.</p>
+    </div>
+  </details>
+  <details class="hint h3-style">
+    <summary>Hint 3: Going deeper</summary>
+    <div class="hint-body">
+      <p>Consider adding a third conv block. A common pattern: 32 &rarr; 64 &rarr; 128 channels,
+      each block being Conv &rarr; BatchNorm &rarr; ReLU &rarr; Pool.</p>
+      <p>If you add more pooling layers, the spatial size shrinks. After two MaxPool2d(2) on
+      a 28&times;28 image you get 7&times;7. A third would give 3&times;3. Or try
+      <code>nn.AdaptiveAvgPool2d(1)</code> which collapses any spatial size to 1&times;1 &mdash;
+      very clean.</p>
+    </div>
+  </details>
+</div>
+
+<div class="concept">
+  <p><strong>Overfitting?</strong> If your training accuracy is much higher than validation accuracy,
+  the model is memorizing instead of learning. There's a standard technique to fight this.</p>
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint: Regularization</summary>
+    <div class="hint-body">
+      <code>nn.Dropout(p)</code> randomly zeros out activations during training with probability
+      <code>p</code>. Try <code>p=0.3</code> or <code>p=0.5</code> before your final Linear layer.
+      It forces the model to not rely on any single neuron. It automatically turns off during evaluation.
+    </div>
+  </details>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2><span class="level-badge level-3">Level 3</span> Data Augmentation (15 minutes)</h2>
+<p style="color:var(--muted);">These changes go in <span class="section-ref">Section 2</span>.
+You're creating "free" training data by showing the model transformed versions of each image.</p>
+
+<div class="concept">
+  <p><strong>The model sees 7,007 training images.</strong> That's tiny by deep learning standards.
+  But does a skin lesion look different when flipped horizontally? Rotated 10 degrees?
+  Slightly brighter? No. So we can generate new training examples for free.</p>
+</div>
+
+<div class="try-this">
+  Look at <code>torchvision.transforms</code>. Add augmentations to <code>train_transform</code>
+  <strong>before</strong> <code>ToTensor()</code>. Start with the simplest one.
+</div>
+
+<div class="warning">
+  Never augment validation data! Only modify <code>train_transform</code>.
+  The validation set needs to be consistent so you can compare scores across experiments.
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint 1: The easiest augmentation</summary>
+    <div class="hint-body">
+      <code>transforms.RandomHorizontalFlip()</code> &mdash; 50% chance of mirroring each image.
+      Skin lesions have no left-right orientation, so this is always safe.
+      One line, often noticeable improvement.
+    </div>
+  </details>
+  <details class="hint h2-style">
+    <summary>Hint 2: More augmentations to stack</summary>
+    <div class="hint-body">
+      <p>Geometric: <code>RandomRotation(degrees)</code>, <code>RandomVerticalFlip()</code>,
+      <code>RandomAffine(degrees, translate)</code></p>
+      <p>Photometric: <code>ColorJitter(brightness, contrast, saturation, hue)</code></p>
+      <p>Stack them in the Compose list. Order matters slightly but isn't critical.
+      Start conservative (small values) and increase if it helps.</p>
+    </div>
+  </details>
+  <details class="hint h3-style">
+    <summary>Hint 3: A common gotcha with Normalize</summary>
+    <div class="hint-body">
+      <p>You might be tempted to add <code>transforms.Normalize(mean=[...], std=[...])</code>
+      with ImageNet statistics. <strong>Be very careful.</strong></p>
+      <p>Think about what happens if your training data is normalized but your validation data
+      isn't. The model learns on data centered around 0, then sees data in [0,1] range at test time.
+      What do you think happens?</p>
+      <p>Since you can't modify <code>val_transform</code> (it's in a locked section),
+      adding Normalize to train_transform alone will <em>hurt</em> performance.</p>
+    </div>
+  </details>
+</div>
+
+<div class="question">
+  With augmentation, your model sees a <em>different</em> version of each image every epoch.
+  Do you think 5 epochs is still enough? What happens if you increase to 10 or 15?
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2><span class="level-badge level-4">Level 4</span> Advanced Techniques (20 minutes)</h2>
+<p style="color:var(--muted);">These are the techniques that separate good results from great ones.
+Changes span <span class="section-ref">Section 4</span> and <span class="section-ref">Section 5</span>.</p>
+
+<div class="concept">
+  <p><strong>This dataset is heavily imbalanced.</strong> Look at the class distribution printed
+  when you run the script. One class has ~4,700 images. Another has ~80. The model takes
+  the easy path: predict the big class for everything and get 67% accuracy.</p>
+</div>
+
+<div class="try-this">
+  <code>nn.CrossEntropyLoss</code> accepts a <code>weight</code> parameter.
+  What if you made misclassifying a rare class cost more?
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint 1: Class weights concept</summary>
+    <div class="hint-body">
+      <p>The idea: a class with 80 samples should have a higher weight than a class with 4,700.
+      This forces the model to pay equal attention to all classes, not just the common ones.</p>
+      <p>A standard formula: <code>weight = total_samples / (num_classes * class_count)</code></p>
+    </div>
+  </details>
+  <details class="hint h2-style">
+    <summary>Hint 2: Computing the weights</summary>
+    <div class="hint-body">
+      <p>The training labels are already extracted as <code>train_labels</code> (a numpy array).
+      You can use <code>np.bincount(train_labels)</code> to count each class.</p>
+      <p>Compute inverse-frequency weights, convert to a <code>torch.FloatTensor</code>,
+      move to <code>DEVICE</code>, and pass as <code>nn.CrossEntropyLoss(weight=your_weights)</code>.</p>
+      <p>Put this code in Section 5, before the criterion line.</p>
+    </div>
+  </details>
+</div>
+
+<div class="concept">
+  <p><strong>Should the learning rate stay the same the whole time?</strong>
+  Think of searching for something in a room. First you scan broadly (big steps).
+  Then you look carefully in the promising area (small steps).</p>
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint 1: Learning rate scheduling</summary>
+    <div class="hint-body">
+      <p>Look at <code>torch.optim.lr_scheduler</code>. The training loop already handles schedulers &mdash;
+      if <code>scheduler</code> is not <code>None</code>, it calls <code>scheduler.step()</code>
+      once per epoch.</p>
+      <p>A popular choice: <code>CosineAnnealingLR</code>. It smoothly decays the learning rate
+      following a cosine curve from your initial LR down to ~0.</p>
+    </div>
+  </details>
+  <details class="hint h2-style">
+    <summary>Hint 2: Setting it up</summary>
+    <div class="hint-body">
+      <p>Create the optimizer first, then the scheduler:</p>
+      <p><code>scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=NUM_EPOCHS)</code></p>
+      <p><code>T_max</code> should match your total number of epochs so the cosine curve
+      completes exactly one half-cycle.</p>
+    </div>
+  </details>
+</div>
+
+<div class="concept">
+  <p><strong>What if someone already trained a powerful vision model on millions of images?</strong>
+  What if you could use their feature detectors and just retrain the final classification layer
+  for your task?</p>
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint 1: Transfer learning</summary>
+    <div class="hint-body">
+      <p><code>torchvision.models</code> has pretrained models like ResNet18, trained on
+      ImageNet (1.2 million natural images). These models have already learned to detect
+      edges, textures, and patterns that transfer to medical images.</p>
+      <p>The idea: load a pretrained model, replace the final classification layer to output
+      7 classes, and fine-tune.</p>
+    </div>
+  </details>
+  <details class="hint h2-style">
+    <summary>Hint 2: How to adapt ResNet18</summary>
+    <div class="hint-body">
+      <p>Load it: <code>from torchvision import models</code></p>
+      <p>ResNet18 has a <code>.fc</code> attribute (the final fully-connected layer).
+      By default it outputs 1000 classes (ImageNet). You need to replace it with one that
+      outputs <code>NUM_CLASSES</code> (7).</p>
+      <p>Use a <strong>lower learning rate</strong> (try 1e-4) &mdash; the pretrained weights
+      are already good, you just need to nudge them.</p>
+    </div>
+  </details>
+  <details class="hint h3-style">
+    <summary>Hint 3: An important subtlety for small images</summary>
+    <div class="hint-body">
+      <p>ResNet18 was designed for 224&times;224 images. Its first layer is a 7&times;7 conv
+      with stride 2, followed by a maxpool with stride 2. On a 28&times;28 image, that
+      aggressively downsamples to 7&times;7 in the first two operations, throwing away spatial
+      information.</p>
+      <p>Advanced move: replace <code>model.conv1</code> with a smaller conv (3&times;3, stride 1)
+      and replace <code>model.maxpool</code> with <code>nn.Identity()</code>. This preserves
+      more spatial resolution for small images.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2><span class="level-badge level-5">Level 5</span> Think Like a Clinician</h2>
+<p style="color:var(--muted);">This isn't about code. It's about what your model actually does.</p>
+
+<div class="concept">
+  <p><strong>Look at the per-class results printed at the end of each run.</strong></p>
+  <p>Find the row for <code>mel</code> (melanoma). What's the recall?
+  Recall means: of all actual melanomas, what fraction did your model catch?</p>
+</div>
+
+<div class="question">
+  Your model gets 0.92 AUC. Impressive! But melanoma recall is 0.15.
+  That means 85% of melanoma patients are told their lesion is benign.
+  <strong>Would you deploy this model in a dermatology clinic?</strong>
+</div>
+
+<div class="concept">
+  <p><strong>In medical AI, the metric you optimize is not always the metric that matters.</strong></p>
+  <p>AUC measures overall discrimination across all classes equally. But missing a melanoma
+  (life-threatening) is not the same as misclassifying a benign keratosis (inconvenient).
+  A model optimized purely for AUC will spend most of its capacity on the common classes
+  because that's where the easy points are.</p>
+</div>
+
+<div class="try-this">
+  After you've beaten 0.90 AUC, go back and try to maximize <strong>melanoma recall</strong>
+  instead. What changes help? What's the tradeoff?
+</div>
+
+<div class="hint-stack">
+  <details class="hint h1-style">
+    <summary>Hint: The single most impactful change for melanoma detection</summary>
+    <div class="hint-body">
+      <p>Class weights (from Level 4). When you penalize melanoma misclassification more heavily,
+      the model is forced to learn melanoma-specific features instead of taking the easy path
+      of predicting the majority class.</p>
+      <p>Your AUC might actually go <em>down</em> when you add class weights. That's okay.
+      You're trading leaderboard points for clinical utility. In the real world,
+      that's the right tradeoff.</p>
+    </div>
+  </details>
+</div>
+
+<div class="scoreboard">
+  <div class="score-card">
+    <div class="big" style="color:var(--accent);">0.90+</div>
+    <div class="label">AUC Target<br>(leaderboard metric)</div>
+  </div>
+  <div class="score-card">
+    <div class="big" style="color:var(--danger);">50%+</div>
+    <div class="label">Melanoma Recall<br>(clinical metric &mdash; bonus challenge)</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<h2>Cheat Sheet: What to Try When You're Stuck</h2>
+
+<div class="concept">
+  <table style="width:100%; font-size:0.9rem;">
+    <thead>
+      <tr>
+        <th style="text-align:left; padding:0.5rem;">Symptom</th>
+        <th style="text-align:left; padding:0.5rem;">Likely Cause</th>
+        <th style="text-align:left; padding:0.5rem;">Try This</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">AUC stuck at ~0.82</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Bad optimizer or LR</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Switch to Adam, lower LR</td>
+      </tr>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">AUC ~0.85, won't go higher</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Model too small</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">More channels, add BatchNorm</td>
+      </tr>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Train acc &gt;&gt; val acc</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Overfitting</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Add Dropout, augmentation</td>
+      </tr>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Val loss going up</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Too many epochs</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Fewer epochs, or add scheduler</td>
+      </tr>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">AUC dropped drastically</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Train/val mismatch</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Check if you transformed val data differently</td>
+      </tr>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Accuracy ~67%, model predicts one class</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Class imbalance</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Class weights in loss function</td>
+      </tr>
+      <tr>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">High AUC but 0% melanoma recall</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Model ignoring rare classes</td>
+        <td style="padding:0.5rem; border-top:1px solid #334155;">Class weights, smaller batch size</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  MPHY 6120 &middot; AI for Medicine &middot; Module 6: Deep Learning<br>
+  Good luck. The baseline is waiting to be beaten.<br>
+  <a href="/modules.html#module-6" style="color:#4a90d9;">Back to Module 6</a> &middot;
+  <a href="/labs/module-06/experiment_report.html" style="color:#4a90d9;">View Experiment Results</a>
+</footer>
+
+</body>
+</html>

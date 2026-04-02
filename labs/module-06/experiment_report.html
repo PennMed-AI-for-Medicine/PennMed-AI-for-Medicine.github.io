@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DermaMNIST Challenge: 25 Experiments in Deep Learning</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
+  :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --muted: #8b949e;
+          --accent: #4a90d9; --danger: #f85149; --success: #3fb950; --blue: #4a90d9; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.6; }
+  h1, h2 { font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  h1 { font-size: 2.2rem; text-align: center; margin-bottom: 0.3rem; }
+  .subtitle { text-align: center; color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid var(--accent);
+       padding-bottom: 0.3rem; }
+  h3 { font-size: 1.15rem; color: var(--accent); margin: 1.5rem 0 0.5rem; }
+  .card { background: var(--card); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+  .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--card); border-radius: 12px; padding: 1.2rem; text-align: center;
+          border-left: 4px solid var(--accent); }
+  .stat .num { font-size: 2rem; font-weight: 700; }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .stat.danger { border-left-color: var(--danger); }
+  .stat.danger .num { color: var(--danger); }
+  .stat.success { border-left-color: var(--success); }
+  .stat.success .num { color: var(--success); }
+  .stat.blue { border-left-color: var(--blue); }
+  .stat.blue .num { color: var(--blue); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
+  th { background: #30363d; padding: 0.6rem 0.5rem; text-align: left; font-weight: 600;
+       position: sticky; top: 0; }
+  td { padding: 0.5rem; border-bottom: 1px solid #30363d; }
+  tr:hover td { background: #1a2744; }
+  .mel-col { font-weight: 700; }
+  .mel-bad { color: var(--danger); }
+  .mel-ok { color: var(--accent); }
+  .mel-good { color: var(--success); }
+  .plot-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1rem 0; }
+  .plot-grid.two { grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); }
+  .plot-card { background: var(--card); border-radius: 12px; overflow: hidden; }
+  .plot-card img { width: 100%; display: block; }
+  .plot-caption { padding: 0.8rem 1rem; color: var(--muted); font-size: 0.9rem; }
+  .takeaway { background: linear-gradient(135deg, #1e3a5f, #161b22); border-left: 4px solid var(--accent);
+              border-radius: 8px; padding: 1.2rem; margin: 1rem 0; }
+  .takeaway strong { color: var(--accent); }
+  .gotcha { border-left-color: var(--danger); background: linear-gradient(135deg, #3b1a1a, #161b22); }
+  .gotcha strong { color: var(--danger); }
+  .chapter-label { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px;
+                   font-size: 0.7rem; font-weight: 600; color: white; }
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px;
+           font-size: 0.75rem; font-weight: 600; }
+  .badge-win { background: var(--success); color: #052e16; }
+  .badge-fail { background: var(--danger); color: white; }
+  details { background: var(--card); border-radius: 8px; margin: 0.6rem 0; border: 1px solid #30363d; }
+  details[open] { border-color: var(--accent); }
+  summary { cursor: pointer; padding: 0.8rem 1rem; font-weight: 600; list-style: none;
+            display: flex; align-items: center; gap: 0.8rem; user-select: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '\25B6'; font-size: 0.7rem; color: var(--accent);
+                    transition: transform 0.2s; flex-shrink: 0; }
+  details[open] summary::before { transform: rotate(90deg); }
+  summary:hover { background: #263044; border-radius: 8px; }
+  .exp-detail { padding: 0 1rem 1rem; color: var(--muted); line-height: 1.7; }
+  .exp-detail p { margin: 0.4rem 0; }
+  .exp-metrics { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 0.5rem 0; font-size: 0.85rem; }
+  .exp-metrics span { display: inline-flex; align-items: center; gap: 0.3rem; }
+  .exp-metrics .metric-label { color: #64748b; }
+  .exp-metrics .metric-val { font-weight: 700; }
+  .exp-change { background: #0f1a2e; border-radius: 6px; padding: 0.6rem 0.8rem;
+                font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem;
+                margin: 0.5rem 0; color: #93c5fd; white-space: pre-wrap; }
+  .verdict-card { background: linear-gradient(135deg, #1a3a2a, #161b22); border: 2px solid var(--success);
+                  border-radius: 12px; padding: 2rem; margin: 1.5rem 0; }
+  .verdict-card h3 { color: var(--success); margin-top: 0; }
+  .verdict-runner-up { background: var(--card); border-radius: 8px; padding: 1rem;
+                       margin: 0.8rem 0; border-left: 3px solid var(--blue); }
+  footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 3rem;
+           padding-top: 1rem; border-top: 1px solid #30363d; }
+  @media (max-width: 768px) {
+    .plot-grid.two { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    table { font-size: 0.75rem; }
+    .exp-metrics { flex-direction: column; gap: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<div style="margin-bottom:1.5rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border,#30363d);">
+  <a href="/modules.html#module-6" style="color:#4a90d9;font-size:0.85rem;text-decoration:none;">&larr; Back to Module 6</a>
+  <span style="color:#8b949e;font-size:0.85rem;"> &middot; MPHY 6120 &middot; clinicalai.guide</span>
+</div>
+
+<h1>Beat the Baseline: 25 Experiments in Deep Learning</h1>
+<p class="subtitle">DermaMNIST Skin Lesion Classification &mdash; MPHY 6120 Module 6</p>
+
+<div class="hero-stats">
+  <div class="stat success">
+    <div class="num">0.929</div>
+    <div class="label">Best AUC (Cosine LR)</div>
+  </div>
+  <div class="stat danger">
+    <div class="num">0.00</div>
+    <div class="label">Baseline Melanoma Recall</div>
+  </div>
+  <div class="stat blue">
+    <div class="num">25</div>
+    <div class="label">Experiments Run</div>
+  </div>
+  <div class="stat">
+    <div class="num">~14 min</div>
+    <div class="label">Total Runtime (MPS)</div>
+  </div>
+</div>
+
+<!-- ── THE BIG QUESTION ── -->
+<h2>The Big Question</h2>
+<div class="card">
+  <p>You just hit <strong>0.93 AUC</strong> on a 7-class skin lesion classifier. Congratulations!</p>
+  <p style="margin-top:0.8rem">But would you deploy this to a dermatology clinic?</p>
+  <p style="margin-top:0.8rem; font-size:1.3rem; text-align:center; padding:1rem;">
+    Your <strong style="color:var(--success)">0.93 AUC</strong> model catches
+    <strong style="color:var(--danger)">41% of melanomas</strong>.
+  </p>
+  <p style="color:var(--muted)">
+    That means 6 out of 10 melanoma patients walk out the door undiagnosed.
+    AUC is a useful optimization target, but it is <em>not</em> a clinical deployment metric.
+  </p>
+</div>
+
+<!-- ── RESULTS TABLE ── -->
+<h2>Full Results</h2>
+<p style="color:var(--muted); margin-bottom:0.5rem;">Sorted by macro AUC. Watch the melanoma recall column.</p>
+<div style="overflow-x: auto;">
+<table>
+<thead>
+<tr>
+  <th>#</th><th>Experiment</th><th>Chapter</th><th>AUC</th>
+  <th>Mel Recall</th><th>Cancer Sens</th>
+  <th>Accuracy</th><th>Params</th><th>Time</th>
+</tr>
+</thead>
+<tbody id="results-table">
+</tbody>
+</table>
+</div>
+
+<!-- ── THE STORY ── -->
+<h2>The Story: 10 Chapters</h2>
+<p style="color:var(--muted); margin-bottom:0.5rem;">Click any experiment to expand details about what changed and what it teaches.</p>
+
+<!-- ════ Chapter 1 ════ -->
+<h3>Chapter 1: The Baseline</h3>
+<div class="takeaway">
+  <strong>The baseline gets 68% accuracy by predicting "benign mole" for everything.</strong>
+  It catches zero cancers. AUC of 0.82 sounds decent until you look at per-class recall: only
+  melanocytic nevi (nv) are detected. This is the consequence of class imbalance &mdash; the model
+  learns the shortcut of always predicting the majority class.
+</div>
+<details>
+  <summary>Exp 01 &mdash; Baseline <span class="badge badge-fail">AUC 0.822</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.822</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Accuracy:</span> <span class="metric-val">68.0%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">6,887</span></span>
+      <span><span class="metric-label">Time:</span> <span class="metric-val">8.3s</span></span>
+    </div>
+    <div class="exp-change">Model: 2-layer CNN (8 &rarr; 16 channels)
+Optimizer: SGD(lr=0.1)   Epochs: 5   Augmentation: None</div>
+    <p>The intentionally weak starting point. SGD at lr=0.1 is dangerously high &mdash; the model overshoots
+    good minima. Only 8 and 16 filters mean the model can barely learn any useful features.
+    With no augmentation, it memorizes the training set's class distribution instead of learning
+    discriminative features. The 0% cancer recall means this model is clinically useless &mdash;
+    every cancer patient walks out undiagnosed.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 2 ════ -->
+<h3>Chapter 2: Fix the Optimizer</h3>
+<div class="takeaway">
+  <strong>Switching SGD &rarr; Adam(lr=1e-3) is often the single best one-line change.</strong>
+  Adam maintains per-parameter adaptive learning rates, so it navigates loss landscapes
+  that trip up vanilla SGD. But learning rate still matters &mdash; too low underfits, too high diverges.
+</div>
+<details>
+  <summary>Exp 02 &mdash; Adam lr=1e-3 <span class="badge badge-win">AUC 0.846</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.846</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">9%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">4%</span></span>
+      <span><span class="metric-label">Accuracy:</span> <span class="metric-val">69.0%</span></span>
+    </div>
+    <div class="exp-change">Changed: optimizer = optim.Adam(model.parameters(), lr=1e-3)</div>
+    <p>One line changed, AUC jumps +0.024. Adam's adaptive learning rates let each parameter
+    move at its own pace. The model starts learning features beyond just "predict nv." This is the
+    go-to optimizer for almost any deep learning project. Note: melanoma recall is still terrible
+    because the architecture is still too weak to learn fine-grained skin lesion features.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 03 &mdash; SGD lr=0.01 <span class="badge badge-fail">AUC 0.662</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.662</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Accuracy:</span> <span class="metric-val">66.9%</span></span>
+    </div>
+    <div class="exp-change">Changed: optimizer = optim.SGD(model.parameters(), lr=0.01)</div>
+    <p>Lowering SGD's learning rate from 0.1 to 0.01 actually made things <em>worse</em>. Why?
+    Without momentum, SGD at 0.01 crawls through the loss landscape in just 5 epochs.
+    It barely learns anything beyond the majority-class shortcut. This shows that
+    learning rate and optimizer choice interact &mdash; you can't tune them independently.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 04 &mdash; Adam lr=1e-4 <span class="badge badge-fail">AUC 0.650</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.650</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Accuracy:</span> <span class="metric-val">66.9%</span></span>
+    </div>
+    <div class="exp-change">Changed: optimizer = optim.Adam(model.parameters(), lr=1e-4)</div>
+    <p>Even Adam can underfit if the learning rate is too conservative. At 1e-4 with only 5 epochs,
+    the model barely moves from initialization. This is why lr=1e-4 is typically used for
+    <em>fine-tuning</em> pretrained models (which are already close to a good solution), not for
+    training from scratch. Lesson: match your learning rate to your training budget.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 05 &mdash; SGD + Momentum <span class="badge">AUC 0.819</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.819</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">3%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">1%</span></span>
+      <span><span class="metric-label">Accuracy:</span> <span class="metric-val">67.0%</span></span>
+    </div>
+    <div class="exp-change">Changed: optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)</div>
+    <p>Adding momentum=0.9 gives SGD a "memory" of past gradient directions, letting it build up
+    speed in consistent directions and dampen oscillations. This is how SGD is <em>supposed</em> to be used &mdash;
+    vanilla SGD without momentum is almost never the right choice. Result is on par with the baseline
+    but still behind Adam for this small model and short training run.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 3 ════ -->
+<h3>Chapter 3: Build a Better Architecture</h3>
+<div class="takeaway">
+  <strong>More channels, deeper networks, BatchNorm, and Dropout each contribute.</strong>
+  The baseline's 6,887 parameters are severely capacity-starved &mdash; it literally cannot represent
+  the features needed to distinguish 7 skin lesion types. Going to 94k params with BatchNorm
+  is the inflection point where the model starts catching melanoma.
+</div>
+<details>
+  <summary>Exp 06 &mdash; More Channels (32/64) <span class="badge badge-win">AUC 0.898</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.898</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">19%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">31%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">41,351</span></span>
+    </div>
+    <div class="exp-change">Model: 2-layer CNN with 32 &rarr; 64 channels (was 8 &rarr; 16)
+Optimizer: Adam(lr=1e-3)</div>
+    <p>6x more parameters, AUC jumps from 0.846 to 0.898. More channels = more feature detectors.
+    The model can now learn separate filters for different colors, edges, and textures in skin lesions.
+    Melanoma recall hits 19% &mdash; still bad clinically, but the model is starting to notice that
+    melanomas look different from nevi. This is a capacity story: you need enough parameters to
+    represent the decision boundaries between 7 classes.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 07 &mdash; Three Conv Blocks + AdaptivePool <span class="badge">AUC 0.855</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.855</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">94,151</span></span>
+    </div>
+    <div class="exp-change">Model: 3 blocks (32 &rarr; 64 &rarr; 128 channels) + AdaptiveAvgPool2d(1)
+Optimizer: Adam(lr=1e-3)</div>
+    <p>Deeper, but AUC actually dropped vs. More Channels. Why? Deeper networks are harder to train &mdash;
+    without BatchNorm, gradients degrade as they pass through more layers (the "vanishing gradient"
+    problem). The 0% melanoma recall is a red flag: this model collapsed to predicting majority class.
+    <strong>Takeaway: depth without BatchNorm can hurt.</strong> AdaptiveAvgPool2d is still a good pattern &mdash;
+    it replaces hardcoded spatial dimensions with a learnable global pooling.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 08 &mdash; BatchNorm <span class="badge badge-win">AUC 0.897</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.897</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">41%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">57%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">94,599</span></span>
+    </div>
+    <div class="exp-change">Model: 3 blocks (32 &rarr; 64 &rarr; 128) + BatchNorm2d after each conv
+Optimizer: Adam(lr=1e-3)</div>
+    <p>Same architecture as Exp 07, but with BatchNorm after each conv layer. AUC jumps from
+    0.855 to 0.897, and melanoma recall explodes from 0% to 41%. BatchNorm normalizes each layer's
+    inputs to zero mean and unit variance, which (a) prevents internal covariate shift, (b) acts as
+    mild regularization, and (c) allows higher learning rates. This is often the single most impactful
+    architectural change you can make. <strong>This model becomes our base for the rest of the experiments.</strong></p>
+  </div>
+</details>
+<details>
+  <summary>Exp 09 &mdash; Dropout <span class="badge">AUC 0.897</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.897</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">50%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">57%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">94,599</span></span>
+    </div>
+    <div class="exp-change">Added: nn.Dropout(0.3) before the classifier linear layer</div>
+    <p>AUC is nearly identical to BatchNorm alone, but melanoma recall jumped from 41% to 50%.
+    Dropout randomly zeros 30% of activations during training, forcing the network to not rely
+    on any single feature. This regularization makes the model more robust to subtle differences &mdash;
+    exactly what you need for distinguishing melanoma from benign nevi. The AUC/recall divergence
+    is starting to show: improvements in rare-class detection don't always move the overall metric.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 10 &mdash; Hidden FC Layer <span class="badge">AUC 0.841</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.841</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-good">66%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">50%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">102,407</span></span>
+    </div>
+    <div class="exp-change">Classifier: Linear(128,64) &rarr; ReLU &rarr; Dropout(0.2) &rarr; Linear(64,7)</div>
+    <p>AUC dropped to 0.841, but melanoma recall hit <strong>66% &mdash; the highest of any experiment!</strong>
+    Adding a hidden FC layer gives the classifier more expressive power to separate classes in
+    feature space. The AUC drop likely comes from worse calibration on majority classes.
+    <strong>This is a key clinical tradeoff:</strong> this model would catch 2 out of 3 melanomas
+    at the cost of more false positives on common lesions. In a derm clinic with follow-up biopsy
+    capability, that tradeoff might be exactly right.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 4 ════ -->
+<h3>Chapter 4: Data Augmentation</h3>
+<div class="takeaway">
+  <strong>A simple horizontal flip + the BatchNorm model = 0.92 AUC.</strong>
+  Augmentation is "free data" &mdash; it shows the model different views of each image,
+  reducing overfitting and improving generalization. But you need more epochs to benefit,
+  since the model sees different versions of each image each time.
+</div>
+<details>
+  <summary>Exp 11 &mdash; Horizontal Flip <span class="badge badge-win">AUC 0.925</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.925</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">33%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">22%</span></span>
+      <span><span class="metric-label">Epochs:</span> <span class="metric-val">10</span></span>
+    </div>
+    <div class="exp-change">train_transform: RandomHorizontalFlip() + ToTensor()
+Epochs: 10 (was 5)</div>
+    <p>The simplest possible augmentation yields a massive AUC jump: 0.897 &rarr; 0.925.
+    Skin lesions have no inherent left-right orientation, so horizontal flip is always safe.
+    With 10 epochs, the model sees each image ~5 times flipped and ~5 times unflipped,
+    effectively doubling the training data. But notice: melanoma recall actually <em>dropped</em>
+    from 41% to 33%. The extra epochs let the model fit majority classes better,
+    which boosts AUC while relatively neglecting rare classes.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 12 &mdash; + Rotation <span class="badge badge-win">AUC 0.921</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.921</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">50%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">51%</span></span>
+    </div>
+    <div class="exp-change">train_transform: RandomHorizontalFlip() + RandomRotation(15) + ToTensor()</div>
+    <p>Adding &plusmn;15&deg; rotation simulates dermoscopes being held at different angles.
+    AUC is slightly lower than flip-only, but melanoma recall jumped back to 50% and cancer
+    sensitivity hit 51%. The rotation adds enough noise that the model can't just memorize
+    spatial layout &mdash; it has to learn rotationally-invariant features, which happen to be
+    more useful for distinguishing cancer from benign lesions.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 13 &mdash; + Color Jitter <span class="badge badge-win">AUC 0.915</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.915</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">31%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">23%</span></span>
+    </div>
+    <div class="exp-change">Added: ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05)</div>
+    <p>Color jitter simulates lighting variation in dermoscopy. AUC dipped slightly, and melanoma
+    recall dropped. Why? Color is actually <em>informative</em> for skin lesion classification &mdash;
+    melanomas tend to have irregular colors. Too aggressive color jitter can wash out the signal
+    that distinguishes dangerous lesions. Lesson: not all augmentation helps equally.
+    Domain knowledge matters when choosing augmentations.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 14 &mdash; + Normalize (GOTCHA) <span class="badge badge-fail">AUC 0.539</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val mel-bad">0.539</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">0%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">0%</span></span>
+    </div>
+    <div class="exp-change">Added: transforms.Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])
+BUT: val_transform stays as just ToTensor() (locked section!)</div>
+    <p style="color:var(--danger);"><strong>WORST RESULT IN THE ENTIRE SUITE.</strong></p>
+    <p>This is an intentional trap. Normalizing with ImageNet statistics shifts pixel values to be
+    centered around zero with unit variance. But the validation transform can't be changed (it's in
+    a locked section), so val data stays in [0,1] range. The model learns features on normalized data
+    and then sees completely different distributions at evaluation time.
+    <strong>Preprocessing must be consistent between train and validation.</strong>
+    This is one of the most common bugs in real ML pipelines and is extremely hard to debug
+    because the model still trains fine &mdash; it only fails silently at evaluation.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 5 ════ -->
+<h3>Chapter 5: Handle Class Imbalance</h3>
+<div class="takeaway">
+  <strong>Class weights are the most direct way to tell the model "melanoma matters more."</strong>
+  They penalize misclassification of rare classes more heavily. AUC dips slightly because
+  the model sacrifices accuracy on the dominant class (nv), but cancer detection improves substantially.
+  This is almost always the right tradeoff in medicine.
+</div>
+<details>
+  <summary>Exp 15 &mdash; Class Weights <span class="badge badge-win">AUC 0.905</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.905</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-good">56%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">29%</span></span>
+      <span><span class="metric-label">Accuracy:</span> <span class="metric-val">62.4%</span></span>
+    </div>
+    <div class="exp-change">criterion = nn.CrossEntropyLoss(weight=inverse_frequency_weights)</div>
+    <p>Accuracy dropped from ~70% to 62% &mdash; but melanoma recall jumped to 56%.
+    The inverse-frequency weights make a melanoma misclassification cost ~6x more than
+    missing a nevi. The model now actively looks for melanoma features instead of defaulting
+    to the safe "it's probably benign" prediction. In clinical terms: we went from catching 0
+    melanomas to catching more than half. The accuracy drop is from nevi being misclassified
+    more often &mdash; more false positives, but those just mean extra biopsies, not missed cancers.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 16 &mdash; Label Smoothing <span class="badge badge-win">AUC 0.903</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.903</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">26%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">44%</span></span>
+    </div>
+    <div class="exp-change">criterion = nn.CrossEntropyLoss(label_smoothing=0.1)</div>
+    <p>Label smoothing replaces hard targets [0,0,0,0,1,0,0] with soft targets [0.014,...,0.9,...,0.014].
+    This prevents the model from becoming overconfident and acts as regularization.
+    AUC is comparable to class weights, but melanoma recall is lower (26% vs 56%).
+    Label smoothing helps generalization broadly but doesn't specifically target rare classes
+    the way class weights do. For imbalanced medical data, class weights are usually more impactful.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 6 ════ -->
+<h3>Chapter 6: Batch Size &amp; Epochs</h3>
+<div class="takeaway">
+  <strong>More epochs help (0.92 at 20 epochs), but watch for overfitting.</strong>
+  Batch size has surprising effects on class balance &mdash; large batches smooth out gradients
+  in a way that favors majority classes, devastating rare-class detection.
+</div>
+<details>
+  <summary>Exp 17 &mdash; Batch Size 64 <span class="badge">AUC 0.899</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.899</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">8%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">35%</span></span>
+    </div>
+    <div class="exp-change">Changed: BATCH_SIZE = 64 (was 32)</div>
+    <p>Doubling batch size from 32 to 64 barely changed AUC but halved the gradient updates per epoch
+    (110 &rarr; 55 steps). The smoother gradients favor majority classes. Training is faster (fewer steps),
+    but melanoma recall collapsed from 41% to 8%. In imbalanced datasets, smaller batches
+    create noisier gradients that actually help the model "notice" rare classes.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 18 &mdash; Batch Size 128 <span class="badge badge-win">AUC 0.911</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.911</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">1%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">24%</span></span>
+    </div>
+    <div class="exp-change">Changed: BATCH_SIZE = 128</div>
+    <p>Surprisingly high AUC (0.911!) but <strong>1% melanoma recall</strong>. This is the
+    poster child for why AUC alone is dangerous. With only ~55 batches per epoch and 7007 images,
+    some batches might contain zero melanoma samples. The model optimizes for the majority class
+    and achieves great AUC by being very good at distinguishing the common lesions from each other.
+    <strong>A student showing this AUC would look great on the leaderboard while deploying a
+    clinically dangerous model.</strong></p>
+  </div>
+</details>
+<details>
+  <summary>Exp 19 &mdash; 20 Epochs <span class="badge badge-win">AUC 0.923</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.923</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">46%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">51%</span></span>
+    </div>
+    <div class="exp-change">Changed: NUM_EPOCHS = 20 (was 10)</div>
+    <p>More training time helps across the board: AUC 0.923, melanoma recall 46%, cancer sensitivity 51%.
+    The model has more time to learn features for rare classes. But check the training curves &mdash;
+    the gap between train and val loss is widening by epoch 20. That's overfitting starting.
+    Going to 50 epochs without regularization would likely hurt. The sweet spot depends on your
+    architecture and regularization strategy.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 7 ════ -->
+<h3>Chapter 7: Learning Rate Scheduling</h3>
+<div class="takeaway">
+  <strong>Cosine annealing achieved the highest AUC of any experiment: 0.929.</strong>
+  The idea: start with a high learning rate to explore broadly, then gradually reduce it
+  to fine-tune into a sharp minimum. CosineAnnealingLR is the modern default.
+</div>
+<details>
+  <summary>Exp 20 &mdash; Cosine LR Schedule <span class="badge badge-win">AUC 0.929 &mdash; #1 AUC</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val" style="color:var(--success)">0.929</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">41%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">45%</span></span>
+      <span><span class="metric-label">Epochs:</span> <span class="metric-val">15</span></span>
+    </div>
+    <div class="exp-change">scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=15)
+NUM_EPOCHS = 15</div>
+    <p>The leaderboard champion. CosineAnnealingLR smoothly decays the learning rate from 1e-3 to ~0
+    over 15 epochs following a cosine curve. Early epochs make big moves; late epochs do precision
+    fine-tuning. The result: best-in-suite AUC at 0.929. But melanoma recall is only 41%. This model
+    excels at the <em>overall</em> classification task but doesn't specifically prioritize cancer.
+    <strong>This is the model students would be proudest of &mdash; and the one that would hurt
+    patients if deployed without additional safeguards.</strong></p>
+  </div>
+</details>
+
+<!-- ════ Chapter 8 ════ -->
+<h3>Chapter 8: Stack the Wins</h3>
+<div class="takeaway">
+  <strong>Combining BatchNorm + augmentation + class weights + cosine LR = best cancer detection.</strong>
+  Individual improvements compound, but there are diminishing returns. The clinically-focused
+  combined model trades leaderboard position for patient safety.
+</div>
+<details>
+  <summary>Exp 21 &mdash; Best Custom CNN <span class="badge">AUC 0.891</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.891</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-good">56%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-good">60%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">102,407</span></span>
+    </div>
+    <div class="exp-change">Model: 3-block BN+Dropout(0.4) + hidden FC(128&rarr;64&rarr;7)
+Augmentation: HFlip + VFlip + Rotation(20) + ColorJitter
+Loss: CrossEntropyLoss(weight=class_weights)
+Optimizer: Adam(1e-3) + CosineAnnealingLR, 15 epochs, batch=64</div>
+    <p>Everything we learned combined into one model. AUC is "only" 0.891 (rank ~14 out of 25),
+    but cancer sensitivity hits 60% and melanoma recall is 56%. The class weights pull the model
+    toward detecting rare cancers, the augmentation improves generalization, and the cosine scheduler
+    fine-tunes into a good minimum. <strong>This is the model a dermatologist would actually want
+    as a screening aid:</strong> it catches more than half of all cancers while maintaining
+    reasonable specificity.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 22 &mdash; + Label Smoothing <span class="badge">AUC 0.846</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.846</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-good">65%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-good">61%</span></span>
+    </div>
+    <div class="exp-change">Added: label_smoothing=0.1 to the weighted CrossEntropyLoss</div>
+    <p>Adding label smoothing on top of class weights pushed melanoma recall to 65% and cancer
+    sensitivity to 61% &mdash; but AUC dropped to 0.846. The soft targets from label smoothing
+    compound with class weights to create very strong pressure toward rare-class detection,
+    at the cost of majority-class calibration. This is diminishing returns: each added technique
+    provides less marginal benefit and can start interfering with others. The art of ML is knowing
+    when to stop stacking.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 9 ════ -->
+<h3>Chapter 9: Transfer Learning</h3>
+<div class="takeaway">
+  <strong>ResNet18 pretrained on ImageNet achieves 0.91 AUC &mdash; matching weeks of
+  architecture search with one import statement.</strong> But pretrained features need fine-tuning
+  for medical images, and 11M parameters on 7k training images risks overfitting.
+</div>
+<details>
+  <summary>Exp 23 &mdash; ResNet18 Fine-Tuned <span class="badge badge-win">AUC 0.915</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.915</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-ok">28%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-ok">33%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">11,180,103</span></span>
+    </div>
+    <div class="exp-change">Model: torchvision ResNet18(pretrained=ImageNet) with fc &rarr; Linear(512,7)
+Optimizer: Adam(lr=1e-4), CosineAnnealingLR, 10 epochs</div>
+    <p>11 million parameters pretrained on 1.2 million natural images. The conv layers already know
+    edges, textures, colors, and shapes &mdash; they just need to adapt to dermoscopy.
+    AUC of 0.915 is strong, but melanoma recall is only 28%. Without class weights, the massive
+    model capacity is spent on majority classes. Transfer learning is powerful but not magic &mdash;
+    you still need to handle imbalance. Also note: 87s training time vs ~12s for the custom CNN.
+    The ImageNet features help on average but don't specifically target the clinical question.</p>
+  </div>
+</details>
+<details>
+  <summary>Exp 24 &mdash; ResNet18 Frozen <span class="badge badge-fail">AUC 0.761</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.761</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-bad">3%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-bad">3%</span></span>
+    </div>
+    <div class="exp-change">All backbone params frozen (requires_grad=False), only fc layer trains</div>
+    <p>A common shortcut: freeze the pretrained backbone and only train the classification head.
+    This <strong>failed badly</strong> (0.761, worse than baseline). Why? ImageNet features are
+    learned from natural images (dogs, cars, buildings). Dermoscopy images are tiny (28&times;28),
+    with very different visual statistics. The frozen features don't transfer well to this domain.
+    <strong>Lesson: feature extraction without fine-tuning only works when domains are similar.</strong>
+    Medical imaging almost always requires fine-tuning.</p>
+  </div>
+</details>
+
+<!-- ════ Chapter 10 ════ -->
+<h3>Chapter 10: The Kitchen Sink</h3>
+<div class="takeaway">
+  <strong>Everything we know, thrown at the problem.</strong> Modified conv1 for small images,
+  all augmentations, class weights, label smoothing, cosine scheduling. This is what a
+  competition submission looks like when you optimize for the right metric.
+</div>
+<details open>
+  <summary>Exp 25 &mdash; Kitchen Sink <span class="badge" style="background:var(--accent);color:#000;">AUC 0.869</span></summary>
+  <div class="exp-detail">
+    <div class="exp-metrics">
+      <span><span class="metric-label">AUC:</span> <span class="metric-val">0.869</span></span>
+      <span><span class="metric-label">Mel Recall:</span> <span class="metric-val mel-good">58%</span></span>
+      <span><span class="metric-label">Cancer Sens:</span> <span class="metric-val mel-good">59%</span></span>
+      <span><span class="metric-label">Params:</span> <span class="metric-val">11,172,423</span></span>
+      <span><span class="metric-label">Time:</span> <span class="metric-val">138s</span></span>
+    </div>
+    <div class="exp-change">Model: ResNet18 with conv1 replaced (3x3 stride-1 for 28x28), maxpool removed
+       Dropout(0.3) &rarr; Linear(512,7)
+Augmentation: HFlip + VFlip + Rotation(20) + RandomAffine + ColorJitter
+Loss: CrossEntropyLoss(weight=class_weights, label_smoothing=0.1)
+Optimizer: Adam(lr=1e-4) + CosineAnnealingLR, 15 epochs, batch=64</div>
+    <p>The "final boss" experiment. We adapted ResNet18 for 28&times;28 images by replacing the
+    aggressive 7&times;7 stride-2 first conv with a 3&times;3 stride-1 conv (preserving spatial resolution)
+    and removing the maxpool. Combined with class weights, aggressive augmentation, and label smoothing,
+    this model prioritizes cancer detection over leaderboard rank. AUC of 0.869 wouldn't win any
+    competitions, but 58% melanoma recall and 59% cancer sensitivity represent the best balance
+    we achieved between overall performance and clinical utility.</p>
+  </div>
+</details>
+
+<!-- ── THE VERDICT ── -->
+<h2>The Verdict: Which Model Would You Deploy?</h2>
+<p style="color:var(--muted); margin-bottom:1rem;">
+  A dermatology practice needs a screening aid that <strong>catches cancer</strong> (high sensitivity),
+  while keeping false positives manageable (patients sent for unnecessary biopsies).
+  Missing a melanoma is catastrophic; an extra biopsy is inconvenient. The cost asymmetry is extreme.
+</p>
+
+<div class="verdict-card">
+  <h3 style="font-size:1.3rem;">Our Pick: Best Custom CNN (Exp 21)</h3>
+  <div class="exp-metrics" style="margin:1rem 0;">
+    <span><span class="metric-label">AUC:</span> <span class="metric-val">0.891</span></span>
+    <span><span class="metric-label">Melanoma Recall:</span> <span class="metric-val" style="color:var(--success)">56%</span></span>
+    <span><span class="metric-label">Cancer Sensitivity:</span> <span class="metric-val" style="color:var(--success)">60%</span></span>
+    <span><span class="metric-label">Params:</span> <span class="metric-val">102k</span></span>
+    <span><span class="metric-label">Inference:</span> <span class="metric-val">Fast (CPU OK)</span></span>
+  </div>
+  <p>Why this one?</p>
+  <ul style="margin:0.5rem 0 0 1.5rem; color:var(--muted);">
+    <li><strong>Best cancer sensitivity (60%)</strong> across all three malignant classes</li>
+    <li><strong>56% melanoma recall</strong> &mdash; catches more than half of melanomas</li>
+    <li><strong>102k parameters</strong> &mdash; runs instantly on any device, no GPU needed for inference</li>
+    <li><strong>Custom architecture</strong> &mdash; you understand every layer, no black-box pretrained weights</li>
+    <li>Augmentation + class weights make it robust to real-world image variation</li>
+  </ul>
+  <p style="margin-top:1rem; color:var(--muted);">
+    In a real deployment, this model would flag suspicious lesions for dermatologist review.
+    The 40% of missed melanomas motivates the next step: ensembling or multi-stage screening.
+  </p>
+</div>
+
+<div class="verdict-runner-up">
+  <strong>Runner-up: Custom + Label Smoothing (Exp 22)</strong>
+  &mdash; 65% melanoma recall, 61% cancer sensitivity, but lower AUC (0.846).
+  If your only goal is catching melanoma, this model wins. The tradeoff: more false positives
+  on benign lesions, meaning more unnecessary biopsies.
+</div>
+
+<div class="verdict-runner-up">
+  <strong>Honorable mention: Hidden FC (Exp 10)</strong>
+  &mdash; <strong>66% melanoma recall</strong> (highest in suite!) from just 5 epochs of training.
+  A surprisingly strong result from a simple architecture change. The hidden FC layer gives the
+  classifier enough expressive power to learn a non-linear decision boundary for melanoma,
+  even with only 102k parameters.
+</div>
+
+<div class="card" style="margin-top:1.5rem;">
+  <h3 style="color:var(--blue); margin-top:0;">What About Ensembles?</h3>
+  <p style="color:var(--muted);">
+    In real clinical AI, the answer is rarely a single model. A <strong>mixture-of-experts</strong>
+    approach could combine the high-AUC Cosine LR model (good at overall classification) with the
+    class-weighted Best Custom CNN (good at catching cancer). If <em>either</em> model flags a lesion
+    as suspicious, send it for biopsy. This "OR" ensemble would have much higher sensitivity than
+    any single model, at the cost of more false positives &mdash; a tradeoff most dermatologists
+    would happily accept.
+  </p>
+  <p style="color:var(--muted); margin-top:0.5rem;">
+    The Stanford CNN that matched 21 dermatologists used exactly this kind of approach:
+    an ensemble of models optimized for different metrics, combined with clinical decision rules.
+    The single-model results you see here are just the starting point.
+  </p>
+</div>
+
+<!-- ── THE PUNCHLINE ── -->
+<h2>The Punchline</h2>
+<div class="card" style="text-align:center; padding:2rem;">
+  <p style="font-size:1.3rem; margin-bottom:1rem;">
+    The model that <strong style="color:var(--success)">wins the leaderboard</strong> (0.93 AUC)
+    <br>is <strong style="color:var(--danger)">not</strong> the model you'd
+    <strong style="color:var(--danger)">deploy to a clinic</strong>.
+  </p>
+  <p style="color:var(--muted); max-width:600px; margin:0 auto;">
+    Cosine LR catches 41% of melanomas. The Best Custom CNN with class weights catches 56%.
+    In the real world, the metric you optimize is not always the metric that matters.
+    <strong>Always look at per-class metrics for safety-critical applications.</strong>
+  </p>
+</div>
+
+<!-- ── PLOTS ── -->
+<h2>Visualizations</h2>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/7_perclass_heatmap.png" alt="Per-class recall heatmap">
+    <div class="plot-caption">
+      <strong>The heatmap tells the real story.</strong> Green = the model detects that disease.
+      Red = it misses it. Look at the MELANOMA column: most high-AUC models are yellow or red.
+      Only models with class weights (Best Custom CNN, Kitchen Sink) turn green.
+    </div>
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/6_clinical_metrics.png" alt="Clinical metrics comparison">
+    <div class="plot-caption">
+      <strong>Left:</strong> High AUC doesn't guarantee high melanoma recall. The danger zone (pink)
+      catches most models. <strong>Right:</strong> Blue bars (AUC) vs red/orange bars (cancer metrics)
+      diverge significantly.
+    </div>
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/1_auc_ranked.png" alt="AUC ranked bar chart">
+    <div class="plot-caption">
+      All 25 experiments ranked by macro AUC. Six experiments beat the 0.90 target.
+      The normalize gotcha is dead last.
+    </div>
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/2_chapter_groups.png" alt="Chapter groups">
+    <div class="plot-caption">
+      Experiments grouped by chapter. Within each chapter, you can see which single change
+      helped most.
+    </div>
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/3_progression.png" alt="Progression arc">
+    <div class="plot-caption">
+      The narrative arc from experiment 1 to 25. Note the dip at exp 14 (normalize gotcha)
+      and the recovery with combined strategies.
+    </div>
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/4_auc_vs_time.png" alt="AUC vs time">
+    <div class="plot-caption">
+      Efficiency frontier: the custom CNNs cluster in the fast/high-AUC region.
+      ResNet18 is slower but not always better.
+    </div>
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div class="plot-card">
+    <img src="plots/5_auc_vs_params.png" alt="AUC vs parameters">
+    <div class="plot-caption">
+      A well-tuned 95k-param CNN can match an 11M-param ResNet18.
+      The baseline's 7k params are simply insufficient.
+    </div>
+  </div>
+</div>
+
+<!-- ── KEY TAKEAWAYS ── -->
+<h2>Key Takeaways for HW5</h2>
+<div class="card">
+  <ol style="padding-left:1.5rem;">
+    <li style="margin-bottom:0.8rem;"><strong>Adam(lr=1e-3)</strong> is almost always better than SGD out of the box</li>
+    <li style="margin-bottom:0.8rem;"><strong>BatchNorm</strong> is often the single biggest architecture improvement</li>
+    <li style="margin-bottom:0.8rem;"><strong>Data augmentation</strong> is free performance &mdash; but keep it consistent with val</li>
+    <li style="margin-bottom:0.8rem;"><strong>Class weights</strong> trade overall accuracy for catching rare important classes</li>
+    <li style="margin-bottom:0.8rem;"><strong>CosineAnnealingLR</strong> is the modern default for scheduling</li>
+    <li style="margin-bottom:0.8rem;"><strong>Transfer learning</strong> is the biggest single lever, but needs fine-tuning</li>
+    <li style="margin-bottom:0.8rem;"><strong>The metric you optimize is not always the metric that matters</strong></li>
+  </ol>
+</div>
+
+<footer>
+  MPHY 6120 &middot; AI for Medicine &middot; Module 6: Deep Learning &middot; 25 experiments on DermaMNIST
+  <br>Generated with PyTorch on Apple M1 Max (MPS backend)
+</footer>
+
+</div>
+
+<script>
+// Populate results table from embedded data
+const results = [
+  {
+    "experiment": "exp_01_baseline",
+    "short_name": "Baseline",
+    "chapter": "Ch1: Baseline",
+    "color": "#888888",
+    "status": "ok",
+    "wall_time_s": 14.4,
+    "params": 6887,
+    "model_name": "BaselineModel",
+    "epochs": 5,
+    "accuracy": 0.68,
+    "auc": 0.822,
+    "time_s": 8.3,
+    "mel_recall": 0.0,
+    "mel_precision": 0.0,
+    "mel_f1": 0.0,
+    "cancer_sensitivity": 0.0,
+    "balanced_accuracy": 0.17,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.38,
+        "recall": 0.21,
+        "f1": 0.27
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "nv": {
+        "precision": 0.7,
+        "recall": 0.98,
+        "f1": 0.82
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_02_adam_default",
+    "short_name": "Adam lr=1e-3",
+    "chapter": "Ch2: Optimizers",
+    "color": "#e74c3c",
+    "status": "ok",
+    "wall_time_s": 10.6,
+    "params": 6887,
+    "model_name": "BaselineModel",
+    "epochs": 5,
+    "accuracy": 0.69,
+    "auc": 0.846,
+    "time_s": 7.1,
+    "mel_recall": 0.09,
+    "mel_precision": 0.48,
+    "mel_f1": 0.15,
+    "cancer_sensitivity": 0.0367,
+    "balanced_accuracy": 0.2114,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.5,
+        "recall": 0.02,
+        "f1": 0.04
+      },
+      "bkl": {
+        "precision": 0.31,
+        "recall": 0.43,
+        "f1": 0.36
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.48,
+        "recall": 0.09,
+        "f1": 0.15
+      },
+      "nv": {
+        "precision": 0.76,
+        "recall": 0.94,
+        "f1": 0.84
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_03_sgd_lower_lr",
+    "short_name": "SGD lr=0.01",
+    "chapter": "Ch2: Optimizers",
+    "color": "#e74c3c",
+    "status": "ok",
+    "wall_time_s": 9.4,
+    "params": 6887,
+    "model_name": "BaselineModel",
+    "epochs": 5,
+    "accuracy": 0.669,
+    "auc": 0.6615,
+    "time_s": 6.2,
+    "mel_recall": 0.0,
+    "mel_precision": 0.0,
+    "mel_f1": 0.0,
+    "cancer_sensitivity": 0.0,
+    "balanced_accuracy": 0.1429,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "nv": {
+        "precision": 0.67,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_04_adam_low_lr",
+    "short_name": "Adam lr=1e-4",
+    "chapter": "Ch2: Optimizers",
+    "color": "#e74c3c",
+    "status": "ok",
+    "wall_time_s": 10.4,
+    "params": 6887,
+    "model_name": "BaselineModel",
+    "epochs": 5,
+    "accuracy": 0.669,
+    "auc": 0.65,
+    "time_s": 7.3,
+    "mel_recall": 0.0,
+    "mel_precision": 0.0,
+    "mel_f1": 0.0,
+    "cancer_sensitivity": 0.0,
+    "balanced_accuracy": 0.1429,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "nv": {
+        "precision": 0.67,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_05_sgd_momentum",
+    "short_name": "SGD+Momentum",
+    "chapter": "Ch2: Optimizers",
+    "color": "#e74c3c",
+    "status": "ok",
+    "wall_time_s": 9.3,
+    "params": 6887,
+    "model_name": "BaselineModel",
+    "epochs": 5,
+    "accuracy": 0.67,
+    "auc": 0.8188,
+    "time_s": 6.2,
+    "mel_recall": 0.03,
+    "mel_precision": 0.43,
+    "mel_f1": 0.05,
+    "cancer_sensitivity": 0.01,
+    "balanced_accuracy": 0.2171,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.29,
+        "recall": 0.59,
+        "f1": 0.39
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.43,
+        "recall": 0.03,
+        "f1": 0.05
+      },
+      "nv": {
+        "precision": 0.78,
+        "recall": 0.9,
+        "f1": 0.84
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_06_more_channels",
+    "short_name": "More Channels",
+    "chapter": "Ch3: Architecture",
+    "color": "#3498db",
+    "status": "ok",
+    "wall_time_s": 11.5,
+    "params": 41351,
+    "model_name": "MoreChannelsModel",
+    "epochs": 5,
+    "accuracy": 0.7190000000000001,
+    "auc": 0.8983,
+    "time_s": 8.4,
+    "mel_recall": 0.19,
+    "mel_precision": 0.57,
+    "mel_f1": 0.28,
+    "cancer_sensitivity": 0.3133,
+    "balanced_accuracy": 0.3586,
+    "per_class": {
+      "akiec": {
+        "precision": 0.4,
+        "recall": 0.06,
+        "f1": 0.11
+      },
+      "bcc": {
+        "precision": 0.32,
+        "recall": 0.69,
+        "f1": 0.44
+      },
+      "bkl": {
+        "precision": 0.46,
+        "recall": 0.45,
+        "f1": 0.46
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.57,
+        "recall": 0.19,
+        "f1": 0.28
+      },
+      "nv": {
+        "precision": 0.83,
+        "recall": 0.91,
+        "f1": 0.87
+      },
+      "vasc": {
+        "precision": 0.5,
+        "recall": 0.21,
+        "f1": 0.3
+      }
+    }
+  },
+  {
+    "experiment": "exp_07_three_blocks",
+    "short_name": "3 Conv Blocks",
+    "chapter": "Ch3: Architecture",
+    "color": "#3498db",
+    "status": "ok",
+    "wall_time_s": 13.1,
+    "params": 94151,
+    "model_name": "ThreeBlockModel",
+    "epochs": 5,
+    "accuracy": 0.669,
+    "auc": 0.8553,
+    "time_s": 9.9,
+    "mel_recall": 0.0,
+    "mel_precision": 0.0,
+    "mel_f1": 0.0,
+    "cancer_sensitivity": 0.0,
+    "balanced_accuracy": 0.1429,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "nv": {
+        "precision": 0.67,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_08_batchnorm",
+    "short_name": "BatchNorm",
+    "chapter": "Ch3: Architecture",
+    "color": "#3498db",
+    "status": "ok",
+    "wall_time_s": 15.7,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 5,
+    "accuracy": 0.6970000000000001,
+    "auc": 0.8966,
+    "time_s": 12.5,
+    "mel_recall": 0.41,
+    "mel_precision": 0.52,
+    "mel_f1": 0.46,
+    "cancer_sensitivity": 0.5667,
+    "balanced_accuracy": 0.4157,
+    "per_class": {
+      "akiec": {
+        "precision": 0.22,
+        "recall": 0.79,
+        "f1": 0.34
+      },
+      "bcc": {
+        "precision": 0.31,
+        "recall": 0.5,
+        "f1": 0.38
+      },
+      "bkl": {
+        "precision": 0.52,
+        "recall": 0.13,
+        "f1": 0.2
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.52,
+        "recall": 0.41,
+        "f1": 0.46
+      },
+      "nv": {
+        "precision": 0.87,
+        "recall": 0.87,
+        "f1": 0.87
+      },
+      "vasc": {
+        "precision": 0.23,
+        "recall": 0.21,
+        "f1": 0.22
+      }
+    }
+  },
+  {
+    "experiment": "exp_09_dropout",
+    "short_name": "Dropout",
+    "chapter": "Ch3: Architecture",
+    "color": "#3498db",
+    "status": "ok",
+    "wall_time_s": 14.8,
+    "params": 94599,
+    "model_name": "DropoutModel",
+    "epochs": 5,
+    "accuracy": 0.6809999999999999,
+    "auc": 0.8965,
+    "time_s": 11.7,
+    "mel_recall": 0.5,
+    "mel_precision": 0.44,
+    "mel_f1": 0.47,
+    "cancer_sensitivity": 0.5667,
+    "balanced_accuracy": 0.4014,
+    "per_class": {
+      "akiec": {
+        "precision": 0.21,
+        "recall": 0.76,
+        "f1": 0.33
+      },
+      "bcc": {
+        "precision": 0.3,
+        "recall": 0.44,
+        "f1": 0.36
+      },
+      "bkl": {
+        "precision": 0.45,
+        "recall": 0.13,
+        "f1": 0.2
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.44,
+        "recall": 0.5,
+        "f1": 0.47
+      },
+      "nv": {
+        "precision": 0.89,
+        "recall": 0.84,
+        "f1": 0.86
+      },
+      "vasc": {
+        "precision": 0.17,
+        "recall": 0.14,
+        "f1": 0.15
+      }
+    }
+  },
+  {
+    "experiment": "exp_10_hidden_fc",
+    "short_name": "Hidden FC",
+    "chapter": "Ch3: Architecture",
+    "color": "#3498db",
+    "status": "ok",
+    "wall_time_s": 15.9,
+    "params": 102407,
+    "model_name": "HiddenFCModel",
+    "epochs": 5,
+    "accuracy": 0.526,
+    "auc": 0.8405,
+    "time_s": 12.5,
+    "mel_recall": 0.66,
+    "mel_precision": 0.32,
+    "mel_f1": 0.43,
+    "cancer_sensitivity": 0.5033,
+    "balanced_accuracy": 0.39,
+    "per_class": {
+      "akiec": {
+        "precision": 0.13,
+        "recall": 0.85,
+        "f1": 0.22
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.34,
+        "recall": 0.45,
+        "f1": 0.39
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.32,
+        "recall": 0.66,
+        "f1": 0.43
+      },
+      "nv": {
+        "precision": 0.94,
+        "recall": 0.56,
+        "f1": 0.7
+      },
+      "vasc": {
+        "precision": 0.6,
+        "recall": 0.21,
+        "f1": 0.32
+      }
+    }
+  },
+  {
+    "experiment": "exp_11_hflip",
+    "short_name": "HFlip",
+    "chapter": "Ch4: Augmentation",
+    "color": "#2ecc71",
+    "status": "ok",
+    "wall_time_s": 27.1,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.7490000000000001,
+    "auc": 0.9245,
+    "time_s": 23.4,
+    "mel_recall": 0.33,
+    "mel_precision": 0.61,
+    "mel_f1": 0.43,
+    "cancer_sensitivity": 0.22,
+    "balanced_accuracy": 0.3257,
+    "per_class": {
+      "akiec": {
+        "precision": 0.57,
+        "recall": 0.12,
+        "f1": 0.2
+      },
+      "bcc": {
+        "precision": 0.44,
+        "recall": 0.21,
+        "f1": 0.29
+      },
+      "bkl": {
+        "precision": 0.58,
+        "recall": 0.45,
+        "f1": 0.5
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.61,
+        "recall": 0.33,
+        "f1": 0.43
+      },
+      "nv": {
+        "precision": 0.79,
+        "recall": 0.96,
+        "f1": 0.87
+      },
+      "vasc": {
+        "precision": 0.6,
+        "recall": 0.21,
+        "f1": 0.32
+      }
+    }
+  },
+  {
+    "experiment": "exp_12_rotation",
+    "short_name": "HFlip+Rotate",
+    "chapter": "Ch4: Augmentation",
+    "color": "#2ecc71",
+    "status": "ok",
+    "wall_time_s": 28.4,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.732,
+    "auc": 0.9209,
+    "time_s": 24.7,
+    "mel_recall": 0.5,
+    "mel_precision": 0.44,
+    "mel_f1": 0.46,
+    "cancer_sensitivity": 0.5133,
+    "balanced_accuracy": 0.4814,
+    "per_class": {
+      "akiec": {
+        "precision": 0.33,
+        "recall": 0.52,
+        "f1": 0.4
+      },
+      "bcc": {
+        "precision": 0.59,
+        "recall": 0.52,
+        "f1": 0.55
+      },
+      "bkl": {
+        "precision": 0.49,
+        "recall": 0.55,
+        "f1": 0.52
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.44,
+        "recall": 0.5,
+        "f1": 0.46
+      },
+      "nv": {
+        "precision": 0.88,
+        "recall": 0.85,
+        "f1": 0.86
+      },
+      "vasc": {
+        "precision": 0.6,
+        "recall": 0.43,
+        "f1": 0.5
+      }
+    }
+  },
+  {
+    "experiment": "exp_13_color_jitter",
+    "short_name": "+ColorJitter",
+    "chapter": "Ch4: Augmentation",
+    "color": "#2ecc71",
+    "status": "ok",
+    "wall_time_s": 37.3,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.741,
+    "auc": 0.9152,
+    "time_s": 33.2,
+    "mel_recall": 0.31,
+    "mel_precision": 0.61,
+    "mel_f1": 0.41,
+    "cancer_sensitivity": 0.2333,
+    "balanced_accuracy": 0.32,
+    "per_class": {
+      "akiec": {
+        "precision": 0.43,
+        "recall": 0.18,
+        "f1": 0.26
+      },
+      "bcc": {
+        "precision": 0.55,
+        "recall": 0.21,
+        "f1": 0.31
+      },
+      "bkl": {
+        "precision": 0.4,
+        "recall": 0.45,
+        "f1": 0.43
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.61,
+        "recall": 0.31,
+        "f1": 0.41
+      },
+      "nv": {
+        "precision": 0.81,
+        "recall": 0.95,
+        "f1": 0.88
+      },
+      "vasc": {
+        "precision": 0.67,
+        "recall": 0.14,
+        "f1": 0.24
+      }
+    }
+  },
+  {
+    "experiment": "exp_14_normalize_gotcha",
+    "short_name": "+Normalize (gotcha)",
+    "chapter": "Ch4: Augmentation",
+    "color": "#2ecc71",
+    "status": "ok",
+    "wall_time_s": 40.3,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.6679999999999999,
+    "auc": 0.5385,
+    "time_s": 35.7,
+    "mel_recall": 0.0,
+    "mel_precision": 0.0,
+    "mel_f1": 0.0,
+    "cancer_sensitivity": 0.0,
+    "balanced_accuracy": 0.1429,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bkl": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "nv": {
+        "precision": 0.67,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_15_class_weights",
+    "short_name": "Class Weights",
+    "chapter": "Ch5: Loss",
+    "color": "#9b59b6",
+    "status": "ok",
+    "wall_time_s": 26.0,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.624,
+    "auc": 0.9046,
+    "time_s": 22.3,
+    "mel_recall": 0.56,
+    "mel_precision": 0.31,
+    "mel_f1": 0.4,
+    "cancer_sensitivity": 0.29,
+    "balanced_accuracy": 0.4929,
+    "per_class": {
+      "akiec": {
+        "precision": 0.26,
+        "recall": 0.18,
+        "f1": 0.21
+      },
+      "bcc": {
+        "precision": 0.33,
+        "recall": 0.13,
+        "f1": 0.19
+      },
+      "bkl": {
+        "precision": 0.36,
+        "recall": 0.36,
+        "f1": 0.36
+      },
+      "df": {
+        "precision": 0.15,
+        "recall": 0.92,
+        "f1": 0.27
+      },
+      "mel": {
+        "precision": 0.31,
+        "recall": 0.56,
+        "f1": 0.4
+      },
+      "nv": {
+        "precision": 0.89,
+        "recall": 0.73,
+        "f1": 0.8
+      },
+      "vasc": {
+        "precision": 0.33,
+        "recall": 0.57,
+        "f1": 0.42
+      }
+    }
+  },
+  {
+    "experiment": "exp_16_label_smoothing",
+    "short_name": "Label Smoothing",
+    "chapter": "Ch5: Loss",
+    "color": "#9b59b6",
+    "status": "ok",
+    "wall_time_s": 27.3,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.741,
+    "auc": 0.9033,
+    "time_s": 24.1,
+    "mel_recall": 0.26,
+    "mel_precision": 0.66,
+    "mel_f1": 0.37,
+    "cancer_sensitivity": 0.4433,
+    "balanced_accuracy": 0.4329,
+    "per_class": {
+      "akiec": {
+        "precision": 0.29,
+        "recall": 0.45,
+        "f1": 0.36
+      },
+      "bcc": {
+        "precision": 0.47,
+        "recall": 0.62,
+        "f1": 0.53
+      },
+      "bkl": {
+        "precision": 0.45,
+        "recall": 0.5,
+        "f1": 0.48
+      },
+      "df": {
+        "precision": 1.0,
+        "recall": 0.08,
+        "f1": 0.15
+      },
+      "mel": {
+        "precision": 0.66,
+        "recall": 0.26,
+        "f1": 0.37
+      },
+      "nv": {
+        "precision": 0.85,
+        "recall": 0.91,
+        "f1": 0.88
+      },
+      "vasc": {
+        "precision": 1.0,
+        "recall": 0.21,
+        "f1": 0.35
+      }
+    }
+  },
+  {
+    "experiment": "exp_17_batch64",
+    "short_name": "Batch=64",
+    "chapter": "Ch6: Batch/Epochs",
+    "color": "#f39c12",
+    "status": "ok",
+    "wall_time_s": 19.4,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.703,
+    "auc": 0.8994,
+    "time_s": 15.8,
+    "mel_recall": 0.08,
+    "mel_precision": 0.9,
+    "mel_f1": 0.15,
+    "cancer_sensitivity": 0.3467,
+    "balanced_accuracy": 0.3643,
+    "per_class": {
+      "akiec": {
+        "precision": 0.25,
+        "recall": 0.09,
+        "f1": 0.13
+      },
+      "bcc": {
+        "precision": 0.25,
+        "recall": 0.87,
+        "f1": 0.39
+      },
+      "bkl": {
+        "precision": 0.6,
+        "recall": 0.14,
+        "f1": 0.22
+      },
+      "df": {
+        "precision": 1.0,
+        "recall": 0.08,
+        "f1": 0.15
+      },
+      "mel": {
+        "precision": 0.9,
+        "recall": 0.08,
+        "f1": 0.15
+      },
+      "nv": {
+        "precision": 0.81,
+        "recall": 0.93,
+        "f1": 0.87
+      },
+      "vasc": {
+        "precision": 0.83,
+        "recall": 0.36,
+        "f1": 0.5
+      }
+    }
+  },
+  {
+    "experiment": "exp_18_batch128",
+    "short_name": "Batch=128",
+    "chapter": "Ch6: Batch/Epochs",
+    "color": "#f39c12",
+    "status": "ok",
+    "wall_time_s": 13.5,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 10,
+    "accuracy": 0.698,
+    "auc": 0.9114,
+    "time_s": 10.3,
+    "mel_recall": 0.01,
+    "mel_precision": 1.0,
+    "mel_f1": 0.02,
+    "cancer_sensitivity": 0.2367,
+    "balanced_accuracy": 0.2957,
+    "per_class": {
+      "akiec": {
+        "precision": 1.0,
+        "recall": 0.03,
+        "f1": 0.06
+      },
+      "bcc": {
+        "precision": 0.33,
+        "recall": 0.67,
+        "f1": 0.45
+      },
+      "bkl": {
+        "precision": 1.0,
+        "recall": 0.02,
+        "f1": 0.04
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 1.0,
+        "recall": 0.01,
+        "f1": 0.02
+      },
+      "nv": {
+        "precision": 0.74,
+        "recall": 0.98,
+        "f1": 0.84
+      },
+      "vasc": {
+        "precision": 0.42,
+        "recall": 0.36,
+        "f1": 0.38
+      }
+    }
+  },
+  {
+    "experiment": "exp_19_epochs20",
+    "short_name": "20 Epochs",
+    "chapter": "Ch6: Batch/Epochs",
+    "color": "#f39c12",
+    "status": "ok",
+    "wall_time_s": 48.2,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 20,
+    "accuracy": 0.755,
+    "auc": 0.9225,
+    "time_s": 45.0,
+    "mel_recall": 0.46,
+    "mel_precision": 0.58,
+    "mel_f1": 0.51,
+    "cancer_sensitivity": 0.5133,
+    "balanced_accuracy": 0.4629,
+    "per_class": {
+      "akiec": {
+        "precision": 0.3,
+        "recall": 0.39,
+        "f1": 0.34
+      },
+      "bcc": {
+        "precision": 0.42,
+        "recall": 0.69,
+        "f1": 0.53
+      },
+      "bkl": {
+        "precision": 0.57,
+        "recall": 0.34,
+        "f1": 0.42
+      },
+      "df": {
+        "precision": 1.0,
+        "recall": 0.08,
+        "f1": 0.15
+      },
+      "mel": {
+        "precision": 0.58,
+        "recall": 0.46,
+        "f1": 0.51
+      },
+      "nv": {
+        "precision": 0.86,
+        "recall": 0.92,
+        "f1": 0.89
+      },
+      "vasc": {
+        "precision": 0.71,
+        "recall": 0.36,
+        "f1": 0.48
+      }
+    }
+  },
+  {
+    "experiment": "exp_20_cosine_scheduler",
+    "short_name": "Cosine LR",
+    "chapter": "Ch7: Scheduling",
+    "color": "#1abc9c",
+    "status": "ok",
+    "wall_time_s": 40.8,
+    "params": 94599,
+    "model_name": "BatchNormModel",
+    "epochs": 15,
+    "accuracy": 0.779,
+    "auc": 0.9292,
+    "time_s": 36.9,
+    "mel_recall": 0.41,
+    "mel_precision": 0.63,
+    "mel_f1": 0.5,
+    "cancer_sensitivity": 0.4467,
+    "balanced_accuracy": 0.4786,
+    "per_class": {
+      "akiec": {
+        "precision": 0.43,
+        "recall": 0.3,
+        "f1": 0.36
+      },
+      "bcc": {
+        "precision": 0.49,
+        "recall": 0.63,
+        "f1": 0.55
+      },
+      "bkl": {
+        "precision": 0.57,
+        "recall": 0.49,
+        "f1": 0.53
+      },
+      "df": {
+        "precision": 1.0,
+        "recall": 0.08,
+        "f1": 0.15
+      },
+      "mel": {
+        "precision": 0.63,
+        "recall": 0.41,
+        "f1": 0.5
+      },
+      "nv": {
+        "precision": 0.86,
+        "recall": 0.94,
+        "f1": 0.9
+      },
+      "vasc": {
+        "precision": 0.78,
+        "recall": 0.5,
+        "f1": 0.61
+      }
+    }
+  },
+  {
+    "experiment": "exp_21_best_custom_cnn",
+    "short_name": "Best Custom CNN",
+    "chapter": "Ch8: Combinations",
+    "color": "#e67e22",
+    "status": "ok",
+    "wall_time_s": 50.1,
+    "params": 102407,
+    "model_name": "BestCustomCNN",
+    "epochs": 15,
+    "accuracy": 0.568,
+    "auc": 0.8908,
+    "time_s": 43.7,
+    "mel_recall": 0.56,
+    "mel_precision": 0.25,
+    "mel_f1": 0.35,
+    "cancer_sensitivity": 0.6,
+    "balanced_accuracy": 0.5,
+    "per_class": {
+      "akiec": {
+        "precision": 0.26,
+        "recall": 0.7,
+        "f1": 0.38
+      },
+      "bcc": {
+        "precision": 0.34,
+        "recall": 0.54,
+        "f1": 0.41
+      },
+      "bkl": {
+        "precision": 0.34,
+        "recall": 0.27,
+        "f1": 0.3
+      },
+      "df": {
+        "precision": 0.12,
+        "recall": 0.17,
+        "f1": 0.14
+      },
+      "mel": {
+        "precision": 0.25,
+        "recall": 0.56,
+        "f1": 0.35
+      },
+      "nv": {
+        "precision": 0.94,
+        "recall": 0.62,
+        "f1": 0.75
+      },
+      "vasc": {
+        "precision": 0.23,
+        "recall": 0.64,
+        "f1": 0.34
+      }
+    }
+  },
+  {
+    "experiment": "exp_22_combo_label_smooth",
+    "short_name": "Custom+LabelSmooth",
+    "chapter": "Ch8: Combinations",
+    "color": "#e67e22",
+    "status": "ok",
+    "wall_time_s": 53.0,
+    "params": 102407,
+    "model_name": "BestCustomCNN",
+    "epochs": 15,
+    "accuracy": 0.385,
+    "auc": 0.846,
+    "time_s": 47.0,
+    "mel_recall": 0.65,
+    "mel_precision": 0.29,
+    "mel_f1": 0.4,
+    "cancer_sensitivity": 0.61,
+    "balanced_accuracy": 0.47,
+    "per_class": {
+      "akiec": {
+        "precision": 0.26,
+        "recall": 0.7,
+        "f1": 0.37
+      },
+      "bcc": {
+        "precision": 0.43,
+        "recall": 0.48,
+        "f1": 0.45
+      },
+      "bkl": {
+        "precision": 0.47,
+        "recall": 0.24,
+        "f1": 0.32
+      },
+      "df": {
+        "precision": 0.01,
+        "recall": 0.17,
+        "f1": 0.02
+      },
+      "mel": {
+        "precision": 0.29,
+        "recall": 0.65,
+        "f1": 0.4
+      },
+      "nv": {
+        "precision": 1.0,
+        "recall": 0.34,
+        "f1": 0.51
+      },
+      "vasc": {
+        "precision": 0.1,
+        "recall": 0.71,
+        "f1": 0.17
+      }
+    }
+  },
+  {
+    "experiment": "exp_23_resnet18_finetune",
+    "short_name": "ResNet18 Finetune",
+    "chapter": "Ch9: Transfer Learning",
+    "color": "#c0392b",
+    "status": "ok",
+    "wall_time_s": 92.0,
+    "params": 11180103,
+    "model_name": "ResNet18Finetune",
+    "epochs": 10,
+    "accuracy": 0.7559999999999999,
+    "auc": 0.9148,
+    "time_s": 86.9,
+    "mel_recall": 0.28,
+    "mel_precision": 0.57,
+    "mel_f1": 0.38,
+    "cancer_sensitivity": 0.3267,
+    "balanced_accuracy": 0.3957,
+    "per_class": {
+      "akiec": {
+        "precision": 0.44,
+        "recall": 0.24,
+        "f1": 0.31
+      },
+      "bcc": {
+        "precision": 0.41,
+        "recall": 0.46,
+        "f1": 0.44
+      },
+      "bkl": {
+        "precision": 0.59,
+        "recall": 0.4,
+        "f1": 0.48
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.57,
+        "recall": 0.28,
+        "f1": 0.38
+      },
+      "nv": {
+        "precision": 0.82,
+        "recall": 0.96,
+        "f1": 0.88
+      },
+      "vasc": {
+        "precision": 0.6,
+        "recall": 0.43,
+        "f1": 0.5
+      }
+    }
+  },
+  {
+    "experiment": "exp_24_resnet18_frozen",
+    "short_name": "ResNet18 Frozen",
+    "chapter": "Ch9: Transfer Learning",
+    "color": "#c0392b",
+    "status": "ok",
+    "wall_time_s": 46.0,
+    "params": 11180103,
+    "model_name": "ResNet18Frozen",
+    "epochs": 10,
+    "accuracy": 0.68,
+    "auc": 0.7608,
+    "time_s": 41.0,
+    "mel_recall": 0.03,
+    "mel_precision": 0.27,
+    "mel_f1": 0.05,
+    "cancer_sensitivity": 0.03,
+    "balanced_accuracy": 0.1729,
+    "per_class": {
+      "akiec": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "bcc": {
+        "precision": 0.27,
+        "recall": 0.06,
+        "f1": 0.1
+      },
+      "bkl": {
+        "precision": 0.35,
+        "recall": 0.13,
+        "f1": 0.19
+      },
+      "df": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "mel": {
+        "precision": 0.27,
+        "recall": 0.03,
+        "f1": 0.05
+      },
+      "nv": {
+        "precision": 0.71,
+        "recall": 0.99,
+        "f1": 0.82
+      },
+      "vasc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  {
+    "experiment": "exp_25_kitchen_sink",
+    "short_name": "Kitchen Sink",
+    "chapter": "Ch10: Kitchen Sink",
+    "color": "#8e44ad",
+    "status": "ok",
+    "wall_time_s": 144.8,
+    "params": 11172423,
+    "model_name": "KitchenSinkResNet",
+    "epochs": 15,
+    "accuracy": 0.452,
+    "auc": 0.8691,
+    "time_s": 138.0,
+    "mel_recall": 0.58,
+    "mel_precision": 0.35,
+    "mel_f1": 0.43,
+    "cancer_sensitivity": 0.5867,
+    "balanced_accuracy": 0.5686,
+    "per_class": {
+      "akiec": {
+        "precision": 0.27,
+        "recall": 0.58,
+        "f1": 0.37
+      },
+      "bcc": {
+        "precision": 0.44,
+        "recall": 0.6,
+        "f1": 0.51
+      },
+      "bkl": {
+        "precision": 0.59,
+        "recall": 0.36,
+        "f1": 0.45
+      },
+      "df": {
+        "precision": 0.03,
+        "recall": 0.58,
+        "f1": 0.06
+      },
+      "mel": {
+        "precision": 0.35,
+        "recall": 0.58,
+        "f1": 0.43
+      },
+      "nv": {
+        "precision": 0.99,
+        "recall": 0.42,
+        "f1": 0.59
+      },
+      "vasc": {
+        "precision": 0.14,
+        "recall": 0.86,
+        "f1": 0.24
+      }
+    }
+  }
+];
+
+const sorted = results
+  .filter(r => r.status === 'ok' && r.auc != null)
+  .sort((a, b) => b.auc - a.auc);
+
+const tbody = document.getElementById('results-table');
+sorted.forEach((r, i) => {
+  const melR = r.mel_recall != null ? r.mel_recall : -1;
+  let melClass = 'mel-bad';
+  if (melR >= 0.5) melClass = 'mel-good';
+  else if (melR >= 0.2) melClass = 'mel-ok';
+
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${i + 1}</td>
+    <td><strong>${r.short_name}</strong></td>
+    <td><span class="chapter-label" style="background:${r.color}">${r.chapter}</span></td>
+    <td><strong>${r.auc.toFixed(4)}</strong></td>
+    <td class="mel-col ${melClass}">${melR >= 0 ? (melR * 100).toFixed(0) + '%' : 'N/A'}</td>
+    <td>${r.cancer_sensitivity != null ? (r.cancer_sensitivity * 100).toFixed(0) + '%' : 'N/A'}</td>
+    <td>${r.accuracy != null ? (r.accuracy * 100).toFixed(1) + '%' : 'N/A'}</td>
+    <td>${r.params != null ? r.params.toLocaleString() : 'N/A'}</td>
+    <td>${r.time_s != null ? r.time_s.toFixed(1) + 's' : 'N/A'}</td>
+  `;
+  tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>
