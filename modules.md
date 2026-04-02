@@ -68,7 +68,12 @@ Slides: [[Slides]](slides/{{module.slides}})
 {% endif %}
 
 {% if module.lab %}
-**Lab:** <a href="{{ module.lab.url }}">{{ module.lab.title }}</a>{% if module.lab.colab_url %} · <a href="{{ module.lab.colab_url }}">Google Colab</a>{% endif %}{% if module.lab.strategy_guide_url %} · <a href="{{ module.lab.strategy_guide_url }}">Strategy Guide</a>{% endif %}{% if module.lab.experiment_report_url %} · <a href="{{ module.lab.experiment_report_url }}">Experiment Report</a>{% endif %}
+**Lab:** {{ module.lab.title }}
+
+* <a href="{{ module.lab.url }}">Accept the Challenge (GitHub Classroom)</a>
+{% if module.lab.colab_url %}* <a href="{{ module.lab.colab_url }}">Open in Google Colab</a> — no local setup needed{% endif %}
+{% if module.lab.strategy_guide_url %}* <a href="{{ module.lab.strategy_guide_url }}">Strategy Guide</a> — progressive hints to improve your score{% endif %}
+{% if module.lab.experiment_report_url %}* <a href="{{ module.lab.experiment_report_url }}">Experiment Report</a> — 25 experiments showing what works and why{% endif %}
 {% endif %}
 
 {% if module.homework %}
