@@ -4,7 +4,7 @@ title: Homework 5 - Deep Learning for Medical Image Classification
 active_tab: homework
 release_date: 2026-03-18
 due_date: 2026-04-08 23:59:00EST
-classroom_link: https://classroom.github.com/a/8_WIx3Nl
+classroom_link: https://classroom.github.com/a/MIvL-q6U
 ---
 
 <!-- Check whether the assignment is ready to release -->
