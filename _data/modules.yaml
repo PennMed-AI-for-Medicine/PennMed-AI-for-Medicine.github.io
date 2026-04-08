@@ -466,6 +466,9 @@
       url: https://arxiv.org/abs/1902.07669
       optional: true
       note: "Practical tool we'll use in class"
+  lab:
+    title: "Clinical NLP Walkthrough"
+    notebook_url: https://github.com/PennMed-AI-for-Medicine/PennMed-AI-for-Medicine.github.io/blob/main/labs/module-07/nlp_walkthrough.ipynb
 
 - module_number: 8
   start_date: 2026-04-08

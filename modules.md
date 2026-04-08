@@ -71,7 +71,8 @@ Slides: [[Slides]](slides/{{module.slides}})
 **Lab:** {{ module.lab.title }}
 
 {% if module.lab.interactive_url %}* <a href="{{ module.lab.interactive_url }}">Interactive Deep Learning Walkthrough</a> — neurons, convolutions, and architecture explorer{% endif %}
-* <a href="{{ module.lab.url }}">Accept the Challenge (GitHub Classroom)</a>
+{% if module.lab.url %}* <a href="{{ module.lab.url }}">Accept the Challenge (GitHub Classroom)</a>{% endif %}
+{% if module.lab.notebook_url %}* <a href="{{ module.lab.notebook_url }}">Jupyter Notebook</a> — live walkthrough with code examples{% endif %}
 {% if module.lab.colab_url %}* <a href="{{ module.lab.colab_url }}">Open in Google Colab</a> — no local setup needed{% endif %}
 {% if module.lab.strategy_guide_url %}* <a href="{{ module.lab.strategy_guide_url }}">Strategy Guide</a> — progressive hints to improve your score{% endif %}
 {% if module.lab.experiment_report_url %}* <a href="{{ module.lab.experiment_report_url }}">Experiment Report</a> — 25 experiments showing what works and why{% endif %}
