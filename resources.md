@@ -16,6 +16,7 @@ Interactive resources built for this course — open in your browser, no setup r
 | 6 — Deep Learning | [Interactive DL Walkthrough](/labs/module-06/) | Neurons, convolutions, and architecture explorer |
 | 6 — Deep Learning | [DermaMNIST Strategy Guide](/labs/module-06/strategy_guide.html) | Progressive hints for the Beat the Baseline challenge |
 | 6 — Deep Learning | [Experiment Report](/labs/module-06/experiment_report.html) | 25 experiments showing what works in CNN training |
+| 6 — Deep Learning | [HW5 Pneumonia Detection Report](/labs/module-06/hw5_report.html) | Complete CNN pipeline — data to Grad-CAM on PneumoniaMNIST |
 | 7 — Clinical NLP | [NLP Walkthrough Notebook](https://github.com/PennMed-AI-for-Medicine/PennMed-AI-for-Medicine.github.io/blob/main/labs/module-07/nlp_walkthrough.ipynb) | Tokenization, embeddings, NER, and report classification |
 
 ---

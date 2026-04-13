@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HW5: Deep Learning for Pneumonia Detection — Results</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
+  :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --muted: #8b949e;
+          --accent: #4a90d9; --border: #30363d; --success: #3fb950; --danger: #f85149; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--bg);
+         color: var(--text); line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  h1, h2 { font-family: 'EB Garamond', Georgia, serif; color: #f0f6fc; }
+  h1 { font-size: 2.2rem; margin-bottom: 0.3rem; }
+  h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; border-bottom: 2px solid var(--accent);
+       padding-bottom: 0.3rem; }
+  .subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+  .card { background: var(--card); border-radius: 12px; padding: 1.5rem; margin: 1rem 0;
+           border: 1px solid var(--border); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--card); border-radius: 12px; padding: 1.2rem; text-align: center;
+           border-left: 4px solid var(--accent); }
+  .stat .num { font-size: 2rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .stat.success { border-left-color: var(--success); }
+  .stat.success .num { color: var(--success); }
+  .stat.danger { border-left-color: var(--danger); }
+  .stat.danger .num { color: var(--danger); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0; }
+  th { background: #21262d; padding: 0.6rem; text-align: left; font-weight: 600; color: #f0f6fc; }
+  td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: #1a2744; }
+  img { width: 100%; border-radius: 8px; display: block; margin: 0.5rem 0; }
+  .plot-card { background: var(--card); border-radius: 12px; overflow: hidden; margin: 1rem 0;
+                border: 1px solid var(--border); }
+  .plot-caption { padding: 0.8rem 1rem; color: var(--muted); font-size: 0.9rem; }
+  .takeaway { background: linear-gradient(135deg, #1e3a5f, #161b22); border-left: 4px solid var(--accent);
+               border-radius: 8px; padding: 1.2rem; margin: 1rem 0; }
+  .takeaway strong { color: var(--accent); }
+  .clinical { border-left-color: var(--danger); background: linear-gradient(135deg, #3b1a1a, #161b22); }
+  .clinical strong { color: var(--danger); }
+  footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 3rem;
+            padding-top: 1rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Pneumonia Detection with Deep Learning</h1>
+<p class="subtitle">MPHY 6120 &middot; Homework 5 &middot; PneumoniaMNIST Results</p>
+
+<div class="stats">
+  <div class="stat">
+    <div class="num">4708</div>
+    <div class="label">Training Images</div>
+  </div>
+  <div class="stat">
+    <div class="num">624</div>
+    <div class="label">Test Images</div>
+  </div>
+  <div class="stat success">
+    <div class="num">0.970</div>
+    <div class="label">Best AUC</div>
+  </div>
+  <div class="stat danger">
+    <div class="num">1</div>
+    <div class="label">Missed Pneumonia (FN)</div>
+  </div>
+</div>
+
+<h2>Part 1: Data Exploration</h2>
+
+<div class="card">
+  <p>PneumoniaMNIST: 1214 normal,
+  3494 pneumonia in training set.
+  The dataset is imbalanced (~75% pneumonia), which means accuracy alone is misleading.</p>
+</div>
+
+<div class="plot-card">
+  <img src="1_2_sample_images.png" alt="Sample images">
+  <div class="plot-caption">Normal chest X-rays (top) vs pneumonia (bottom). Even at 28&times;28 resolution,
+  pneumonia cases show increased opacity in the lung fields.</div>
+</div>
+
+<div class="plot-card">
+  <img src="1_2_class_distribution.png" alt="Class distribution">
+  <div class="plot-caption">Training set class distribution — significant imbalance toward pneumonia.</div>
+</div>
+
+<div class="plot-card">
+  <img src="1_3_augmentation.png" alt="Augmentation examples">
+  <div class="plot-caption">Data augmentation creates training variety through flips, rotations,
+  translations, and brightness changes — all clinically safe transformations.</div>
+</div>
+
+<h2>Part 2: Simple CNN</h2>
+
+<div class="card">
+  <p>3-layer CNN with BatchNorm and dropout: 93,249 parameters.
+  Architecture: Conv(32) &rarr; Conv(64) &rarr; Conv(128) &rarr; AdaptiveAvgPool &rarr; FC(1).</p>
+</div>
+
+<div class="plot-card">
+  <img src="2_3_training_curves_simplecnn.png" alt="SimpleCNN training curves">
+  <div class="plot-caption">SimpleCNN training curves showing loss and accuracy convergence.</div>
+</div>
+
+<h2>Part 3: Transfer Learning</h2>
+
+<div class="takeaway">
+  <strong>Key insight:</strong> Transfer learning with pretrained ResNet18 outperforms training from scratch,
+  even though ImageNet contains no medical images. Low-level visual features (edges, textures) are universal.
+</div>
+
+<div class="plot-card">
+  <img src="2_3_training_curves_resnet18_(pretrained).png" alt="ResNet training curves">
+  <div class="plot-caption">ResNet18 (pretrained) training curves — two-stage fine-tuning with frozen backbone
+  followed by full model training at lower learning rate.</div>
+</div>
+
+<h2>Model Comparison</h2>
+
+<table>
+  <thead>
+    <tr><th>Model</th><th>Accuracy</th><th>AUC</th><th>Precision</th><th>Recall</th><th>F1</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SimpleCNN</td>
+      <td>0.851</td>
+      <td>0.955</td>
+      <td>0.815</td>
+      <td>0.985</td>
+      <td>0.892</td>
+    </tr>
+    <tr>
+      <td>ResNet18 (scratch)</td>
+      <td>0.859</td>
+      <td>0.969</td>
+      <td>0.819</td>
+      <td>0.995</td>
+      <td>0.898</td>
+    </tr>
+    <tr>
+      <td>ResNet18 (pretrained)</td>
+      <td>0.888</td>
+      <td>0.970</td>
+      <td>0.849</td>
+      <td>0.997</td>
+      <td>0.917</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Part 4: Evaluation</h2>
+
+<div class="plot-card">
+  <img src="4_1_confusion_matrix.png" alt="Confusion matrix">
+  <div class="plot-caption">Confusion matrix on the test set. Focus on false negatives (bottom-left) —
+  these are missed pneumonia cases.</div>
+</div>
+
+<div class="plot-card">
+  <img src="4_2_roc_pr_curves.png" alt="ROC and PR curves">
+  <div class="plot-caption">ROC curve (left) and Precision-Recall curve (right) with operating points
+  at different thresholds. For pneumonia screening, we'd choose a low threshold to maximize recall.</div>
+</div>
+
+<div class="clinical">
+  <strong>Clinical reality:</strong> A model with AUC=0.970 on 28&times;28 images
+  is a proof of concept, not a deployable system. Real pneumonia detection requires full-resolution images,
+  multi-label classification, and validation across institutions.
+</div>
+
+<div class="plot-card">
+  <img src="4_3_error_analysis.png" alt="Error analysis">
+  <div class="plot-caption">Error analysis: true positives, true negatives, false positives, and false negatives.
+  False negatives tend to be subtle cases; false positives often have prominent vascular markings.</div>
+</div>
+
+<h2>Part 5: Interpretability</h2>
+
+<div class="plot-card">
+  <img src="5_1_filters.png" alt="Conv filters">
+  <div class="plot-caption">Learned filters from the first convolutional layer — detecting edges,
+  gradients, and simple textures that form the basis of higher-level feature detection.</div>
+</div>
+
+<div class="plot-card">
+  <img src="5_2_gradcam.png" alt="Grad-CAM">
+  <div class="plot-caption">Grad-CAM visualizations showing where the model focuses. Top: original images.
+  Middle: activation heatmaps. Bottom: overlay. The model attends to lung fields and areas of opacity.</div>
+</div>
+
+<div class="takeaway">
+  <strong>What we learned:</strong> A pretrained ResNet18, fine-tuned with augmentation, achieves strong
+  performance on pneumonia detection even at 28&times;28 resolution. Transfer learning consistently
+  outperforms training from scratch on small medical datasets. But AUC alone doesn't tell the clinical
+  story — per-class recall and error analysis are essential for understanding real-world impact.
+</div>
+
+<footer>
+  MPHY 6120 &middot; AI for Medicine &middot; Homework 5: Deep Learning<br>
+  Generated with PyTorch + MedMNIST
+</footer>
+
+</div>
+</body>
+</html>
