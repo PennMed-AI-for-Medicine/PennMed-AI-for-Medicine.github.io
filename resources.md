@@ -6,6 +6,20 @@ active_tab: resources
 
 # Course Resources
 
+## Interactive Labs & Tools
+
+Interactive resources built for this course — open in your browser, no setup required.
+
+| Module | Tool | Description |
+|--------|------|-------------|
+| 4 — ML Foundations | [Clinical ML Consultant](/labs/module-04/) | Diabetes screening simulation — threshold analysis, CMO constraints, deployment decisions |
+| 6 — Deep Learning | [Interactive DL Walkthrough](/labs/module-06/) | Neurons, convolutions, and architecture explorer |
+| 6 — Deep Learning | [DermaMNIST Strategy Guide](/labs/module-06/strategy_guide.html) | Progressive hints for the Beat the Baseline challenge |
+| 6 — Deep Learning | [Experiment Report](/labs/module-06/experiment_report.html) | 25 experiments showing what works in CNN training |
+| 7 — Clinical NLP | [NLP Walkthrough Notebook](https://github.com/PennMed-AI-for-Medicine/PennMed-AI-for-Medicine.github.io/blob/main/labs/module-07/nlp_walkthrough.ipynb) | Tokenization, embeddings, NER, and report classification |
+
+---
+
 ## Development Environment
 
 **Recommended IDE:** [Visual Studio Code](https://code.visualstudio.com/) with Python and Jupyter extensions

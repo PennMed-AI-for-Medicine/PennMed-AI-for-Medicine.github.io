@@ -308,6 +308,9 @@
       url: https://www.acpjournals.org/doi/10.7326/M20-7770
       optional: true
       note: "Practical framework for fairness in clinical ML"
+  lab:
+    title: "Clinical ML Consultant — Diabetes Screening Simulation"
+    interactive_url: /labs/module-04/
 
 - module_number: 5
   start_date: 2026-03-03
