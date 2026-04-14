@@ -11,7 +11,7 @@ This project is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ pa
 </div>
 
 <div class="alert alert-warning" markdown="1">
-**Final Presentations:** April 28-29 during class time. A **Review Board** of senior clinical and technical leaders will attend to provide feedback—simulating a real deployment review.
+**Final Presentations:** April 29 during class time. A **Review Board** of senior clinical and technical leaders will attend to provide feedback—simulating a real deployment review. **Strict 12-minute talk + 3-minute Q&A — hard cutoff.** See [Presentation](#presentation-25-of-grade) for details.
 </div>
 
 ---
@@ -29,7 +29,7 @@ This project integrates everything you've learned:
 **Deliverables:**
 1. Technical artifact (working model/pipeline)
 2. Comprehensive field guide (6-10 pages)
-3. Final presentation (15-20 minutes)
+3. Final presentation (12 minutes + 3 min Q&A, hard cutoff)
 
 ---
 
@@ -184,7 +184,17 @@ final-project/
 
 ## Presentation (25% of grade)
 
-15-20 minute presentation + 5 minutes Q&A.
+**12-minute talk + 3 minutes Q&A. Hard cutoff.** Presentations are **April 29** during class.
+
+### ⏱ Strict Time Limits — New This Year
+
+Last year's presentations consistently ran long and ate into later groups' time. This year the cutoff is strict, and this is by design: a 12-minute slot is the standard at real clinical AI venues (MICCAI, RSNA, AMIA). Learning to land the headline in 12 minutes *is* part of the field guide mindset.
+
+- A **visible countdown timer** will be projected for every talk.
+- Verbal cues at **11:00 ("1 min")**, **11:30 ("30 sec")**, and **12:00 ("time")**.
+- **After 12:00 you will be cut off mid-slide.**
+- **Dock: 1 point (out of 25) per 30 seconds over**, rounded up. Going 45 seconds over costs 2 points.
+- Your **repo, field guide, and report carry the depth.** The talk is the headline — point the Review Board to the appendix for anything that doesn't fit.
 
 ### The Review Board
 
@@ -195,16 +205,16 @@ Your final presentation simulates a real clinical AI deployment review. A **Revi
 
 They will ask questions as if you were proposing to deploy this tool at their institution. This is intentional—bridging technical depth with clinical context and leadership communication is the whole point.
 
-**Structure:**
-1. **The Problem** (3 min) — What clinical problem? Why does it matter?
-2. **The Data** (2 min) — What data? Key characteristics and limitations?
-3. **The Approach** (4 min) — What did you build? Key technical decisions?
-4. **Results** (4 min) — How well does it work? Honest assessment.
-5. **Field Guide Highlights** (3 min) — Governance, monitoring, limitations
-6. **Lessons Learned** (2 min) — What would you do differently?
-7. **Q&A with Review Board** (5 min)
+### Suggested Structure (12 min total)
 
-Presentations are **April 28-29** during class.
+1. **The Problem** (2 min) — What clinical problem? Why does it matter?
+2. **The Data & Approach** (3 min) — What data, what did you build, key technical decisions?
+3. **Results** (3 min) — How well does it work? Honest assessment.
+4. **Field Guide Highlights** (2 min) — Governance, monitoring, limitations
+5. **Lessons Learned & Close** (2 min) — What would you do differently?
+6. **Q&A with Review Board** (3 min)
+
+Cut methods detail aggressively — put the walkthrough in your repo/report. Reviewers will read the field guide; they need you to tell them the **story**, not the spec.
 
 ---
 
@@ -250,7 +260,8 @@ Presentations are **April 28-29** during class.
 | Apr 8 | Custom project proposals due |
 | Apr 15 | **CHECKPOINT: Field Guide Outline Due** (see below) |
 | Apr 22 | Recommended: Main experiments complete |
-| Apr 28-29 | **Final Presentations** |
+| Apr 28 | In-class group work session (last instructor check-ins) |
+| Apr 29 | **Final Presentations** (12 + 3, hard cutoff) |
 | May 6 | **Everything due by 11:59 PM** |
 
 ### Required Checkpoint: Field Guide Outline (Apr 15)
@@ -299,4 +310,4 @@ Assume the reader is a clinician with basic technical literacy — they know wha
 - **The field guide is not an afterthought** — Budget significant time for it
 - **Get feedback early** — Share drafts with classmates, come to office hours
 - **Be honest about limitations** — We're grading your analysis, not your AUC
-- **Practice your presentation** — 15 minutes goes fast
+- **Practice your presentation with a timer** — 12 minutes goes fast, and the cutoff is strict
