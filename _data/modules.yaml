@@ -474,8 +474,8 @@
     notebook_url: https://github.com/PennMed-AI-for-Medicine/PennMed-AI-for-Medicine.github.io/blob/main/labs/module-07/nlp_walkthrough.ipynb
 
 - module_number: 8
-  start_date: 2026-04-08
-  end_date: 2026-04-15
+  start_date: 2026-04-14
+  end_date: 2026-04-21
   title: Large Language Models in Medicine
   description: >
     Transformer architectures, large language models, prompting strategies, and
@@ -532,8 +532,8 @@
       note: "Med-PaLM paper—state of the art for medical QA"
 
 - module_number: 9
-  start_date: 2026-04-15
-  end_date: 2026-04-21
+  start_date: 2026-04-22
+  end_date: 2026-04-22
   title: Model Evaluation & Explainability
   description: >
     Moving beyond AUROC to clinically meaningful evaluation. Calibration, decision curve
@@ -587,7 +587,7 @@
       note: "Provocative argument for interpretable models"
 
 - module_number: 10
-  start_date: 2026-04-21
+  start_date: 2026-04-22
   end_date: 2026-04-22
   title: Governance, Regulatory & Deployment
   description: >
@@ -645,7 +645,7 @@
       note: "Framework for documenting ML models"
 
 - module_number: 11
-  start_date: 2026-04-22
+  start_date: 2026-04-28
   end_date: 2026-04-29
   title: Final Projects & Presentations
   description: >
@@ -653,15 +653,13 @@
     (model/pipeline) and a field guide document. Peer feedback and discussion
     of deployment readiness.
   lessons:
-    - title: "Final Project Work Session"
+    - title: "Final Project Group Work Session"
       description: >
-        Last in-class work time. Final debugging, polishing presentations, and
-        completing field guides. One-on-one check-ins with instructor.
-    - title: "Final Presentations: Day 1"
+        Dedicated in-class time to work on final projects in your groups. Final
+        debugging, polishing presentations, completing field guides, and one-on-one
+        check-ins with the instructor. HW7 due at end of day.
+    - title: "Final Presentations"
       description: >
         Student presentations (15-20 min each). Focus on the problem, approach,
-        results, and field guide highlights. Q&A and peer feedback.
-    - title: "Final Presentations: Day 2"
-      description: >
-        Remaining presentations. Course wrap-up: what we learned, where the field
-        is going, and how to continue learning after the course.
+        results, and field guide highlights. Q&A, peer feedback, and course wrap-up:
+        what we learned, where the field is going, and how to keep learning.

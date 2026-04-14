@@ -3,7 +3,7 @@ layout: default
 title: Homework 6 - Clinical NLP & Large Language Models
 active_tab: homework
 release_date: 2026-04-01
-due_date: 2026-04-15 23:59:00EST
+due_date: 2026-04-21 23:59:00EST
 classroom_link: https://classroom.github.com/a/XXXXXX
 ---
 

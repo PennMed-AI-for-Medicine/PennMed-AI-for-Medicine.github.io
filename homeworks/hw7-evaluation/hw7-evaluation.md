@@ -3,7 +3,7 @@ layout: default
 title: Homework 7 - Model Evaluation & Explainability
 active_tab: homework
 release_date: 2026-04-15
-due_date: 2026-04-22 23:59:00EST
+due_date: 2026-04-28 23:59:00EST
 classroom_link: https://classroom.github.com/a/XXXXXX
 ---
 

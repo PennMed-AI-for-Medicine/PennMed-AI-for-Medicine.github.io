@@ -82,23 +82,23 @@
 - date: 2026-04-08
   title: "Module 8: Transformers & Large Language Models"
 
-# Week 12
+# Week 12 — LLMs kickoff
 - date: 2026-04-14
-  title: "Module 8: LLMs in Clinical Settings"
+  title: "Module 8: Transformers & Large Language Models (Intro)"
 
 - date: 2026-04-15
-  title: "Module 8: Prompting & Retrieval-Augmented Generation"
+  title: "Module 8: Prompting, In-Context Learning & RAG (hands-on)"
 
-# Week 13
+# Week 13 — LLMs wrap-up + condensed Eval/Governance
 - date: 2026-04-21
-  title: "Module 9: Model Evaluation, Calibration & Explainability"
+  title: "Module 8: LLMs in Clinical Practice — Opportunities, Risks & Regulation (HW6 due)"
 
 - date: 2026-04-22
-  title: "Module 10: Governance, Regulatory & Deployment"
+  title: "Modules 9 + 10 (condensed): Evaluation, Calibration, Governance & Field Guides"
 
-# Week 14
+# Week 14 — Project sprint + finals
 - date: 2026-04-28
-  title: "Module 11: Final Presentations Day 1"
+  title: "Module 11: Final Project Group Work Session (HW7 due)"
 
 - date: 2026-04-29
-  title: "Module 11: Final Presentations Day 2"
+  title: "Module 11: Final Presentations"
