@@ -530,6 +530,10 @@
       url: https://www.nature.com/articles/s41586-023-06291-2
       optional: true
       note: "Med-PaLM paper—state of the art for medical QA"
+  lab:
+    title: "The LLM Arena — Compare Models on Clinical Tasks"
+    classroom_url: https://classroom.github.com/a/fvRbeQXZ
+  homework: Homework 6 - Clinical NLP & Large Language Models
 
 - module_number: 9
   start_date: 2026-04-22

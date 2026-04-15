@@ -22,6 +22,10 @@ The goal is to produce graduates who can both **build models** and **write the f
 </div>
 
 <div class="alert alert-info" markdown="1">
+**Quick Links:** [Schedule](/schedule.html) · [Modules](/modules.html) · [Resources](/resources.html) · [Staff](/staff.html) · [Textbook](https://book.clinicalai.guide)
+</div>
+
+<div class="alert alert-info" markdown="1">
 **Course Logistics - Spring 2026**
 
 - **Course:** MPHY 6120 - Artificial Intelligence for Medicine
