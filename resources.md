@@ -18,7 +18,7 @@ Interactive resources built for this course — open in your browser, no setup r
 | 6 — Deep Learning | [Experiment Report](/labs/module-06/experiment_report.html) | 25 experiments showing what works in CNN training |
 | 6 — Deep Learning | [HW5 Pneumonia Detection Report](/labs/module-06/hw5_report.html) | Complete CNN pipeline — data to Grad-CAM on PneumoniaMNIST |
 | 7 — Clinical NLP | [NLP Walkthrough Notebook](https://github.com/PennMed-AI-for-Medicine/PennMed-AI-for-Medicine.github.io/blob/main/labs/module-07/nlp_walkthrough.ipynb) | Tokenization, embeddings, NER, and report classification |
-| 8 — LLMs in Medicine | [LLM Arena Lab](https://classroom.github.com/a/fvRbeQXZ) | Compare models on clinical tasks — hallucination, safety, prompting |
+| 8 — LLMs in Medicine | [LLM Arena Lab](https://classroom.github.com/a/6C7_qySy) | Compare models on clinical tasks — hallucination, safety, prompting |
 
 ---
 
