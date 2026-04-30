@@ -3,7 +3,7 @@ layout: default
 title: Schedule
 active_tab: items
 term_start: 2026-01-14
-term_end: 2026-04-29
+term_end: 2026-05-06
 lecture_days: Tuesday, Wednesday
 ---
 <!--

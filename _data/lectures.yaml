@@ -96,9 +96,13 @@
 - date: 2026-04-22
   title: "Modules 9 + 10 (condensed): Evaluation, Calibration, Governance & Field Guides"
 
-# Week 14 — Project sprint + finals
+# Week 14 — Project sprint
 - date: 2026-04-28
-  title: "Module 11: Final Project Group Work Session (HW7 due)"
+  title: "Module 11: Final Project Prep Day (in-class group work + instructor check-ins)"
 
 - date: 2026-04-29
-  title: "Module 11: Final Presentations"
+  title: "Module 11: Final Project Prep Day (last in-class working session)"
+
+# Final Presentations held during University final exam slot
+- date: 2026-05-06
+  title: "Module 11: Final Presentations — afternoon @ RadOnc.AI Lab"

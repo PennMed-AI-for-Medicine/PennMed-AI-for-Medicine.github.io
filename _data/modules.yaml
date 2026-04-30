@@ -650,20 +650,23 @@
 
 - module_number: 11
   start_date: 2026-04-28
-  end_date: 2026-04-29
+  end_date: 2026-05-06
   title: Final Projects & Presentations
   description: >
-    Students present their final projects, which include both a technical artifact
-    (model/pipeline) and a field guide document. Peer feedback and discussion
-    of deployment readiness.
+    Two in-class prep days followed by final presentations during the University
+    final exam slot. Presentations cover both the technical artifact (model/pipeline)
+    and the field guide, with peer feedback and a Review Panel of invited clinical
+    and technical guests.
   lessons:
-    - title: "Final Project Group Work Session"
+    - title: "Final Project Prep Days (Apr 28 & 29)"
       description: >
-        Dedicated in-class time to work on final projects in your groups. Final
-        debugging, polishing presentations, completing field guides, and one-on-one
-        check-ins with the instructor. HW7 due at end of day.
-    - title: "Final Presentations"
+        Both class days this week are dedicated in-class working sessions for
+        final projects. Group work, debugging, polishing presentations, completing
+        field guides, and one-on-one check-ins with the instructor.
+    - title: "Final Presentations (May 6, afternoon @ RadOnc.AI Lab)"
       description: >
-        Student presentations (15-20 min each). Focus on the problem, approach,
-        results, and field guide highlights. Q&A, peer feedback, and course wrap-up:
-        what we learned, where the field is going, and how to keep learning.
+        Student presentations during the University final exam slot, held in the
+        RadOnc.AI Lab. Strict 12-minute talk + 3-minute Q&A, hard cutoff. Focus on
+        the problem, approach, results, and field guide highlights. A Review Panel
+        of invited clinical and technical guests will provide feedback. Course
+        wrap-up follows.

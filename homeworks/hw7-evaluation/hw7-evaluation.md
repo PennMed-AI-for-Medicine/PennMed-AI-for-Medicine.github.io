@@ -7,25 +7,8 @@ due_date: 2026-04-28 23:59:00EST
 classroom_link: https://classroom.github.com/a/XXXXXX
 ---
 
-<!-- Check whether the assignment is ready to release -->
-{% capture today %}{{site.time | date: '%s'}}{% endcapture %}
-{% capture release_date %}{{page.release_date | date: '%s'}}{% endcapture %}
-{% if release_date > today %}
-<div class="alert alert-danger">
-Warning: this assignment is not yet released. Check back on {{ page.release_date | date: '%B %-d, %Y' }}.
-</div>
-{% endif %}
-<!-- End check -->
-
-<div class="alert alert-info">
-This assignment is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ page.due_date | date: "%I:%M%p" }}.
-</div>
-
-<div class="alert alert-success" markdown="1">
-**Get Started:**
-1. [**Accept the assignment on GitHub Classroom**]({{ page.classroom_link }}) — You'll get your own private repository with starter code
-2. Clone your repo and complete the exercises in `hw7_evaluation.py`
-3. Push your completed work to GitHub before the deadline
+<div class="alert alert-warning" markdown="1">
+**Not required for Spring 2026.** Given the compressed end-of-semester timeline, HW7 is **optional and will not be graded** this term. The assignment is left up as a reference — the evaluation and explainability concepts are directly relevant to your final project's field guide, so skim the parts that help your governance section. No submission needed.
 </div>
 
 <div class="alert alert-warning" markdown="1">

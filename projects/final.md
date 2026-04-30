@@ -11,7 +11,7 @@ This project is due on {{ page.due_date | date: "%A, %B %-d, %Y" }} before {{ pa
 </div>
 
 <div class="alert alert-warning" markdown="1">
-**Final Presentations:** April 29 during class time. A **Review Board** of senior clinical and technical leaders will attend to provide feedback—simulating a real deployment review. **Strict 12-minute talk + 3-minute Q&A — hard cutoff.** See [Presentation](#presentation-25-of-grade) for details.
+**Final Presentations:** **Wednesday, May 6 (afternoon)** at the **RadOnc.AI Lab**. A **Review Panel** of invited clinical and technical guests will attend to provide feedback, giving you a taste of a real deployment review. **Strict 12-minute talk + 3-minute Q&A — hard cutoff.** See [Presentation](#presentation-25-of-grade) for details.
 </div>
 
 ---
@@ -184,7 +184,7 @@ final-project/
 
 ## Presentation (25% of grade)
 
-**12-minute talk + 3 minutes Q&A. Hard cutoff.** Presentations are **April 29** during class.
+**12-minute talk + 3 minutes Q&A. Hard cutoff.** Presentations are **Wednesday, May 6 in the afternoon at the RadOnc.AI Lab.**
 
 ### ⏱ Strict Time Limits — New This Year
 
@@ -194,16 +194,16 @@ Last year's presentations consistently ran long and ate into later groups' time.
 - Verbal cues at **11:00 ("1 min")**, **11:30 ("30 sec")**, and **12:00 ("time")**.
 - **After 12:00 you will be cut off mid-slide.**
 - **Dock: 1 point (out of 25) per 30 seconds over**, rounded up. Going 45 seconds over costs 2 points.
-- Your **repo, field guide, and report carry the depth.** The talk is the headline — point the Review Board to the appendix for anything that doesn't fit.
+- Your **repo, field guide, and report carry the depth.** The talk is the headline — point the Review Panel to the appendix for anything that doesn't fit.
 
-### The Review Board
+### The Review Panel
 
-Your final presentation simulates a real clinical AI deployment review. A **Review Board** of senior leaders will attend, including:
+Your final presentation gives you a taste of a real clinical AI deployment review. A **Review Panel** of invited guests will attend, which may include:
 - Clinical informaticists
-- Department leadership
-- Technical experts from industry/Penn
+- Department colleagues
+- Technical collaborators from Penn and partner groups
 
-They will ask questions as if you were proposing to deploy this tool at their institution. This is intentional—bridging technical depth with clinical context and leadership communication is the whole point.
+They'll ask questions as if you were proposing to deploy this tool at their institution. This is intentional—bridging technical depth with clinical context and clear communication is the whole point.
 
 ### Suggested Structure (12 min total)
 
@@ -212,7 +212,7 @@ They will ask questions as if you were proposing to deploy this tool at their in
 3. **Results** (3 min) — How well does it work? Honest assessment.
 4. **Field Guide Highlights** (2 min) — Governance, monitoring, limitations
 5. **Lessons Learned & Close** (2 min) — What would you do differently?
-6. **Q&A with Review Board** (3 min)
+6. **Q&A with Review Panel** (3 min)
 
 Cut methods detail aggressively — put the walkthrough in your repo/report. Reviewers will read the field guide; they need you to tell them the **story**, not the spec.
 
@@ -260,9 +260,10 @@ Cut methods detail aggressively — put the walkthrough in your repo/report. Rev
 | Apr 8 | Custom project proposals due |
 | Apr 15 | **CHECKPOINT: Field Guide Outline Due** (see below) |
 | Apr 22 | Recommended: Main experiments complete |
-| Apr 28 | In-class group work session (last instructor check-ins) |
-| Apr 29 | **Final Presentations** (12 + 3, hard cutoff) |
-| May 6 | **Everything due by 11:59 PM** |
+| Apr 28 | Final project prep day — in-class group work + instructor check-ins |
+| Apr 29 | Final project prep day — last in-class working session |
+| **May 6 (PM)** | **Final Presentations @ RadOnc.AI Lab** (12 + 3, hard cutoff) |
+| May 6, 11:59 PM | **Everything due** (technical artifact + field guide) |
 
 ### Required Checkpoint: Field Guide Outline (Apr 15)
 
